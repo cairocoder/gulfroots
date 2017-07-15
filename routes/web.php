@@ -45,6 +45,9 @@ Route::group(['prefix'=>'admin','middleware'=>'auth_admin'],function()
 	Route::get('users/{user}/posts', 'UsersController@UserPosts');
 
 	Route::resource('categories', 'CategoriesController');
+	Route::post('categories/sort', 'CategoriesController@sortRows');
+	Route::get('categories/{id}/create', 'CategoriesController@create');
+	Route::post('categories/{id}', 'CategoriesController@store');
 });
 
 //Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
