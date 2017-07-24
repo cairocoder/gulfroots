@@ -395,6 +395,20 @@ License: You must have a valid license purchased only from themeforest(the above
 						</a>
 					</li>
 
+					<li class="start {{Request::is('admin/packages*')?"active":""}}">
+						<a href="{{Url('/')}}/admin/packages">
+						<i class="icon-home"></i>
+						<span class="title">Packages</span>
+						</a>
+					</li>
+
+					<li class="start {{Request::is('admin/filters*')?"active":""}}">
+						<a href="{{Url('/')}}/admin/filters">
+						<i class="icon-home"></i>
+						<span class="title">Filters</span>
+						</a>
+					</li>
+
 					<li class="last ">
 						<a href="javascript:;">
 						<i class="icon-pointer"></i>
