@@ -409,6 +409,13 @@ License: You must have a valid license purchased only from themeforest(the above
 						</a>
 					</li>
 
+					<li class="start {{Request::is('admin/filter-groups*')?"active":""}}">
+						<a href="{{Url('/')}}/admin/filter-groups">
+						<i class="icon-home"></i>
+						<span class="title">Filters Groups</span>
+						</a>
+					</li>
+
 					<li class="last ">
 						<a href="javascript:;">
 						<i class="icon-pointer"></i>

@@ -52,6 +52,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth_admin'],function()
 	Route::resource('packages', 'PackagesController');
 
 	Route::resource('filters', 'FiltersController');
+	Route::resource('filter-groups', 'FiltersGroupsController');
 	
 
 });
