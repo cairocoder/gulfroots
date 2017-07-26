@@ -50,10 +50,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth_admin'],function()
 	Route::post('categories/{id}', 'CategoriesController@store');
 
 	Route::resource('packages', 'PackagesController');
-	Route::get('packages/create', 'PackagesController@create');
 
 	Route::resource('filters', 'FiltersController');
-	Route::get('filters/create', 'FiltersController@create');
 	
 
 });
