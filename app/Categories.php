@@ -14,4 +14,9 @@ class Categories extends Model
     {
     	return $this->hasMany('App\Categories', 'sub_id');
     }
+    public function getMembers()
+    {
+    	return $this->hasMany('App\AdController');
+    }
+
 }

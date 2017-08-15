@@ -36,10 +36,17 @@ class FiltersController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+         'name_ar' => 'required|alpha_num',
+         'name_en' => 'required|alpha_num',
+         // 'value_ar_start' => 'required|alpha_num',
+         // 'value_en_end' => 'required|alpha_num'
+     ]);
         Filters::create($request->all());
         return redirect()->to(Url('/admin/filters/'));
     }
 
+    
     /**
      * Display the specified resource.
      *

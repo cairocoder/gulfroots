@@ -10,7 +10,7 @@
 </div>
 <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
     {!! Form::label('type', 'Type') !!}
-    {!! Form::select('type', array('1' => 'Dropdown List', '2' => 'Price Range', '3' => 'Labes', '4' => 'Arranging'),null,['class'=>'form-control']) !!}
+    {!! Form::select('type', array('1' => 'Dropdown List', '2' => 'Price Range', '3' => 'Lables', '4' => 'Arranging'),null,['class'=>'form-control']) !!}
     <small class="text-danger">{{ $errors->first('type') }}</small>
 </div>
 <div class="form-group{{ $errors->has('value_ar_start') ? ' has-error' : '' }}">

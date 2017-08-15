@@ -416,6 +416,13 @@ License: You must have a valid license purchased only from themeforest(the above
 						</a>
 					</li>
 
+					<li class="start {{Request::is('admin/ads*')?"active":""}}">
+						<a href="{{Url('/')}}/admin/ads">
+						<i class="icon-home"></i>
+						<span class="title">Ads</span>
+						</a>
+					</li>
+
 					<li class="last ">
 						<a href="javascript:;">
 						<i class="icon-pointer"></i>

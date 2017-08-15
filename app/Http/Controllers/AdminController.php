@@ -35,6 +35,10 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $request->merge(['password'=>bcrypt($request->password)]);
+        $this->validate($request, [
+         'name'=>'required|alpha_num',
+         'email' => 'required|email',
+        ]);
         Admin::create($request->all());
         return redirect()->to(Url('admin/admins'));
     }

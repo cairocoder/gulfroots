@@ -10,4 +10,8 @@ class UserSubscriptions extends Model
     protected $fillable = ['user_id','months','posts','status'];
 
     
+    public function getMembers()
+    {
+    	return $this->hasMany('App\AdController');
+    }
 }

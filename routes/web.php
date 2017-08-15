@@ -53,6 +53,19 @@ Route::group(['prefix'=>'admin','middleware'=>'auth_admin'],function()
 
 	Route::resource('filters', 'FiltersController');
 	Route::resource('filter-groups', 'FiltersGroupsController');
+
+	Route::get('filters/{user}/create', 'filtersController@create');
+	Route::post('filters/{user}', 'filtersController@store');
+
+	Route::get('admins/create', 'AdminController@create');
+	Route::post('admins', 'AdminController@store');
+
+	Route::get('packages/create', 'PackagesController@create');
+	Route::post('packages', 'PackagesController@store');
+
+	Route::resource('ads', 'AdController');
+	Route::get('ads/create','AdController@create');
+	Route::post('ads','AdController@store');
 	
 
 });
