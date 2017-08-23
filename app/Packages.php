@@ -13,6 +13,6 @@ class Packages extends Model
     
     public function getMembers()
     {
-    	return $this->hasMany('App\AdController');
+    	return $this->hasMany('App\Ad');
     }
 }

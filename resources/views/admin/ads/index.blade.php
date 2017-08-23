@@ -23,9 +23,9 @@
 				@foreach($ads as $ad)
 					<tr>
 						<td>{{$ad->id}}</td>
-						<td>{{$ad->user_id}}</td>
-						<td>{{$ad->category_id}}</td>
-						<td>{{$ad->package_id}}</td>
+						<td>{{$ad->user->user_id}}</td>
+						<td>{{$ad->category->name_en}}</td>
+						<td>{{$ad->package->name_en}}</td>
 						<td>{{$ad->name}}</td>
 						<td>{{$ad->description}}</td>
 						<td>{{$ad->slug}}</td>

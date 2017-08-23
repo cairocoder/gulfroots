@@ -20,17 +20,17 @@
 			</div>
 			<div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }}">
 			    {!! Form::label('user_id', 'User Id') !!}
-			    {!! Form::text('user_id', null, ['class' => 'form-control', 'required' => 'required']) !!}
+			    {!! Form::select('user_id',$user, null, ['id'=> 'user_subscriptions', 'class' => 'form-control']) !!}
 			    <small class="text-danger">{{ $errors->first('user_id') }}</small>
 			</div>
 			<div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
 			    {!! Form::label('category_id', 'category_id') !!}
-			    {!! Form::text('category_id', null, ['class' => 'form-control', 'required' => 'required']) !!}
+			    {!! Form::select('category_id',$category, null, ['id'=> 'categories', 'class' => 'form-control']) !!}
 			    <small class="text-danger">{{ $errors->first('category_id') }}</small>
 			</div>					
 			<div class="form-group{{ $errors->has('package_id') ? ' has-error' : '' }}">
 			    {!! Form::label('package_id', 'Package_id') !!}
-			    {!! Form::text('package_id', null, ['class' => 'form-control', 'required' => 'required']) !!}
+			    {!! Form::select('package_id',$package, null, ['id' => 'packages', 'class' => 'form-control']) !!}
 			    <small class="text-danger">{{ $errors->first('package_id') }}</small>
 			</div>
 {!!Form::submit('save', ['class'=>'btn btn-success'])!!}

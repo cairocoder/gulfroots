@@ -25,7 +25,7 @@ class CreateAdsTable extends Migration
             $table->integer('type');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('user_subscriptions')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');;
         });
