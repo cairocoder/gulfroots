@@ -13,5 +13,6 @@ class UserSubscriptions extends Model
     public function getMembers()
     {
     	return $this->hasMany('App\Ad');
+    	return $this->hasMany('App\Posts');
     }
 }

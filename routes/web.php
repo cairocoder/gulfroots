@@ -66,6 +66,10 @@ Route::group(['prefix'=>'admin','middleware'=>'auth_admin'],function()
 	Route::resource('ads', 'AdController');
 	Route::get('ads/create','AdController@create');
 	Route::post('ads','AdController@store');
+
+	Route::resource('posts', 'PostsController');
+	Route::get('posts/create','PostsController@create');
+	Route::post('posts','PostsController@store');
 	
 
 });

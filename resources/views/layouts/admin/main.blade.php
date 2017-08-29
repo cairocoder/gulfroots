@@ -423,6 +423,13 @@ License: You must have a valid license purchased only from themeforest(the above
 						</a>
 					</li>
 
+					<li class="start {{Request::is('admin/posts*')?"active":""}}">
+						<a href="{{Url('/')}}/admin/posts">
+						<i class="icon-home"></i>
+						<span class="title">Posts</span>
+						</a>
+					</li>
+
 					<li class="last ">
 						<a href="javascript:;">
 						<i class="icon-pointer"></i>
