@@ -27,6 +27,8 @@ class User extends Authenticatable
 
     public function getMessages()
     {
+        // $ne = Messages::first();
+        // dd($ne);
         return $this->hasMany('App\Messages','id');
     }
 
@@ -74,6 +76,43 @@ class User extends Authenticatable
     public function getPosts()
     {
         return $this->hasMany('App\Posts','user_id');
+    }
+
+    public function roles ()
+    {
+        return $this->belongsToMany('App\Role','role_users','user_id','role_id');
+    }
+
+    public function hasAnyRole($roles)
+    {
+        if(is_array($roles))
+        {
+            foreach ($roles as $role) 
+            {
+                if($this->hasRole($role))
+                {
+                    true;
+                }
+            }
+        }
+        else
+        {
+            if($this->hasRole($roles))
+            {
+                return ture;
+            }
+        }
+        return false;
+    }
+
+    public static function hasRole ($role)
+
+    {
+        if(auth()->user()->roles()->first()->slug === $role)
+        {
+            return true;
+        }
+        return false;
     }
 }
 
