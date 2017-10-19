@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use \App\Messages;
+use App\Messages;
+use App\Conversation;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -26,6 +27,7 @@ class User extends Authenticatable
 
     public function getMessages()
     {
+        return $this->hasMany('App\Messages','id');
     }
 
     public function getMessagesFrom()
@@ -38,6 +40,11 @@ class User extends Authenticatable
     {
         return Messages::where('to_id',$this->id)->select('from_id')->get()->groupBy('from_id');
         //return $this->hasMany('App\Messages','to_id');
+    }
+
+    public function getConversation()
+    {
+        return $this->hasMany('App\Conversation','id');
     }
 
     public function getBills()
