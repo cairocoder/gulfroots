@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use \App\Messages;
+use App\Messages;
+use App\Conversation;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -26,6 +27,9 @@ class User extends Authenticatable
 
     public function getMessages()
     {
+        // $ne = Messages::first();
+        // dd($ne);
+        return $this->hasMany('App\Messages','id');
     }
 
     public function getMessagesFrom()
@@ -38,6 +42,11 @@ class User extends Authenticatable
     {
         return Messages::where('to_id',$this->id)->select('from_id')->get()->groupBy('from_id');
         //return $this->hasMany('App\Messages','to_id');
+    }
+
+    public function getConversation()
+    {
+        return $this->hasMany('App\Conversation','id');
     }
 
     public function getBills()
@@ -67,6 +76,43 @@ class User extends Authenticatable
     public function getPosts()
     {
         return $this->hasMany('App\Posts','user_id');
+    }
+
+    public function roles ()
+    {
+        return $this->belongsToMany('App\Role','role_users','user_id','role_id');
+    }
+
+    public function hasAnyRole($roles)
+    {
+        if(is_array($roles))
+        {
+            foreach ($roles as $role) 
+            {
+                if($this->hasRole($role))
+                {
+                    true;
+                }
+            }
+        }
+        else
+        {
+            if($this->hasRole($roles))
+            {
+                return ture;
+            }
+        }
+        return false;
+    }
+
+    public static function hasRole ($role)
+
+    {
+        if(auth()->user()->roles()->first()->slug === $role)
+        {
+            return true;
+        }
+        return false;
     }
 }
 

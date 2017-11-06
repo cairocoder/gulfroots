@@ -16,6 +16,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', function () {
+    dd(\App\User::hasRole('user'));
+});
+
 
 Route::get('admin/login', 'AdminAuthController@login');
 Route::post('admin/login', 'AdminAuthController@doLogin');
@@ -74,8 +78,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth_admin'],function()
 
 });
 
-//Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
-//Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
-//Auth::routes();
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');

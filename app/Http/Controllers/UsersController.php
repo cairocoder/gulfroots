@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Bills;
+use App\Messages;
+use App\Conversation;
 class UsersController extends Controller
 {
     public function rules($id)
@@ -57,9 +59,9 @@ class UsersController extends Controller
     public function userMessages(User $user)
     {   
 
-        $user->mesgs = $user->getMessagesFrom()->toArray();
+        $user->mesgs = $user->getMessages();
         //  ,$user->getMessagesTo()->toArray())
-        dd($user->mesgs);
+        //dd($user->mesgs);
         return View('admin.users.messages',compact('user'));
     }
 
