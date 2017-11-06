@@ -15,11 +15,10 @@ class CreateFiltersTable extends Migration
     {
         Schema::create('filters', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name_ar');
-            $table->string('name_en');
+            $table->string('name');
             $table->string('type');
-            $table->string('value_ar_start');
-            $table->string('value_en_end');
+            $table->string('value_start');
+            $table->string('value_end');
             $table->integer('range_start');
             $table->timestamps();
         });

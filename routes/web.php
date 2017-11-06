@@ -16,11 +16,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function () {
-    dd(\App\User::hasRole('user'));
-});
-
-
 Route::get('admin/login', 'AdminAuthController@login');
 Route::post('admin/login', 'AdminAuthController@doLogin');
 
@@ -30,6 +25,13 @@ Route::post('password/email', 'AdminAuthController@sendResetLinkEmail');
 Route::get('password/reset', 'AdminAuthController@showResetForm');
 
 Route::post('password/reset', 'AdminAuthController@showResetForm');
+
+
+Route::group(['middleware'=>['auth','Role'],'roles' => ['user.*']], function(){
+	Route::resource('/posts', 'PostsController',['except' => [
+		'show','index',
+	]]);
+});
 
 
 Route::group(['prefix'=>'admin','middleware'=>'auth_admin'],function()
