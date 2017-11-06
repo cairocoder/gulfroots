@@ -91,7 +91,7 @@ class User extends Authenticatable
             {
                 if($this->hasRole($role))
                 {
-                    true;
+                   return true;
                 }
             }
         }
@@ -99,18 +99,36 @@ class User extends Authenticatable
         {
             if($this->hasRole($roles))
             {
-                return ture;
+                return true;
             }
         }
         return false;
     }
 
     public static function hasRole ($role)
-
     {
-        if(auth()->user()->roles()->first()->slug === $role)
+        $roles = json_decode(auth()->user()->roles()->first()->permissions, true);
+        $secondary_roles = json_decode(auth()->user()->permissions, true);
+
+        if(array_key_exists($role, $roles) && $roles[$role] === true)
         {
             return true;
+        }
+
+        if(array_key_exists($role, $secondary_roles) && $secondary_roles[$role] === true)
+        {
+            return true;
+        }
+
+        foreach ($roles as $key => $value) {
+            if ((str_is($role, $key) || str_is($key ,$role)) && $value === true) {
+                return true;
+            }
+        }
+        foreach ($secondary_roles as $key => $value) {
+            if ((str_is($role, $key) || str_is($key ,$role)) && $value === true) {
+                return true;
+            }
         }
         return false;
     }

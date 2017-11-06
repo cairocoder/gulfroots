@@ -20,6 +20,10 @@ class RoleMiddleware
             return response('Accsess Denied', 401);
         }
         $actions = request()->route()->getAction();
-        dd($actions);
+        $roles = isset($actions['roles']) ? $actions['roles'] : null;
+        if (auth()->user()->hasAnyRole($roles) && $roles !== NULL) {
+            return $next($request);
+        }
+        return response('Accsess Denied', 401);
     }
 }
