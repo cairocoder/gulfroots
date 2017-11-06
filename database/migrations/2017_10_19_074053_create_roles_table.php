@@ -26,6 +26,12 @@ class CreateRolesTable extends Migration
             $table->integer('role_id')->unsigned();
             $table->primary(array('user_id','role_id'));
         });
+
+        Schema::create('role_admins', function (Blueprint $table) {
+            $table->integer('admin_id')->unsigned();
+            $table->integer('role_id')->unsigned();
+            $table->primary(array('admin_id','role_id'));
+        });
     }
 
     /**
@@ -37,5 +43,6 @@ class CreateRolesTable extends Migration
     {
         Schema::dropIfExists('roles');
         Schema::dropIfExists('role_users');
+        Schema::dropIfExists('role_admins');
     }
 }
