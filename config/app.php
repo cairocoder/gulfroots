@@ -162,6 +162,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        //jrm2k6\Cloudder\CloudderServiceProvider::class,
+        
 
         /*
          * Package Service Providers...
@@ -228,6 +230,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'providers' => array('JD\Cloudder\CloudderServiceProvider'),
+        'aliases' => array('Cloudder' => 'JD\Cloudder\Facades\Cloudder'),
 
     ],
 

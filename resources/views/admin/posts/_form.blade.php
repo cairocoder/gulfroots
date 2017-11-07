@@ -5,12 +5,12 @@
 			</div>
 			<div class="form-group{{ $errors->has('short_des') ? ' has-error' : '' }}">
 			    {!! Form::label('short_des', 'Post short Description') !!}
-			    {!! Form::text('short_des', null, ['class' => 'form-control', 'required' => 'required|alpha_num']) !!}
+			    {!! Form::text('short_des', null, ['class' => 'form-control', 'required' => 'required|text']) !!}
 			    <small class="text-danger">{{ $errors->first('short_des') }}</small>
 			</div>
 			<div class="form-group{{ $errors->has('long_des') ? ' has-error' : '' }}">
 			    {!! Form::label('long_des', 'Post long Description') !!}
-			    {!! Form::text('long_des', null, ['class' => 'form-control', 'required' => 'required|alpha_num']) !!}
+			    {!! Form::text('long_des', null, ['class' => 'form-control', 'required' => '']) !!}
 			    <small class="text-danger">{{ $errors->first('long_des') }}</small>
 			</div>
 			<div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
@@ -35,13 +35,35 @@
 			    <small class="text-danger">{{ $errors->first('sub_category_id') }}</small>
 			</div>
 			<div class="form-group{{ $errors->has('photos') ? ' has-error' : '' }}">
-			    {!! Form::label('photos', 'Photos') !!}
-			    {!! Form::file('photos', null, ['class' => 'form-control']) !!}
+			    <!-- {!! Form::label('photos', 'Photos') !!}</br>
+			    {!! Form::file('photos', null, ['class' => 'form-control']) !!}</br></br>
+			    {!! Form::submit('upload')!!} -->
+			    <form enctype="multipart/form-data" action="" method="POST">
+			    Select images: 
+			    <input type='file' name="file[]" onchange="readURL(this);" multiple><br><br>
+				<img id="blah" src="http://placehold.it/180" alt="your image" height="250" width="250" />
+
+			    </form>
+			    
+				<script type="text/javascript">
+					function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+				</script>
 			    <small class="text-danger">{{ $errors->first('photos') }}</small>
 			</div>						
 
 
-{!!Form::submit('save', ['class'=>'btn btn-success'])!!}
+{!!Form::submit('Create', ['class'=>'btn btn-success'])!!}
 
 
 

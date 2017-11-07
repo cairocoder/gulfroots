@@ -24,6 +24,6 @@ class Posts extends Model
     }
     public function getMembers()
     {
-        return $this->hasMany('App\Reviews');
+        return $this->hasMany('App\Reviews','App\Post_Photos');
     }
 }

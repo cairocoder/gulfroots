@@ -9,6 +9,7 @@ use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\FileReader;
 
 class PostsController extends Controller
 {
@@ -43,11 +44,11 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-             'name' => 'required|alpha_num',
-             'short_des' => 'required|alpha_num',
+             'name' => 'required',
+             'short_des' => 'required',
              //'name_ar' => 'required|alpha_num',
              //'short_des_ar' => 'required|alpha_num',
-             'long_des' => 'required|alpha_num',
+             'long_des' => 'required',
              //'long_des_ar' => 'required|alpha_num',
              'photos' => 'required',
              'price' => 'required|numeric'
