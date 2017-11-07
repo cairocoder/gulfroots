@@ -1,17 +1,17 @@
-			<div class="form-group{{ $errors->has('name_en') ? ' has-error' : '' }}">
-			    {!! Form::label('name_en', 'Post Name') !!}
-			    {!! Form::text('name_en', null, ['class' => 'form-control', 'required' => 'required|alpha_num']) !!}
-			    <small class="text-danger">{{ $errors->first('name_en') }}</small>
+			<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+			    {!! Form::label('name', 'Post Name') !!}
+			    {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required|alpha_num']) !!}
+			    <small class="text-danger">{{ $errors->first('name') }}</small>
 			</div>
-			<div class="form-group{{ $errors->has('short_des_en') ? ' has-error' : '' }}">
-			    {!! Form::label('short_des_en', 'Post short Description') !!}
-			    {!! Form::text('short_des_en', null, ['class' => 'form-control', 'required' => 'required|alpha_num']) !!}
-			    <small class="text-danger">{{ $errors->first('short_des_en') }}</small>
+			<div class="form-group{{ $errors->has('short_des') ? ' has-error' : '' }}">
+			    {!! Form::label('short_des', 'Post short Description') !!}
+			    {!! Form::text('short_des', null, ['class' => 'form-control', 'required' => 'required|alpha_num']) !!}
+			    <small class="text-danger">{{ $errors->first('short_des') }}</small>
 			</div>
-			<div class="form-group{{ $errors->has('long_des_en') ? ' has-error' : '' }}">
-			    {!! Form::label('long_des_en', 'Post long Description') !!}
-			    {!! Form::text('long_des_en', null, ['class' => 'form-control', 'required' => 'required|alpha_num']) !!}
-			    <small class="text-danger">{{ $errors->first('long_des_en') }}</small>
+			<div class="form-group{{ $errors->has('long_des') ? ' has-error' : '' }}">
+			    {!! Form::label('long_des', 'Post long Description') !!}
+			    {!! Form::text('long_des', null, ['class' => 'form-control', 'required' => 'required|alpha_num']) !!}
+			    <small class="text-danger">{{ $errors->first('long_des') }}</small>
 			</div>
 			<div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
 			    {!! Form::label('price', 'Price') !!}

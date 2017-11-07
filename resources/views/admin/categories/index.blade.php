@@ -9,8 +9,8 @@
 				<table class="table table-bordered">
 					<thead>
 						<th> #</th>
-						<th> name ar</th>
-						<th> name en</th>
+						<th> Name</th>
+						<th> Slug</th>
 						<th> sort</th>
 						<th> option</th>
 					</thead>
@@ -19,8 +19,8 @@
 						@foreach($categories as $category)
 							<tr>
 								<td>{{$category->id}}</td>
-								<td><a href="{{Url('/')}}/admin/categories/{{$category->id}}">{{$category->name_ar}}</a></td>
-								<td><a href="{{Url('/')}}/admin/categories/{{$category->id}}">{{$category->name_en}}</a></td>
+								<td><a href="{{Url('/')}}/admin/categories/{{$category->id}}">{{$category->name}}</a></td>
+								<td><a href="{{Url('/')}}/admin/categories/{{$category->id}}">{{$category->slug}}</a></td>
 								<td>{!! Form::input('number','sort['.$category->id.']',$category->sort,['style'=>'width:50px'])!!}</td>
 								<td><a href="{{Url('/')}}/admin/categories/{{$category->id}}/edit" class="btn btn-warning">edit</a></td>
 							</tr>

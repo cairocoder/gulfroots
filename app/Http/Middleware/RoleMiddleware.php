@@ -15,7 +15,7 @@ class RoleMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->user() === null || auth()->admin() === null)
+        if(auth()->user() === null ||auth()->admin() === null)
         {
             return response('Accsess Denied', 401);
         }
@@ -26,4 +26,7 @@ class RoleMiddleware
         }
         return response('Accsess Denied', 401);
     }
+
+    //(auth()->user()->hasAnyRole($roles) && $roles !== NULL) || 
+    //auth()->user() === null || 
 }

@@ -21,12 +21,12 @@ class CategoriesController extends Controller
     public function store($id,Request $request)
     {
         $this->validate($request, [
-             'name_ar' => 'required|alpha_num',
-             'name_en' => 'required|alpha_num',
+             'name' => 'required|alpha_num',
+             'status' => 'required|numeric',
              'sub_id' => 'required|numeric',
-             'slug_ar' => 'required|alpha_num',
-             'slug_en' => 'required|alpha_num',
-             'sort' => 'required|numeric'
+             'slug' => 'required|alpha_num',
+             // 'icon' => 'required|alpha_num',
+             // 'sort' => 'required|numeric'
          ]);
     	$request->merge(['sub_id'=>$id]);
     	Categories::create($request->all());

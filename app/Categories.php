@@ -8,7 +8,7 @@ class Categories extends Model
 {
     //
     protected $table = 'categories';
-    protected $fillable = ['name','sub_id','slug','sort'];
+    protected $fillable = ['name','sub_id','Des','icon','status'];
     
     public function getSubCategories()
     {
