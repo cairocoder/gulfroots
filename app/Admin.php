@@ -64,6 +64,7 @@ class Admin extends Authenticatable
     {
         $roles = json_decode(auth()->admin()->roles()->first()->permissions, true);
         $secondary_roles = json_decode(auth()->admin()->permissions, true);
+        dd(json_decode($secondary_roles));
 
         if(array_key_exists($role, $roles) && $roles[$role] === true)
         {

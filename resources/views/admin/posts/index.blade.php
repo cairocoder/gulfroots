@@ -25,11 +25,11 @@
 					<tr>
 						<td>{{$post->id}}</td>
 						<td>{{$post->user->user_id}}</td>
-						<td>{{$post->category->name_en}}</td>
+						<td>{{$post->category->name}}</td>
 						<td>{{$post->category->sub_id}}</td>
-						<td>{{$post->name_en}}</td>
-						<td>{{$post->short_des_en}}</td>
-						<td>{{$post->long_des_en}}</td>
+						<td>{{$post->name}}</td>
+						<td>{{$post->short_des}}</td>
+						<td>{{$post->long_des}}</td>
 						<td>{{$post->price}}</td>
 						<td>{{$post->photos}}</td>
 						<td><a href="{{Url('/')}}/admin/posts/{{$post->id}}/edit" class="btn btn-warning">EDIT</a></td>

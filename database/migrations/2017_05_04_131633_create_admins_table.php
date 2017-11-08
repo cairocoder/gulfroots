@@ -23,6 +23,7 @@ class CreateAdminsTable extends Migration
             $table->string('title');
             $table->string('photo');
             $table->rememberToken();
+            $table->text('permissions')->unllabel();
             $table->timestamps();
 
             $table->foreign('group_id')->references('id')->on('admin_groups')->onDelete('cascade');

@@ -9,6 +9,7 @@ use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\FileReader;
 
 class PostsController extends Controller
 {
@@ -30,7 +31,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-     	$category = Categories::pluck('name_en','id');
+     	$category = Categories::pluck('name','id');
         $subcategory = Categories::pluck('sub_id','id');
         $user = UserSubscriptions::pluck('user_id','id');
         return View('admin.posts.create',compact('category','subcategory','user'));
@@ -43,11 +44,11 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-             'name_en' => 'required|alpha_num',
-             'short_des_en' => 'required|alpha_num',
+             'name' => 'required',
+             'short_des' => 'required',
              //'name_ar' => 'required|alpha_num',
              //'short_des_ar' => 'required|alpha_num',
-             'long_des_en' => 'required|alpha_num',
+             'long_des' => 'required',
              //'long_des_ar' => 'required|alpha_num',
              'photos' => 'required',
              'price' => 'required|numeric'
@@ -73,7 +74,7 @@ class PostsController extends Controller
      */
     public function edit(Posts $post)
     {
-        $category = Categories::pluck('name_en','id');
+        $category = Categories::pluck('name','id');
         $subcategory = Categories::pluck('sub_id','id');
         $user = UserSubscriptions::pluck('user_id','id');
         return View('admin.posts.edit',compact('post','category','subcategory','user'));

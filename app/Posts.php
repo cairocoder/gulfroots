@@ -22,4 +22,8 @@ class Posts extends Model
     {
         return $this->belongsTo('App\UserSubscriptions');
     }
+    public function getMembers()
+    {
+        return $this->hasMany('App\Reviews','App\Post_Photos');
+    }
 }

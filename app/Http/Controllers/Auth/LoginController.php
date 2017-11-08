@@ -40,7 +40,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if($user->roles->first()->slug === 'Admin')
+        if($user->roles->first()->slug === 'admin')
         {
             return redirect('/admin');
         }
