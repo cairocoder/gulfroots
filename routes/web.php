@@ -13,7 +13,7 @@
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('admin/login', 'AdminAuthController@login');
@@ -76,6 +76,10 @@ Route::group(['prefix'=>'admin','middleware'=>'auth_admin'],function()
 	Route::resource('posts', 'PostsController');
 	Route::get('posts/create','PostsController@create');
 	Route::post('posts','PostsController@store');
+
+	Route::resource('messages', 'MessagesController');
+	Route::get('messages/create','MessagesController@create');
+	Route::post('messages','MessagesController@store');
 	
 
 });
@@ -85,3 +89,4 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/messageconfirmation', 'HomeController@goto')->name('messageconfirmation');

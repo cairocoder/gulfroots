@@ -8,20 +8,19 @@
 			<table class="table table-bordered">
 				<thead>
 					<th>#</th>
-					<th>Name</th>
-					<th>Title</th>
+					<th>Send to</th>
+					<th>Message</th>
 					<th>Date</th>
 					<th>Control</th>
 				</thead>
-				@foreach($user->getMessages as $mes)
+				@foreach($user->getConversation as $mes)
 				<tr>
 					<td>{{$mes->id}}</td>
-					<td>{{$mes->user->name}}</td>
-					<td>{{$mes->message}}</td>
-					<td>{{$mes->created_at->format('Y-m-d H:i:s')}}</td>
+					<td>{{$mes->user_two}}</td>
+					<td>{{$mes->user_one}}</td>
 					<td width="16%">
 							{!! Form::open(['method' => 'DELETE', 'action' => ['UsersController@destroy',$user->id]]) !!}
-									<a href="{{Url('/')}}/admin/users/messages/{{$user->id}}/edit" class="btn btn-warning">Edit</a>
+									<a href="">Edit</a>
 							        {!! Form::submit("Delete", ['class' => 'btn btn-danger']) !!}
 							{!! Form::close() !!}
 						</td>
