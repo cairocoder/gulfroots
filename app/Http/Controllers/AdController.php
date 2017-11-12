@@ -31,8 +31,8 @@ class AdController extends Controller
      */
     public function create()
     {
-        $category = Categories::pluck('name_en','id');
-        $package = Packages::pluck('name_en','id');
+        $category = Categories::pluck('name','id');
+        $package = Packages::pluck('name','id');
         $user = UserSubscriptions::pluck('user_id','id');
         return View('admin.ads.create',compact('category','package','user'));
     }
@@ -69,8 +69,8 @@ class AdController extends Controller
 
     public function edit(Ad $ad)
     {
-        $category = Categories::get()->pluck('name_en','id');
-        $package = Packages::get()->pluck('name_en','id');
+        $category = Categories::get()->pluck('name','id');
+        $package = Packages::get()->pluck('name','id');
         $user = UserSubscriptions::pluck('user_id','id');
         return View('admin.ads.edit', compact('ad','category','package','user'));
     }

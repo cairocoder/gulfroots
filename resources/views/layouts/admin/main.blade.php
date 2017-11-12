@@ -67,18 +67,9 @@
             </li>
         </ul> -->
         <ul class="nav navbar-nav ml-auto">
-            <li class="nav-item d-md-down-none">
-                <a class="nav-link" href="#"><i class="icon-bell"></i><span class="badge badge-pill badge-danger">5</span></a>
-            </li>
-            <li class="nav-item d-md-down-none">
-                <a class="nav-link" href="#"><i class="icon-list"></i></a>
-            </li>
-            <li class="nav-item d-md-down-none">
-                <a class="nav-link" href="#"><i class="icon-location-pin"></i></a>
-            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                    <img src="img/avatars/6.jpg" class="img-avatar" alt="">
                     <span class="d-md-down-none">admin</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
@@ -182,6 +173,13 @@
 						<span class="title">Posts</span>
 						</a>
 					</li>
+
+                    <li class="start {{Request::is('admin/messages*')?"active":""}}">
+                        <a class="nav-link" href="{{Url('/')}}/admin/messages">
+                        <i class="icon-home"></i>
+                        <span class="title"> Messages </span>
+                        </a>
+                    </li>
 
 					<li class="nav-item nav-dropdown">
 						<a class="nav-link nav-dropdown-toggle" href="#">

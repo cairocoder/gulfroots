@@ -47,6 +47,10 @@ class User extends Authenticatable
     public function getConversation()
     {
         return $this->hasMany('App\Conversation','id');
+        //$conversations = Conversation::where('user_one',$this->id)->get();
+        //dd($conversations);
+        //return $conversations;
+        return View('admin.users.messages', compact('conversations'));
     }
 
     public function getBills()
