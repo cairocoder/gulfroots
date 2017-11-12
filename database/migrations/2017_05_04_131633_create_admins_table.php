@@ -19,7 +19,11 @@ class CreateAdminsTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->integer('group_id')->unsigned();
+            $table->string('phone');
+            $table->string('title');
+            $table->string('photo');
             $table->rememberToken();
+            $table->text('permissions')->unllabel();
             $table->timestamps();
 
             $table->foreign('group_id')->references('id')->on('admin_groups')->onDelete('cascade');

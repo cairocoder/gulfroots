@@ -1,513 +1,569 @@
 <!DOCTYPE html>
-<!-- 
-Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.2
-Version: 3.7.0
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Like: www.facebook.com/keenthemes
-Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!-->
-<html lang="en">
-<!--<![endif]-->
-<!-- BEGIN HEAD -->
+<html lang="en" dir="rtl">
 <head>
-	<meta charset="utf-8"/>
-	<title> @yield('title') | Admin Panel </title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<meta content="" name="description"/>
-	<meta content="" name="author"/>
-	<!-- BEGIN GLOBAL MANDATORY STYLES -->
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css">
-	<link href="{{Url('/')}}/backend/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link href="{{Url('/')}}/backend/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css">
-	<link href="{{Url('/')}}/backend/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-	<link href="{{Url('/')}}/backend/assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css">
-	<link href="{{Url('/')}}/backend/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
-	<!-- END GLOBAL MANDATORY STYLES -->
-	<!-- BEGIN THEME STYLES -->
-	<link href="{{Url('/')}}/backend/assets/global/css/components-md.css" id="style_components" rel="stylesheet" type="text/css"/>
-	<link href="{{Url('/')}}/backend/assets/global/css/plugins-md.css" rel="stylesheet" type="text/css"/>
-	<link href="{{Url('/')}}/backend/assets/admin/layout2/css/layout.css" rel="stylesheet" type="text/css"/>
-	<link id="style_color" href="{{Url('/')}}/backend/assets/admin/layout2/css/themes/grey.css" rel="stylesheet" type="text/css"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
+    <title> @yield('title') | Admin Panel </title>
 
-	<link href="{{Url('/')}}/backend/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	<link href="{{Url('/')}}/backend/assets/admin/layout2/css/custom.css" rel="stylesheet" type="text/css"/>
-	<!-- END THEME STYLES -->
-	<link rel="shortcut icon" href="favicon.ico"/>
+    <!-- Icons -->
+    <link href="{{ asset('node_modules/Font-Awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('node_modules/simple-line-icons/css/simple-line-icons.css')}}" rel="stylesheet">
+
+    <!-- Main styles for this application -->
+    
+    <link href="{{ asset('css/style.css')}}" rel="stylesheet">
+
+    <link rel="shortcut icon" href="favicon.ico"/>
 </head>
-<!-- END HEAD -->
-<!-- BEGIN BODY -->
-<!-- DOC: Apply "page-header-fixed-mobile" and "page-footer-fixed-mobile" class to body element to force fixed header or footer in mobile devices -->
-<!-- DOC: Apply "page-sidebar-closed" class to the body and "page-sidebar-menu-closed" class to the sidebar menu element to hide the sidebar by default -->
-<!-- DOC: Apply "page-sidebar-hide" class to the body to make the sidebar completely hidden on toggle -->
-<!-- DOC: Apply "page-sidebar-closed-hide-logo" class to the body element to make the logo hidden on sidebar toggle -->
-<!-- DOC: Apply "page-sidebar-hide" class to body element to completely hide the sidebar on sidebar toggle -->
-<!-- DOC: Apply "page-sidebar-fixed" class to have fixed sidebar -->
-<!-- DOC: Apply "page-footer-fixed" class to the body element to have fixed footer -->
-<!-- DOC: Apply "page-sidebar-reversed" class to put the sidebar on the right side -->
-<!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
-<body class="page-md page-boxed page-header-fixed page-container-bg-solid page-sidebar-closed-hide-logo">
-<!-- BEGIN HEADER -->
-<div class="page-header md-shadow-z-1-i navbar navbar-fixed-top">
-	<!-- BEGIN HEADER INNER -->
-	<div class="page-header-inner container">
-		<!-- BEGIN LOGO -->
-		<div class="page-logo">
-			<a href="index.html">
-			<img src="{{Url('/')}}/backend/assets/admin/layout2/img/logo-default.png" alt="logo" class="logo-default"/>
-			</a>
-			<div class="menu-toggler sidebar-toggler">
-				<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
-			</div>
-		</div>
-		<!-- END LOGO -->
-		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-		<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-		</a>
-		<!-- END RESPONSIVE MENU TOGGLER -->
 
-		<!-- BEGIN PAGE TOP -->
-		<div class="page-top">
-			<!-- BEGIN HEADER SEARCH BOX -->
-			<!-- BEGIN TOP NAVIGATION MENU -->
-			<div class="top-menu">
-				<ul class="nav navbar-nav pull-right">
-					<!-- BEGIN NOTIFICATION DROPDOWN -->
-					<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-					<li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
-						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-						<i class="icon-bell"></i>
-						<span class="badge badge-default">
-						7 </span>
-						</a>
-						<ul class="dropdown-menu">
-							<li class="external">
-								<h3><span class="bold">12 pending</span> notifications</h3>
-								<a href="extra_profile.html">view all</a>
-							</li>
-							<li>
-								<ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
-									<li>
-										<a href="javascript:;">
-										<span class="time">just now</span>
-										<span class="details">
-										<span class="label label-sm label-icon label-success">
-										<i class="fa fa-plus"></i>
-										</span>
-										New user registered. </span>
-										</a>
-									</li>
-									<li>
-										<a href="javascript:;">
-										<span class="time">3 mins</span>
-										<span class="details">
-										<span class="label label-sm label-icon label-danger">
-										<i class="fa fa-bolt"></i>
-										</span>
-										Server #12 overloaded. </span>
-										</a>
-									</li>
-									<li>
-										<a href="javascript:;">
-										<span class="time">10 mins</span>
-										<span class="details">
-										<span class="label label-sm label-icon label-warning">
-										<i class="fa fa-bell-o"></i>
-										</span>
-										Server #2 not responding. </span>
-										</a>
-									</li>
-									<li>
-										<a href="javascript:;">
-										<span class="time">14 hrs</span>
-										<span class="details">
-										<span class="label label-sm label-icon label-info">
-										<i class="fa fa-bullhorn"></i>
-										</span>
-										Application error. </span>
-										</a>
-									</li>
-									<li>
-										<a href="javascript:;">
-										<span class="time">2 days</span>
-										<span class="details">
-										<span class="label label-sm label-icon label-danger">
-										<i class="fa fa-bolt"></i>
-										</span>
-										Database overloaded 68%. </span>
-										</a>
-									</li>
-									<li>
-										<a href="javascript:;">
-										<span class="time">3 days</span>
-										<span class="details">
-										<span class="label label-sm label-icon label-danger">
-										<i class="fa fa-bolt"></i>
-										</span>
-										A user IP blocked. </span>
-										</a>
-									</li>
-									<li>
-										<a href="javascript:;">
-										<span class="time">4 days</span>
-										<span class="details">
-										<span class="label label-sm label-icon label-warning">
-										<i class="fa fa-bell-o"></i>
-										</span>
-										Storage Server #4 not responding dfdfdfd. </span>
-										</a>
-									</li>
-									<li>
-										<a href="javascript:;">
-										<span class="time">5 days</span>
-										<span class="details">
-										<span class="label label-sm label-icon label-info">
-										<i class="fa fa-bullhorn"></i>
-										</span>
-										System Error. </span>
-										</a>
-									</li>
-									<li>
-										<a href="javascript:;">
-										<span class="time">9 days</span>
-										<span class="details">
-										<span class="label label-sm label-icon label-danger">
-										<i class="fa fa-bolt"></i>
-										</span>
-										Storage server failed. </span>
-										</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-					<!-- END NOTIFICATION DROPDOWN -->
-					<!-- BEGIN INBOX DROPDOWN -->
-					<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-					<li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
-						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-						<i class="icon-envelope-open"></i>
-						<span class="badge badge-default">
-						4 </span>
-						</a>
-						<ul class="dropdown-menu">
-							<li class="external">
-								<h3>You have <span class="bold">7 New</span> Messages</h3>
-								<a href="page_inbox.html">view all</a>
-							</li>
-							<li>
-								<ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
-									<li>
-										<a href="inbox.html?a=view">
-										<span class="photo">
-										<img src="{{Url('/')}}/backend/assets/admin/layout3/img/avatar2.jpg" class="img-circle" alt="">
-										</span>
-										<span class="subject">
-										<span class="from">
-										Lisa Wong </span>
-										<span class="time">Just Now </span>
-										</span>
-										<span class="message">
-										Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-										</a>
-									</li>
-									<li>
-										<a href="inbox.html?a=view">
-										<span class="photo">
-										<img src="{{Url('/')}}/backend/assets/admin/layout3/img/avatar3.jpg" class="img-circle" alt="">
-										</span>
-										<span class="subject">
-										<span class="from">
-										Richard Doe </span>
-										<span class="time">16 mins </span>
-										</span>
-										<span class="message">
-										Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-										</a>
-									</li>
-									<li>
-										<a href="inbox.html?a=view">
-										<span class="photo">
-										<img src="{{Url('/')}}/backend/assets/admin/layout3/img/avatar1.jpg" class="img-circle" alt="">
-										</span>
-										<span class="subject">
-										<span class="from">
-										Bob Nilson </span>
-										<span class="time">2 hrs </span>
-										</span>
-										<span class="message">
-										Vivamus sed nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-										</a>
-									</li>
-									<li>
-										<a href="inbox.html?a=view">
-										<span class="photo">
-										<img src="{{Url('/')}}/backend/assets/admin/layout3/img/avatar2.jpg" class="img-circle" alt="">
-										</span>
-										<span class="subject">
-										<span class="from">
-										Lisa Wong </span>
-										<span class="time">40 mins </span>
-										</span>
-										<span class="message">
-										Vivamus sed auctor 40% nibh congue nibh... </span>
-										</a>
-									</li>
-									<li>
-										<a href="inbox.html?a=view">
-										<span class="photo">
-										<img src="{{Url('/')}}/backend/assets/admin/layout3/img/avatar3.jpg" class="img-circle" alt="">
-										</span>
-										<span class="subject">
-										<span class="from">
-										Richard Doe </span>
-										<span class="time">46 mins </span>
-										</span>
-										<span class="message">
-										Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-										</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-					<!-- END INBOX DROPDOWN -->
-					
-					<!-- BEGIN USER LOGIN DROPDOWN -->
-					<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-					<li class="dropdown dropdown-user">
-						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-						
-						<img alt="" class="img-circle" src="{{Url('/')}}/backend/assets/admin/layout2/img/avatar3_small.jpg"/>
-						<span class="username username-hide-on-mobile">
-						Nick </span>
-						<i class="fa fa-angle-down"></i>
-						</a>
-						<ul class="dropdown-menu dropdown-menu-default">
-							<li>
-								<a href="extra_profile.html">
-								<i class="icon-user"></i> My Profile </a>
-							</li>
-							<li>
-								<a href="page_calendar.html">
-								<i class="icon-calendar"></i> My Calendar </a>
-							</li>
-							<li>
-								<a href="inbox.html">
-								<i class="icon-envelope-open"></i> My Inbox <span class="badge badge-danger">
-								3 </span>
-								</a>
-							</li>
-							<li>
-								<a href="page_todo.html">
-								<i class="icon-rocket"></i> My Tasks <span class="badge badge-success">
-								7 </span>
-								</a>
-							</li>
-							<li class="divider">
-							</li>
-							<li>
-								<a href="extra_lock.html">
-								<i class="icon-lock"></i> Lock Screen </a>
-							</li>
-							<li>
-								<a href="login.html">
-								<i class="icon-key"></i> Log Out </a>
-							</li>
-						</ul>
-					</li>
-					<!-- END USER LOGIN DROPDOWN -->
-				</ul>
-			</div>
-			<!-- END TOP NAVIGATION MENU -->
-		</div>
-		<!-- END PAGE TOP -->
-	</div>
-	<!-- END HEADER INNER -->
-</div>
-<!-- END HEADER -->
-<div class="clearfix">
-</div>
-<div class="container">
-	<!-- BEGIN CONTAINER -->
-	<div class="page-container">
-		<!-- BEGIN SIDEBAR -->
-		<div class="page-sidebar-wrapper">
-			<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-			<!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-			<div class="page-sidebar navbar-collapse collapse">
-				<!-- BEGIN SIDEBAR MENU -->
-				<!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
-				<!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
-				<!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
-				<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-				<!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
-				<!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-				<ul class="page-sidebar-menu page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-					
-					<li class="start {{Request::is('admin')?"active":""}}">
-						<a href="{{Url('/')}}">
-						<i class="icon-home"></i>
-						<span class="title">Home</span>
-						</a>
-					</li>
+<!-- BODY options, add following classes to body to change options
 
-					<!-- 	<li class="start {{Request::is('admin/admin-groups*')?"active":""}}">
-						<a href="{{Url('/')}}/admin/admin-groups">
-						<i class="icon-home"></i>
-						<span class="title">Admins Groups</span>
-						</a>
-					</li> -->
-					
-					<li class="start {{Request::is('admin/site-settings*')?"active":""}}">
-						<a href="{{Url('/')}}/admin/site-settings">
+// Header options
+1. '.header-fixed'					- Fixed Header
+
+// Brand options
+1. '.brand-minimized'       - Minimized brand (Only symbol)
+
+// Sidebar options
+1. '.sidebar-fixed'					- Fixed Sidebar
+2. '.sidebar-hidden'				- Hidden Sidebar
+3. '.sidebar-off-canvas'		- Off Canvas Sidebar
+4. '.sidebar-minimized'			- Minimized Sidebar (Only icons)
+5. '.sidebar-compact'			  - Compact Sidebar
+
+// Aside options
+1. '.aside-menu-fixed'			- Fixed Aside Menu
+2. '.aside-menu-hidden'			- Hidden Aside Menu
+3. '.aside-menu-off-canvas'	- Off Canvas Aside Menu
+
+// Breadcrumb options
+1. '.breadcrumb-fixed'			- Fixed Breadcrumb
+
+// Footer options
+1. '.footer-fixed'					- Fixed footer
+
+-->
+
+<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+    <header class="app-header navbar">
+        <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">☰</button>
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button">☰</button>
+
+        <!-- <ul class="nav navbar-nav d-md-down-none">
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#">Dashboard</a>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#">Users</a>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#">Settings</a>
+            </li>
+        </ul> -->
+        <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item d-md-down-none">
+                <a class="nav-link" href="#"><i class="icon-bell"></i><span class="badge badge-pill badge-danger">5</span></a>
+            </li>
+            <li class="nav-item d-md-down-none">
+                <a class="nav-link" href="#"><i class="icon-list"></i></a>
+            </li>
+            <li class="nav-item d-md-down-none">
+                <a class="nav-link" href="#"><i class="icon-location-pin"></i></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                    <span class="d-md-down-none">admin</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-header text-center">
+                        <strong>Account</strong>
+                    </div>
+                    <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span class="badge badge-info">42</span></a>
+                    <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span class="badge badge-success">42</span></a>
+                    <a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Tasks<span class="badge badge-danger">42</span></a>
+                    <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comments<span class="badge badge-warning">42</span></a>
+                    <div class="dropdown-header text-center">
+                        <strong>Settings</strong>
+                    </div>
+                    <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+                    <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Settings</a>
+                    <a class="dropdown-item" href="#"><i class="fa fa-usd"></i> Payments<span class="badge badge-secondary">42</span></a>
+                    <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span class="badge badge-primary">42</span></a>
+                    <div class="divider"></div>
+                    <a class="dropdown-item" href="#"><i class="fa fa-shield"></i> Lock Account</a>
+                    <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Logout</a>
+                </div>
+            </li>
+        </ul>
+        <button class="navbar-toggler aside-menu-toggler" type="button">☰</button>
+
+    </header>
+
+    <div class="app-body">
+        <div class="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="nav">
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="icon-speedometer"></i> Dashboard <span class="badge badge-primary">NEW</span></a>
+                    </li> -->
+                   
+
+                     <li class="start {{Request::is('admin')?"active":""}}">
+                        <a class="nav-link" href="{{Url('/')}}">
+						<i class="icon-home"></i> Home</a>
+                    </li>
+
+                    <li class="start {{Request::is('admin/site-settings*')?"active":""}}">
+						<a class="nav-link" href="{{Url('/')}}/admin/site-settings">
 						<i class="fa fa-gears"></i>
 						<span class="title">Site Settings</span>
 						</a>
 					</li>
 
 					<li class="start {{Request::is('admin/admins*')?"active":""}}">
-						<a href="{{Url('/')}}/admin/admins">
+						<a class="nav-link" href="{{Url('/')}}/admin/admins">
 						<i class="icon-home"></i>
 						<span class="title">Admins</span>
 						</a>
 					</li>
 
 					<li class="start {{Request::is('admin/users*')?"active":""}}">
-						<a href="{{Url('/')}}/admin/users">
+						<a class="nav-link" href="{{Url('/')}}/admin/users">
 						<i class="icon-home"></i>
 						<span class="title">Users</span>
 						</a>
 					</li>
 
 					<li class="start {{Request::is('admin/categories*')?"active":""}}">
-						<a href="{{Url('/')}}/admin/categories">
+						<a class="nav-link" href="{{Url('/')}}/admin/categories">
 						<i class="icon-home"></i>
 						<span class="title">Categories</span>
 						</a>
 					</li>
 
 					<li class="start {{Request::is('admin/packages*')?"active":""}}">
-						<a href="{{Url('/')}}/admin/packages">
+						<a class="nav-link" href="{{Url('/')}}/admin/packages">
 						<i class="icon-home"></i>
 						<span class="title">Packages</span>
 						</a>
 					</li>
 
 					<li class="start {{Request::is('admin/filters*')?"active":""}}">
-						<a href="{{Url('/')}}/admin/filters">
+						<a class="nav-link" href="{{Url('/')}}/admin/filters">
 						<i class="icon-home"></i>
 						<span class="title">Filters</span>
 						</a>
 					</li>
 
 					<li class="start {{Request::is('admin/filter-groups*')?"active":""}}">
-						<a href="{{Url('/')}}/admin/filter-groups">
+						<a class="nav-link" href="{{Url('/')}}/admin/filter-groups">
 						<i class="icon-home"></i>
 						<span class="title">Filters Groups</span>
 						</a>
 					</li>
 
 					<li class="start {{Request::is('admin/ads*')?"active":""}}">
-						<a href="{{Url('/')}}/admin/ads">
+						<a class="nav-link" href="{{Url('/')}}/admin/ads">
 						<i class="icon-home"></i>
 						<span class="title">Ads</span>
 						</a>
 					</li>
 
-					<li class="last ">
-						<a href="javascript:;">
-						<i class="icon-pointer"></i>
-						<span class="title">Maps</span>
-						<span class="arrow "></span>
+					<li class="start {{Request::is('admin/posts*')?"active":""}}">
+						<a class="nav-link" href="{{Url('/')}}/admin/posts">
+						<i class="icon-home"></i>
+						<span class="title">Posts</span>
 						</a>
-						<ul class="sub-menu">
-							<li>
-								<a href="maps_google.html">
-								Google Maps</a>
+					</li>
+
+					<li class="nav-item nav-dropdown">
+						<a class="nav-link nav-dropdown-toggle" href="#">
+						<i class="icon-map"></i><span class="arrow "></span> Maps</a>
+						<ul class="nav-dropdown-items">
+							<li class="nav-item">
+								<a class="nav-link" href="maps_google.html"><i class="icon-map"></i> Google Maps</a>
 							</li>
-							<li>
-								<a href="maps_vector.html">
-								Vector Maps</a>
+							<li class="nav-item">
+								<a class="nav-link" href="maps_vector.html"><i class="icon-map"></i> Vector Maps</a>
 							</li>
 						</ul>
 					</li>
-			
-				</ul>
-				<!-- END SIDEBAR MENU -->
-			</div>
-		</div>
-		<!-- END SIDEBAR -->
-		<!-- BEGIN CONTENT -->
-		<div class="page-content-wrapper">
-			<div class="page-content">
-				<!-- BEGIN PAGE CONTENT-->
-				<div class="row">
-					<div class="col-md-12">
-						@yield('content')
-					</div>
-				</div>
-				<!-- END PAGE CONTENT-->
-			</div>
-		</div>
-		<!-- END CONTENT -->
-		<!-- BEGIN QUICK SIDEBAR -->
-		<!--Cooming Soon...-->
-		<!-- END QUICK SIDEBAR -->
-	</div>
-	<!-- END CONTAINER -->
-	<!-- BEGIN FOOTER -->
-	<div class="page-footer">
-		<div class="page-footer-inner">
-			{{date('Y')}} &copy; GulfRoots by  <a href="https://viralcorners.com" target="_blank"><b>Viral Corners</b></a>.
-		</div>
-		<div class="scroll-to-top">
-			<i class="icon-arrow-up"></i>
-		</div>
-	</div>
-	<!-- END FOOTER -->
-</div>
-<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-<!-- BEGIN CORE PLUGINS -->
-<!--[if lt IE 9]>
-<script src="{{Url('/')}}/backend/assets/global/plugins/respond.min.js"></script>
-<script src="{{Url('/')}}/backend/assets/global/plugins/excanvas.min.js"></script> 
-<![endif]-->
-<script src="{{Url('/')}}/backend/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-<script src="{{Url('/')}}/backend/assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-<!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-<script src="{{Url('/')}}/backend/assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-<script src="{{Url('/')}}/backend/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="{{Url('/')}}/backend/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-<script src="{{Url('/')}}/backend/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-<script src="{{Url('/')}}/backend/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-<script src="{{Url('/')}}/backend/assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
-<script src="{{Url('/')}}/backend/assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-<script src="{{Url('/')}}/backend/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
-<!-- END CORE PLUGINS -->
-<script src="{{Url('/')}}/backend/assets/global/scripts/metronic.js" type="text/javascript"></script>
-<script src="{{Url('/')}}/backend/assets/admin/layout2/scripts/layout.js" type="text/javascript"></script>
-<script src="{{Url('/')}}/backend/assets/admin/layout2/scripts/demo.js" type="text/javascript"></script>
-<script src="{{Url('/')}}/backend/datatables/js/jquery.dataTables.min.js" type="text/javascript"></script>
-<script src="{{Url('/')}}/backend/datatables/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+                                  
 
-<script>
-      jQuery(document).ready(function() {    
-        	Metronic.init(); // init metronic core components
-			Layout.init(); // init current layout
-			Demo.init(); // init demo features
-      });
-</script>
+                </ul>
+            </nav>
+            <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+        </div>
+
+        <!-- Main content -->
+        <main class="main">
+
+            <!-- Breadcrumb -->
+            <!-- <ol class="breadcrumb">
+                <li class="breadcrumb-item">Home</li>
+                <li class="breadcrumb-item"><a href="#">Admin</a>
+                </li>
+                <li class="breadcrumb-item active">Dashboard</li> -->
+
+                <!-- Breadcrumb Menu-->
+                <!-- <li class="breadcrumb-menu d-md-down-none">
+                    <div class="btn-group" role="group" aria-label="Button group">
+                        <a class="btn" href="#"><i class="icon-speech"></i></a>
+                        <a class="btn" href="./"><i class="icon-graph"></i> &nbsp;Dashboard</a>
+                        <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>
+                    </div>
+                </li>
+            </ol> -->
+
+
+
+            <div class="page-content-wrapper">
+            <div class="page-content">
+                <!-- BEGIN PAGE CONTENT-->
+                <div class="card-body">
+                
+                    
+                        @yield('content')
+                    
+                
+            </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+        </div>
+            <!-- /.conainer-fluid -->
+        </main>
+
+        <aside class="aside-menu">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab"><i class="icon-list"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><i class="icon-speech"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#settings" role="tab"><i class="icon-settings"></i></a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="timeline" role="tabpanel">
+                    <div class="callout m-0 py-2 text-muted text-center bg-light text-uppercase">
+                        <small><b>Today</b>
+                        </small>
+                    </div>
+                    <hr class="transparent mx-3 my-0">
+                    <div class="callout callout-warning m-0 py-3">
+                        <div class="avatar float-right">
+                            <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                        </div>
+                        <div>Meeting with
+                            <strong>Lucas</strong>
+                        </div>
+                        <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 1 - 3pm</small>
+                        <small class="text-muted"><i class="icon-location-pin"></i>&nbsp; Palo Alto, CA</small>
+                    </div>
+                    <hr class="mx-3 my-0">
+                    <div class="callout callout-info m-0 py-3">
+                        <div class="avatar float-right">
+                            <img src="img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                        </div>
+                        <div>Skype with
+                            <strong>Megan</strong>
+                        </div>
+                        <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 4 - 5pm</small>
+                        <small class="text-muted"><i class="icon-social-skype"></i>&nbsp; On-line</small>
+                    </div>
+                    <hr class="transparent mx-3 my-0">
+                    <div class="callout m-0 py-2 text-muted text-center bg-light text-uppercase">
+                        <small><b>Tomorrow</b>
+                        </small>
+                    </div>
+                    <hr class="transparent mx-3 my-0">
+                    <div class="callout callout-danger m-0 py-3">
+                        <div>New UI Project -
+                            <strong>deadline</strong>
+                        </div>
+                        <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 10 - 11pm</small>
+                        <small class="text-muted"><i class="icon-home"></i>&nbsp; creativeLabs HQ</small>
+                        <div class="avatars-stack mt-2">
+                            <div class="avatar avatar-xs">
+                                <img src="img/avatars/1.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                            </div>
+                            <div class="avatar avatar-xs">
+                                <img src="img/avatars/3.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                            </div>
+                            <div class="avatar avatar-xs">
+                                <img src="img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                            </div>
+                            <div class="avatar avatar-xs">
+                                <img src="img/avatars/5.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                            </div>
+                            <div class="avatar avatar-xs">
+                                <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mx-3 my-0">
+                    <div class="callout callout-success m-0 py-3">
+                        <div>
+                            <strong>#10 Startups.Garden</strong>Meetup</div>
+                        <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 1 - 3pm</small>
+                        <small class="text-muted"><i class="icon-location-pin"></i>&nbsp; Palo Alto, CA</small>
+                    </div>
+                    <hr class="mx-3 my-0">
+                    <div class="callout callout-primary m-0 py-3">
+                        <div>
+                            <strong>Team meeting</strong>
+                        </div>
+                        <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 4 - 6pm</small>
+                        <small class="text-muted"><i class="icon-home"></i>&nbsp; creativeLabs HQ</small>
+                        <div class="avatars-stack mt-2">
+                            <div class="avatar avatar-xs">
+                                <img src="img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                            </div>
+                            <div class="avatar avatar-xs">
+                                <img src="img/avatars/3.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                            </div>
+                            <div class="avatar avatar-xs">
+                                <img src="img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                            </div>
+                            <div class="avatar avatar-xs">
+                                <img src="img/avatars/5.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                            </div>
+                            <div class="avatar avatar-xs">
+                                <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                            </div>
+                            <div class="avatar avatar-xs">
+                                <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                            </div>
+                            <div class="avatar avatar-xs">
+                                <img src="img/avatars/8.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mx-3 my-0">
+                </div>
+                <div class="tab-pane p-3" id="messages" role="tabpanel">
+                    <div class="message">
+                        <div class="py-3 pb-5 mr-3 float-left">
+                            <div class="avatar">
+                                <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                                <span class="avatar-status badge-success"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <small class="text-muted">Lukasz Holeczek</small>
+                            <small class="text-muted float-right mt-1">1:52 PM</small>
+                        </div>
+                        <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+                        <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+                    </div>
+                    <hr>
+                    <div class="message">
+                        <div class="py-3 pb-5 mr-3 float-left">
+                            <div class="avatar">
+                                <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                                <span class="avatar-status badge-success"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <small class="text-muted">Lukasz Holeczek</small>
+                            <small class="text-muted float-right mt-1">1:52 PM</small>
+                        </div>
+                        <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+                        <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+                    </div>
+                    <hr>
+                    <div class="message">
+                        <div class="py-3 pb-5 mr-3 float-left">
+                            <div class="avatar">
+                                <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                                <span class="avatar-status badge-success"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <small class="text-muted">Lukasz Holeczek</small>
+                            <small class="text-muted float-right mt-1">1:52 PM</small>
+                        </div>
+                        <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+                        <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+                    </div>
+                    <hr>
+                    <div class="message">
+                        <div class="py-3 pb-5 mr-3 float-left">
+                            <div class="avatar">
+                                <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                                <span class="avatar-status badge-success"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <small class="text-muted">Lukasz Holeczek</small>
+                            <small class="text-muted float-right mt-1">1:52 PM</small>
+                        </div>
+                        <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+                        <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+                    </div>
+                    <hr>
+                    <div class="message">
+                        <div class="py-3 pb-5 mr-3 float-left">
+                            <div class="avatar">
+                                <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                                <span class="avatar-status badge-success"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <small class="text-muted">Lukasz Holeczek</small>
+                            <small class="text-muted float-right mt-1">1:52 PM</small>
+                        </div>
+                        <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+                        <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+                    </div>
+                </div>
+                <div class="tab-pane p-3" id="settings" role="tabpanel">
+                    <h6>Settings</h6>
+
+                    <div class="aside-options">
+                        <div class="clearfix mt-4">
+                            <small><b>Option 1</b>
+                            </small>
+                            <label class="switch switch-text switch-pill switch-success switch-sm float-right">
+                                <input type="checkbox" class="switch-input" checked="">
+                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                <span class="switch-handle"></span>
+                            </label>
+                        </div>
+                        <div>
+                            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
+                        </div>
+                    </div>
+
+                    <div class="aside-options">
+                        <div class="clearfix mt-3">
+                            <small><b>Option 2</b>
+                            </small>
+                            <label class="switch switch-text switch-pill switch-success switch-sm float-right">
+                                <input type="checkbox" class="switch-input">
+                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                <span class="switch-handle"></span>
+                            </label>
+                        </div>
+                        <div>
+                            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
+                        </div>
+                    </div>
+
+                    <div class="aside-options">
+                        <div class="clearfix mt-3">
+                            <small><b>Option 3</b>
+                            </small>
+                            <label class="switch switch-text switch-pill switch-success switch-sm float-right">
+                                <input type="checkbox" class="switch-input">
+                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                <span class="switch-handle"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="aside-options">
+                        <div class="clearfix mt-3">
+                            <small><b>Option 4</b>
+                            </small>
+                            <label class="switch switch-text switch-pill switch-success switch-sm float-right">
+                                <input type="checkbox" class="switch-input" checked="">
+                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                <span class="switch-handle"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <h6>System Utilization</h6>
+
+                    <div class="text-uppercase mb-1 mt-4">
+                        <small><b>CPU Usage</b>
+                        </small>
+                    </div>
+                    <div class="progress progress-xs">
+                        <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small class="text-muted">348 Processes. 1/4 Cores.</small>
+
+                    <div class="text-uppercase mb-1 mt-2">
+                        <small><b>Memory Usage</b>
+                        </small>
+                    </div>
+                    <div class="progress progress-xs">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small class="text-muted">11444GB/16384MB</small>
+
+                    <div class="text-uppercase mb-1 mt-2">
+                        <small><b>SSD 1 Usage</b>
+                        </small>
+                    </div>
+                    <div class="progress progress-xs">
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small class="text-muted">243GB/256GB</small>
+
+                    <div class="text-uppercase mb-1 mt-2">
+                        <small><b>SSD 2 Usage</b>
+                        </small>
+                    </div>
+                    <div class="progress progress-xs">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small class="text-muted">25GB/256GB</small>
+                </div>
+            </div>
+        </aside>
+
+
+    </div>
+
+   <!-- BEGIN FOOTER -->
+ <!--    <div class="page-footer">
+        <div class="page-footer-inner">
+            {{date('Y')}} &copy; GulfRoots by  <a href="https://viralcorners.com" target="_blank"><b>Viral Corners</b></a>.
+        </div>
+        <div class="scroll-to-top">
+            <i class="icon-arrow-up"></i>
+        </div>
+    </div> -->
+    <footer class="app-footer">
+        <a href="http://gulfroots.com">GulfRoots</a> © 2017
+        <span class="float-left">Powered by <a href="http://viralcorners.com">Viral Corners</a>
+        </span>
+    </footer>
+    <!-- END FOOTER -->
+
+    <!-- Bootstrap and necessary plugins -->
+    <script src="{{Url('/')}}/js/jquery.min.js"></script>
+    <script src="{{Url('/')}}/js/popper.min.js"></script>
+    <script src="{{Url('/')}}/js/bootstrap.min.js"></script>
+    <script src="{{Url('/')}}/js/pace.min.js"></script>
+
+
+    <!-- Plugins and scripts required by all views -->
+    <script src="{{Url('/')}}/node_modules/Chart.js/dist/Chart.min.js"></script>
+
+
+    <!-- GenesisUI main scripts -->
+
+    <script src="{{Url('/')}}/js/app.js"></script>
+
+   
 @yield('inlineJS')
 <!-- END JAVASCRIPTS -->
 </body>
-<!-- END BODY -->
+
 </html>

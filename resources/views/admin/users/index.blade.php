@@ -27,21 +27,21 @@
 							{!! Form::close() !!}
 						</td>
 						<td>
-							<div class="col-md-3">
+							
 								<a href="{{Url('/')}}/admin/users/{{$user->id}}/messages" class="btn btn-primary">Messages</a>
-							</div>
-							<div class="col-md-3">
+							
+							
 								<a href="{{Url('/')}}/admin/users/{{$user->id}}/bills" class="btn btn-primary">Bills</a>
-							</div>
+							
 							@if($user->isCommercial())
-							<div class="col-md-3">
+							
 								<a href="{{Url('/')}}/admin/users/{{$user->id}}/subscriptions" class="btn btn-primary">Subscriptions</a>
-							</div>
+							
 							@endif
 
-							<div class="col-md-3">
+							
 								<a href="{{Url('/')}}/admin/users/{{$user->id}}/posts" class="btn btn-primary">Posts</a>
-							</div>
+							
 						</td>
 					</tr>
 			</tbody>

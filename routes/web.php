@@ -16,7 +16,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::get('admin/login', 'AdminAuthController@login');
 Route::post('admin/login', 'AdminAuthController@doLogin');
 
@@ -26,6 +25,13 @@ Route::post('password/email', 'AdminAuthController@sendResetLinkEmail');
 Route::get('password/reset', 'AdminAuthController@showResetForm');
 
 Route::post('password/reset', 'AdminAuthController@showResetForm');
+
+
+Route::group(['middleware'=>['auth','Role'],'roles' => ['user.*']], function(){
+	Route::resource('/posts', 'PostsController',['except' => [
+		'show','index',
+	]]);
+});
 
 
 Route::group(['prefix'=>'admin','middleware'=>'auth_admin'],function()
@@ -66,12 +72,16 @@ Route::group(['prefix'=>'admin','middleware'=>'auth_admin'],function()
 	Route::resource('ads', 'AdController');
 	Route::get('ads/create','AdController@create');
 	Route::post('ads','AdController@store');
+
+	Route::resource('posts', 'PostsController');
+	Route::get('posts/create','PostsController@create');
+	Route::post('posts','PostsController@store');
 	
 
 });
 
-//Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
-//Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
-//Auth::routes();
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');

@@ -8,7 +8,7 @@ class Categories extends Model
 {
     //
     protected $table = 'categories';
-    protected $fillable = ['name_ar','name_en','sub_id','slug_ar','slug_en','sort'];
+    protected $fillable = ['name','sub_id','Des','icon','status'];
     
     public function getSubCategories()
     {
@@ -17,6 +17,7 @@ class Categories extends Model
     public function getMembers()
     {
     	return $this->hasMany('App\Ad');
+        return $this->hasMany('App\Posts');
     }
 
 }
