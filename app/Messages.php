@@ -36,5 +36,10 @@ class Messages extends Model
         return $this->user();
     }
 
+    // public function receiver()
+    // {
+    //     return $this->user();
+    // }
+
 
 }

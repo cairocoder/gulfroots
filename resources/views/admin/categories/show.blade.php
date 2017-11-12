@@ -9,8 +9,8 @@
 				<table class="table table-bordered">
 					<thead>
 						<th> #</th>
-						<th> name ar</th>
-						<th> name en</th>
+						<th> Name</th>
+						<th> Sub id</th>
 						<th> Edit</th>
 						<th> Delete</th>
 					</thead>
@@ -19,8 +19,8 @@
 						@foreach($category->getSubCategories as $category)
 							<tr>
 								<td>{{$category->id}}</td>
-								<td><a href="{{Url('/')}}/admin/categories/{{$category->id}}">{{$category->name_ar}}</a></td>
-								<td><a href="{{Url('/')}}/admin/categories/{{$category->id}}">{{$category->name_en}}</a></td>
+								<td><a href="{{Url('/')}}/admin/categories/{{$category->id}}">{{$category->name}}</a></td>
+								<td><a href="{{Url('/')}}/admin/categories/{{$category->id}}">{{$category->sub_id}}</a></td>
 								
 								<td><a href="{{Url('/')}}/admin/categories/{{$category->id}}/edit" class="btn btn-warning">edit</a></td>
 								<td>
