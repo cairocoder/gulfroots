@@ -16,6 +16,31 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('register', 'Auth\RegisterController@showRegistrationForm');
+Route::get('personalregister', 'Auth\RegisterController@showUserRegistrationForm');
+
+Route::get('commercialuserregister', 'Auth\RegisterCommercialController@showRegistrationForm')->name('commercialuserregister');
+Route::post('commercialuserregister', 'Auth\RegisterCommercialController@createNewCommercialUser');
+
+Route::get(
+    '/user/verify', ['as' => 'user-show-verify', function() {
+        return response()->view('auth.verifyUser');
+    }]
+);
+
+Route::post(
+    '/user/verify',
+    ['uses' => 'Auth\RegisterCommercialController@verify', 'as' => 'user-verify', ]
+);
+
+Route::post(
+    '/user/verify/resend',
+    ['uses' => 'Auth\RegisterCommercialController@verifyResend',
+//        'middleware' => 'auth',
+        'as' => 'user-verify-resend']
+);
+
+
 Route::get('admin/login', 'AdminAuthController@login');
 Route::post('admin/login', 'AdminAuthController@doLogin');
 
