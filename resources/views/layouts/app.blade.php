@@ -14,11 +14,11 @@
     <meta name="description" content="The description here" />
     
     <!-- favicon -->
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('front-assets/favicon/apple-touch-icon.png')}}">
-    <link rel="icon" type="image/png" href="{{ asset('front-assets/favicon/favicon-32x32.png" sizes="32x32')}}">
-    <link rel="icon" type="image/png" href="{{ asset('front-assets/favicon/favicon-16x16.png" sizes="16x16')}}">
-    <link rel="manifest" href="{{ asset('front-assets/favicon/manifest.json')}}">
-    <link rel="mask-icon" href="{{ asset('front-assets/favicon/safari-pinned-tab.svg')}}" color="#fa5b31">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('favicon/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" href="{{ asset('favicon/favicon-32x32.png" sizes="32x32')}}">
+    <link rel="icon" type="image/png" href="{{ asset('favicon/favicon-16x16.png" sizes="16x16')}}">
+    <link rel="manifest" href="{{ asset('favicon/manifest.json')}}">
+    <link rel="mask-icon" href="{{ asset('favicon/safari-pinned-tab.svg')}}" color="#fa5b31">
     <meta name="theme-color" content="#078aff">
     <link href="https://fonts.googleapis.com/css?family=Cairo:200,300,400,600,700,900&amp;subset=arabic" rel="stylesheet">
     
@@ -97,16 +97,6 @@
         <nav>
             <ul>
                 <li><a href="#!">السيارات والمركبات</a>
-                    <ul class="level2">
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                    </ul>
                 </li>
                 <li><a href="#!">السفر والسياحة</a>
                     <ul class="level2">
