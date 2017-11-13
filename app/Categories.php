@@ -16,8 +16,12 @@ class Categories extends Model
     }
     public function getMembers()
     {
-    	return $this->hasMany('App\Ad');
-        return $this->hasMany('App\Posts');
+    	return $this->hasMany('App\Ad','App\Posts');
     }
+    public function getMainCategory()
+    {
+        return $this->belongsToMany('App\Categories');
+    }
+
 
 }
