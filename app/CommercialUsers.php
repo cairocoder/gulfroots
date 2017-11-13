@@ -11,6 +11,6 @@ class CommercialUsers extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'contact_number', 'whatsapp_number', 'address', 'logo', 'phone_number', 'commercial_record_number', 'commercial_record_file', 'maaroof_url', 'longitude', 'latitude'
+    protected $fillable = ['user_id', 'contact_number', 'whatsapp_number', 'address', 'logo', 'phone_number', 'country_code', 'commercial_record_number', 'commercial_record_file', 'maaroof_url', 'longitude', 'latitude'
     ];
 }
