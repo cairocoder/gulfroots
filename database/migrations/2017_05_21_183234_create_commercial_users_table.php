@@ -21,6 +21,9 @@ class CreateCommercialUsersTable extends Migration
             $table->string('address');
             $table->string('logo');
             $table->string('phone_number');
+            $table->string('country_code');
+            $table->string('authy_id')->nullable();
+            $table->boolean('verified')->default(false);
             $table->integer('commercial_record_number');
             $table->string('commercial_record_file');
             $table->string('maaroof_url');

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,16 +15,16 @@
     <meta name="description" content="The description here" />
     
     <!-- favicon -->
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('front-assets/favicon/apple-touch-icon.png')}}">
-    <link rel="icon" type="image/png" href="{{ asset('front-assets/favicon/favicon-32x32.png" sizes="32x32')}}">
-    <link rel="icon" type="image/png" href="{{ asset('front-assets/favicon/favicon-16x16.png" sizes="16x16')}}">
-    <link rel="manifest" href="{{ asset('front-assets/favicon/manifest.json')}}">
-    <link rel="mask-icon" href="{{ asset('front-assets/favicon/safari-pinned-tab.svg')}}" color="#fa5b31">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('favicon/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" href="{{ asset('favicon/favicon-32x32.png')}}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ asset('favicon/favicon-16x16.png') }}" sizes="16x16">
+    <link rel="manifest" href="{{ asset('favicon/manifest.json')}}">
+    <link rel="mask-icon" href="{{ asset('favicon/safari-pinned-tab.svg')}}" color="#fa5b31">
     <meta name="theme-color" content="#078aff">
     <link href="https://fonts.googleapis.com/css?family=Cairo:200,300,400,600,700,900&amp;subset=arabic" rel="stylesheet">
     
       <!-- Main Style -->
-      <link rel="stylesheet" href="{{ asset('front-assets/css/style.min.ar.css')}}">
+      <link href="{{ asset('front-assets/css/style.min.ar.css') }}" rel="stylesheet">
     
       <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,23 +47,19 @@
                 <div class="row no-margin">
                     <div class="col l7">
                         <!-- /Logo/ -->
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="{{ route('home') }}">
                             <img src="{{ asset('front-assets/images/logo.png')}}" alt="GulfRoots">
                         </a>
                     </div>
-                    @guest
                     <div class="col l2 user-area">
                         <a href="{{ route('login') }}">تسجيل الدخول</a>
                         <a href="{{ route('register') }}">التسجيل</a>
                     </div>
-                    @else
                     <div class="col l3 user-ctrl">
-                        <div class="account-box">
+                        <!-- <div class="account-box">
                             <div class="account-head">
                                 <img src="{{ asset('front-assets/images/user.jpg')}}" alt="">
-                                <a href="#"  data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span ></span>
-                                </a>
+                                حسابي
                                 <i class="fa fa-caret-down"></i>
                             </div>
                             <div class="account-drop">
@@ -71,18 +68,10 @@
                                     <li><a href="#!">رابط</a></li>
                                     <li><a href="#!">رابط</a></li>
                                     <li><a href="#!">رابط</a></li>
-                                    <li><a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" >
-                                            {{ csrf_field() }}
-                                        </form></li>
                                 </ul>
                             </div>
-                        </div>
-                            @endguest
+                        </div> -->
+
                         <div class="add-ad">
                             <a class="butn blue" href="#!">اضف اعلان</a>
                         </div>
@@ -213,28 +202,94 @@
       <!-- Header End -->
 
 
-
-      <div class="big-head top-100 bottom-50 centerd">
-            <h1>اختر نوع الحساب</h1>
+    
+    <div class="big-head top-100 bottom-50 centerd">
+            <h1>تسجيل عضوية جديدة</h1>
     </div>
 
       <!-- register -->
-      <div class="big-container register-select bottom-100 centerd">
+      <div class="big-container register bottom-100 centerd">
+
+        <div class="boxed-container">
+
+            <div class="row no-margin center-border bottom-50">
+                <span class="has-or">أو</span>
+
+                <div class="box-head">
+                    <p>من خلال التسجيل في الموقع انا اوافق علي 
+                        <a href="#!" target="_blank">شروط الاستخدام</a>
+                        و
+                        <a href="#!" target="_blank">سياسة الخصوصية</a>
+                        واوافق علي تلقي العروض من موقع قلف روتس
+                    </p>
+                </div>
+
+                <div class="col l6">
+                    <form class="normal-inputs form-80 top-25 bottom-25" role="form" method="POST" action="{{ route('commercialuserregister') }}">
+                        {{ csrf_field() }}
+                        <div>
+                        <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus placeholder="اسم المستخدم">
+                        @if ($errors->has('name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required placeholder="البريد الاليكتروني">
+                        @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                        </div>
+                        <div class="form-group{{ $errors->has('country_code') ? ' has-error' : '' }}">
+                            <input id="country_code" type="text" class="form-control" name="country_code" value="{{ old('country_code') }}" required placeholder="كود الدوله">
+                            @if ($errors->has('country_code'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('country_code') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+                        <div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
+                            <input id="phone_number" type="text" class="form-control" name="phone_number" value="{{ old('phone_number') }}" required placeholder="رقم الجوال">
+                            @if ($errors->has('phone_number'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('phone_number') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <input id="password" type="password" class="form-control" name="password" required placeholder="كلمة المرور">
+                        @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                        </div>
+                        <div class="form-group">
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="إعادة كلمة المرور">
+                        </div>
+                        <div>
+                        <input type="submit"  value="تسجيل الحساب">
+                        </div>
+                        <a href="{{route ('login')}}">هل لديك حساب مسجل؟</a>
+                    </form>
+                </div>
+                
+                <div class="col l6 centerd vcenter">
+
+                    <a href="#!" class="zoom blocked"><img src="{{ asset('front-assets/images/facebook-reg.jpg')}}" alt=""></a>
+                    <a href="#!" class="zoom blocked"><img src="{{ asset('front-assets/images/google-reg.jpg')}}" alt=""></a>
+                
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
 
         
-
-        <a href="{{ url('personalregister')}}" class="zoom">
-            <img src="{{ asset('front-assets/images/personal.jpg')}}" alt="">
-            <h3>تسجيل حساب شخصي <small>حساب خاص بالافراد</small></h3>
-        </a>
-        <a href="#!" class="zoom">
-            <img src="{{ asset('front-assets/images/company.jpg')}}" alt="">
-            <h3>تسجيل حساب شركات <small>حساب خاص بالشركات</small></h3>
-        </a>
-        <a href="{{ url('commercialuserregister')}}" class="zoom">
-            <img src="{{ asset('front-assets/images/family.jpg')}}" alt="">
-            <h3>تسجيل حساب عائلي <small>حساب خاص بتجار المستقبل والاسر المنتجة</small></h3>
-        </a>
 
       </div>
      

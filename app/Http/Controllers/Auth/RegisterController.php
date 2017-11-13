@@ -74,7 +74,6 @@ class RegisterController extends Controller
         $user = User::create($data);
         $role = Role::whereSlug('user')->first();
         $user->roles()->attach($role);
-
         return $user;
     }
     public function register(Request $request)
@@ -83,4 +82,13 @@ class RegisterController extends Controller
         event(new Registered($user = $this->create($request->all())));
         return view('messageconfirmation');
     }
+    public function showRegistrationForm()
+    {
+        return view('auth.preregister');
+    }
+    public function showUserRegistrationForm()
+    {
+        return view('auth.register');
+    }
+
 }
