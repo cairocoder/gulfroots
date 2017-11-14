@@ -16,17 +16,16 @@
 					</thead>
 
 					<tbody>
-						<?php $t = $category->name; $y = $category->id;?>
-						@foreach($category->getSubCategories as $category)
+						@foreach($category->getSubCategories as $SubCategory)
 							<tr>
-								<td>{{$category->id}}</td>
+								<td>{{$SubCategory->id}}</td>
+								<td><a href="{{Url('/')}}/admin/categories/{{$SubCategory->id}}">{{$SubCategory->name}}</a></td>
 								<td><a href="{{Url('/')}}/admin/categories/{{$category->id}}">{{$category->name}}</a></td>
-								<td><a href="{{Url('/')}}/admin/categories/{{$y}}">{{$t}}</a></td>
 								
-								<td><a href="{{Url('/')}}/admin/categories/{{$category->id}}/edit" class="btn btn-warning">edit</a></td>
+								<td><a href="{{Url('/')}}/admin/categories/{{$SubCategory->id}}/edit" class="btn btn-warning">edit</a></td>
 								<td>
-								{!!Form::open(['method'=>'DELETE','action'=>['CategoriesController@destroy',$category->id]])!!}
-									<button class="btn btn-danger" onClick="return confirm('Are you sure to DELETE This category ?')">DELETE</button>
+								{!!Form::open(['method'=>'DELETE','action'=>['CategoriesController@destroy',$SubCategory->id]])!!}
+									<button class="btn btn-danger" onClick="return confirm('Are you sure to DELETE This SubCategory ?')">DELETE</button>
 								</td>
 								{!!Form::close() !!}
 							</tr>

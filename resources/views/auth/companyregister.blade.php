@@ -1,13 +1,13 @@
 @extends('layouts.user')
 
 @section('content')
+<!-- normal body -->
     <div class="normal-body">
-
         <div class="company-top">
             <div class="big-container">
                 <div class="row no-margin">
                     <div class="col l6">
-                        <h1>لماذا قلف روتس للأسر المنتجة؟</h1>
+                        <h1>لماذا قلف روتس للشركات؟</h1>
                         <p>
                             نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
                             نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
@@ -27,31 +27,36 @@
         </div>
         <div class="big-container">
             <form class="has-range">
-
-                        <h2 class="mini-head">باقة الاسر المنتجة</h2>
-                        <p class="mini-prag">
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                        </p>
-
-                    <input type="hidden" class="pack-calc" value="150">
-
-                    <div class="centerd packed">
-                        <div>تكلفة باقة الاسر المنتجة</div>
-                        <div class="pack-num"><span>150</span>ريال</div>
+                    <h1 class="top-range">اختر الفتره</h1>
+                    <input class="range-time" type="range" max="80" min="20" step="20" dir="rtl" value="20">
+                    <div class="ranger">
+                        <div class="row">
+                            <div class="col l3">شهر</div>
+                            <div class="col l3">3 شهور</div>
+                            <div class="col l3">6 شهور</div>
+                            <div class="col l3">سنة</div>
+                        </div>
                     </div>
-
-
-                    <div class="strip-head blue to-back">بيانات الاسرة</div>
+                    <h1 class="top-range">اختر عدد الاعلانات</h1>
+                    <input class="range-num" type="range" max="80" min="20" step="20" dir="rtl" value="20">
+                    <div class="ranger">
+                        <div class="row">
+                            <div class="col l3">100</div>
+                            <div class="col l3">300</div>
+                            <div class="col l3">700</div>
+                            <div class="col l3">غير محدود</div>
+                        </div>
+                    </div>
+                    <input type="hidden" class="pack-calc" value="400">
+                    <div class="centerd packed">
+                        <div>تكلفة الباقة المختارة</div>
+                        <div class="pack-num"><span>400</span>ريال</div>
+                    </div>
+                    <div class="strip-head blue to-back">بيانات الشركة</div>
                     <div class="to-back-body">
                         <div class="row no-margin">
                             <div class="col l6">
-                                <input type="text" placeholder="اسم الاسرة*">
+                                <input type="text" placeholder="اسم الشركة*">
                                 <input type="email" placeholder="البريد الاليكتروني*">
                                 <input type="text" placeholder="رقم الاتصال*">
                                 <input type="text" placeholder="رقم الواتس اب">
@@ -59,7 +64,12 @@
                                 <input type="password" placeholder="اعادة كلمة المرور*">
                                 <input type="text" placeholder="العنوان">
                                 <div class="file-upload">
-                                    <input type="text" placeholder="شعار المشروع" readonly><input class="hidden-upload" type="file">
+                                    <input type="text" placeholder="شعار الشركة" readonly><input class="hidden-upload" type="file">
+                                    <button class="open-file">رفع</button>
+                                </div>
+                                <input type="text" placeholder="رقم السجل التجاري*">
+                                <div class="file-upload">
+                                    <input type="text" placeholder="السجل التجاري*" readonly><input class="hidden-upload" type="file">
                                     <button class="open-file">رفع</button>
                                 </div>
                                 <input type="text" placeholder="اوقات العمل">
@@ -78,13 +88,9 @@
                             <div class="clearfix"></div>
                         </div>
                     </div>
-
-
-
                     <div class="strip-head blue to-back">وسائل الدفع</div>
                     <div class="to-back-body">
                         <div class="pay-wrap">
-
                         <div class="pay-box">
                             <img src="assets/images/pay1.jpg" alt="">
                             <div class="pay-text">
@@ -122,15 +128,12 @@
                                     <div class="pay-btn">أختر</div>
                                 </div>
                         </div>
-                        
                         </div>
                     </div>
-
                     <label class="checkbox full-width top-50">
                             <input type="checkbox"><span></span>
                             أوافق علي <a href="#!">الشروط والاحكام</a> الخاصة بالنشر علي موقع قلف روتس
                     </label>
-
                     <div class="top-50 bottom-50 rightness">
                         <input class="normal-submit" type="submit" value="تأكيد البيانات">
                     </div>
