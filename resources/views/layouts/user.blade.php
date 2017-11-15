@@ -47,7 +47,7 @@
                 <div class="row no-margin">
                     <div class="col l7">
                         <!-- /Logo/ -->
-                        <a class="logo" href="{{ route('home')}}">
+                        <a class="logo" href="{{ route('landing')}}">
                             <img src="{{ asset('images/logo.png')}}" alt="GulfRoots">
                         </a>
                     </div>
