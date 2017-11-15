@@ -12,9 +12,7 @@
 */
 
 
-Route::get('/', function () {
-    return view('home');
-})->name('landing');
+Route::get('/', 'HomeController@index')->name('landing');
 
 Route::get('register', 'Auth\RegisterController@showRegistrationForm');
 Route::get('personalregister', 'Auth\RegisterController@showUserRegistrationForm');
@@ -112,6 +110,4 @@ Route::group(['prefix'=>'admin','middleware'=>'auth_admin'],function()
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/messageconfirmation', 'HomeController@goto')->name('messageconfirmation');

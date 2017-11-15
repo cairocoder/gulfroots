@@ -181,7 +181,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         App\Providers\TwilioRestClientProvider::class,
         App\Providers\AuthyApiProvider::class,
-
+        Aws\Laravel\AwsServiceProvider::class,
     ],
 
     /*
@@ -234,7 +234,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'providers' => array('JD\Cloudder\CloudderServiceProvider'),
         'aliases' => array('Cloudder' => 'JD\Cloudder\Facades\Cloudder'),
-
+        'AWS' => Aws\Laravel\AwsFacade::class,
     ],
 
 ];
