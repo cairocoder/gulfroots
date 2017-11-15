@@ -40,7 +40,46 @@
 
       <!-- Header Strat -->
       <header>
+            @guest
+            <div class="header-box">
+            <div class="header-top">
+                <div class="row no-margin">
+                    <div class="col l7">
+                        <!-- /Logo/ -->
+                        <a class="logo" href="{{ route('home')}}">
+                            <img src="{{ asset('images/logo.png')}}" alt="GulfRoots">
+                        </a>
+                    </div>
+                    <div class="col l2 user-area">
+                        <a href="{{ route('login') }}">تسجيل الدخول</a>
+                        <a href="{{ route('register') }}">التسجيل</a>
+                    </div>
+                    <div class="col l3 user-ctrl">
+                        <div class="account-box">
+                            <div class="account-head">
+                                <img src="{{ asset('images/user.jpg')}}" alt="">
+                                حسابي
+                                <i class="fa fa-caret-down"></i>
+                            </div>
+                            <div class="account-drop">
+                                <ul>
+                                    <li><a href="#!">أدراة اﻷعلانات</a></li>
+                                    <li><a href="#!">الرسائل</a></li>
+                                    <li><a href="#!">البحث المحفوظة</a></li>
+                                    <li><a href="#!">الملف الشخصى</a></li>
+                                </ul>
+                            </div>
+                        </div>
 
+                        <div class="add-ad">
+                            <a class="butn blue" href="#!">اضف اعلان</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+            @else
         <div class="header-box">
             <div class="header-top">
                 <div class="row no-margin">
@@ -50,12 +89,9 @@
                             <img src="{{ asset('front-assets/images/logo.png')}}" alt="GulfRoots">
                         </a>
                     </div>
-                    @guest
                     <div class="col l2 user-area">
-                        <a href="{{ route('login') }}">تسجيل الدخول</a>
-                        <a href="{{ route('register') }}">التسجيل</a>
+                        
                     </div>
-                    @else
                     <div class="col l3 user-ctrl">
                         <div class="account-box">
                             <div class="account-head">
@@ -67,10 +103,10 @@
                             </div>
                             <div class="account-drop">
                                 <ul>
-                                    <li><a href="#!">رابط</a></li>
-                                    <li><a href="#!">رابط</a></li>
-                                    <li><a href="#!">رابط</a></li>
-                                    <li><a href="#!">رابط</a></li>
+                                    <li><a href="#!">أدراة اﻷعلانات</a></li>
+                                    <li><a href="#!">الرسائل</a></li>
+                                    <li><a href="#!">البحث المحفوظة</a></li>
+                                    <li><a href="#!">الملف الشخصى</a></li>
                                     <li><a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -82,7 +118,6 @@
                                 </ul>
                             </div>
                         </div>
-                            @endguest
                         <div class="add-ad">
                             <a class="butn blue" href="#!">اضف اعلان</a>
                         </div>
@@ -91,6 +126,7 @@
 
             </div>
         </div>
+        @endguest
 
 
         <!-- Menu Start -->
@@ -703,9 +739,10 @@
                     </div>
                     <div class="col l3">
                         <h3>الوصول السريع</h3>
-                        <a href="#!">استرجاع كلمة المرور</a>
+                        <a href="{{ route('password.request') }}">استرجاع كلمة المرور</a>
                         <a href="#!">خدمات الشركات</a>
-                        <a href="#!">خدمات الافراد</a>
+                        <a href="{{ url('commercialuserregister')}}">خدمات اﻷسر</a>
+                        <a href="{{ url('personalregister')}}">خدمات الافراد</a>
                     </div>
                     <div class="col l3">
                         <h3>الاقسام الاكثر شهرة</h3>
@@ -741,22 +778,8 @@
                 </div>
             </div>
         </div>
-
       </footer>
       <!-- Fixed Footer End -->
-
-
-
-
-
-
-
-
-
-
-
-
-
       <!-- jQuery plugins -->
       <script defer src="{{Url('/')}}/js/ui.min.js"></script>
   </body>
