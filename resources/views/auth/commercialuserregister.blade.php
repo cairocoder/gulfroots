@@ -71,7 +71,7 @@
                             </div>
                             <div class="col l6">
                                 <div class="note">
-                                    <img src="assets/images/info.jpg" alt="">
+                                    <img src="{{ asset('front-assets/images/info.jpg')}}" alt="">
                                     تأكد من ادخال جميع البيانات بشكل صحيح واضافة بيانات الاتصال بشكل واضح ومفصل ذلك سوف يساعد ويسهل التواصل بينك وبين عملاءك
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                         <div class="pay-wrap">
 
                         <div class="pay-box">
-                            <img src="assets/images/pay1.jpg" alt="">
+                            <img src="{{ asset('front-assets/images/pay1.jpg')}}" alt="">
                             <div class="pay-text">
                                 <h3>البطاقة الاليكترونية</h3>
                                 <p>
@@ -99,7 +99,7 @@
                             </div>
                         </div>
                         <div class="pay-box">
-                                <img src="assets/images/pay2.jpg" alt="">
+                                <img src="{{ asset('front-assets/images/pay2.jpg')}}" alt="">
                                 <div class="pay-text">
                                     <h3>سداد</h3>
                                     <p>
@@ -111,7 +111,7 @@
                                 </div>
                         </div>
                         <div class="pay-box">
-                                <img src="assets/images/pay3.jpg" alt="">
+                                <img src="{{ asset('front-assets/images/pay3.jpg')}}" alt="">
                                 <div class="pay-text">
                                     <h3>التحويل البنكي</h3>
                                     <p>
