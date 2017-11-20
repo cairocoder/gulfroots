@@ -16,6 +16,7 @@ Route::get('/', 'HomeController@index')->name('landing');
 Route::get('/help', 'HomeController@help')->name('help');
 Route::get('/categories/{category}', 'CategoriesController@forntend');
 Route::get('/searchresult', 'HomeController@search')->name('searchresult');
+
 Route::get('register', 'Auth\RegisterController@showRegistrationForm');
 Route::get('personalregister', 'Auth\RegisterController@showUserRegistrationForm');
 

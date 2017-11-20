@@ -61,7 +61,7 @@
                 
                 <div class="col l6 centerd vcenter">
 
-                    <a href="#!" class="zoom blocked"><img src="{{ asset('front-assets/images/facebook-reg.jpg')}}" alt=""></a>
+                    <a href="{{route('redirect')}}" class="zoom blocked"><img src="{{ asset('front-assets/images/facebook-reg.jpg')}}" alt=""></a>
                     <a href="#!" class="zoom blocked"><img src="{{ asset('front-assets/images/google-reg.jpg')}}" alt=""></a>
                 
                 </div>

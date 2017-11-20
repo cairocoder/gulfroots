@@ -5,18 +5,18 @@
 @endsection
 
 @section('content')
-<div class="big-head top-100 bottom-50 centerd">
-            <h1>تأكيد الحساب</h1>
+    <div class="big-head top-100 bottom-50 centerd">
+        <h1>تأكيد الحساب</h1>
     </div>
-      <!-- register -->
-      <div class="big-container register bottom-100 centerd">
+    <!-- register -->
+    <div class="big-container register bottom-100 centerd">
         <div class="boxed-container">
             <div class="row no-margin top-50 bottom-50">
                 <div class="thanks-box">
-                   من فضلك ادخل كود التأكيد الذي تم ارساله علي هاتفك الجوال لتأكيد بياناتك
-                   <div class="tiny-form">
-                       <form>
-                        {!! Form::open(['url' => route('user-verify')]) !!}
+                    من فضلك ادخل كود التأكيد الذي تم ارساله علي هاتفك الجوال لتأكيد بياناتك
+                    <div class="tiny-form">
+                        <form>
+                            {!! Form::open(['url' => route('user-verify')]) !!}
                             <input type="text" placeholder="كود التأكيد">
                             <div class="row no-margin">
                                 <div class="col l6 rightness bolded">
@@ -30,23 +30,23 @@
                                 {!! Form::close() !!}
                                 <div class="clearfix"></div>
                             </div>
-                       </form>
-                   </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="clearfix"></div>
             </div>
         </div>
-      </div>
-<!--     {!! Form::open(['url' => route('user-verify')]) !!}
-        <div class="form-group">
-            {!! Form::label('token') !!}
-            {!! Form::text('token', '', ['class' => 'form-control']) !!}
-        </div>
-        <button type="submit" class="btn btn-primary">Verify Token</button>
-    {!! Form::close() !!} -->
-<!-- 
+    </div>
+    <!--     {!! Form::open(['url' => route('user-verify')]) !!}
+            <div class="form-group">
+{!! Form::label('token') !!}
+    {!! Form::text('token', '', ['class' => 'form-control']) !!}
+            </div>
+            <button type="submit" class="btn btn-primary">Verify Token</button>
+{!! Form::close() !!} -->
+    <!--
     <hr>
     {!! Form::open(['url' => route('user-verify-resend')]) !!}
-        <button type="submit" class="btn">Resend code</button>
-    {!! Form::close() !!} -->
+            <button type="submit" class="btn">Resend code</button>
+{!! Form::close() !!} -->
 @endsection

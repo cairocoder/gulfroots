@@ -96,7 +96,7 @@
                     <div class="col l3 user-ctrl">
                         <div class="account-box">
                             <div class="account-head">
-                                <img src="{{ asset('front-assets/images/user.jpg')}}" alt="">
+                                <img src="{{ Auth::user()->profile_picture }}" alt="">
                                 <a href="#"  data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span ></span>
                                 </a>

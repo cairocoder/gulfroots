@@ -45,5 +45,6 @@ class LoginController extends Controller
         //     return redirect('/admin');
         // }
         return redirect()->route('landing');
+
     }
 }

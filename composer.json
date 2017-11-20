@@ -6,12 +6,13 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "authy/php": "^2.5",
         "aws/aws-sdk-php-laravel": "^3.1",
-        "jrm2k6/cloudder": "0.4.*",
+        "guzzlehttp/guzzle": "^6.2.1",
         "laravel/framework": "5.4.*",
+        "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "~5.4",
+        "rinvex/laravel-authy": "^2.0",
         "twilio/sdk": "^5.15"
     },
     "require-dev": {
