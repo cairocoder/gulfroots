@@ -42,7 +42,18 @@ return [
     ],
 
     'authy' => [
-        'apiKey' => env('AUTHY_API_KEY'),
+        'secret' => env('AUTHY_API_KEY'),
     ],
+
+    'facebook' =>[
+        'client_id'     => env('FACEBOOK_ID'),
+        'client_secret' => env('FACEBOOK_SECRET'),
+        'redirect'      => env('FACEBOOK_URL')
+    ],
+    'google' =>[
+        'client_id'     => env('GOOGLE_ID'),
+        'client_secret' => env('GOOGLE_SECRET'),
+        'redirect'      => env('GOOGLE_REDIRECT')
+    ]
 
 ];

@@ -14,6 +14,9 @@
 
 Route::get('/', 'HomeController@index')->name('landing');
 
+Route::get('/redirect', 'Auth\SocialAuthFacebookController@redirect')->name('redirect');
+Route::get('/callback', 'Auth\SocialAuthFacebookController@callback');
+
 Route::get('register', 'Auth\RegisterController@showRegistrationForm');
 Route::get('personalregister', 'Auth\RegisterController@showUserRegistrationForm');
 
