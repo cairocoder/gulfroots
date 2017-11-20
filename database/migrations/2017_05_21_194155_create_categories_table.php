@@ -21,6 +21,7 @@ class CreateCategoriesTable extends Migration
             $table->string('slug');
             $table->string('Des');
             $table->string('icon');
+            $table->string('photo');
             $table->integer('sort');
             $table->timestamps();
             
