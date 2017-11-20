@@ -16,6 +16,11 @@ Route::get('/', 'HomeController@index')->name('landing');
 Route::get('/help', 'HomeController@help')->name('help');
 Route::get('/categories/{category}', 'CategoriesController@forntend');
 Route::get('/searchresult', 'HomeController@search')->name('searchresult');
+Route::get('/about', 'HomeController@about')->name('about');
+Route::get('/ad1', 'HomeController@ads')->name('ad1');
+
+Route::get('/redirect', 'Auth\SocialAuthFacebookController@redirect')->name('redirect');
+Route::get('/callback', 'Auth\SocialAuthFacebookController@callback');
 
 Route::get('register', 'Auth\RegisterController@showRegistrationForm');
 Route::get('personalregister', 'Auth\RegisterController@showUserRegistrationForm');
@@ -91,7 +96,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth_admin'],function()
 
 	Route::resource('site-settings', 'SiteSettingsController');
 	Route::resource('admins', 'AdminController');
-	
+
 	Route::resource('users', 'UsersController');
 	Route::get('users/{user}/messages', 'UsersController@userMessages');
 	Route::get('users/{user}/bills', 'UsersController@UserBills');
@@ -129,7 +134,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth_admin'],function()
 	Route::resource('messages', 'MessagesController');
 	Route::get('messages/create','MessagesController@create');
 	Route::post('messages','MessagesController@store');
-	
+
 
 });
 
