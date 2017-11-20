@@ -26,7 +26,6 @@ class CreateSiteSettingsTable extends Migration
             $table->integer('contact_email')->unsigned();
             $table->integer('subscription_mail')->unsigned();
             $table->timestamps();
-
             $table->foreign('default_sms_getway')->references('id')->on('sms_getways')->onDelete('cascade');
             $table->foreign('default_email')->references('id')->on('sender_emails')->onDelete('cascade');
             $table->foreign('contact_email')->references('id')->on('sender_emails')->onDelete('cascade');
