@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="big-container">
-            <form class="has-range">
+            <form class="has-range" role="form" method="POST" action="{{ route('companyregister') }}">
                     <h1 class="top-range">اختر الفتره</h1>
                     <input class="range-time" type="range" max="80" min="20" step="20" dir="rtl" value="20">
                     <div class="ranger">
@@ -56,12 +56,50 @@
                     <div class="to-back-body">
                         <div class="row no-margin">
                             <div class="col l6">
-                                <input type="text" placeholder="اسم الشركة*">
-                                <input type="email" placeholder="البريد الاليكتروني*">
-                                <input type="text" placeholder="رقم الاتصال*">
-                                <input type="text" placeholder="رقم الواتس اب">
-                                <input type="password" placeholder="كلمة المرور*">
-                                <input type="password" placeholder="اعادة كلمة المرور*">
+                                <div>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus placeholder="اسم الشركة*">
+                                @if ($errors->has('name'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required placeholder="البريد الاليكتروني*">
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('country_code') ? ' has-error' : '' }}">
+                                <input id="authy-countries" type="text" class="form-control" name="country_code" value="{{ old('country_code') }}" required placeholder="كود الدولة">
+                                @if ($errors->has('country_code'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('country_code') }}</strong>
+                                    </span>
+                                @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
+                                <input id="phone_number" type="text" class="form-control" name="phone_number" value="{{ old('phone_number') }}" required placeholder="رقم الاتصال*">
+                                @if ($errors->has('phone_number'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('phone_number') }}</strong>
+                                    </span>
+                                @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                <input id="password" type="password" class="form-control" name="password" required placeholder="كلمة المرور*">
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                                </div>
+                                <div class="form-group">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="إعادة كلمة المرور*">
+                                </div>
+<!--                                 <input type="text" placeholder="رقم الواتس اب">
                                 <input type="text" placeholder="العنوان">
                                 <div class="file-upload">
                                     <input type="text" placeholder="شعار الشركة" readonly><input class="hidden-upload" type="file">
@@ -77,11 +115,11 @@
                                 <div class="input-wrap">
                                         <input type="text" placeholder="الموقع الجغرافي*">
                                     <a href="#!"><i class="fa fa-map-marker"></i>تحديد الموقع الجغرافي</a>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col l6">
                                 <div class="note">
-                                    <img src="assets/images/info.jpg" alt="">
+                                    <img src="{{ asset('front-assets/images/info.jpg')}}" alt="">
                                     تأكد من ادخال جميع البيانات بشكل صحيح واضافة بيانات الاتصال بشكل واضح ومفصل ذلك سوف يساعد ويسهل التواصل بينك وبين عملاءك
                                 </div>
                             </div>
@@ -92,7 +130,7 @@
                     <div class="to-back-body">
                         <div class="pay-wrap">
                         <div class="pay-box">
-                            <img src="assets/images/pay1.jpg" alt="">
+                            <img src="{{ asset('front-assets/images/pay1.jpg')}}" alt="">
                             <div class="pay-text">
                                 <h3>البطاقة الاليكترونية</h3>
                                 <p>
@@ -105,7 +143,7 @@
                             </div>
                         </div>
                         <div class="pay-box">
-                                <img src="assets/images/pay2.jpg" alt="">
+                                <img src="{{ asset('front-assets/images/pay2.jpg')}}" alt="">
                                 <div class="pay-text">
                                     <h3>سداد</h3>
                                     <p>
@@ -117,7 +155,7 @@
                                 </div>
                         </div>
                         <div class="pay-box">
-                                <img src="assets/images/pay3.jpg" alt="">
+                                <img src="{{ asset('front-assets/images/pay3.jpg')}}" alt="">
                                 <div class="pay-text">
                                     <h3>التحويل البنكي</h3>
                                     <p>
@@ -131,7 +169,7 @@
                         </div>
                     </div>
                     <label class="checkbox full-width top-50">
-                            <input type="checkbox"><span></span>
+                            <input type="checkbox" required><span></span>
                             أوافق علي <a href="#!">الشروط والاحكام</a> الخاصة بالنشر علي موقع قلف روتس
                     </label>
                     <div class="top-50 bottom-50 rightness">

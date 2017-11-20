@@ -12,7 +12,7 @@
             <img src="{{ asset('front-assets/images/personal.jpg')}}" alt="">
             <h3>تسجيل حساب شخصي <small>حساب خاص بالافراد</small></h3>
         </a>
-        <a href="#!" class="zoom">
+        <a href="{{ url('companyregister')}}" class="zoom">
             <img src="{{ asset('front-assets/images/company2.jpg')}}" alt="">
             <h3>تسجيل حساب شركات <small>حساب خاص بالشركات</small></h3>
         </a>

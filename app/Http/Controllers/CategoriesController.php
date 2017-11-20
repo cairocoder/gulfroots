@@ -13,6 +13,15 @@ class CategoriesController extends Controller
     	return View('admin.categories.index', compact('categories'));
     }
 
+    public function forntend(Categories $category)
+    {
+        //$categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+        $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+        $subcategory = Categories::where('sub_id', '!=', null)->get();
+        $spechialcategory = Categories::where('slug', '!=', null)->get();
+        return View('categories.mincategory', compact('category','categories','subcategory','spechialcategory'));
+    }
+
     public function create($id)
     {
     	return View('admin.categories.create', compact('id'));

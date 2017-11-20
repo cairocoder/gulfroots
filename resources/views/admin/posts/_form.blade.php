@@ -18,17 +18,17 @@
 			    {!! Form::text('price', null, ['class' => 'form-control', 'required' => 'required|numrical']) !!}
 			    <small class="text-danger">{{ $errors->first('price') }}</small>
 			</div>
-			
+
 			<div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }}">
 			    {!! Form::label('user_id', 'User_id') !!}
 			    {!! Form::select('user_id',$user, null, ['id'=> 'user_subscriptions', 'class' => 'form-control']) !!}
 			    <small class="text-danger">{{ $errors->first('user_id') }}</small>
-			</div>					
+			</div>
 			<div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
 			    {!! Form::label('category_id', 'category_id') !!}
 			    {!! Form::select('category_id',$category, null, ['id'=> 'categories', 'class' => 'form-control']) !!}
 			    <small class="text-danger">{{ $errors->first('category_id') }}</small>
-			</div>					
+			</div>
 			<div class="form-group{{ $errors->has('sub_category_id') ? ' has-error' : '' }}">
 			    {!! Form::label('sub_category_id', 'sub_category_id') !!}
 			    {!! Form::select('sub_category_id',$subcategory, null, ['id'=> 'categories', 'class' => 'form-control', 'required' => 'required']) !!}
@@ -39,12 +39,12 @@
 			    {!! Form::file('photos', null, ['class' => 'form-control']) !!}</br></br>
 			    {!! Form::submit('upload')!!} -->
 			    <form enctype="multipart/form-data" action="" method="POST">
-			    Select images: 
+			    Select images:
 			    <input type='file' name="file[]" onchange="readURL(this);" multiple><br><br>
 				<img id="blah" src="http://placehold.it/180" alt="your image" height="250" width="250" />
 
 			    </form>
-			    
+
 				<script type="text/javascript">
 					function readURL(input) {
             if (input.files && input.files[0]) {
@@ -60,7 +60,7 @@
         }
 				</script>
 			    <small class="text-danger">{{ $errors->first('photos') }}</small>
-			</div>						
+			</div>
 
 
 {!!Form::submit('Create', ['class'=>'btn btn-success'])!!}
@@ -69,7 +69,7 @@
 
 @section('inlineJS')
 <script type="text/javascript">
-	
+
 
 </script>
 @endsection

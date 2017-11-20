@@ -33,7 +33,7 @@
                             </div>
                        </form>
                    </div>
-                    <a href="{{route ('home')}}" class="butn blue">عودة للصفحة الرئيسية</a>
+                    <a href="{{route ('landing')}}" class="butn blue">عودة للصفحة الرئيسية</a>
                 </div>
                 <div class="clearfix"></div>
             </div>
