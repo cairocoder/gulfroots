@@ -182,6 +182,8 @@ return [
         App\Providers\TwilioRestClientProvider::class,
         App\Providers\AuthyApiProvider::class,
         Aws\Laravel\AwsServiceProvider::class,
+        Rinvex\Authy\Providers\AuthyServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -232,9 +234,11 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'providers' => array('JD\Cloudder\CloudderServiceProvider'),
-        'aliases' => array('Cloudder' => 'JD\Cloudder\Facades\Cloudder'),
         'AWS' => Aws\Laravel\AwsFacade::class,
+        'AuthyApp' => Rinvex\Authy\Facades\AuthyApp::class,
+        'AuthyToken' => Rinvex\Authy\Facades\AuthyToken::class,
+        'AuthyUser' => Rinvex\Authy\Facades\AuthyUser::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];

@@ -50,7 +50,7 @@
                     </form>
                 </div>
                 <div class="col l6 centerd vcenter2">
-                    <a href="#!" class="zoom blocked"><img src="{{ asset('images/facebook-log.jpg') }}" alt=""></a>
+                    <a href="{{url('/redirect')}}" class="zoom blocked"><img src="{{ asset('images/facebook-log.jpg') }}" alt=""></a>
                     <a href="#!" class="zoom blocked"><img src="{{ asset('images/google-log.jpg')}}" alt=""></a>
                 </div>
                 <div class="clearfix"></div>
