@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use App\Categories;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +16,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        view()->composer('layouts.user', function($view) {
+            $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+            $subcategory = Categories::where('sub_id', '!=', null)->get();
+            $spechialcategory = Categories::where('slug', '!=', null)->get();
+            $view->with(compact('categories', 'subcategory', 'spechialcategory'));
+        });
         Schema::defaultStringLength(191);
     }
 
