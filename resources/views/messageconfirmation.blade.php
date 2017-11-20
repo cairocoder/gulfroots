@@ -18,7 +18,7 @@
                                     {{ Auth::user()->name }} <span ></span>
                                 </a></h3>
                     شكرا لك علي التسجيل في قلف روتس.
-                    <a href="{{route ('home')}}" class="butn blue">عودة للصفحة الرئيسية</a>
+                    <a href="{{route ('landing')}}" class="butn blue">عودة للصفحة الرئيسية</a>
                 
                 </div>
 
