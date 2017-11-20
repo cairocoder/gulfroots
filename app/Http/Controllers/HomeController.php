@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Categories;
 
 class HomeController extends Controller
 {
@@ -11,10 +12,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
@@ -23,11 +24,27 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+        $subcategory = Categories::where('sub_id', '!=', null)->get();
+        $spechialcategory = Categories::where('slug', '!=', null)->get();
+        return view('home')->with(compact('categories','subcategory','spechialcategory'));
     }
 
     public function goto()
     {
         return view('messageconfirmation');
+    }
+
+    public function help()
+    {
+        $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+        $subcategory = Categories::where('sub_id', '!=', null)->get();
+        $spechialcategory = Categories::where('slug', '!=', null)->get();
+        return view('help', compact('categories','subcategory','spechialcategory'));
+    }
+
+    public function search()
+    {
+        return view('searchresult');
     }
 }

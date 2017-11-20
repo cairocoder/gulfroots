@@ -37,12 +37,10 @@ class PackagesController extends Controller
     public function store(Request $request)
         {
             $this->validate($request, [
-             'name_ar' => 'required|alpha_num',
-             'name_en' => 'required|alpha_num',
+             'name' => 'required|alpha_num',
              'price' => 'required|numeric',
-             'desciption_ar' => 'required|alpha_num',
-             'desciption_en' => 'required|alpha_num',
-             'features_ar' => 'required|alpha_num',
+             'desciption' => 'required|alpha_num',
+             'features' => 'required|alpha_num',
              'isBestValue' => 'required|numeric'
          ]);
         Packages::create($request->all());

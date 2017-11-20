@@ -9,13 +9,13 @@
                     <div class="col l6">
                         <h1>لماذا قلف روتس للأسر المنتجة؟</h1>
                         <p>
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
                         </p>
                     </div>
                     <div class="col l6">
@@ -26,17 +26,17 @@
             </div>
         </div>
         <div class="big-container">
-            <form class="has-range">
-
+            <form class="has-range" role="form" method="POST" action="{{ route('commercialuserregister') }}" novalidate>
+                {{ csrf_field() }}
                         <h2 class="mini-head">باقة الاسر المنتجة</h2>
                         <p class="mini-prag">
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
                         </p>
 
                     <input type="hidden" class="pack-calc" value="150">
@@ -51,12 +51,50 @@
                     <div class="to-back-body">
                         <div class="row no-margin">
                             <div class="col l6">
-                                <input type="text" placeholder="اسم الاسرة*">
-                                <input type="email" placeholder="البريد الاليكتروني*">
-                                <input type="text" placeholder="رقم الاتصال*">
-                                <input type="text" placeholder="رقم الواتس اب">
-                                <input type="password" placeholder="كلمة المرور*">
-                                <input type="password" placeholder="اعادة كلمة المرور*">
+                                <div>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus placeholder="اسم الاسرة*">
+                                @if ($errors->has('name'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required placeholder="البريد الاليكتروني*">
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('country_code') ? ' has-error' : '' }}">
+                                <input id="authy-countries" type="text" class="form-control" name="country_code" value="{{ old('country_code') }}" required placeholder="كود الدولة">
+                                @if ($errors->has('country_code'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('country_code') }}</strong>
+                                    </span>
+                                @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
+                                <input id="phone_number" type="text" class="form-control" name="phone_number" value="{{ old('phone_number') }}" required placeholder="رقم الاتصال*">
+                                @if ($errors->has('phone_number'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('phone_number') }}</strong>
+                                    </span>
+                                @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                <input id="password" type="password" class="form-control" name="password" required placeholder="كلمة المرور*">
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                                </div>
+                                <div class="form-group">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="إعادة كلمة المرور*">
+                                </div>
+                                <!-- <input type="text" placeholder="رقم الواتس اب">
                                 <input type="text" placeholder="العنوان">
                                 <div class="file-upload">
                                     <input type="text" placeholder="شعار المشروع" readonly><input class="hidden-upload" type="file">
@@ -67,7 +105,7 @@
                                 <div class="input-wrap">
                                         <input type="text" placeholder="الموقع الجغرافي*">
                                     <a href="#!"><i class="fa fa-map-marker"></i>تحديد الموقع الجغرافي</a>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col l6">
                                 <div class="note">
@@ -122,12 +160,12 @@
                                     <div class="pay-btn">أختر</div>
                                 </div>
                         </div>
-                        
+
                         </div>
                     </div>
 
                     <label class="checkbox full-width top-50">
-                            <input type="checkbox"><span></span>
+                            <input type="checkbox" required><span></span>
                             أوافق علي <a href="#!">الشروط والاحكام</a> الخاصة بالنشر علي موقع قلف روتس
                     </label>
 

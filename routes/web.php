@@ -13,7 +13,9 @@
 
 
 Route::get('/', 'HomeController@index')->name('landing');
-
+Route::get('/help', 'HomeController@help')->name('help');
+Route::get('/categories/{category}', 'CategoriesController@forntend');
+Route::get('/searchresult', 'HomeController@search')->name('searchresult');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm');
 Route::get('personalregister', 'Auth\RegisterController@showUserRegistrationForm');
 
@@ -37,6 +39,29 @@ Route::post(
 //        'middleware' => 'auth',
         'as' => 'user-verify-resend']
 );
+
+
+Route::get('companyregister', 'Auth\RegisterCompanyController@showRegistrationForm')->name('companyregister');
+Route::post('companyregister', 'Auth\RegisterCompanyController@createNewCommercialUser');
+
+Route::get(
+    '/user/verify', ['as' => 'user-show-verify', function() {
+        return response()->view('auth.verifyUser');
+    }]
+);
+
+Route::post(
+    '/user/verify',
+    ['uses' => 'Auth\RegisterCompanyController@verify', 'as' => 'user-verify', ]
+);
+
+Route::post(
+    '/user/verify/resend',
+    ['uses' => 'Auth\RegisterCompanyController@verifyResend',
+//        'middleware' => 'auth',
+        'as' => 'user-verify-resend']
+);
+
 
 
 Route::get('admin/login', 'AdminAuthController@login');

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- 
+
     <!-- Page Title -->
     <title>GulfRoots</title>
-    
+
     <!-- Meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +12,7 @@
     <meta name="author" content="Copyright (c) Viralcorners">
     <meta name="keywords" content="The keywords here" />
     <meta name="description" content="The description here" />
-    
+
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('favicon/apple-touch-icon.png')}}">
     <link rel="icon" type="image/png" href="{{ asset('favicon/favicon-32x32.png')}}" sizes="32x32">
@@ -21,10 +21,16 @@
     <link rel="mask-icon" href="{{ asset('favicon/safari-pinned-tab.svg')}}" color="#fa5b31">
     <meta name="theme-color" content="#078aff">
     <link href="https://fonts.googleapis.com/css?family=Cairo:200,300,400,600,700,900&amp;subset=arabic" rel="stylesheet">
-    
+
       <!-- Main Style -->
       <link href="{{ asset('front-assets/css/style.min.ar.css') }}" rel="stylesheet">
-    
+      <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/authy-forms.css/2.2/form.authy.min.css">
+          <!-- JS Files -->
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/authy-forms.js/2.2/form.authy.min.js"></script>
+
       <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
       <!--[if lt IE 9]>
@@ -32,8 +38,8 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
 
-    
-      
+
+
   </head>
 
   <body class="white-header">
@@ -86,12 +92,12 @@
                 <div class="row no-margin">
                     <div class="col l7">
                         <!-- /Logo/ -->
-                        <a class="logo" href="{{route('home')}}">
+                        <a class="logo" href="{{route('landing')}}">
                             <img src="{{ asset('front-assets/images/logo.png')}}" alt="GulfRoots">
                         </a>
                     </div>
                     <div class="col l2 user-area">
-                        
+
                     </div>
                     <div class="col l3 user-ctrl">
                         <div class="account-box">
@@ -111,7 +117,7 @@
                                     <li><a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            تسجيل الخروج
                                         </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" >
                                             {{ csrf_field() }}
@@ -145,130 +151,20 @@
                             <li><a href="#!">رابط</a></li>
                     </ul>
                 </li>
-                <li><a href="#!">السفر والسياحة</a>
-                    <ul class="level2">
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                    </ul>
-                </li>
-                <li><a href="#!">المنزل والحديقة</a>
-                    <ul class="level2">
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                    </ul>
-                </li>
-                <li><a href="#!">وظائف</a>
-                    <ul class="level2">
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                    </ul>
-                </li>
-                <li><a href="#!">العقارات</a>
-                    <ul class="level2">
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                    </ul>
-                </li>
-                <li><a href="#!">خدمات وتأجير</a>
-                    <ul class="level2">
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                    </ul>
-                </li>
-                <li><a href="#!">الاليكترونيات والكمبيوتر</a>
-                    <ul class="level2">
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                    </ul>
-                </li>
-                <li><a href="#!">الرياضة واللياقة البدنية</a>
-                    <ul class="level2">
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                    </ul>
-                </li>
-                <li><a href="#!">اخري</a>
-                    <ul class="level2">
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                            <li><a href="#!">رابط</a></li>
-                    </ul>
-                </li>
+
             </ul>
         </nav>
         <!-- Menu End -->
-
-
       </header>
       <!-- Header End -->
-
-
-    
     <div class="">
-
-        
-                
                 @yield('content')
-                
-           
-
-        
-
       </div>
-     
-
       <!-- Fixed Footer Start -->
       <footer>
         <div class="big-container">
             <div class="footer-top">
-                تطبيقات قلف روتس الخاصة بالهواتف الذكية 
+                تطبيقات قلف روتس الخاصة بالهواتف الذكية
                 <a href="#!"><img src="{{ asset('images/apple.jpg')}}" alt=""></a>
                 <a href="#!"><img src="{{ asset('images/google.jpg')}}" alt=""></a>
             </div>
@@ -293,7 +189,7 @@
                     <div class="col l3">
                         <h3>الوصول السريع</h3>
                         <a href="{{ route('password.request') }}">استرجاع كلمة المرور</a>
-                        <a href="#!">خدمات الشركات</a>
+                        <a href="{{ url('companyregister')}}">خدمات الشركات</a>
                         <a href="{{ url('commercialuserregister')}}">خدمات اﻷسر</a>
                         <a href="{{ url('personalregister')}}">خدمات الافراد</a>
                     </div>
@@ -305,7 +201,7 @@
                         <a href="#!">الوظائف</a>
                        <a href="#!">لعب الاطفال</a>
                     </div>
-                        
+
                     <div class="clearfix"></div>
                 </div>
             </div>
