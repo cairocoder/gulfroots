@@ -18,7 +18,7 @@ class CreatePackagesTable extends Migration
             $table->string('name');
             $table->double('price');
             $table->text('desciption');
-            $table->text('features_ar');
+            $table->text('features');
             $table->integer('isBestValue');
             $table->timestamps();
         });

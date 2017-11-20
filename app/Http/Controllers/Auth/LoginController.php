@@ -40,10 +40,11 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-//        if($user->roles->first()->slug != null && $user->roles->first()->slug === 'admin')
-//        {
-//            return redirect('/admin');
-//        }
-        return redirect()->home();
+        // if($user->roles->first()->slug != null && $user->roles->first()->slug === 'admin')
+        // {
+        //     return redirect('/admin');
+        // }
+        return redirect()->route('landing');
+
     }
 }

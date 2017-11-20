@@ -10,8 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Copyright (c) Viralcorners">
-    <meta name="keywords" content="The keywords here" />
-    <meta name="description" content="The description here" />
+    <meta name="keywords" content="The keywords here"/>
+    <meta name="description" content="The description here"/>
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('favicon/apple-touch-icon.png')}}">
@@ -20,7 +20,8 @@
     <link rel="manifest" href="{{ asset('favicon/manifest.json')}}">
     <link rel="mask-icon" href="{{ asset('favicon/safari-pinned-tab.svg')}}" color="#fa5b31">
     <meta name="theme-color" content="#078aff">
-    <link href="https://fonts.googleapis.com/css?family=Cairo:200,300,400,600,700,900&amp;subset=arabic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cairo:200,300,400,600,700,900&amp;subset=arabic"
+          rel="stylesheet">
 
     <!-- Main Style -->
     <link href="{{ asset('front-assets/css/style.min.ar.css') }}" rel="stylesheet">
@@ -34,10 +35,20 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <!--<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>-->
+    <!--<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/authy-forms.js/2.2/form.authy.min.js"></script>
     <![endif]-->
 
+
+</head>
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
 
 
 </head>
@@ -103,8 +114,8 @@
                             <div class="account-box">
                                 <div class="account-head">
                                     <img src="{{ asset('front-assets/images/user.jpg')}}" alt="">
-                                    <a href="#"  data-toggle="dropdown" role="button" aria-expanded="false">
-                                        {{ Auth::user()->name }} <span ></span>
+                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        {{ Auth::user()->name }} <span></span>
                                     </a>
                                     <i class="fa fa-caret-down"></i>
                                 </div>
@@ -119,18 +130,16 @@
                                                      document.getElementById('logout-form').submit();">
                                                 تسجيل الخروج
                                             </a>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" >
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                                 {{ csrf_field() }}
-                                            </form></li>
+                                            </form>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="add-ad">
-                                <a class="butn blue" href="#!">اضف اعلان</a>
-                            </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         @endguest
@@ -146,7 +155,8 @@
                                     @if(count($subcategory) > 0)
                                         @foreach($subcategory as $t)
                                             @if($t->sub_id == $category->id)
-                                                <li><a href="{{Url('/')}}/categories/{{$category->id}}">{{$t->name}}</a></li>
+                                                <li><a href="{{Url('/')}}/categories/{{$category->id}}">{{$t->name}}</a>
+                                                </li>
                                             @endif
                                         @endforeach
                                     @else
