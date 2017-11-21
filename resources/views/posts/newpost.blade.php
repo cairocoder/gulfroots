@@ -432,4 +432,4 @@
 @endsection
 
 <!-- jQuery plugins -->
-<script defer src="{{ asset('js/ui.min.js"></script>
+<script defer src="{{ asset('js/ui.min.js')}}"></script>

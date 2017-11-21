@@ -23,6 +23,7 @@ class CreatePostsTable extends Migration
             $table->integer('sub_category_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->string('photos');
+            $table->integer('views')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('user_subscriptions')->onDelete('cascade');

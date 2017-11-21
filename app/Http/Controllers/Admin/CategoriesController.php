@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Categories;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CategoriesController extends Controller
 {
@@ -13,7 +14,7 @@ class CategoriesController extends Controller
     	return View('admin.categories.index', compact('categories'));
     }
 
-    public function forntend(Categories $category)
+    public function frontend(Categories $category)
     {
         //$categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
         $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();

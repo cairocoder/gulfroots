@@ -14,7 +14,7 @@
 
 Route::get('/', 'HomeController@index')->name('landing');
 Route::get('/help', 'HomeController@help')->name('help');
-Route::get('/categories/{category}', 'CategoriesController@forntend');
+Route::get('/categories/{category}', 'Admin\CategoriesController@frontend');
 Route::get('/searchresult', 'HomeController@search')->name('searchresult');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/ad1', 'HomeController@ads')->name('ad1');
@@ -76,7 +76,7 @@ Route::post('password/reset', 'Admin\AdminAuthController@showResetForm');
 
 
 Route::group(['middleware' => ['auth', 'Role'], 'roles' => ['user.*']], function () {
-    Route::resource('/posts', 'PostsController', ['except' => [
+    Route::resource('/posts', 'Admin\PostsController', ['except' => [
         'show', 'index',
     ]]);
 });
