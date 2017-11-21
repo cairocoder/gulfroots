@@ -28,8 +28,8 @@
     <link rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/authy-forms.css/2.2/form.authy.min.css">
     <!-- JS Files -->
-    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/authy-forms.js/2.2/form.authy.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -49,7 +49,7 @@
                     <div class="col l7">
                         <!-- /Logo/ -->
                         <a class="logo" href="{{ route('landing')}}">
-                            <img src="{{ asset('images/logo.png')}}" alt="GulfRoots">
+                            <img src="{{ asset('front-assets/images/logo.png')}}" alt="GulfRoots">
                         </a>
                     </div>
                     <div class="col l2 user-area">
@@ -59,7 +59,7 @@
                     <div class="col l3 user-ctrl">
                         <div class="account-box">
                             <div class="account-head">
-                                <img src="{{ asset('images/user.jpg')}}" alt="">
+                                <img src="{{ asset('front-assets/images/user.jpg')}}" alt="">
                                 حسابي
                                 <i class="fa fa-caret-down"></i>
                             </div>
@@ -72,13 +72,11 @@
                                 </ul>
                             </div>
                         </div>
-
                         <div class="add-ad">
                             <a class="butn blue" href="#!">اضف اعلان</a>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         @else
@@ -92,12 +90,11 @@
                             </a>
                         </div>
                         <div class="col l2 user-area">
-
                         </div>
                         <div class="col l3 user-ctrl">
                             <div class="account-box">
                                 <div class="account-head">
-                                    <img src="{{ Auth::user()->pofile_picture }}" alt="">
+                                    <img src="{{ Auth::user()->profile_picture }}" alt="">
                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false">
                                         {{ Auth::user()->name }} <span></span>
                                     </a>
@@ -112,7 +109,7 @@
                                         <li><a href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                                Logout
+                                                تسجيل الخروج
                                             </a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                                 {{ csrf_field() }}
@@ -122,11 +119,10 @@
                                 </div>
                             </div>
                             <div class="add-ad">
-                                <a class="butn blue" href="#!">اضف اعلان</a>
+                                <a class="butn blue" href="{{route('ad1')}}">اضف اعلان</a>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         @endguest
@@ -169,12 +165,11 @@
             <a href="#!"><img src="{{ asset('front-assets/images/google.jpg')}}" alt=""></a>
         </div>
     </div>
-
     <div class="footer-map">
         <div class="row no-margin">
             <div class="col l3">
                 <h3>الدعم والمساعدة</h3>
-                <a href="#!">عن قلف روتس</a>
+                <a href="{{ route('about')}}">عن قلف روتس</a>
                 <a href="#!">خدمة العملاء</a>
                 <a href="{{ route('help') }}">المساعدة</a>
                 <a href="#!">نصائح الحماية والخصوصية</a>
@@ -199,6 +194,9 @@
                 @if(count($categories) > 0)
                     @foreach($categories as $category)
                         <a href="{{Url('/')}}/categories/{{$category->id}}">{{$category->name}}</a>
+                        @if($category->id === 5)
+                        @break
+                        @endif
                     @endforeach
                 @else
                 @endif
