@@ -30,7 +30,7 @@ class HomeController extends Controller
         return view('home')->with(compact('categories','subcategory','spechialcategory'));
     }
 
-    public function goto()
+    public function mc()
     {
         return view('messageconfirmation');
     }
