@@ -21,8 +21,6 @@ class CreateUserSubscriptionsTable extends Migration
             $table->integer('status');
             
             $table->timestamps();
-            
-
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             
         });

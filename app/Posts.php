@@ -8,7 +8,7 @@ class Posts extends Model
 {
     //
     protected $table = 'posts';
-    protected $fillable = ['name','short_des','long_des','price','category_id','sub_category_id','user_id'];
+    protected $fillable = ['name','short_des','long_des','price','category_id','sub_category_id','user_id', 'country', 'city', 'detailed_address'];
 
     public function category()
     {

@@ -9,4 +9,9 @@ class Favourites extends Model
     //
     protected $table = 'favourites';
     protected $fillable = ['user_id', 'post_id'];
+
+    public function post()
+    {
+        return $this->hasOne('App\Posts');
+    }
 }

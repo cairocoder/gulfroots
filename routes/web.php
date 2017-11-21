@@ -17,7 +17,7 @@ Route::get('/help', 'HomeController@help')->name('help');
 Route::get('/categories/{category}', 'Admin\CategoriesController@frontend');
 Route::get('/searchresult', 'HomeController@search')->name('searchresult');
 Route::get('/about', 'HomeController@about')->name('about');
-Route::get('/ad1', 'HomeController@ads')->name('ad1');
+Route::get('/posts/{id}', 'PostsController@ShowPost');
 
 Route::get('/redirect', 'Auth\SocialAuthFacebookController@redirect')->name('redirect');
 Route::get('/callback', 'Auth\SocialAuthFacebookController@callback');

@@ -18,12 +18,14 @@ class CreatePostsTable extends Migration
             $table->string('name');
             $table->string('short_des');
             $table->string('long_des');
+            $table->string('country');
+            $table->string('city');
+            $table->string('detailed_address');
             $table->integer('price');
             $table->integer('category_id')->unsigned();
             $table->integer('sub_category_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->string('photos');
-            $table->integer('views')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('user_subscriptions')->onDelete('cascade');
