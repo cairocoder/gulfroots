@@ -18,6 +18,10 @@ Route::get('/categories/{category}', 'CategoriesController@forntend');
 Route::get('/searchresult', 'HomeController@search')->name('searchresult');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/ad1', 'HomeController@ads')->name('ad1');
+Route::get('/profile', 'UsersController@profile')->name('profile');
+Route::get('/ads', 'UsersController@ads')->name('ads');
+Route::get('/messages', 'UsersController@messages')->name('messages');
+Route::get('/savedsearch', 'UsersController@savedsearch')->name('savedsearch');
 
 Route::get('/redirect', 'Auth\SocialAuthFacebookController@redirect')->name('redirect');
 Route::get('/callback', 'Auth\SocialAuthFacebookController@callback');

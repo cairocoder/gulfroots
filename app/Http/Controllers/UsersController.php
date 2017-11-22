@@ -7,6 +7,7 @@ use App\User;
 use App\Bills;
 use App\Messages;
 use App\Conversation;
+use App\Categories;
 class UsersController extends Controller
 {
     public function rules($id)
@@ -14,7 +15,7 @@ class UsersController extends Controller
         return [
             'name'  =>'required',
             'email' =>"required|email|unique:users,email,$id"
-        ]; 
+        ];
 
     }
 
@@ -25,7 +26,7 @@ class UsersController extends Controller
     }
 
     public function edit(User $user)
-    {   
+    {
         if($user->isCommercial())
         {
             $user = array_merge($user->toArray(),$user->getCommerical->toArray());
@@ -57,7 +58,7 @@ class UsersController extends Controller
     }
 
     public function userMessages(User $user)
-    {   
+    {
 
         $user->mesgs = $user->getMessages();
         //  ,$user->getMessagesTo()->toArray())
@@ -84,5 +85,45 @@ class UsersController extends Controller
     public function UserPosts(User $user)
     {
         return View('admin.users.posts',compact('user'));
+    }
+
+    public function profile(User $user)
+    {
+      if($user->isCommercial())
+      {
+          $user = array_merge($user->toArray(),$user->getCommerical->toArray());
+          $user['isCommercial'] = true;
+      }else{
+          $user = $user->toArray();
+          $user['isCommercial'] =false;
+      }
+      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+      $subcategory = Categories::where('sub_id', '!=', null)->get();
+      $spechialcategory = Categories::where('slug', '!=', null)->get();
+      return view('users.profile', compact('categories','subcategory','spechialcategory','user'));
+    }
+
+    public function ads(User $user)
+    {
+      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+      $subcategory = Categories::where('sub_id', '!=', null)->get();
+      $spechialcategory = Categories::where('slug', '!=', null)->get();
+      return view('users.ads', compact('categories','subcategory','spechialcategory','user'));
+    }
+
+    public function messages(User $user)
+    {
+      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+      $subcategory = Categories::where('sub_id', '!=', null)->get();
+      $spechialcategory = Categories::where('slug', '!=', null)->get();
+      return view('users.messages', compact('categories','subcategory','spechialcategory','user'));
+    }
+
+    public function savedsearch(User $user)
+    {
+      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+      $subcategory = Categories::where('sub_id', '!=', null)->get();
+      $spechialcategory = Categories::where('slug', '!=', null)->get();
+      return view('users.savedsearch', compact('categories','subcategory','spechialcategory','user'));
     }
 }

@@ -50,10 +50,10 @@ class PostsController extends Controller
              //'short_des_ar' => 'required|alpha_num',
              'long_des' => 'required',
              //'long_des_ar' => 'required|alpha_num',
-             'photos' => 'required',
+             //'photos' => 'required',
              'price' => 'required|numeric'
          ]);
-        
+
         Posts::create($request->all());
         return redirect()->to(Url('/admin/posts/'));
     }
@@ -65,7 +65,7 @@ class PostsController extends Controller
      */
     public function show(Posts $post)
     {
-        return View('admin.posts.show', compact('post'));   
+        return View('admin.posts.show', compact('post'));
     }
     /**
      * Edit the posts $id
@@ -100,7 +100,7 @@ class PostsController extends Controller
     public function destroy(Posts $post)
     {
         $post->delete();
-        return redirect()->back(); 
+        return redirect()->back();
     }
 
 }

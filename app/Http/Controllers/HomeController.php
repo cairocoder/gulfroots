@@ -63,4 +63,12 @@ class HomeController extends Controller
       $spechialcategory = Categories::where('slug', '!=', null)->get();
       return view('posts.ad1', compact('categories','subcategory','spechialcategory'));
     }
+
+    public function profile()
+    {
+      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+      $subcategory = Categories::where('sub_id', '!=', null)->get();
+      $spechialcategory = Categories::where('slug', '!=', null)->get();
+      return view('users.profile', compact('categories','subcategory','spechialcategory'));
+    }
 }

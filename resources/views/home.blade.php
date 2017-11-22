@@ -349,16 +349,16 @@
             <div class="row no-margin bottom-50">
 
                 <div class="col l3 centerd">
-                        <a href="#!"><img src="{{ asset('front-assets/images/cat1.jpg')}}" alt=""></a>
+                        <a href="{{Url('/')}}/categories/1}}"><img src="{{ asset('front-assets/images/cat1.jpg')}}" alt=""></a>
                 </div>
                 <div class="col l3 centerd">
-                        <a href="#!"><img src="{{ asset('front-assets/images/cat2.jpg')}}" alt=""></a>
+                        <a href="{{Url('/')}}/categories/3}}"><img src="{{ asset('front-assets/images/cat2.jpg')}}" alt=""></a>
                 </div>
                 <div class="col l3 centerd">
-                        <a href="#!"><img src="{{ asset('front-assets/images/cat3.jpg')}}" alt=""></a>
+                        <a href="{{Url('/')}}/categories/4}}"><img src="{{ asset('front-assets/images/cat3.jpg')}}" alt=""></a>
                 </div>
                 <div class="col l3 centerd">
-                        <a href="#!"><img src="{{ asset('front-assets/images/cat4.jpg')}}" alt=""></a>
+                        <a href="{{Url('/')}}/categories/7}}"><img src="{{ asset('front-assets/images/cat4.jpg')}}" alt=""></a>
                 </div>
 
                 <div class="clearfix"></div>
