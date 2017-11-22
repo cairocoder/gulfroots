@@ -17,6 +17,10 @@ Route::get('/help', 'HomeController@help')->name('help');
 Route::get('/categories/{category}', 'Admin\CategoriesController@frontend');
 Route::get('/searchresult', 'HomeController@search')->name('searchresult');
 Route::get('/about', 'HomeController@about')->name('about');
+Route::get('/profile', 'UsersController@profile')->name('profile');
+Route::get('/ads', 'UsersController@ads')->name('ads');
+Route::get('/messages', 'UsersController@messages')->name('messages');
+Route::get('/savedsearch', 'UsersController@savedsearch')->name('savedsearch');
 Route::get('/posts/{id}', 'PostsController@ShowPost');
 
 Route::get('/redirect', 'Auth\SocialAuthController@fbredirect')->name('fbredirect');

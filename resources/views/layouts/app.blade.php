@@ -65,10 +65,10 @@
                             </div>
                             <div class="account-drop">
                                 <ul>
-                                    <li><a href="#!">أدراة اﻷعلانات</a></li>
-                                    <li><a href="#!">الرسائل</a></li>
-                                    <li><a href="#!">البحث المحفوظة</a></li>
-                                    <li><a href="#!">الملف الشخصى</a></li>
+                                    <li><a href="{{route ('ads')}}">أدراة اﻷعلانات</a></li>
+                                    <li><a href="{{route ('messages')}}">الرسائل</a></li>
+                                    <li><a href="{{route ('savedsearch')}}">البحث المحفوظة</a></li>
+                                    <li><a href="{{route ('profile')}}">الملف الشخصى</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -102,10 +102,10 @@
                                 </div>
                                 <div class="account-drop">
                                     <ul>
-                                        <li><a href="#!">أدراة اﻷعلانات</a></li>
-                                        <li><a href="#!">الرسائل</a></li>
-                                        <li><a href="#!">البحث المحفوظة</a></li>
-                                        <li><a href="#!">الملف الشخصى</a></li>
+                                        <li><a href="{{route ('ads')}}">أدراة اﻷعلانات</a></li>
+                                        <li><a href="{{route ('messages')}}">الرسائل</a></li>
+                                        <li><a href="{{route ('savedsearch')}}">البحث المحفوظة</a></li>
+                                        <li><a href="{{route ('profile')}}">الملف الشخصى</a></li>
                                         <li><a href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

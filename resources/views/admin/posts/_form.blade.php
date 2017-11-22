@@ -34,10 +34,10 @@
 			    {!! Form::select('sub_category_id',$subcategory, null, ['id'=> 'categories', 'class' => 'form-control', 'required' => 'required']) !!}
 			    <small class="text-danger">{{ $errors->first('sub_category_id') }}</small>
 			</div>
-			<div class="form-group{{ $errors->has('photos') ? ' has-error' : '' }}">
-			    <!-- {!! Form::label('photos', 'Photos') !!}</br>
+			<!-- <div class="form-group{{ $errors->has('photos') ? ' has-error' : '' }}">
+			    {!! Form::label('photos', 'Photos') !!}</br>
 			    {!! Form::file('photos', null, ['class' => 'form-control']) !!}</br></br>
-			    {!! Form::submit('upload')!!} -->
+			    {!! Form::submit('upload')!!}
 			    <form enctype="multipart/form-data" action="" method="POST">
 			    Select images:
 			    <input type='file' name="file[]" onchange="readURL(this);" multiple><br><br>
@@ -60,7 +60,7 @@
         }
 				</script>
 			    <small class="text-danger">{{ $errors->first('photos') }}</small>
-			</div>
+			</div> -->
 
 
 {!!Form::submit('Create', ['class'=>'btn btn-success'])!!}
