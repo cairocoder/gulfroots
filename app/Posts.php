@@ -8,22 +8,26 @@ class Posts extends Model
 {
     //
     protected $table = 'posts';
-    protected $fillable = ['name','short_des','long_des','price','category_id','sub_category_id','user_id', 'country', 'city', 'detailed_address'];
+    protected $fillable = ['name', 'short_des', 'long_des', 'country', 'city', 'detailed_address', 'seller_name', 'seller_email',
+        'seller_contact_no', 'longitude', 'latitude', 'price', 'category_id', 'sub_category_id', 'user_id', 'isBreaking', 'isinMain', 'isinBestPosts'];
 
     public function category()
     {
         return $this->belongsTo('App\Categories');
     }
+
     public function subcategory()
     {
         return $this->belongsTo('App\Categories');
     }
+
     public function user()
     {
         return $this->belongsTo('App\UserSubscriptions');
     }
+
     public function getMembers()
     {
-        return $this->hasMany('App\Reviews','App\Post_Photos');
+        return $this->hasMany('App\Reviews', 'App\Post_Photos');
     }
 }

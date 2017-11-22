@@ -7,16 +7,21 @@ use App\Http\Controllers\Controller;
 use Socialite;
 use App\Services\SocialFacebookAccountService;
 
-class SocialAuthFacebookController extends Controller
+class SocialAuthController extends Controller
 {
     /**
      * Create a redirect method to facebook api.
      *
      * @return void
      */
-    public function redirect()
+    public function fbredirect()
     {
         return Socialite::driver('facebook')->redirect();
+    }
+
+    public function gplusredirect()
+    {
+        return Socialite::driver('google')->redirect();
     }
 
     /**
@@ -24,9 +29,9 @@ class SocialAuthFacebookController extends Controller
      *
      * @return callback URL from facebook
      */
-    public function callback(SocialFacebookAccountService $service)
+    public function callback(SocialAccountService $service, $provider)
     {
-        $user = $service->createOrGetUser(Socialite::driver('facebook')->stateless()->user());
+        $user = $service->createOrGetUser(Socialite::driver($provider)->stateless()->user());
         auth()->login($user);
         return redirect()->route('landing');
     }

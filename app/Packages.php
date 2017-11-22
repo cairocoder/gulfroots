@@ -8,7 +8,7 @@ class Packages extends Model
 {
     //
     protected $table = 'packages';
-    protected $fillable = ['name', 'price', 'desciption', 'features_ar', 'isBestValue'];
+    protected $fillable = ['name', 'price', 'description', 'features', 'isBestValue'];
 
     public function getMembers()
     {

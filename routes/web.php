@@ -19,8 +19,11 @@ Route::get('/searchresult', 'HomeController@search')->name('searchresult');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/posts/{id}', 'PostsController@ShowPost');
 
-Route::get('/redirect', 'Auth\SocialAuthFacebookController@redirect')->name('redirect');
-Route::get('/callback', 'Auth\SocialAuthFacebookController@callback');
+Route::get('/redirect', 'Auth\SocialAuthController@fbredirect')->name('fbredirect');
+Route::get('/fb/callback', 'Auth\SocialAuthController@callback');
+
+Route::get('/gplus/redirect', 'Auth\SocialAuthController@gplusredirect')->name('gplusredirect');
+Route::get('/gplus/callback', 'Auth\SocialAuthController@callback');
 
 Route::get('register', 'Auth\RegisterController@showRegistrationForm');
 Route::get('personalregister', 'Auth\RegisterController@showUserRegistrationForm');

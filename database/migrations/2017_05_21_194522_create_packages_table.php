@@ -17,7 +17,7 @@ class CreatePackagesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->double('price');
-            $table->text('desciption');
+            $table->text('description');
             $table->text('features');
             $table->integer('isBestValue');
             $table->timestamps();
