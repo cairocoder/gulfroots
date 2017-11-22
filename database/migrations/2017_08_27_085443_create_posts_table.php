@@ -18,7 +18,18 @@ class CreatePostsTable extends Migration
             $table->string('name');
             $table->string('short_des');
             $table->string('long_des');
+            $table->string('country');
+            $table->string('city');
+            $table->string('detailed_address');
+            $table->string('seller_name');
+            $table->string('seller_email');
+            $table->string('seller_contact_no');
+            $table->string('longitude');
+            $table->string('latitude');
             $table->integer('price');
+            $table->integer('isBreaking');
+            $table->integer('isinMain');
+            $table->integer('isinBestPosts');
             $table->integer('category_id')->unsigned();
             $table->integer('sub_category_id')->unsigned();
             $table->integer('user_id')->unsigned();

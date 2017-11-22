@@ -22,6 +22,30 @@ class AppServiceProvider extends ServiceProvider
             $spechialcategory = Categories::where('slug', '!=', null)->get();
             $view->with(compact('categories', 'subcategory', 'spechialcategory'));
         });
+        view()->composer('posts.ad1', function($view) {
+            $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+            $subcategory = Categories::where('sub_id', '!=', null)->get();
+            $spechialcategory = Categories::where('slug', '!=', null)->get();
+            $view->with(compact('categories', 'subcategory', 'spechialcategory'));
+        });
+        view()->composer('posts.ad2', function($view) {
+            $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+            $subcategories = Categories::where('sub_id', '!=', null)->get();
+            $spechialcategory = Categories::where('slug', '!=', null)->get();
+            $view->with(compact('categories', 'subcategories', 'spechialcategory'));
+        });
+        view()->composer('posts.ad3', function($view) {
+            $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+            $subcategories = Categories::where('sub_id', '!=', null)->get();
+            $spechialcategory = Categories::where('slug', '!=', null)->get();
+            $view->with(compact('categories', 'subcategories', 'spechialcategory'));
+        });
+        view()->composer('layouts.app', function($view) {
+            $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+            $subcategory = Categories::where('sub_id', '!=', null)->get();
+            $spechialcategory = Categories::where('slug', '!=', null)->get();
+            $view->with(compact('categories', 'subcategory', 'spechialcategory'));
+        });
         Schema::defaultStringLength(191);
     }
 

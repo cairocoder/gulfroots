@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\User;
@@ -9,6 +9,7 @@ use View;
 use App\Messages;
 use App\Conversation;
 use App\ConversationRepository;
+use App\Http\Controllers\Controller;
 
 class MessagesController extends Controller
 {

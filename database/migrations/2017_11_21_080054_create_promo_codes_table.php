@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSocialFacebookAccountsTable extends Migration
+class CreatePromoCodesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateSocialFacebookAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('social_facebook_accounts', function (Blueprint $table) {
+        Schema::create('promo_codes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->string('provider_user_id');
-            $table->string('provider');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ class CreateSocialFacebookAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('social_facebook_accounts');
+        Schema::dropIfExists('promo_codes');
     }
 }

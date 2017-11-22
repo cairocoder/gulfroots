@@ -73,7 +73,7 @@
                             </div>
                         </div>
                         <div class="add-ad">
-                            <a class="butn blue" href="{{route('ad1')}}">اضف اعلان</a>
+                            <a class="butn blue" href="{{route('register')}}">اضف اعلان</a>
                         </div>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                                 </div>
                             </div>
                             <div class="add-ad">
-                                <a class="butn blue" href="{{route('ad1')}}">اضف اعلان</a>
+                                <a class="butn blue" href="{{Url('newad')}}">اضف اعلان</a>
                             </div>
                         </div>
                     </div>

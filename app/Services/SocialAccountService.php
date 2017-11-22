@@ -3,19 +3,19 @@ namespace App\Services;
 use App\SocialFacebookAccount;
 use App\User;
 use Laravel\Socialite\Contracts\User as ProviderUser;
-class SocialFacebookAccountService
+class SocialAccountService
 {
-    public function createOrGetUser(ProviderUser $providerUser)
+    public function createOrGetUser(ProviderUser $providerUser, $provider)
     {
-        $account = SocialFacebookAccount::whereProvider('facebook')
+        $account = SocialAccount::whereProvider($provider)
             ->whereProviderUserId($providerUser->getId())
             ->first();
         if ($account) {
             return $account->user;
         } else {
-            $account = new SocialFacebookAccount([
+            $account = new SocialAccount([
                 'provider_user_id' => $providerUser->getId(),
-                'provider' => 'facebook'
+                'provider' => $provider
             ]);
             $user = User::whereEmail($providerUser->getEmail())->first();
             if (!$user) {

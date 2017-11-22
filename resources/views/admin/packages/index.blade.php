@@ -25,9 +25,8 @@
 						<td>{{$package->id}}</td>
 						<td>{{$package->name_ar}}</td>
 						<td>{{$package->name_en}}</td>
-						<td>{{$package->desciption_ar}}</td>
-						<td>{{$package->desciption_en}}</td>
-						<td>{{$package->features_ar}}</td>
+						<td>{{$package->description}}</td>
+						<td>{{$package->features}}</td>
 						<td>{{$package->price}}</td>
 						<td>{{$package->isBestValue}}</td>
 						<td><a href="{{Url('/')}}/admin/packages/{{$package->id}}/edit" class="btn btn-warning">EDIT</a></td>

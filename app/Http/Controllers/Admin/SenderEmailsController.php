@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\SenderEmails;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SenderEmailsController extends Controller
 {

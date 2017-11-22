@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Filters;
+use App\Packages;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class FiltersController extends Controller
+class PackagesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,8 @@ class FiltersController extends Controller
      */
     public function index()
     {
-        $filters = Filters::latest()->get();
-        return View('admin.filters.index', compact('filters'));
+        $packages = Packages::latest()->get();
+        return View('admin.packages.index', compact('packages'));
     }
 
     /**
@@ -25,7 +26,7 @@ class FiltersController extends Controller
      */
     public function create()
     {
-        return View('admin.filters.create');
+        return View('admin.packages.create');
     }
 
     /**
@@ -35,27 +36,27 @@ class FiltersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $this->validate($request, [
-         'name_ar' => 'required|alpha_num',
-         'name_en' => 'required|alpha_num',
-         // 'value_ar_start' => 'required|alpha_num',
-         // 'value_en_end' => 'required|alpha_num'
-     ]);
-        Filters::create($request->all());
-        return redirect()->to(Url('/admin/filters/'));
+        {
+            $this->validate($request, [
+             'name' => 'required|alpha_num',
+             'price' => 'required|numeric',
+             'desciption' => 'required|alpha_num',
+             'features' => 'required|alpha_num',
+             'isBestValue' => 'required|numeric'
+         ]);
+        Packages::create($request->all());
+        return redirect()->to(Url('/admin/packages/'));
     }
 
-    
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Filters $filter)
+    public function show(Packages $package)
     {
-        return View('admin.filters.show', compact('filter'));
+        return View('admin.packages.show', compact('package'));
     }
 
     /**
@@ -64,9 +65,9 @@ class FiltersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Filters $filter)
+    public function edit(Packages $package)
     {
-        return View('admin.filters.edit', compact('filter'));
+        return View('admin.packages.edit', compact('package'));
     }
 
     /**
@@ -76,10 +77,10 @@ class FiltersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Filters $filter, Request $request)
+    public function update(Packages $package, Request $request)
     {
-        $filter->update($request->all());
-        return redirect()->to(Url('/admin/filters'));
+        $package->update($request->all());
+        return redirect()->to(Url('/admin/packages'));
     }
 
     /**
@@ -88,9 +89,9 @@ class FiltersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Filters $filter)
+    public function destroy(Packages $package)
     {
-        $filter->delete();
+        $package->delete();
         return redirect()->back();
     }
 }

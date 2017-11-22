@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 use Auth;
 use Validator;
 use \App\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
+use App\Http\Controllers\Controller;
 class AdminAuthController extends Controller
 {
     protected $auth;

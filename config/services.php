@@ -48,12 +48,12 @@ return [
     'facebook' =>[
         'client_id'     => env('FACEBOOK_ID'),
         'client_secret' => env('FACEBOOK_SECRET'),
-        'redirect'      => env('FACEBOOK_URL')
+        'redirect'      => env('APP_URL') . env('FACEBOOK_URL')
     ],
     'google' =>[
         'client_id'     => env('GOOGLE_ID'),
         'client_secret' => env('GOOGLE_SECRET'),
-        'redirect'      => env('GOOGLE_REDIRECT')
+        'redirect'      => env('APP_URL') . env('GOOGLE_REDIRECT')
     ]
 
 ];

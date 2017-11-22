@@ -72,7 +72,7 @@
                             </div>
                         </div>
                         <div class="add-ad">
-                            <a class="butn blue" href="{{route('ad1')}}">اضف اعلان</a>
+                            <a class="butn blue" href="{{ route('register') }}">اضف اعلان</a>
                         </div>
                     </div>
                 </div>
@@ -92,13 +92,13 @@
                         </div>
                         <div class="col l3 user-ctrl">
                             <div class="account-box">
-                              <div class="account-head">
-                                  <img src="{{ Auth::user()->profile_picture }}" alt="">
-                                  <a href="#" data-toggle="dropdown" role="button" aria-expanded="false">
-                                      {{ Auth::user()->name }} <span></span>
-                                  </a>
-                                  <i class="fa fa-caret-down"></i>
-                              </div>
+                                <div class="account-head">
+                                    <img src="{{ Auth::user()->profile_picture }}" alt="">
+                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        {{ Auth::user()->name }} <span></span>
+                                    </a>
+                                    <i class="fa fa-caret-down"></i>
+                                </div>
                                 <div class="account-drop">
                                     <ul>
                                       <li><a href="{{route ('ads')}}">أدراة اﻷعلانات</a></li>
@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                             <div class="add-ad">
-                                <a class="butn blue" href="{{route('ad1')}}">اضف اعلان</a>
+                                <a class="butn blue" href="{{Url('newad')}}">اضف اعلان</a>
                             </div>
                         </div>
                     </div>
@@ -193,7 +193,7 @@
                         @foreach($categories as $category)
                             <a href="{{Url('/')}}/categories/{{$category->id}}">{{$category->name}}</a>
                             @if($category->id === 5)
-                            @break
+                                @break
                             @endif
                         @endforeach
                     @else

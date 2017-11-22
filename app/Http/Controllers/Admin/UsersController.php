@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\User;
@@ -8,6 +8,7 @@ use App\Bills;
 use App\Messages;
 use App\Conversation;
 use App\Categories;
+use App\Http\Controllers\Controller;
 class UsersController extends Controller
 {
     public function rules($id)

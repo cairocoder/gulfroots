@@ -184,6 +184,7 @@ return [
         Aws\Laravel\AwsServiceProvider::class,
         Rinvex\Authy\Providers\AuthyServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Kryptonit3\Counter\CounterServiceProvider::class,
     ],
 
     /*
@@ -239,6 +240,7 @@ return [
         'AuthyToken' => Rinvex\Authy\Facades\AuthyToken::class,
         'AuthyUser' => Rinvex\Authy\Facades\AuthyUser::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Counter' => Kryptonit3\Counter\Facades\CounterFacade::class,
     ],
 
 ];

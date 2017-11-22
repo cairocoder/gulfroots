@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePackagesTable extends Migration
+class CreateSavedSearchesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreatePackagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('packages', function (Blueprint $table) {
+        Schema::create('saved_searches', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->double('price');
-            $table->text('description');
-            $table->text('features');
-            $table->integer('isBestValue');
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ class CreatePackagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('packages');
+        Schema::dropIfExists('saved_searches');
     }
 }

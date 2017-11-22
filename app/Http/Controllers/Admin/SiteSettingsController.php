@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\SiteSettings;
 use App\SmsGetways;
 use App\SenderEmails;
 use Illuminate\Http\Request;
 use Validator;
+use App\Http\Controllers\Controller;
 
 class SiteSettingsController extends Controller
 {
