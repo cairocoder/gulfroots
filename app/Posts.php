@@ -28,6 +28,6 @@ class Posts extends Model
 
     public function filters()
     {
-        return $this->belongsTo('App\Filters');
+        return $this->belongsToMany('App\Filters', 'filter_post');
     }
 }

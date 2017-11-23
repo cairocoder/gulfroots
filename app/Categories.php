@@ -24,7 +24,7 @@ class Categories extends Model
     }
     public function filtersgroups()
     {
-        return $this->belongsToMany('App\FiltersGroups');
+        return $this->belongsToMany('App\FiltersGroups', 'categories_filters_groups');
     }
 
 }

@@ -21,6 +21,9 @@ class CreateFiltersTable extends Migration
             $table->string('value_end');
             $table->integer('range_start');
             $table->timestamps();
+            $table->integer('group_id')->unsigned();
+
+            $table->foreign('group_id')->references('id')->on('filters_groups')->onDelete('cascade');
         });
     }
 
@@ -31,6 +34,6 @@ class CreateFiltersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Filters');
+        Schema::dropIfExists('filters');
     }
 }

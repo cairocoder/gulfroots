@@ -13,5 +13,7 @@ class FiltersGroupsTableSeeder extends Seeder
     {
         //
         DB::table('filters_groups')->insert(['group_name' => 'asd']);
+        DB::table('filters_groups')->insert(['group_name' => 'asd2']);
+        DB::table('filters_groups')->insert(['group_name' => 'asd3']);
     }
 }
