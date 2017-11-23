@@ -7,8 +7,8 @@
 
 <!-- register -->
 <div class="big-container bottom-100">
-    <form>
-
+    <form method="POST" action="{{Url('/newpost')}}">
+        {{ csrf_field() }}
         <div class="row no-margin centerd">
 
             <div class="col l3">
@@ -127,7 +127,7 @@
             <div class="row no-margin borderd">
                 <div class="col l6">
                     <div class="top-group">
-                        <input type="text" class="in-mini" placeholder="السعر">
+                        <input type="text" class="in-mini" name="price" placeholder="السعر">
                         <label class="checkbox blued">
                             <input type="radio" name="price"><span></span> محدد
                         </label>
@@ -164,8 +164,8 @@
             <div class="row no-margin">
                 <div class="col l6">
                     <br>
-                    <input type="text" placeholder="السعر">
-                    <textarea placeholder="وصف الاعلان"></textarea>
+                    <input type="text" name="short_des" placeholder="السعر">
+                    <textarea name="long_des" placeholder="وصف الاعلان"></textarea>
                     <div class="pay-box not-payed">
                         <img src="{{ asset('images/urgant.jpg')}}" alt="">
                         <div class="pay-text">
@@ -197,11 +197,11 @@
         <div class="to-back-body">
             <div class="row no-margin">
                 <div class="col l6">
-                    <input type="text" placeholder="اسم البائع*">
-                    <input type="email" placeholder="البريد الاليكتروني*">
-                    <input type="text" placeholder="رقم الاتصال">
+                    <input type="text" name="seller_name" placeholder="اسم البائع*">
+                    {{--<input type="email" placeholder="البريد الاليكتروني*">--}}
+                    <input type="text" name="seller_contact_no" placeholder="رقم الاتصال">
                     <div class="input-wrap">
-                        <input type="text" placeholder="العنوان*">
+                        <input type="text" name="detailed_address"placeholder="العنوان*">
                         <a href="#!"><i class="fa fa-map-marker"></i>تحديد الموقع الجغرافي</a>
                     </div>
                 </div>

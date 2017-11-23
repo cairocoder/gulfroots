@@ -1,6 +1,6 @@
 <?php
 namespace App\Services;
-use App\SocialFacebookAccount;
+use App\SocialAccount;
 use App\User;
 use Laravel\Socialite\Contracts\User as ProviderUser;
 class SocialAccountService

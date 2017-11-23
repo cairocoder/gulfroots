@@ -60,6 +60,7 @@ class RegisterCommercialController extends Controller
         Auth::login(User::where('email', $values['email'])->first());
         $authyUser = app('rinvex.authy.user');
         $user = $authyUser->register($values['email'], $values['phone_number'], $values['country_code']);
+//        dd($user);
         if ($user->succeed()) {
             $newUser->authy_id = $user->get('user')['id'];
             $newUser->save();
@@ -72,6 +73,8 @@ class RegisterCommercialController extends Controller
             DB::commit();
             return redirect()->route('user-show-verify');
         } else {
+            //delete created user
+            User::where('email', $values['email'])->first();
             $errors = $this->getAuthyErrors($authyUser->errors());
             DB::rollback();
             return view('auth.commercialuserregister', ['errors' => new MessageBag($errors)]);
@@ -120,7 +123,7 @@ class RegisterCommercialController extends Controller
                 'status',
                 'Verification code re-sent'
             );
-            return redirect()->route('user-show-verify');
+            return redirect()->route('user-verify');
         } else {
             $errors = $this->getAuthyErrors($smsTokenSent->errors());
             return view('auth.verifyUser', ['errors' => new MessageBag($errors)]);

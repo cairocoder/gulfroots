@@ -14,5 +14,9 @@ class FiltersGroups extends Model
       return $this->belongsToMany('App\GroupsFilters','filters', 'id','id' );
     	//return $this->hasMany('App\GroupsFilters','group_id');
     }
+    public function categories()
+    {
+        return $this->belongsToMany('App\Categories');
+    }
 
 }

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.user')
 @section('content')
     <!-- normal body -->
     <div class="normal-body">
@@ -202,24 +202,23 @@
 
             <!-- spical inside -->
             <div class="spical-inside">
-                <div class="spical-head">المنتجات المميزة</div>
-                <a href="#!">السيارات</a>
-                <a href="#!">المركبات</a>
-                <a href="#!">المفروشات</a>
-                <a href="#!">الاثاث</a>
-                <a href="#!">الاجهزة اللوحية</a>
-                <a href="#!">لعب الاطفال</a>
-                <a href="#!">الايفون</a>
-                <a href="#!">وظائف</a>
-                <a href="#!">مخبوزات</a>
-                <a href="#!">منسقي حفلات</a>
-            </div>
+                    <div class="spical-head start {{Request::is('/categories*')?"active":""}}">المنتجات المميزة</div>
+                    @if(count($spechialcategory) > 0)
+                    @foreach($spechialcategory as $spechial)
+                    <a href="{{Url('/')}}/categories/{{$spechial->id}}">{{$spechial->slug}}</a>
+                    @if($spechial->id === 10)
+                    @break
+                    @endif
+                    @endforeach
+                    @else
+                    @endif
+                </div>
 
             <!-- link map -->
             <div class="link-map">
-                <div class="map-item"><a href="index.html">الرئيسية</a></div>
-                <div class="map-item"><a href="main-cat.html">اسم القسم</a></div>
-                <div class="map-item">اسم المنتج</div>
+                <div class="map-item"><a href="{{ route ('landing')}}">الرئيسية</a></div>
+                <div class="map-item"><a href="">{{$post->category_id}}</a></div>
+                <div class="map-item">{{$post->name}}</div>
             </div>
 
 
@@ -231,12 +230,12 @@
                         <div class="watch-icon">
                             <i class="fa fa-star"></i>
                         </div>
-                        <h1>اسم المنتج</h1>
-                        <h3> 0000 <span>ريال</span></h3>
+                        <h1>{{$post->name}}</h1>
+                        <h3> {{$post->price}} <span>ريال</span></h3>
                         <div class="row no-margin borderd">
                             <div class="col l6">
                                 <i class="fa fa-map-marker"></i>
-                                {{$post->country}} - {{$post->city}} |<br> {{Counter::showAndCount('posts', $post->id)}} مشاهدة
+                                {{$post->country}} - {{$post->city}} |<span dir="ltr">مشاهدة {{Counter::showAndCount('posts', $post->id)}} </spin>
                             </div>
                             <div class="col l6 lefted">
                                 <a href="#!">
@@ -279,16 +278,16 @@
 
                         <div class="swiper-container gallery-top">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad2.jpg)"></div>
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad1.jpg)"></div>
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad2.jpg)"></div>
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad1.jpg)"></div>
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad2.jpg)"></div>
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad1.jpg)"></div>
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad2.jpg)"></div>
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad1.jpg)"></div>
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad2.jpg)"></div>
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad1.jpg)"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
                             </div>
 
                             <div class="swiper-button-next swiper-button-white"></div>
@@ -296,16 +295,16 @@
                         </div>
                         <div class="swiper-container gallery-thumbs">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad2.jpg)"></div>
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad1.jpg)"></div>
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad2.jpg)"></div>
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad1.jpg)"></div>
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad2.jpg)"></div>
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad1.jpg)"></div>
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad2.jpg)"></div>
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad1.jpg)"></div>
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad2.jpg)"></div>
-                                <div class="swiper-slide" style="background-image:url(assets/images/ad1.jpg)"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
+                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
                             </div>
                         </div>
 
@@ -313,7 +312,7 @@
 
 
                     <div class="centerd top-25 bottom-25">
-                        <img src="assets/images/width-ads.jpg" alt="">
+                        <img src="{{ asset('front-assets/images/width-ads.jpg')}}" alt="">
                     </div>
 
                     <div class="product-info">
@@ -322,21 +321,18 @@
                             <div class="col l7">
                                 <h2>وصف المنتج</h2>
                                 <p>
-                                    نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                    نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                    نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                    نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                                  {{$post->long_des}}
                                 </p>
                             </div>
                             <div class="col l5">
                                 <div class="product-det">
                                     <div>
                                         تاريخ الاعلان
-                                        <span>17/05/2017</span>
+                                        <span>{{$post->created_at}}</span>
                                     </div>
                                     <div>
                                         تاريخ التعديل
-                                        <span>17/05/2017</span>
+                                        <span>{{$post->updated_at}}</span>
                                     </div>
                                     <div>
                                         الحالة
@@ -357,7 +353,7 @@
                             <!-- ad item -->
                             <a href="#!" class="ad-item">
                                 <div class="image-box">
-                                    <img src="assets/images/ad-thumb.jpg" alt="">
+                                    <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
                                     <div class="price boxed-only">500000
                                         <span>ر.س</span>
                                     </div>
@@ -394,7 +390,7 @@
                             <!-- ad item -->
                             <a href="#!" class="ad-item">
                                 <div class="image-box">
-                                    <img src="assets/images/ad-thumb.jpg" alt="">
+                                    <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
                                     <div class="price boxed-only">500000
                                         <span>ر.س</span>
                                     </div>
@@ -431,7 +427,7 @@
                             <!-- ad item -->
                             <a href="#!" class="ad-item">
                                 <div class="image-box">
-                                    <img src="assets/images/ad-thumb.jpg" alt="">
+                                    <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
                                     <div class="price boxed-only">500000
                                         <span>ر.س</span>
                                     </div>
@@ -475,7 +471,7 @@
                             <!-- ad item -->
                             <a href="#!" class="ad-item">
                                 <div class="image-box">
-                                    <img src="assets/images/ad-thumb.jpg" alt="">
+                                    <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
                                     <div class="price boxed-only">500000
                                         <span>ر.س</span>
                                     </div>
@@ -512,7 +508,7 @@
                             <!-- ad item -->
                             <a href="#!" class="ad-item">
                                 <div class="image-box">
-                                    <img src="assets/images/ad-thumb.jpg" alt="">
+                                    <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
                                     <div class="price boxed-only">500000
                                         <span>ر.س</span>
                                     </div>
@@ -549,7 +545,7 @@
                             <!-- ad item -->
                             <a href="#!" class="ad-item">
                                 <div class="image-box">
-                                    <img src="assets/images/ad-thumb.jpg" alt="">
+                                    <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
                                     <div class="price boxed-only">500000
                                         <span>ر.س</span>
                                     </div>
@@ -585,7 +581,7 @@
                     </div>
 
                     <div class="centerd">
-                        <img src="assets/images/width-ads.jpg" alt="">
+                        <img src="{{ asset('front-assets/images/width-ads.jpg')}}" alt="">
                     </div>
 
 
@@ -607,7 +603,7 @@
                                         <!-- ad item -->
                                         <a href="#!" class="ad-item">
                                             <div class="image-box">
-                                                <img src="assets/images/ad-thumb.jpg" alt="">
+                                                <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
                                             </div>
                                             <div class="post-data">
                                                 <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
@@ -624,7 +620,7 @@
                                         <!-- ad item -->
                                         <a href="#!" class="ad-item">
                                             <div class="image-box">
-                                                <img src="assets/images/ad-thumb.jpg" alt="">
+                                                <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
                                             </div>
                                             <div class="post-data">
                                                 <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
@@ -645,7 +641,7 @@
                                         <!-- ad item -->
                                         <a href="#!" class="ad-item">
                                             <div class="image-box">
-                                                <img src="assets/images/ad-thumb.jpg" alt="">
+                                                <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
                                             </div>
                                             <div class="post-data">
                                                 <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
@@ -662,7 +658,7 @@
                                         <!-- ad item -->
                                         <a href="#!" class="ad-item">
                                             <div class="image-box">
-                                                <img src="assets/images/ad-thumb.jpg" alt="">
+                                                <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
                                             </div>
                                             <div class="post-data">
                                                 <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
@@ -693,7 +689,7 @@
                                         <!-- ad item -->
                                         <a href="#!" class="ad-item">
                                             <div class="image-box">
-                                                <img src="assets/images/ad-thumb.jpg" alt="">
+                                                <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
                                             </div>
                                             <div class="post-data">
                                                 <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
@@ -710,7 +706,7 @@
                                         <!-- ad item -->
                                         <a href="#!" class="ad-item">
                                             <div class="image-box">
-                                                <img src="assets/images/ad-thumb.jpg" alt="">
+                                                <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
                                             </div>
                                             <div class="post-data">
                                                 <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
@@ -731,7 +727,7 @@
                                         <!-- ad item -->
                                         <a href="#!" class="ad-item">
                                             <div class="image-box">
-                                                <img src="assets/images/ad-thumb.jpg" alt="">
+                                                <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
                                             </div>
                                             <div class="post-data">
                                                 <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
@@ -748,7 +744,7 @@
                                         <!-- ad item -->
                                         <a href="#!" class="ad-item">
                                             <div class="image-box">
-                                                <img src="assets/images/ad-thumb.jpg" alt="">
+                                                <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
                                             </div>
                                             <div class="post-data">
                                                 <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
@@ -779,7 +775,7 @@
                                         <!-- ad item -->
                                         <a href="#!" class="ad-item">
                                             <div class="image-box">
-                                                <img src="assets/images/ad-thumb.jpg" alt="">
+                                                <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
                                             </div>
                                             <div class="post-data">
                                                 <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
@@ -796,7 +792,7 @@
                                         <!-- ad item -->
                                         <a href="#!" class="ad-item">
                                             <div class="image-box">
-                                                <img src="assets/images/ad-thumb.jpg" alt="">
+                                                <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
                                             </div>
                                             <div class="post-data">
                                                 <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
@@ -817,7 +813,7 @@
                                         <!-- ad item -->
                                         <a href="#!" class="ad-item">
                                             <div class="image-box">
-                                                <img src="assets/images/ad-thumb.jpg" alt="">
+                                                <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
                                             </div>
                                             <div class="post-data">
                                                 <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
@@ -834,7 +830,7 @@
                                         <!-- ad item -->
                                         <a href="#!" class="ad-item">
                                             <div class="image-box">
-                                                <img src="assets/images/ad-thumb.jpg" alt="">
+                                                <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
                                             </div>
                                             <div class="post-data">
                                                 <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
@@ -860,7 +856,7 @@
 
 
                     <div class="centerd">
-                        <img src="assets/images/width-ads.jpg" alt="">
+                        <img src="{{ asset('front-assets/images/width-ads.jpg')}}" alt="">
                     </div>
 
                 </div>
@@ -869,7 +865,7 @@
 
                     <div class="user-side">
                         <div class="user-info-box">
-                            <img src="assets/images/user-mini.jpg" alt="">
+                            <img src="{{ asset('front-assets/images/user-mini.jpg')}}" alt="">
                             <div class="user-data">
                                 <a href="#!">اسم المستخدم</a>
                                 <span>10/10/2010</span>
@@ -941,11 +937,11 @@
                         المباشر</a>
 
                     <div class="google-ads">
-                        <img src="assets/images/ads.png" alt="">
+                        <img src="{{ asset('front-assets/images/ads.png')}}" alt="">
                     </div>
 
                     <div class="google-ads">
-                        <img src="assets/images/ads.png" alt="">
+                        <img src="{{ asset('front-assets/images/ads.png')}}" alt="">
                     </div>
 
                 </div>
@@ -958,7 +954,3 @@
 
     </div>
 @endsection
-
-
-<!-- jQuery plugins -->
-<script defer src="assets/js/ui.min.js"></script>

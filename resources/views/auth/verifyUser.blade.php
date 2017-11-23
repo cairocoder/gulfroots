@@ -15,19 +15,20 @@
                 <div class="thanks-box">
                     من فضلك ادخل كود التأكيد الذي تم ارساله علي هاتفك الجوال لتأكيد بياناتك
                     <div class="tiny-form">
-                        <form>
-                            {!! Form::open(['url' => route('user-verify')]) !!}
-                            <input type="text" placeholder="كود التأكيد">
+                        <form method="POST" action="{{route('user-verify')}}">
+                            {{ csrf_field() }}
+                            {{--{!! Form::open(['url' => route('user-verify')]) !!}--}}
+                            <input type="text" name="token" placeholder="كود التأكيد">
                             <div class="row no-margin">
                                 <div class="col l6 rightness bolded">
-                                    {!! Form::open(['url' => route('user-verify-resend')]) !!}
-                                    <a type="submit" class="ln-45 opa">ارسال الكود مره اخري؟</a>
-                                    {!! Form::close() !!}
+{{--                                    {!! Form::open(['url' => route('user-verify-resend')]) !!}--}}
+                                    <a href="{{route('user-verify-resend')}}" type="submit" class="ln-45 opa">ارسال الكود مره اخري؟</a>
+                                    {{--{!! Form::close() !!}--}}
                                 </div>
                                 <div class="col l6">
                                     <input class="blue rudis ln-45 bolded no-border full-width opa" type="submit" value="تأكيد">
                                 </div>
-                                {!! Form::close() !!}
+                                {{--{!! Form::close() !!}--}}
                                 <div class="clearfix"></div>
                             </div>
                         </form>

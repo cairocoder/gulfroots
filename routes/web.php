@@ -15,19 +15,24 @@
 Route::get('/', 'HomeController@index')->name('landing');
 Route::get('/help', 'HomeController@help')->name('help');
 Route::get('/categories/{category}', 'Admin\CategoriesController@frontend');
-Route::get('/searchresult', 'HomeController@search')->name('searchresult');
+Route::get('/savedata', 'HomeController@savedata')->name('savedata');
 Route::get('/about', 'HomeController@about')->name('about');
+Route::get('/contactus', 'HomeController@contactus')->name('contactus');
+Route::get('/conditions', 'HomeController@conditions')->name('conditions');
+Route::get('/custmoerservice', 'HomeController@custmoerservice')->name('custmoerservice');
+Route::get('/privacypolicy', 'HomeController@privacypolicy')->name('privacypolicy');
+Route::get('/protectionadvices', 'HomeController@protectionadvices')->name('protectionadvices');
+Route::get('/publishingpolicy', 'HomeController@publishingpolicy')->name('publishingpolicy');
 Route::get('/profile', 'UsersController@profile')->name('profile');
 Route::get('/ads', 'UsersController@ads')->name('ads');
 Route::get('/messages', 'UsersController@messages')->name('messages');
 Route::get('/savedsearch', 'UsersController@savedsearch')->name('savedsearch');
 Route::get('/posts/{id}', 'PostsController@ShowPost');
 
-Route::get('/redirect', 'Auth\SocialAuthController@fbredirect')->name('fbredirect');
-Route::get('/fb/callback', 'Auth\SocialAuthController@callback');
-
+Route::get('/fb/redirect', 'Auth\SocialAuthController@fbredirect')->name('fbredirect');
 Route::get('/gplus/redirect', 'Auth\SocialAuthController@gplusredirect')->name('gplusredirect');
-Route::get('/gplus/callback', 'Auth\SocialAuthController@callback');
+Route::get('/{provider}/callback', 'Auth\SocialAuthController@callback');
+
 
 Route::get('register', 'Auth\RegisterController@showRegistrationForm');
 Route::get('personalregister', 'Auth\RegisterController@showUserRegistrationForm');
@@ -39,9 +44,9 @@ Route::get('/user/verify', function () {
     return response()->view('auth.verifyUser');
 })->name('user-show-verify');
 
-Route::post('/user/verify','Auth\RegisterCommercialController@verify');
+Route::post('/user/verify','Auth\RegisterCommercialController@verify')->name('user-verify');
 
-Route::post(
+Route::get(
     '/user/verify/resend',
     ['uses' => 'Auth\RegisterCommercialController@verifyResend',
 //        'middleware' => 'auth',
@@ -51,24 +56,24 @@ Route::post(
 
 Route::get('companyregister', 'Auth\RegisterCompanyController@showRegistrationForm')->name('companyregister');
 Route::post('companyregister', 'Auth\RegisterCompanyController@createNewCommercialUser');
-
-Route::get(
-    '/user/verify', ['as' => 'user-show-verify', function () {
-        return response()->view('auth.verifyUser');
-    }]
-);
-
-Route::post(
-    '/user/verify',
-    ['uses' => 'Auth\RegisterCompanyController@verify', 'as' => 'user-verify',]
-);
-
-Route::post(
-    '/user/verify/resend',
-    ['uses' => 'Auth\RegisterCompanyController@verifyResend',
-//        'middleware' => 'auth',
-        'as' => 'user-verify-resend']
-);
+//
+//Route::get(
+//    '/user/verify', ['as' => 'user-show-verify', function () {
+//        return response()->view('auth.verifyUser');
+//    }]
+//);
+//
+//Route::post(
+//    '/user/verify',
+//    ['uses' => 'Auth\RegisterCompanyController@verify', 'as' => 'user-verify',]
+//);
+//
+//Route::post(
+//    '/user/verify/resend',
+//    ['uses' => 'Auth\RegisterCompanyController@verifyResend',
+////        'middleware' => 'auth',
+//        'as' => 'user-verify-resend']
+//);
 
 
 Route::get('admin/login', 'Admin\AdminAuthController@login');
@@ -141,7 +146,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth_admin'], function () {
 Route::get('newad', 'ListingController@ChooseCategory');
 Route::post('newad', 'ListingController@ShowNewProduct');
 Route::get('newad/{category}', 'ListingController@ChooseSubCategory');
-Route::get('newad/{category}/{Subcategory}', 'ListingController@ChooseSupplyOrDemand');
 Route::post('newpost', 'ListingController@CreateNewPost');
 
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');

@@ -14,6 +14,9 @@ class Filters extends Model
     {
     	return $this->hasMany('App\GroupsFilters','filter_id');
     }
-
+    public function posts()
+    {
+        return $this->belongsTo('App\Posts');
+    }
   
 }

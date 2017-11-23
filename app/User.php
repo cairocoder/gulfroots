@@ -32,6 +32,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Messages','id');
     }
 
+    public function posts()
+    {
+        return $this->hasMany('App\Posts');
+    }
+
     public function getMessagesFrom()
     {
         return Messages::where('from_id',$this->id)->select('to_id')->get()->groupBy('to_id');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use App\User;
 use App\Bills;
@@ -38,7 +39,7 @@ class UsersController extends Controller
         return View('admin.users.edit',compact('user'));
     }
 
-    public function update(User $user,Request $request)
+    public function update(Authenticatable $user,Request $request)
     {
         $this->validate($request,$this->rules($user->id));
         if($request->has('password')){
@@ -87,7 +88,7 @@ class UsersController extends Controller
         return View('admin.users.posts',compact('user'));
     }
 
-    public function profile(User $user)
+    public function profile(Authenticatable $user)
     {
       if($user->isCommercial())
       {
@@ -97,10 +98,7 @@ class UsersController extends Controller
           $user = $user->toArray();
           $user['isCommercial'] =false;
       }
-      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-      $subcategory = Categories::where('sub_id', '!=', null)->get();
-      $spechialcategory = Categories::where('slug', '!=', null)->get();
-      return view('users.profile', compact('categories','subcategory','spechialcategory','user'));
+      return view('users.profile', compact('user'));
     }
 
     public function ads(User $user)

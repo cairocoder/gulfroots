@@ -11,7 +11,7 @@
   </div>
 
   <div class="profile-body">
-    <!-- {!! Form::model($user,['action' => ['UsersController@update', $user['id']], 'method' => 'PATCH']) !!} -->
+    <!-- {!! Form::model($user,['url' => Url('/post'), 'method' => 'POST']) !!} -->
           <div class="row no-margin table-head">
               <div>
                       صورة الملف الشخصي
@@ -43,7 +43,7 @@
           <div class="row no-margin">
           <div class="col l5 mt-15 mb-15">
           <input type="email" placeholder="البريد الاليكتروني">
-          <input type="email" placeholder="اعادة البريد الاليكتروني">
+          <input type="email" placeholder="اعادة البريد الاليكتروني" value="">
           <button class="the-btn blue no-border">حفظ</button>
           </div>
           </div>

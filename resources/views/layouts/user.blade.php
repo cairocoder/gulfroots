@@ -131,6 +131,9 @@
                     @if(count($categories) > 0)
                         @foreach($categories as $category)
                             <li><a href="{{Url('/')}}/categories/{{$category->id}}">{{$category->name}}</a>
+                              @if($category->id === 6)
+                              @break
+                              @endif
                                 <ul class="level2">
                                     @if(count($subcategory) > 0)
                                         @foreach($subcategory as $t)
@@ -168,17 +171,17 @@
                 <div class="col l3">
                     <h3>الدعم والمساعدة</h3>
                     <a href="{{ route('about')}}">عن قلف روتس</a>
-                    <a href="#!">خدمة العملاء</a>
+                    <a href="{{ route('custmoerservice')}}">خدمة العملاء</a>
                     <a href="{{ route('help') }}">المساعدة</a>
-                    <a href="#!">نصائح الحماية والخصوصية</a>
-                    <a href="#!">اتصل بنا</a>
+                    <a href="{{ route('protectionadvices')}}">نصائح الحماية والخصوصية</a>
+                    <a href="{{ route('contactus')}}">اتصل بنا</a>
                 </div>
                 <div class="col l3">
                     <h3>اتفاقية الاستخدام</h3>
-                    <a href="#!">الشروط والاحكام</a>
-                    <a href="#!">سياسة الخصوصية</a>
-                    <a href="#!">سياسية النشر</a>
-                    <a href="{{ route('searchresult')}}">سياسة حفظ البيانات</a>
+                    <a href="{{ route('conditions')}}">الشروط والاحكام</a>
+                    <a href="{{ route('privacypolicy')}}">سياسة الخصوصية</a>
+                    <a href="{{ route('publishingpolicy')}}">سياسية النشر</a>
+                    <a href="{{ route('savedata')}}">سياسة حفظ البيانات</a>
                 </div>
                 <div class="col l3">
                     <h3>الوصول السريع</h3>

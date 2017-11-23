@@ -77,7 +77,6 @@ class FiltersGroupsController extends Controller
     public function edit(FiltersGroups $filter_group)
     {
         $filters = Filters::all();
-        dd($filter_group->groupFilters[0]->filter->id);
         return View('admin.filtersGroup.edit',compact('filter_group','filters'));
     }
 

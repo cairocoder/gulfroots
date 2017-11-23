@@ -16,7 +16,7 @@ class CreateAdminGroupsTable extends Migration
         Schema::create('admin_groups', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('premissions');
+            $table->string('permissions');
             $table->timestamps();
         });
     }

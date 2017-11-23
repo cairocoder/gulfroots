@@ -37,10 +37,10 @@ class HomeController extends Controller
 
     public function help()
     {
-        $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-        $subcategory = Categories::where('sub_id', '!=', null)->get();
-        $spechialcategory = Categories::where('slug', '!=', null)->get();
-        return view('help', compact('categories','subcategory','spechialcategory'));
+       $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+       $subcategory = Categories::where('sub_id', '!=', null)->get();
+       $spechialcategory = Categories::where('slug', '!=', null)->get();
+        return view('help',compact('categories','subcategory','spechialcategory'));
     }
 
     public function search()
@@ -64,11 +64,59 @@ class HomeController extends Controller
       return view('posts.ad1', compact('categories','subcategory','spechialcategory'));
     }
 
-    public function profile()
+    public function contactus()
     {
       $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
       $subcategory = Categories::where('sub_id', '!=', null)->get();
       $spechialcategory = Categories::where('slug', '!=', null)->get();
-      return view('users.profile', compact('categories','subcategory','spechialcategory'));
+      return view('contactus', compact('categories','subcategory','spechialcategory'));
+    }
+
+    public function privacypolicy()
+    {
+      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+      $subcategory = Categories::where('sub_id', '!=', null)->get();
+      $spechialcategory = Categories::where('slug', '!=', null)->get();
+      return view('privacypolicy', compact('categories','subcategory','spechialcategory'));
+    }
+
+    public function conditions()
+    {
+      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+      $subcategory = Categories::where('sub_id', '!=', null)->get();
+      $spechialcategory = Categories::where('slug', '!=', null)->get();
+      return view('conditions', compact('categories','subcategory','spechialcategory'));
+    }
+
+    public function protectionadvices()
+    {
+      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+      $subcategory = Categories::where('sub_id', '!=', null)->get();
+      $spechialcategory = Categories::where('slug', '!=', null)->get();
+      return view('protectionadvices', compact('categories','subcategory','spechialcategory'));
+    }
+
+    public function publishingpolicy()
+    {
+//      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+//      $subcategory = Categories::where('sub_id', '!=', null)->get();
+      $spechialcategory = Categories::where('slug', '!=', null)->get();
+      return view('publishingpolicy', compact('spechialcategory'));
+    }
+
+    public function custmoerservice()
+    {
+      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+      $subcategory = Categories::where('sub_id', '!=', null)->get();
+      $spechialcategory = Categories::where('slug', '!=', null)->get();
+      return view('custmoerservice', compact('categories','subcategory','spechialcategory'));
+    }
+
+    public function savedata()
+    {
+      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+      $subcategory = Categories::where('sub_id', '!=', null)->get();
+      $spechialcategory = Categories::where('slug', '!=', null)->get();
+      return view('savedata', compact('categories','subcategory','spechialcategory'));
     }
 }
