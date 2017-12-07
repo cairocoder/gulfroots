@@ -5,9 +5,9 @@
 	<div class="panel-heading">@yield('title')</div>
 	<div class="panel-body">
 		@if($settings == null)
-			{!!Form::open(['action'=>'SiteSettingsController@store','novalidate'])!!}
+			{!!Form::open(['action'=>'Admin\SiteSettingsController@store','novalidate'])!!}
 		@else
-			{!!Form::model($settings,['action'=>['SiteSettingsController@update',$settings],'method'=>'PATCH','novalidate'])!!}
+			{!!Form::model($settings,['action'=>['Admin\SiteSettingsController@update',$settings],'method'=>'PATCH','novalidate'])!!}
 		@endif
 			
 			<div role="tabpanel">

@@ -23,7 +23,7 @@
 						<td>{{$package->group_name}}</td>
 						<td><a href="{{Url('/')}}/admin/filter-groups/{{$package->id}}/edit" class="btn btn-warning">EDIT</a></td>
 						<td>
-							{!!Form::open(['method'=>'DELETE','action'=>['FiltersGroupsController@destroy',$package->id]])!!}
+							{!!Form::open(['method'=>'DELETE','action'=>['Admin\FiltersGroupsController@destroy',$package->id]])!!}
 								<button class="btn btn-danger" onClick="return confirm('Are you sure to DELETE This record ?')">DELETE</button>
 							{!!Form::close()!!}
 						</td>

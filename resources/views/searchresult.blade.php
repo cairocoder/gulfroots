@@ -396,8 +396,8 @@
 
                         <div class="row no-margin ads-list">
 
-                            <div class="col l4">
-                                <!-- ad item -->
+                            <!-- <div class="col l4">
+                                ad item
                                 <a href="#!" class="ad-item">
                                     <div class="image-box">
                                         <img src="assets/images/ad-thumb.jpg" alt="">
@@ -434,7 +434,7 @@
                             </div>
 
                             <div class="col l4">
-                                <!-- ad item -->
+                                ad item
                                 <a href="#!" class="ad-item">
                                     <div class="image-box">
                                         <img src="assets/images/ad-thumb.jpg" alt="">
@@ -471,7 +471,7 @@
                             </div>
 
                             <div class="col l4">
-                                <!-- ad item -->
+                                ad item
                                 <a href="#!" class="ad-item">
                                     <div class="image-box">
                                         <img src="assets/images/ad-thumb.jpg" alt="">
@@ -505,7 +505,7 @@
                                         <i class="fa fa-star"></i>
                                     </div>
                                 </a>
-                            </div>
+                            </div> -->
 
                         </div>
 
@@ -513,46 +513,55 @@
                         <div class="strip-head on-top">احدث الاعلانات</div>
 
                         <div class="row no-margin ads-list">
+                            @if(count($posts) > 0)
+                                @foreach($posts as $post)
+                                <div class="col l4">
+                                    <!-- ad item -->
+                                    <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
+                                        <div class="image-box">
+                                            <img src="assets/images/ad-thumb.jpg" alt="">
+                                            <div class="price boxed-only">{{$post->price}}
+                                                <span>ر.س</span>
+                                            </div>
+                                        </div>
+                                        <h1 title="سيارة بمواصفات خاصة" class="boxed-only">{{$post->short_des}} </h1>
+                                        <div class="post-data normal-only">
+                                            <h1 title="سيارة بمواصفات خاصة">
+                                            {{$post->short_des}} 
+                                            </h1>
+                                            <div class="price">{{$post->price}}
+                                                <span>ر.س</span>
+                                            </div>
+                                            <div class="desc">
+                                                {{$post->long_des}}
+                                            </div>
+                                        </div>
+                                        <small class="boxed-only">مدينة الرياض</small>
+                                        <div class="info normal-only">
+                                            <h3>السعودية
+                                                <small>الرياض</small>
+                                            </h3>
+                                            <div class="time"> {{$post->created_at}}</div>
+                                        </div>
+                                        @if($post->liked == 1)
+                                            <div class="watch-icon active">
+                                        @else
+                                            <div class="watch-icon">
+                                        @endif
+                                            <input type="hidden" name="liked" class="liked" value="{{$post->liked}}">
+                                            <input type="hidden" name="post_id" class="post_id" value="{{$post->id}}">
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                @endforeach
+                            @else
+                                <h1> No Search Results </h1>
+                            @endif
+                            
 
-                            <div class="col l4">
-                                <!-- ad item -->
-                                <a href="#!" class="ad-item">
-                                    <div class="image-box">
-                                        <img src="assets/images/ad-thumb.jpg" alt="">
-                                        <div class="price boxed-only">500000
-                                            <span>ر.س</span>
-                                        </div>
-                                    </div>
-                                    <h1 title="سيارة بمواصفات خاصة" class="boxed-only">سيارة بمواصفات خاصة</h1>
-                                    <div class="post-data normal-only">
-                                        <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                        <div class="price">500000
-                                            <span>ر.س</span>
-                                        </div>
-                                        <div class="desc">
-                                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص
-                                            تجريبي نص تجريبي نص تجريبي
-                                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص
-                                            تجريبي نص تجريبي نص تجريبي
-                                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص
-                                            تجريبي نص تجريبي
-                                        </div>
-                                    </div>
-                                    <small class="boxed-only">مدينة الرياض</small>
-                                    <div class="info normal-only">
-                                        <h3>السعودية
-                                            <small>الرياض</small>
-                                        </h3>
-                                        <div class="time">منذ 15 دقيقة</div>
-                                    </div>
-                                    <div class="watch-icon active">
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="col l4">
-                                <!-- ad item -->
+                            <!-- <div class="col l4">
+                                ad item
                                 <a href="#!" class="ad-item heigh-light">
                                     <div class="important"><span></span>
                                         <div>عاجل</div>
@@ -592,7 +601,7 @@
                             </div>
 
                             <div class="col l4">
-                                <!-- ad item -->
+                                ad item
                                 <a href="#!" class="ad-item">
                                     <div class="image-box">
                                         <img src="assets/images/ad-thumb.jpg" alt="">
@@ -626,7 +635,7 @@
                                         <i class="fa fa-star"></i>
                                     </div>
                                 </a>
-                            </div>
+                            </div> -->
 
                         </div>
 

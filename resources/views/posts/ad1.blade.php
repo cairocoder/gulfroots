@@ -12,7 +12,7 @@
         <div class="select-box links">
             @if(count($categories) > 0)
                 @foreach($categories as $category)
-                    <a href="{{Url('newad')}}/{{$category->id}}"><i class="{{$category->icon}}"></i>{{$category->name}}
+                    <a href="{{Url('newad')}}/{{$category->id}}"><i class="fa fa-{{$category->icon}}"></i>{{$category->name}}
                     </a>
                 @endforeach
             @endif

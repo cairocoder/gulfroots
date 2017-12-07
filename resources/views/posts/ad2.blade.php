@@ -16,7 +16,7 @@
                 @if(count($categories) > 0)
                     @foreach($categories as $category)
                         @if($category->id == $ancestor)
-                            <i class="{{$category->icon}}"></i> {{$category->name}}
+                            <i class="fa fa-{{$category->icon}}"></i> {{$category->name}}
                             <a href="{{Url('newad')}}"><i class="fa fa-times"></i></a>
                         @endif
                     @endforeach

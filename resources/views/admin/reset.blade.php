@@ -60,7 +60,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END LOGO -->
     <!-- BEGIN LOGIN -->
     <div class="content">
-        {!! Form::open(['action'=>'AdminAuthController@reset']) !!}
+        {!! Form::open(['action'=>'Admin\AdminAuthController@reset']) !!}
             <div class="form-title">
                 <span class="form-title">Forget Password ?</span>
                 <span class="form-subtitle">Enter your e-mail to reset it.</span>
