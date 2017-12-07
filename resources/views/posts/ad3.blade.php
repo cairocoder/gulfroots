@@ -50,18 +50,17 @@
     <div class="big-container bottom-100 centerd">
 
         <!-- dropdown wrapper -->
-        <form role="form" method="POST" action="{{Url('newad')}}">
+        <form id="form1" role="form" method="POST" action="{{Url('newad')}}">
             {{ csrf_field() }}
             <input type="hidden" name="subcategory_id" value="{{$category_id}}">
+            <input type="hidden" id="SupplyOrDemand" name="SupplyOrDemand" value="">
             <div class="select-box links">
                 <!-- select start  -->
-                    <button type="submit" name="SupplyOrDemand" value="Supply"><i></i> للعرض
-                    </button>
+                    <a onclick="document.getElementById('SupplyOrDemand').value='Supply';document.getElementById('form1').submit();"><i></i> للعرض</a>
                 <!-- select end  -->
 
                 <!-- select start  -->
-                    <button type="submit" name="SupplyOrDemand" value="Demand"><i></i>للطب
-                    </button>
+                    <a onclick="document.getElementById('SupplyOrDemand').value='Demand';document.getElementById('form1').submit();"><i></i> للطلب</a>
                 <!-- select end  -->
             </div>
         </form>

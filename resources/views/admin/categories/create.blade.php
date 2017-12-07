@@ -4,7 +4,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading">@yield('title')</div>
 	<div class="panel-body">
-		{!!Form::open(['action'=>['CategoriesController@store',$id],'novalidate'])!!}
+		{!!Form::open(['action'=>['Admin\CategoriesController@store',$id],'novalidate'])!!}
 			@include('admin.categories._form')		
 				
 		{!!Form::close()!!}

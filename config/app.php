@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Riyadh',
 
     /*
     |--------------------------------------------------------------------------
@@ -185,6 +185,7 @@ return [
         Rinvex\Authy\Providers\AuthyServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Kryptonit3\Counter\CounterServiceProvider::class,
+        Laravel\Scout\ScoutServiceProvider::class,
     ],
 
     /*

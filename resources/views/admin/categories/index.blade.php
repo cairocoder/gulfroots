@@ -5,7 +5,7 @@
 		<div class="panel-heading">@yield('title')</div>
 		<div class="panel-body">
 			@if(count($categories) > 0)
-				{!!Form::open(['action'=>'CategoriesController@sortRows'])!!}
+				{!!Form::open(['action'=>'Admin\CategoriesController@sortRows'])!!}
 				<table class="table table-bordered">
 					<thead>
 						<th> #</th>

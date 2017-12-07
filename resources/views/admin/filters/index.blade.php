@@ -34,7 +34,7 @@
 						@endif
 						<td><a href="{{Url('/')}}/admin/filters/{{$filter->id}}/edit" class="btn btn-warning">EDIT</a></td>
 						<td>
-							{!!Form::open(['method'=>'DELETE','action'=>['FiltersController@destroy',$filter->id]])!!}
+							{!!Form::open(['method'=>'DELETE','action'=>['Admin\FiltersController@destroy',$filter->id]])!!}
 								<button class="btn btn-danger" onClick="return confirm('Are you sure to DELETE This record ?')">DELETE</button>
 							{!!Form::close()!!}
 						</td>
