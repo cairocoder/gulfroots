@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use App\Jobs\SendVerificationEmail;
+use Mail;
+use App\Nail\EmailVerification;
 
 class RegisterController extends Controller
 {
@@ -66,24 +69,41 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // return User::create([
-        //     'name' => $data['name'],
-        //     'email' => $data['email'],
-        //     'password' => bcrypt($data['password']),
-        // ]);
-        $data['password'] = bcrypt($data['password']);
-        $user = User::create($data);
-        $role = Role::whereSlug('user')->first();
-        $user->roles()->attach($role);
-        return $user;
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'email_token' => base64_encode($data['email']),
+        ]);
+        // $data['password'] = bcrypt($data['password']);
+        // $user = User::create($data);
+        // $role = Role::whereSlug('user')->first();
+        // $user->roles()->attach($role);
+        // return $user;
     }
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));
-        Auth::login($user);
-        return view('messageconfirmation');
+        dispatch(new SendVerificationEmail($user));
+        return view('verification');
+        // Auth::login($user);
+        // return view('messageconfirmation');
     }
+    /**
+   * Handle a registration request for the application.
+   *
+   * @param $token
+   * @return \Illuminate\Http\Response
+   */
+   public function verify($token)
+   {
+       $user = User::where('email_token',$token)->first();
+       $user->verified = 1;
+       if($user->save()){
+           return view('emailconfirm',['user'=>$user]);
+       }
+   }
     public function showRegistrationForm()
     {
         return view('auth.preregister');

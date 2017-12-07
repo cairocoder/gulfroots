@@ -188,6 +188,9 @@
 @if(count($spechialcategory) > 0)
 @foreach($spechialcategory as $spechial)
 <a href="{{Url('/')}}/categories/{{$spechial->id}}">{{$spechial->slug}}</a>
+@if($spechial->id === 12)
+@break
+@endif
 @endforeach
 @else
 @endif

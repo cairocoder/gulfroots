@@ -13,6 +13,7 @@
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "~5.4",
+        "nahid/talk": "^2.2",
         "rinvex/laravel-authy": "^2.0",
         "twilio/sdk": "^5.15"
     },

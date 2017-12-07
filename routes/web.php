@@ -25,7 +25,10 @@ Route::get('/protectionadvices', 'HomeController@protectionadvices')->name('prot
 Route::get('/publishingpolicy', 'HomeController@publishingpolicy')->name('publishingpolicy');
 Route::get('/profile', 'UsersController@profile')->name('profile');
 Route::get('/ads', 'UsersController@ads')->name('ads');
-Route::get('/messages', 'UsersController@messages')->name('messages');
+Route::get('/messages', 'MessagesController@index')->name('messages');
+Route::get('/allmessages/{id}', 'MessagesController@showAllMessages');
+//Route::get('', 'MessagesController@showAllMessages');
+Route::post('/messages', 'MessagesController@SendMessage');
 Route::get('/savedsearch', 'UsersController@savedsearch')->name('savedsearch');
 Route::get('/posts/{id}', 'PostsController@ShowPost');
 
@@ -55,7 +58,7 @@ Route::get(
 
 
 Route::get('companyregister', 'Auth\RegisterCompanyController@showRegistrationForm')->name('companyregister');
-Route::post('companyregister', 'Auth\RegisterCompanyController@createNewCommercialUser');
+Route::post('companyregister', 'Auth\RegisterCompanyController@createNewCompanyUser');
 //
 //Route::get(
 //    '/user/verify', ['as' => 'user-show-verify', function () {
@@ -150,5 +153,6 @@ Route::post('newpost', 'ListingController@CreateNewPost');
 
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
 Auth::routes();
 Route::get('/messageconfirmation', 'HomeController@mc')->name('messageconfirmation');

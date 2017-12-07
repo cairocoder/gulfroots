@@ -5,11 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\CommercialUsers;
 use Auth;
-use Authy\AuthyApi as AuthyApi;
 use DB;
 use Hash;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -33,53 +31,68 @@ class RegisterCompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createNewCommercialUser(Request $request, AuthyApi $authyApi)
+    public function createNewCompanyUser(Request $request)
     {
+              $logoFile = 'null';
+              $CommericalFile = 'null';
+              $image = $request->file('logo');
+              $getimageName = time().'.'.$image->getClientOriginalExtension();
+              $image->move(public_path('images'), $getimageName);
+              $logoFile = 'images'. $getimageName;
+              // $image2 = $request->file('record_file');
+              // $getimage2Name = time().'.'.$image2->getClientOriginalExtension();
+              // $image2->move(public_path('images'), $getimage2Name);
+              // $CommericalFile = 'images'. $getimage2Name ;
+//dd($getimageName);
         $this->validate(
             $request, [
                 'name' => 'required|string',
                 'email' => 'required|unique:users|email',
                 'password' => 'required',
                 'country_code' => 'required',
-                'phone_number' => 'required|numeric'
+                'phone_number' => 'required|numeric',
+                'whatsapp_number' => 'required|string',
+                'address' => 'required|string',
+                'commercial_record_number' => 'required|numeric',
+                'contact_number' => 'required|string',
+                'maaroof_url' => 'required|string',
+               // 'logo' => 'required',
+                // 'commercial_record_file' => 'required'
             ]
         );
 
         $values = $request->all();
         $values['password'] = Hash::make($values['password']);
-
-
         User::create([
             'name' => $values['name'],
             'email' => $values['email'],
             'password' => $values['password'],
+            'profile_picture' => $logoFile
         ]);
         DB::beginTransaction();
         $values['user_id'] = User::where('email', $values['email'])->first()->id;
+        //$values['commercial_record_file'] = $CommericalFile;
         $newUser = new CommercialUsers($values);
         $newUser->save();
         Auth::login(User::where('email', $values['email'])->first());
-        $authyUser = $authyApi->registerUser(
-//            $newUser->email,
-            $values['email'],
-            $newUser->phone_number,
-            $newUser->country_code
-        );
-        if ($authyUser->ok()) {
-            $newUser->authy_id = $authyUser->id();
-            $newUser->save();
-            $request->session()->flash(
-                'status',
-                "User created successfully"
-            );
-
-            $sms = $authyApi->requestSms($newUser->authy_id);
-            DB::commit();
+        $authyUser = app('rinvex.authy.user');
+        $user = $authyUser->register($values['email'], $values['phone_number'], $values['country_code']);
+        if ($user->succeed()) {
+          $newUser->authy_id = $user->get('user')['id'];
+          $newUser->save();
+          $request->session()->flash(
+              'status',
+              "User created successfully"
+          );
+          $authyToken = app('rinvex.authy.token');
+          $smsTokenSent = $authyToken->send($user->get('user')['id'], 'sms'); // Send SMS token
+          DB::commit();
             return redirect()->route('user-show-verify');
         } else {
-            $errors = $this->getAuthyErrors($authyUser->errors());
-            DB::rollback();dd($errors);
-            return view('auth.commercialuserregister', ['errors' => new MessageBag($errors)]);
+          User::where('email', $values['email'])->first();
+          $errors = $this->getAuthyErrors($authyUser->errors());
+          DB::rollback();
+          return view('auth.companyregister', ['errors' => new MessageBag($errors)]);
         }
     }
 
@@ -91,16 +104,15 @@ class RegisterCompanyController extends Controller
      * @param AuthyApi $authyApi Authy Client
      * @return mixed Response view
      */
-    public function verify(Request $request, Authenticatable $user,
-                           AuthyApi $authyApi, Client $client)
+    public function verify(Request $request, Authenticatable $user)
     {
         $user = $user->getCommerical;
         $token = $request->input('token');
-        $verification = $authyApi->verifyToken($user->authy_id, $token);
-        if ($verification->ok()) {
+        $authyToken = app('rinvex.authy.token');
+        $tokenVerified = $authyToken->verify($token, $user->authy_id); // Verify token
+        if ($tokenVerified->succeed()) {
             $user->verified = true;
             $user->save();
-            //$this->sendSmsNotification($client, $user);
             return redirect()->route('messageconfirmation');
         } else {
             $errors = $this->getAuthyErrors($verification->errors());
@@ -116,19 +128,19 @@ class RegisterCompanyController extends Controller
      * @param AuthyApi $authyApi Authy Client
      * @return mixed Response view
      */
-    public function verifyResend(Request $request, Authenticatable $user,
-                                 AuthyApi $authyApi)
+    public function verifyResend(Request $request, Authenticatable $user)
     {
         $user = $user->getCommerical;
-        $sms = $authyApi->requestSms($user->authy_id);
-        if ($sms->ok()) {
+        $authyToken = app('rinvex.authy.token');
+        $smsTokenSent = $authyToken->send($user->authy_id, 'sms'); // Send SMS token
+        if ($smsTokenSent->succeed()) {
             $request->session()->flash(
                 'status',
                 'Verification code re-sent'
             );
-            return redirect()->route('user-show-verify');
+            return redirect()->route('user-verify');
         } else {
-            $errors = $this->getAuthyErrors($sms->errors());
+            $errors = $this->getAuthyErrors($smsTokenSent->errors());
             return view('auth.verifyUser', ['errors' => new MessageBag($errors)]);
         }
     }
@@ -142,21 +154,7 @@ class RegisterCompanyController extends Controller
         return $errors;
     }
 
-    private function sendSmsNotification($client, $user)
-    {
-        $twilioNumber = config('services.twilio')['number'] or die(
-        "TWILIO_NUMBER is not set in the environment"
-        );
-        $messageBody = 'You did it! Signup complete :)';
 
-        $client->messages->create(
-            $user->fullNumber(),    // Phone number which receives the message
-            [
-                "from" => $twilioNumber, // From a Twilio number in your account
-                "body" => $messageBody
-            ]
-        );
-    }
 
     /**
      * Store a newly created resource in storage.

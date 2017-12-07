@@ -58,8 +58,6 @@
               {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required', 'placeholder'=>'أسم المستخدم']) !!}
               <small class="text-danger">{{ $errors->first('name') }}</small>
           </div>
-          <input type="text" placeholder="رقم الجوال">
-          <input type="text" placeholder="العنوان">
           {!! Form::submit("حفظ", ['class' => 'the-btn blue no-border']) !!}
           </div>
           </div>

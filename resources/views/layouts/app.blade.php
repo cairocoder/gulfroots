@@ -65,15 +65,15 @@
                             </div>
                             <div class="account-drop">
                                 <ul>
-                                    <li><a href="{{route ('ads')}}">أدراة اﻷعلانات</a></li>
-                                    <li><a href="{{route ('messages')}}">الرسائل</a></li>
-                                    <li><a href="{{route ('savedsearch')}}">البحث المحفوظة</a></li>
-                                    <li><a href="{{route ('profile')}}">الملف الشخصى</a></li>
+                                    <li><a href="{{route ('login')}}">أدراة اﻷعلانات</a></li>
+                                    <li><a href="{{route ('login')}}">الرسائل</a></li>
+                                    <li><a href="{{route ('login')}}">البحث المحفوظة</a></li>
+                                    <li><a href="{{route ('login')}}">الملف الشخصى</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="add-ad">
-                            <a class="butn blue" href="{{route('register')}}">اضف اعلان</a>
+                            <a class="butn blue" href="{{route('login')}}">اضف اعلان</a>
                         </div>
                     </div>
                 </div>
