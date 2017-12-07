@@ -53,12 +53,24 @@ class AppServiceProvider extends ServiceProvider
             $spechialcategory = Categories::where('slug', '!=', null)->get();
             $view->with(compact('categories', 'subcategory', 'spechialcategory'));
         });
+        view()->composer('includes.searchbar', function($view) {
+          $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+          $subcategory = Categories::where('sub_id', '!=', null)->get();
+          $spechialcategory = Categories::where('slug', '!=', null)->get();
+          $view->with(compact('categories', 'subcategory', 'spechialcategory'));
+      });
         view()->composer('home', function($view) {
             $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
             $subcategory = Categories::where('sub_id', '!=', null)->get();
             $spechialcategory = Categories::where('slug', '!=', null)->get();
             $view->with(compact('categories', 'subcategory', 'spechialcategory'));
         });
+        view()->composer('includes.specialcategories', function($view) {
+          $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
+          $subcategory = Categories::where('sub_id', '!=', null)->get();
+          $spechialcategory = Categories::where('slug', '!=', null)->get();
+          $view->with(compact('categories', 'subcategory', 'spechialcategory'));
+      });
         Schema::defaultStringLength(191);
     }
 

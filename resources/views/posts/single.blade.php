@@ -5,220 +5,16 @@
 
         <div class="big-container">
 
-            <!-- filter start -->
-            <div class="main-filter">
-                <form>
-                    <!-- select dropdown start -->
-                    <div class="select-cat">
-                        <!-- hidden input to catch the id -->
-                        <input id="cat-id" type="text" hidden>
-                        <!-- select icon in the search bar -->
-                        <div class="select-head">
-                            <div class="select-icon">
-                                <i class="fa fa-bars"></i>
-                            </div>
-                            <i class="fa fa-caret-down"></i>
-                        </div>
-                        <!-- dropdown wrapper -->
-                        <div class="select-box">
-                            <!-- select all cats -->
-                            <div class="select-group" data-cat-icon="bars" data-cat-id="0">
-                                <i class="fa fa-bars"></i> جميع الاقسام
-                            </div>
-                            <!-- select group level 1 start  -->
-                            <div class="select-group" data-cat-icon="car" data-cat-id="1">
-                                <i class="fa fa-car"></i> السيارات والمركبات
-                                <div class="group-toggle"><i class="fa fa-caret-down"></i></div>
+            @include('includes.searchbar')
 
-                                <!-- select group level 2 start  -->
-                                <div class="group-box">
-                                    <!-- group item -->
-                                    <div class="select-item-level1" data-cat-id="2">
-                                        رابط
-                                        <div class="group-toggle"><i class="fa fa-caret-down"></i></div>
-
-                                        <!-- select group level 3 start  -->
-                                        <div class="group-box2">
-                                            <!-- group item -->
-                                            <div class="select-item-level2" data-cat-id="3">
-                                                رابط
-                                            </div>
-                                            <!-- group item -->
-                                            <div class="select-item-level2" data-cat-id="4">
-                                                رابط
-                                            </div>
-                                            <!-- group item -->
-                                            <div class="select-item-level2" data-cat-id="5">
-                                                رابط
-                                            </div>
-                                            <!-- group item -->
-                                            <div class="select-item-level2" data-cat-id="6">
-                                                رابط
-                                            </div>
-                                        </div>
-                                        <!-- select group level 3 end  -->
-
-                                    </div>
-                                    <!-- group item -->
-                                    <div class="select-item-level1" data-cat-id="7">
-                                        رابط
-                                        <div class="group-toggle"><i class="fa fa-caret-down"></i></div>
-
-                                        <!-- select group level 3 start  -->
-                                        <div class="group-box2">
-                                            <!-- group item -->
-                                            <div class="select-item-level2" data-cat-id="8">
-                                                رابط
-                                            </div>
-                                            <!-- group item -->
-                                            <div class="select-item-level2" data-cat-id="9">
-                                                رابط
-                                            </div>
-                                            <!-- group item -->
-                                            <div class="select-item-level2" data-cat-id="10">
-                                                رابط
-                                            </div>
-                                            <!-- group item -->
-                                            <div class="select-item-level2" data-cat-id="11">
-                                                رابط
-                                            </div>
-                                        </div>
-                                        <!-- select group level 3 end  -->
-
-                                    </div>
-                                    <!-- group item -->
-                                    <div class="select-item-level1" data-cat-id="12">
-                                        رابط
-                                    </div>
-                                </div>
-                                <!-- select group level 2 end  -->
-
-                            </div>
-                            <!-- select group level 1 end  -->
-
-                            <!-- select group level 1 start  -->
-                            <div class="select-group" data-cat-icon="ship" data-cat-id="13">
-                                <i class="fa fa-ship"></i>قوارب والدراجات المائية
-                                <div class="group-toggle"><i class="fa fa-caret-down"></i></div>
-
-                                <!-- select group level 2 start  -->
-                                <div class="group-box">
-                                    <!-- group item -->
-                                    <div class="select-item-level1" data-cat-id="14">
-                                        رابط
-                                        <div class="group-toggle"><i class="fa fa-caret-down"></i></div>
-
-                                        <!-- select group level 3 start  -->
-                                        <div class="group-box2">
-                                            <!-- group item -->
-                                            <div class="select-item-level2" data-cat-id="15">
-                                                رابط
-                                            </div>
-                                            <!-- group item -->
-                                            <div class="select-item-level2" data-cat-id="16">
-                                                رابط
-                                            </div>
-                                            <!-- group item -->
-                                            <div class="select-item-level2" data-cat-id="17">
-                                                رابط
-                                            </div>
-                                            <!-- group item -->
-                                            <div class="select-item-level2" data-cat-id="18">
-                                                رابط
-                                            </div>
-                                        </div>
-                                        <!-- select group level 3 end  -->
-
-                                    </div>
-                                    <!-- group item -->
-                                    <div class="select-item-level1" data-cat-id="19">
-                                        رابط
-                                        <div class="group-toggle"><i class="fa fa-caret-down"></i></div>
-
-                                        <!-- select group level 3 start  -->
-                                        <div class="group-box2">
-                                            <!-- group item -->
-                                            <div class="select-item-level2" data-cat-id="20">
-                                                رابط
-                                            </div>
-                                            <!-- group item -->
-                                            <div class="select-item-level2" data-cat-id="21">
-                                                رابط
-                                            </div>
-                                            <!-- group item -->
-                                            <div class="select-item-level2" data-cat-id="22">
-                                                رابط
-                                            </div>
-                                            <!-- group item -->
-                                            <div class="select-item-level2" data-cat-id="23">
-                                                رابط
-                                            </div>
-                                        </div>
-                                        <!-- select group level 3 end  -->
-
-                                    </div>
-                                    <!-- group item -->
-                                    <div class="select-item-level1" data-cat-id="24">
-                                        رابط
-                                    </div>
-                                </div>
-                                <!-- select group level 2 end  -->
-
-                            </div>
-                            <!-- select group level 1 end  -->
-                        </div>
-                    </div>
-                    <!-- select dropdown end -->
-
-                    <!-- search bar -->
-                    <div class="main-search">
-                        <input type="text" placeholder="ابحث عن ...">
-                    </div>
-
-                    <!-- city box -->
-                    <div class="city-box">
-                        <div class="city-form">
-                            <i class="fa fa-map-marker"></i>
-                            <input type="text" placeholder="المدينة">
-                            <select>
-                                <option selected>0 كم</option>
-                                <option>5 كم</option>
-                                <option>10 كم</option>
-                                <option>20 كم</option>
-                                <option>40 كم</option>
-                                <option>80 كم</option>
-                                <option>100 كم</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- submit -->
-                    <input type="submit" value="إبحث">
-
-
-                </form>
-            </div>
-            <!-- filter end -->
-
-            <!-- spical inside -->
-            <div class="spical-inside">
-                    <div class="spical-head start {{Request::is('/categories*')?"active":""}}">المنتجات المميزة</div>
-                    @if(count($spechialcategory) > 0)
-                    @foreach($spechialcategory as $spechial)
-                    <a href="{{Url('/')}}/categories/{{$spechial->id}}">{{$spechial->slug}}</a>
-                    @if($spechial->id === 10)
-                    @break
-                    @endif
-                    @endforeach
-                    @else
-                    @endif
-                </div>
-
+            @include('includes.specialcategories')
             <!-- link map -->
             <div class="link-map">
                 <div class="map-item"><a href="{{ route ('landing')}}">الرئيسية</a></div>
-                <div class="map-item"><a href="">{{$post->category_id}}</a></div>
-                <div class="map-item">{{$post->name}}</div>
+                @foreach($parents as $cat)
+                    <div class="map-item"><a href="{{ Url('categories/'.$cat->id) }}">{{$cat->name}}</a></div>
+                @endforeach
+                <div class="map-item">{{$post->short_des}}</div>
             </div>
 
 
@@ -227,10 +23,17 @@
 
                 <div class="col l9">
                     <div class="single-box">
-                        <div class="watch-icon">
+                        </form>
+                        @if($post->liked == 1)
+                            <div class="watch-icon active">
+                        @else
+                            <div class="watch-icon">
+                        @endif
+                            <input type="hidden" name="liked" class="liked" value="{{$post->liked}}">
+                            <input type="hidden" name="post_id" class="post_id" value="{{$post->id}}">
                             <i class="fa fa-star"></i>
                         </div>
-                        <h1>{{$post->name}}</h1>
+                        <h1>{{$post->short_des}}</h1>
                         <h3> {{$post->price}} <span>ريال</span></h3>
                         <div class="row no-margin borderd">
                             <div class="col l6">
@@ -238,7 +41,7 @@
                                 {{$post->country}} - {{$post->city}} |<span dir="ltr">مشاهدة {{Counter::showAndCount('posts', $post->id)}} </spin>
                             </div>
                             <div class="col l6 lefted">
-                                <a href="#!">
+                                <a href="{{Url('newad') .'/'. $post->sub_category_id}}">
                                     <i class="fa fa-plus crcl"></i> اضف اعلان مشابة
                                 </a>
                                 |
@@ -278,16 +81,9 @@
 
                         <div class="swiper-container gallery-top">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
+                                @foreach($post_photos as $photo)
+                                    <div class="swiper-slide" style="background-image:url('{{ asset($photo->photolink) }}')"></div>
+                                @endforeach
                             </div>
 
                             <div class="swiper-button-next swiper-button-white"></div>
@@ -295,16 +91,9 @@
                         </div>
                         <div class="swiper-container gallery-thumbs">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad2.jpg')}}')"></div>
-                                <div class="swiper-slide" style="background-image:url('{{ asset('front-assets/images/ad1.jpg')}}')"></div>
+                            @foreach($post_photos as $photo)
+                                <div class="swiper-slide" style="background-image:url('{{ asset($photo->photolink) }}')"></div>
+                            @endforeach
                             </div>
                         </div>
 
@@ -328,11 +117,11 @@
                                 <div class="product-det">
                                     <div>
                                         تاريخ الاعلان
-                                        <span>{{$post->created_at}}</span>
+                                        <span>{{  strftime("%b %d %Y",strtotime($post->created_at))}}</span>
                                     </div>
                                     <div>
                                         تاريخ التعديل
-                                        <span>{{$post->updated_at}}</span>
+                                        <span>{{  strftime("%b %d %Y",strtotime($post->updated_at))}}</span>
                                     </div>
                                     <div>
                                         الحالة
@@ -348,236 +137,54 @@
                     <div class="strip-head blue on-top">احدث الاعلانات لهذا البائع</div>
 
                     <div class="row no-margin ads-list">
-
-                        <div class="col l4">
-                            <!-- ad item -->
-                            <a href="#!" class="ad-item">
-                                <div class="image-box">
-                                    <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
-                                    <div class="price boxed-only">500000
-                                        <span>ر.س</span>
-                                    </div>
+                        @foreach($latest as $listing)
+                            @if($listing->id != $post->id)
+                                <div class="col l4">
+                                    <!-- ad item -->
+                                    <a href="{{Url('posts').'/'.$listing->id}}" class="ad-item">
+                                        <div class="image-box">
+                                            <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
+                                            <div class="price boxed-only">{{$listing->price}}
+                                                <span>ر.س</span>
+                                            </div>
+                                        </div>
+                                        <h1 title="سيارة بمواصفات خاصة" class="boxed-only">سيارة بمواصفات خاصة</h1>
+                                        <div class="post-data normal-only">
+                                            <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
+                                            <div class="price">{{$listing->price}}
+                                                <span>ر.س</span>
+                                            </div>
+                                            <div class="desc">
+                                                {{$listing->short_des}}
+                                            </div>
+                                        </div>
+                                        <small class="boxed-only">مدينة الرياض</small>
+                                        <div class="info normal-only">
+                                            <h3>السعودية
+                                                <small>الرياض</small>
+                                            </h3>
+                                            <div class="time">{{  strftime("%b %d %Y",strtotime($listing->created_at))}}</div>
+                                        </div>
+                                        @if($listing->liked == 1)
+                                            <div class="watch-icon active">
+                                        @else
+                                            <div class="watch-icon">
+                                        @endif
+                                            <input type="hidden" name="liked" class="liked" value="{{$listing->liked}}">
+                                            <input type="hidden" name="post_id" class="post_id" value="{{$listing->id}}">
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </a>
                                 </div>
-                                <h1 title="سيارة بمواصفات خاصة" class="boxed-only">سيارة بمواصفات خاصة</h1>
-                                <div class="post-data normal-only">
-                                    <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                    <div class="price">500000
-                                        <span>ر.س</span>
-                                    </div>
-                                    <div class="desc">
-                                        نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                        نص تجريبي
-                                    </div>
-                                </div>
-                                <small class="boxed-only">مدينة الرياض</small>
-                                <div class="info normal-only">
-                                    <h3>السعودية
-                                        <small>الرياض</small>
-                                    </h3>
-                                    <div class="time">منذ 15 دقيقة</div>
-                                </div>
-                                <div class="watch-icon active">
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="col l4">
-                            <!-- ad item -->
-                            <a href="#!" class="ad-item">
-                                <div class="image-box">
-                                    <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
-                                    <div class="price boxed-only">500000
-                                        <span>ر.س</span>
-                                    </div>
-                                </div>
-                                <h1 title="سيارة بمواصفات خاصة" class="boxed-only">سيارة بمواصفات خاصة</h1>
-                                <div class="post-data normal-only">
-                                    <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                    <div class="price">500000
-                                        <span>ر.س</span>
-                                    </div>
-                                    <div class="desc">
-                                        نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                        نص تجريبي
-                                    </div>
-                                </div>
-                                <small class="boxed-only">مدينة الرياض</small>
-                                <div class="info normal-only">
-                                    <h3>السعودية
-                                        <small>الرياض</small>
-                                    </h3>
-                                    <div class="time">منذ 15 دقيقة</div>
-                                </div>
-                                <div class="watch-icon">
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="col l4">
-                            <!-- ad item -->
-                            <a href="#!" class="ad-item">
-                                <div class="image-box">
-                                    <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
-                                    <div class="price boxed-only">500000
-                                        <span>ر.س</span>
-                                    </div>
-                                </div>
-                                <h1 title="سيارة بمواصفات خاصة" class="boxed-only">سيارة بمواصفات خاصة</h1>
-                                <div class="post-data normal-only">
-                                    <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                    <div class="price">500000
-                                        <span>ر.س</span>
-                                    </div>
-                                    <div class="desc">
-                                        نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                        نص تجريبي
-                                    </div>
-                                </div>
-                                <small class="boxed-only">مدينة الرياض</small>
-                                <div class="info normal-only">
-                                    <h3>السعودية
-                                        <small>الرياض</small>
-                                    </h3>
-                                    <div class="time">منذ 15 دقيقة</div>
-                                </div>
-                                <div class="watch-icon">
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </a>
-                        </div>
-
+                            @endif    
+                        @endforeach
                     </div>
 
 
                     <div class="strip-head on-top">اعلانات متشابهه</div>
 
                     <div class="row no-margin ads-list">
-
-                        <div class="col l4">
-                            <!-- ad item -->
-                            <a href="#!" class="ad-item">
-                                <div class="image-box">
-                                    <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
-                                    <div class="price boxed-only">500000
-                                        <span>ر.س</span>
-                                    </div>
-                                </div>
-                                <h1 title="سيارة بمواصفات خاصة" class="boxed-only">سيارة بمواصفات خاصة</h1>
-                                <div class="post-data normal-only">
-                                    <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                    <div class="price">500000
-                                        <span>ر.س</span>
-                                    </div>
-                                    <div class="desc">
-                                        نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                        نص تجريبي
-                                    </div>
-                                </div>
-                                <small class="boxed-only">مدينة الرياض</small>
-                                <div class="info normal-only">
-                                    <h3>السعودية
-                                        <small>الرياض</small>
-                                    </h3>
-                                    <div class="time">منذ 15 دقيقة</div>
-                                </div>
-                                <div class="watch-icon active">
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="col l4">
-                            <!-- ad item -->
-                            <a href="#!" class="ad-item">
-                                <div class="image-box">
-                                    <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
-                                    <div class="price boxed-only">500000
-                                        <span>ر.س</span>
-                                    </div>
-                                </div>
-                                <h1 title="سيارة بمواصفات خاصة" class="boxed-only">سيارة بمواصفات خاصة</h1>
-                                <div class="post-data normal-only">
-                                    <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                    <div class="price">500000
-                                        <span>ر.س</span>
-                                    </div>
-                                    <div class="desc">
-                                        نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                        نص تجريبي
-                                    </div>
-                                </div>
-                                <small class="boxed-only">مدينة الرياض</small>
-                                <div class="info normal-only">
-                                    <h3>السعودية
-                                        <small>الرياض</small>
-                                    </h3>
-                                    <div class="time">منذ 15 دقيقة</div>
-                                </div>
-                                <div class="watch-icon">
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="col l4">
-                            <!-- ad item -->
-                            <a href="#!" class="ad-item">
-                                <div class="image-box">
-                                    <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
-                                    <div class="price boxed-only">500000
-                                        <span>ر.س</span>
-                                    </div>
-                                </div>
-                                <h1 title="سيارة بمواصفات خاصة" class="boxed-only">سيارة بمواصفات خاصة</h1>
-                                <div class="post-data normal-only">
-                                    <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                    <div class="price">500000
-                                        <span>ر.س</span>
-                                    </div>
-                                    <div class="desc">
-                                        نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي
-                                        نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
-                                        نص تجريبي
-                                    </div>
-                                </div>
-                                <small class="boxed-only">مدينة الرياض</small>
-                                <div class="info normal-only">
-                                    <h3>السعودية
-                                        <small>الرياض</small>
-                                    </h3>
-                                    <div class="time">منذ 15 دقيقة</div>
-                                </div>
-                                <div class="watch-icon">
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </a>
-                        </div>
-
+                    
                     </div>
 
                     <div class="centerd">
@@ -865,11 +472,11 @@
 
                     <div class="user-side">
                         <div class="user-info-box">
-                            <img src="{{ asset('front-assets/images/user-mini.jpg')}}" alt="">
+                            <img src="{{ $seller->profile_picture }}" alt="">
                             <div class="user-data">
-                                <a href="#!">اسم المستخدم</a>
-                                <span>10/10/2010</span>
-                                <div class="on">متصل الان</div>
+                                <a href="{{Url('user/'.$seller->id)}}">{{ $seller->name }}</a>
+                                <span>{{  strftime("%b %d %Y",strtotime($seller->created_at)) }}</span>
+                                <!-- <div class="on">متصل الان</div> -->
                             </div>
                         </div>
 
@@ -899,7 +506,7 @@
                                 +996******
                             </span>
                             <span>
-                                +9961854215
+                                {{$seller->whatsapp_number}}
                             </span>
                         </div>
 

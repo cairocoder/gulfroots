@@ -4,7 +4,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading">@yield('title')</div>
 	<div class="panel-body">
-		{!!Form::model($category,['action'=>['CategoriesController@update',$category->id],'method'=>'PATCH','novalidate'])!!}
+		{!!Form::model($category,['action'=>['Admin\CategoriesController@update',$category->id],'method'=>'PATCH','novalidate'])!!}
 			@include('admin.categories._form')
 		{!!Form::close()!!}
 	</div>

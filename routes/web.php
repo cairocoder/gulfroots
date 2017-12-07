@@ -14,7 +14,7 @@
 
 Route::get('/', 'HomeController@index')->name('landing');
 Route::get('/help', 'HomeController@help')->name('help');
-Route::get('/categories/{category}', 'Admin\CategoriesController@frontend');
+Route::get('/categories/{category}', 'PostsController@GetPostsByCategory');
 Route::get('/savedata', 'HomeController@savedata')->name('savedata');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/contactus', 'HomeController@contactus')->name('contactus');
@@ -31,6 +31,9 @@ Route::get('/allmessages/{id}', 'MessagesController@showAllMessages');
 Route::post('/messages', 'MessagesController@SendMessage');
 Route::get('/savedsearch', 'UsersController@savedsearch')->name('savedsearch');
 Route::get('/posts/{id}', 'PostsController@ShowPost');
+
+Route::post('/search', 'SearchController@search');
+Route::post('/favorite/posts/{id}', 'PostsController@toggleFavorite');
 
 Route::get('/fb/redirect', 'Auth\SocialAuthController@fbredirect')->name('fbredirect');
 Route::get('/gplus/redirect', 'Auth\SocialAuthController@gplusredirect')->name('gplusredirect');
@@ -122,8 +125,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth_admin'], function () {
     Route::resource('filters', 'Admin\FiltersController');
     Route::resource('filter-groups', 'Admin\FiltersGroupsController');
 
-    Route::get('filters/{user}/create', 'Admin\FiltersController@create');
-    Route::post('filters/{user}', 'Admin\FiltersController@store');
+    Route::get('filters/create', 'Admin\FiltersController@create');
+    Route::post('filters/', 'Admin\FiltersController@store');
 
     Route::get('admins/create', 'Admin\AdminController@create');
     Route::post('admins', 'Admin\AdminController@store');

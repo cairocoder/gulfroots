@@ -47,9 +47,9 @@ class ListingController extends Controller
         //
         $ancestor = Categories::findorfail($subcategory_id);
         $filterss = $ancestor->filtersgroups()->get();
-            foreach ($filterss as $item) {
-                $groupsoffilters[$item['id']] = $item;
-            }
+        foreach ($filterss as $item) {
+            $groupsoffilters[$item['id']] = $item;
+        }
         while($ancestor->sub_id != null){
             $ancestor = Categories::findorfail($ancestor->sub_id);
             $filterss = $ancestor->filtersgroups()->get();
@@ -85,13 +85,13 @@ class ListingController extends Controller
             'sub_category_id' => $request->input('subcategory_id'),
             'user_id' => $user->id,
         ]);
-
+        $post->searchable();
         foreach ($request->file('img') as $image){
             $getimageName = time().'.'.$image->getClientOriginalExtension();
             $image->move(public_path('images'), $getimageName);
             $photo = Post_Photos::create([
                'post_id' => $post->id,
-               'photolink' => 'images'. $getimageName
+               'photolink' => 'images/'. $getimageName
             ]);
         }
         return redirect('posts/'.$post->id);

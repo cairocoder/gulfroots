@@ -7,7 +7,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading">@yield('title')</div>
 	<div class="panel-body">
-		{!!Form::open(['action'=>['FiltersGroupsController@store'],'novalidate'])!!}
+		{!!Form::open(['action'=>['Admin\FiltersGroupsController@store'],'novalidate'])!!}
 			@include('admin.filtersGroup._form')		
 				
 		{!!Form::close()!!}

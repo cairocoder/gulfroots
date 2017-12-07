@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Riyadh',
 
     /*
     |--------------------------------------------------------------------------
@@ -186,6 +186,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Kryptonit3\Counter\CounterServiceProvider::class,
         Nahid\Talk\TalkServiceProvider::class,
+        Laravel\Scout\ScoutServiceProvider::class,
     ],
 
     /*
