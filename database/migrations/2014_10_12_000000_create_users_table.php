@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('profile_picture')->default('//i.imgur.com/mDXJHnd.jpg');
             $table->text('permissions')->unllabel();
+            $table->tinyInteger('verified')->default(0);
+            $table->string('email_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

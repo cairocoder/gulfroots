@@ -166,7 +166,7 @@
                         <input type="text" name="short_des" placeholder="عنوان">
                         <textarea name="long_des" placeholder="وصف الاعلان"></textarea>
                         <div class="pay-box not-payed">
-                            <img src="{{ asset('images/urgant.jpg')}}" alt="">
+                            <img src="{{ asset('front-assets/images/urgant.jpg')}}" alt="">
                             <div class="pay-text">
                                 <h3>علامة عاجل <span>20 ريال</span></h3>
                                 <p>
@@ -183,7 +183,7 @@
                     <div class="col l6">
                         <br>
                         <div class="note">
-                            <img src="{{ asset('images/info.jpg')}}" alt="">
+                            <img src="{{ asset('front-assets/images/info.jpg')}}" alt="">
                             تأكد من ادخال عنوان ووصف الاعلان بشكل واضح ومميز واحرص ان يكون الوصف مفصلا واضحا بكل تفاصيل
                             المنتج
                         </div>
@@ -207,7 +207,7 @@
                     </div>
                     <div class="col l6">
                         <div class="note">
-                            <img src="{{ asset('images/info.jpg')}}" alt="">
+                            <img src="{{ asset('front-assets/images/info.jpg')}}" alt="">
                             تأكد من ادخال جميع البيانات بشكل صحيح واضافة بيانات الاتصال بشكل واضح ومفصل ذلك سوف يساعد
                             ويسهل
                             التواصل بين عملائك
@@ -340,7 +340,7 @@
                     </div>
                     <div class="col l6">
                         <div class="note">
-                            <img src="assets/images/info.jpg" alt="">
+                            <img src="{{ asset('front-assets/images/info.jpg')}}" alt="">
                             تأكد من اضافة عدد كافي من الصور لتوضيح تفاصيل المنتج او الخدمة ذلك يساعد المستخدم علي الاختيار مما يساعد علي زيادة مبيعاتك                                </div>
                     </div>
                     <div class="clearfix"></div>
@@ -355,7 +355,7 @@
 
 
                         <div class="pay-box not-payed extra1">
-                            <img src="{{ asset('images/extra1.jpg')}}" alt="">
+                            <img src="{{ asset('front-assets/images/extra1.jpg')}}" alt="">
                             <div class="pay-text">
                                 <h3>لون مميز
                                     <select name="isColored">
@@ -375,7 +375,7 @@
                         </div>
 
                         <div class="pay-box not-payed extra2">
-                            <img src="{{ asset('images/extra2.jpg')}}" alt="">
+                            <img src="{{ asset('front-assets/images/extra2.jpg')}}" alt="">
                             <div class="pay-text">
                                 <h3>عرض في الرئيسية
                                     <select name="isinMain">
@@ -396,7 +396,7 @@
                         </div>
 
                         <div class="pay-box not-payed extra3">
-                            <img src="{{ asset('images/extra3.jpg')}}" alt="">
+                            <img src="{{ asset('front-assets/images/extra3.jpg')}}" alt="">
                             <div class="pay-text">
                                 <h3>ضمن افضل الاعلانات
                                     <select name="isinBest">
@@ -433,7 +433,7 @@
                     </div>
                     <div class="col l6">
                         <div class="note">
-                            <img src="{{ asset('images/info.jpg')}}" alt="">
+                            <img src="{{ asset('front-assets/images/info.jpg')}}" alt="">
                             ميز اعلانك باستخدام المجموعه التي تناسبك من الخصائص المميزة لعرض الاعلان كما يمكن التحكم في
                             فترة
                             عرضها
@@ -444,8 +444,8 @@
             </div>
 
             <label class="checkbox full-width top-50">
-                <input type="checkbox"><span></span>
-                أوافق علي <a href="#!">الشروط والاحكام</a> الخاصة بالنشر علي موقع قلف روتس
+                <input type="checkbox" required><span></span>
+                أوافق علي <a href="{{ route ('conditions')}}" target="_blank">الشروط والاحكام</a> الخاصة بالنشر علي موقع قلف روتس
             </label>
 
             <div class="top-50 bottom-50 rightness">
@@ -466,7 +466,7 @@
         <div class="closer"></div>
         <div class="my-modal-body">
             <h1 class="no-margin nb centerd">الباقة المجانية</h1>
-            <img src="{{ asset('images/pack-img.jpg')}}')}}" alt="">
+            <img src="{{ asset('front-assets/images/pack-img.jpg')}}" alt="">
             <div class="centerd">
                 <br>
                 <button class="in-modal the-btn blue pack1-on">اشترك الان</button>
@@ -479,7 +479,7 @@
         <div class="closer"></div>
         <div class="my-modal-body">
             <h1 class="no-margin nb centerd">الباقة الاضافية</h1>
-            <img src="{{ asset('images/pack-img.jpg')}}')}}" alt="">
+            <img src="{{ asset('front-assets/images/pack-img.jpg')}}" alt="">
             <div class="centerd">
                 <br>
                 <button class="in-modal the-btn blue pack2-on">اشترك الان</button>
@@ -492,7 +492,7 @@
         <div class="closer"></div>
         <div class="my-modal-body">
             <h1 class="no-margin nb centerd">الباقة المميزة</h1>
-            <img src="{{ asset('images/pack-img.jpg')}}')}}" alt="">
+            <img src="{{ asset('front-assets/images/pack-img.jpg')}}" alt="">
             <div class="centerd">
                 <br>
                 <button class="in-modal the-btn blue pack3-on">اشترك الان</button>
@@ -505,7 +505,7 @@
         <div class="closer"></div>
         <div class="my-modal-body">
             <h1 class="no-margin nb centerd">الباقة الكاملة</h1>
-            <img src="{{ asset('images/pack-img.jpg')}}" alt="">
+            <img src="{{ asset('front-assets/images/pack-img.jpg')}}" alt="">
             <div class="centerd">
                 <br>
                 <button class="in-modal the-btn blue pack4-on">اشترك الان</button>
@@ -514,6 +514,3 @@
         </div>
     </div>
 @endsection
-
-<!-- jQuery plugins -->
-<script defer src="{{ asset('js/ui.min.js')}}"></script>

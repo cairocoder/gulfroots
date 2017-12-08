@@ -483,6 +483,20 @@
                         <div class="send-masseg mt-25 the-btn blue modal-open" data-modal-open=".normal-messege">ارسل
                             رسالة
                         </div>
+                        <div class="my-modal normal-messege">
+                        <div class="closer"></div>
+                        <div class="my-modal-body">
+                            <h1 class="no-margin nb">ارسل رسالة الي : </h1>
+                            <form form role="form" method="POST" action="">
+                              {!! csrf_field() !!}
+                              <input type="text" placeholder="عنوان الرساله">
+                              <<textarea name="message-data" id="message-data" class="send-massege" placeholder="اكتب رسالتك"></textarea>
+                              <input type="hidden" name="_id" value="{{$seller->id}}">
+                              <button class="send-btn" type="submit">ارسال</button>
+                            </form>
+                        </div>
+                        </div>
+
 
                         <a href="#!" class="whats mt-15 the-btn gray">تواصل خلال واتس اب</a>
 
