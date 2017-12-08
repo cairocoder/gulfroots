@@ -163,7 +163,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         //jrm2k6\Cloudder\CloudderServiceProvider::class,
-        
+
 
         /*
          * Package Service Providers...
@@ -185,6 +185,7 @@ return [
         Rinvex\Authy\Providers\AuthyServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Kryptonit3\Counter\CounterServiceProvider::class,
+        Nahid\Talk\TalkServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
     ],
 
@@ -242,6 +243,7 @@ return [
         'AuthyUser' => Rinvex\Authy\Facades\AuthyUser::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Counter' => Kryptonit3\Counter\Facades\CounterFacade::class,
+        'Talk'  =>  Nahid\Talk\Facades\Talk::class,
     ],
 
 ];

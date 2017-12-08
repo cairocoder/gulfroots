@@ -9,13 +9,13 @@
                     <div class="col l6">
                         <h1>لماذا قلف روتس للشركات؟</h1>
                         <p>
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
-                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي 
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
                         </p>
                     </div>
                     <div class="col l6">
@@ -26,7 +26,8 @@
             </div>
         </div>
         <div class="big-container">
-            <form class="has-range" role="form" method="POST" action="{{ route('companyregister') }}">
+            <form class="has-range" role="form" method="POST" action="{{ route('companyregister') }}" enctype="multipart/form-data" novalidate>
+              {!! csrf_field() !!}
                     <h1 class="top-range">اختر الفتره</h1>
                     <input class="range-time" type="range" max="80" min="20" step="20" dir="rtl" value="20">
                     <div class="ranger">
@@ -73,7 +74,7 @@
                                 @endif
                                 </div>
                                 <div class="form-group{{ $errors->has('country_code') ? ' has-error' : '' }}">
-                                <input id="authy-countries" type="text" class="form-control" name="country_code" value="{{ old('country_code') }}" required placeholder="كود الدولة">
+                                <input id="authy-countries" type="text" class="form-control" name="country_code" value="{{ old('country_code') }}" required placeholder="كود الدولة*">
                                 @if ($errors->has('country_code'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('country_code') }}</strong>
@@ -99,21 +100,58 @@
                                 <div class="form-group">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="إعادة كلمة المرور*">
                                 </div>
-<!--                                 <input type="text" placeholder="رقم الواتس اب">
-                                <input type="text" placeholder="العنوان">
+                                <div class="form-group{{ $errors->has('whatsapp_number') ? ' has-error' : '' }}">
+                                <input id="whatsapp_number" class="form-control" name="whatsapp_number" type="text" placeholder="رقم الواتس اب*" required>
+                                @if ($errors->has('whatsapp_number'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('whatsapp_number') }}</strong>
+                                    </span>
+                                @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                                <input id="address" class="form-control" name="address" type="text" placeholder="العنوان*" required>
+                                @if ($errors->has('address'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('address') }}</strong>
+                                    </span>
+                                @endif
+                                </div>
                                 <div class="file-upload">
-                                    <input type="text" placeholder="شعار الشركة" readonly><input class="hidden-upload" type="file">
+                                    <input id="logo" name="companylogo" class="form-control" type="text" placeholder="شعار الشركة*" readonly>
+                                    <input class="hidden-upload" type="file" name="logo">
                                     <button class="open-file">رفع</button>
                                 </div>
-                                <input type="text" placeholder="رقم السجل التجاري*">
-                                <div class="file-upload">
-                                    <input type="text" placeholder="السجل التجاري*" readonly><input class="hidden-upload" type="file">
-                                    <button class="open-file">رفع</button>
+                                <div class="form-group{{ $errors->has('commercial_record_number') ? ' has-error' : '' }}">
+                                <input id="commercial_record_number" name="commercial_record_number" class="form-control" type="text" placeholder="رقم السجل التجاري*" required>
+                                @if ($errors->has('commercial_record_number'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('commercial_record_number') }}</strong>
+                                    </span>
+                                @endif
                                 </div>
-                                <input type="text" placeholder="اوقات العمل">
-                                <input type="text" placeholder="الموقع الاليكتروني او رابط معروف او رابط التواصل الاجتماعي">
-                                <div class="input-wrap">
-                                        <input type="text" placeholder="الموقع الجغرافي*">
+                                <!-- <div class="file-upload">
+                                    <input id="commercial_record_file" name="commercial_record_file" class="form-control" type="text" placeholder="صورة السجل التجارى*" readonly>
+                                    <input class="hidden-upload" type="file" name="record_file">
+                                    <button class="open-file">رفع</button>
+                                </div> -->
+                                <div class="form-group{{ $errors->has('contact_number') ? ' has-error' : '' }}">
+                                <input id="contact_number" name="contact_number" class="form-control" type="text" placeholder="اوقات العمل*" required>
+                                @if ($errors->has('contact_number'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('contact_number') }}</strong>
+                                    </span>
+                                @endif
+                                </div>
+                                <div class="form-group{{ $errors->has('maaroof_url') ? ' has-error' : '' }}">
+                                <input id="maaroof_url" name="maaroof_url" class="from-control" type="text" placeholder="الموقع الاليكتروني او رابط معروف او رابط التواصل الاجتماعي*" required>
+                                @if ($errors->has('maaroof_url'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('maaroof_url') }}</strong>
+                                    </span>
+                                @endif
+                                </div>
+                                <!-- <div class="input-wrap">
+                                        <input id="longitude" name="longitude" class="form-control" type="text" placeholder="الموقع الجغرافي*" required>
                                     <a href="#!"><i class="fa fa-map-marker"></i>تحديد الموقع الجغرافي</a>
                                 </div> -->
                             </div>

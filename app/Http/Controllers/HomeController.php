@@ -24,10 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-        $subcategory = Categories::where('sub_id', '!=', null)->get();
-        $spechialcategory = Categories::where('slug', '!=', null)->get();
-        return view('home')->with(compact('categories','subcategory','spechialcategory'));
+        return view('home');
     }
 
     public function mc()
@@ -37,10 +34,7 @@ class HomeController extends Controller
 
     public function help()
     {
-       $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-       $subcategory = Categories::where('sub_id', '!=', null)->get();
-       $spechialcategory = Categories::where('slug', '!=', null)->get();
-        return view('help',compact('categories','subcategory','spechialcategory'));
+        return view('help');
     }
 
     public function search()
@@ -50,73 +44,46 @@ class HomeController extends Controller
 
     public function about()
     {
-      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-      $subcategory = Categories::where('sub_id', '!=', null)->get();
-      $spechialcategory = Categories::where('slug', '!=', null)->get();
-      return view('about', compact('categories','subcategory','spechialcategory'));
+      return view('about');
     }
 
     public function ads()
     {
-      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-      $subcategory = Categories::where('sub_id', '!=', null)->get();
-      $spechialcategory = Categories::where('slug', '!=', null)->get();
-      return view('posts.ad1', compact('categories','subcategory','spechialcategory'));
+      return view('posts.ad1');
     }
 
     public function contactus()
     {
-      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-      $subcategory = Categories::where('sub_id', '!=', null)->get();
-      $spechialcategory = Categories::where('slug', '!=', null)->get();
-      return view('contactus', compact('categories','subcategory','spechialcategory'));
+      return view('contactus');
     }
 
     public function privacypolicy()
     {
-      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-      $subcategory = Categories::where('sub_id', '!=', null)->get();
-      $spechialcategory = Categories::where('slug', '!=', null)->get();
-      return view('privacypolicy', compact('categories','subcategory','spechialcategory'));
+      return view('privacypolicy');
     }
 
     public function conditions()
     {
-      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-      $subcategory = Categories::where('sub_id', '!=', null)->get();
-      $spechialcategory = Categories::where('slug', '!=', null)->get();
-      return view('conditions', compact('categories','subcategory','spechialcategory'));
+      return view('conditions');
     }
 
     public function protectionadvices()
     {
-      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-      $subcategory = Categories::where('sub_id', '!=', null)->get();
-      $spechialcategory = Categories::where('slug', '!=', null)->get();
-      return view('protectionadvices', compact('categories','subcategory','spechialcategory'));
+      return view('protectionadvices');
     }
 
     public function publishingpolicy()
     {
-//      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-//      $subcategory = Categories::where('sub_id', '!=', null)->get();
-      $spechialcategory = Categories::where('slug', '!=', null)->get();
-      return view('publishingpolicy', compact('spechialcategory'));
+      return view('publishingpolicy');
     }
 
     public function custmoerservice()
     {
-      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-      $subcategory = Categories::where('sub_id', '!=', null)->get();
-      $spechialcategory = Categories::where('slug', '!=', null)->get();
-      return view('custmoerservice', compact('categories','subcategory','spechialcategory'));
+      return view('custmoerservice');
     }
 
     public function savedata()
     {
-      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-      $subcategory = Categories::where('sub_id', '!=', null)->get();
-      $spechialcategory = Categories::where('slug', '!=', null)->get();
-      return view('savedata', compact('categories','subcategory','spechialcategory'));
+      return view('savedata');
     }
 }

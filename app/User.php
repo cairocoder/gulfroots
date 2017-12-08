@@ -17,7 +17,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'profile_picture'];
+    protected $fillable = ['name', 'email', 'password', 'profile_picture','email_token'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -98,7 +98,7 @@ class User extends Authenticatable
     {
         if(is_array($roles))
         {
-            foreach ($roles as $role) 
+            foreach ($roles as $role)
             {
                 if($this->hasRole($role))
                 {
@@ -145,4 +145,3 @@ class User extends Authenticatable
         return false;
     }
 }
-
