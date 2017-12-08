@@ -14,7 +14,7 @@ class PostsTableSeeder extends Seeder
         //
         $faker = Faker\Factory::create();
         //
-        for($i = 1; $i <= 10; $i++) {
+        for($i = 0; $i < 10; $i++) {
             DB::table('posts')->insert([
                 'short_des' => $faker->realText(20),
                 'long_des' => $faker->realText(200),
@@ -25,6 +25,12 @@ class PostsTableSeeder extends Seeder
                 'price' => $faker->numberBetween(1000,2500),
                 'sub_category_id' => $faker->numberBetween(19,25),
                 'user_id' => $faker->numberBetween(1,10),
+            ]);
+        }
+        for($i = 0; $i < 44; $i++){
+            DB::table('post__photos')->insert([
+                'photolink' => 'images/1512666410.png',
+                'post_id' => $i + 1,
             ]);
         }
     }

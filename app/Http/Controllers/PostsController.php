@@ -23,11 +23,12 @@ class PostsController extends Controller
         $post = Posts::findorfail($id);
         $post->liked = Favorites::where('post_id', $id)->where('user_id', $user->id)->count();
         $seller = User::where('id', $post->user_id)->first();
-        $seller->whatsapp_number = CommercialUsers::where('id', $post->user_id)->first()->whatsapp_number;
+        $seller->whatsapp_number = "";//CommercialUsers::where('id', $post->user_id)->first()->whatsapp_number;
         $latest = Posts::where('user_id', $post->user_id)->orderBy('created_at', 'desc')->take(3)->get();
         $post_photos = Post_Photos::with('post')->get();
         $latest->map(function ($post) use ($user) {
             $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
+            $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
             return $post;
         });
         $parents = [];
@@ -44,7 +45,7 @@ class PostsController extends Controller
     public function toggleFavorite($id){
         $user = Auth::user();
         if(!$user)
-            return 0;
+            return 2;
     	$action = Favorites::where('post_id', $id)->where('user_id', $user->id)->get();
     	if(count($action) == 0){
     		Favorites::create([
@@ -83,8 +84,17 @@ class PostsController extends Controller
         }
         $posts->map(function ($post) use ($user) {
             $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
+            $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
             return $post;
         });
-        return view('categories.mincategory', compact('posts', 'category'));
+        $parents = [];
+        $ancestor = Categories::findorfail($category_id);
+        array_push($parents, $ancestor);
+        while($ancestor->sub_id != null){
+            $ancestor = Categories::findorfail($ancestor->sub_id);
+            array_push($parents, $ancestor);
+        }
+        $parents = array_reverse($parents);
+        return view('categories.maincategory', compact('posts', 'category', 'parents'));
     }
 }

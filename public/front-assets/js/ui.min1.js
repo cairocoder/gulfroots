@@ -9075,9 +9075,25 @@ $(document).on('click','.select-item-level2',function(e){
         $('.select-icon i').removeClass().addClass('fa fa-'+icon);
 });
 
-
-
-
+$(document).on('click', '.watch-icon', function(e){
+	var thisinput = $(this);
+    var postid = $(this).find('input.post_id').val();
+    var state = $(this).find('input.liked');
+    var csrf_token = $('meta[name="csrf-token"]').attr('content');
+	$.ajax({
+        type:'POST',
+        url:'/favorite/posts/'+postid,
+        data: {postid, '_token':csrf_token},
+        success:function(data) {
+            state.val(data);
+            if(state.val() == 0) {
+		        thisinput.removeClass('active');
+		    } else {
+		        thisinput.addClass('active');
+			}
+        }
+      });
+});
 
 $(document).on('click','.show-num', function(){
     $(this).addClass('active');
@@ -9127,6 +9143,7 @@ $(document).on('click','.pack4-on', function(){
 $(document).on('click','.modal-open', function(){
     var modal = $(this).data('modal-open');
     $('.global-overlay, '+modal).fadeIn(300);
+    e.preventDefault(); 
 });
 
 $(document).on('click','.tab-button', function(){
@@ -9510,56 +9527,10 @@ $('#file-input').on("change", previewImages);
 
 });
 
-
-
-$(document).on('click', '.watch-icon', function(e){
-	var thisinput = $(this);
-    var postid = $(this).find('input.post_id').val();
-    var state = $(this).find('input.liked');
-    var csrf_token = $('meta[name="csrf-token"]').attr('content');
-	$.ajax({
-        type:'POST',
-        url:'/favorite/posts/'+postid,
-        data: {postid, '_token':csrf_token},
-        success:function(data) {
-            state.val(data);
-            if(state.val() == 0) {
-		        thisinput.removeClass('active');
-		    } else {
-		        thisinput.addClass('active');
-			}
-        }
-      });
-});
-
-$('.watch-icon').click(function(e){ 
+$('.ad-item .watch-icon').click(function(e){ 
 	e.preventDefault();
-});
-  
-  
-  
-$(document).on('click', '.open-msgs', function() {
-    var thispop = $(this);
-    var msgsid = $(this).parent().find('#msgs-id').val();
-    var getpop = $(this).data('modal-open');
-    $(getpop).find('.maseges-container').empty();
+ })
 
-    $.ajax({
-        url: '/allmessages/' + msgsid,
-        type: 'get',
-        dataType: 'json',
-        success: function(data) {
-  
-            $.each(data.messages, function() {
-                $(getpop).find('.maseges-container').append('<small class="small-head user-inpop"><span>بواسطة</span>' + this.sender.name + '</small>');
-                $(getpop).find('.maseges-container').append('<small class="small-head"><span>تاريخ الارسال</span>' + this.created_at + '</small>');
-                $(getpop).find('.maseges-container').append('<div class="massege-box massegs">' + this.message + '</div>');
-            });
-  
-         },
-        error: function() {
-            console.log('error');
-        }
-      });
-  });
-  
+
+
+

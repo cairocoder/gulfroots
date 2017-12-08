@@ -12,108 +12,7 @@
             <input type="hidden" name="subcategory_id" value="{{$subcategory_id}}">
             <div class="row no-margin centerd">
 
-                <div class="col l3">
-                    <div class="pack-box pack-white">
-                        <h4>المجانية
-                            <small>
-                                الباقة المبسطة<br>
-                                باقة مجانية بالكامل
-                            </small>
-                        </h4>
-                        <span>تعديلات غير محدودة</span>
-                        <span>يمكن اضافة حتي 10 صور</span>
-
-                        <div class="choose-pack">
-                            <input type="radio" name="pack" value="1" class="o-extra0">
-                            <div>
-                                اختيار
-                            </div>
-                            <a href="#!" class="modal-open" data-modal-open=".pack1">
-                                توضيح
-                            </a>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col l3">
-                    <div class="pack-box pack-yellow">
-                        <h4>الاضافية
-                            <small>
-                                الباقة المتوسطة<br>
-                                ظهور 3 مرات اكثر من الاعلانات الاخري
-                            </small>
-                        </h4>
-                        <span>تعديلات غير محدودة</span>
-                        <span>يمكن اضافة حتي 10 صور</span>
-                        <span>خلفية ملونة للاعلان</span>
-
-                        <div class="choose-pack">
-                            <input type="radio" name="pack" value="2" class="o-extra1">
-                            <div>
-                                اختيار
-                            </div>
-                            <a href="#!" class="modal-open" data-modal-open=".pack2">
-                                توضيح
-                            </a>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col l3">
-                    <div class="pack-box pack-red">
-                        <h4>المميزة
-                            <small>
-                                الباقة الذهبية<br>
-                                ظهور 7 مرات اكثر من الاعلانات الاخري
-                            </small>
-                        </h4>
-                        <span>تعديلات غير محدودة</span>
-                        <span>يمكن اضافة حتي 20 صور</span>
-                        <span>خلفية ملونة للاعلان</span>
-                        <span>ظهور ضمن افضل الاعلانات</span>
-
-                        <div class="choose-pack">
-                            <input type="radio" name="pack" value="3" class="o-extra2">
-                            <div>
-                                اختيار
-                            </div>
-                            <a href="#!" class="modal-open" data-modal-open=".pack3">
-                                توضيح
-                            </a>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col l3">
-                    <div class="pack-box pack-blue">
-                        <h4>الكاملة
-                            <small>
-                                افضل اعلان للنجاح<br>
-                                ظهور 12 مرات اكثر من الاعلانات الاخري
-                            </small>
-                        </h4>
-                        <span>تعديلات غير محدودة</span>
-                        <span>يمكن اضافة حتي 20 صور</span>
-                        <span>خلفية ملونة للاعلان</span>
-                        <span>ظهور ضمن افضل الاعلانات</span>
-                        <span>ظهور خاص في الرئيسية</span>
-                        <span>التحدث المباشر مع المشتري</span>
-
-                        <div class="choose-pack">
-                            <input type="radio" name="pack" value="4" class="o-extra3">
-                            <div>
-                                اختيار
-                            </div>
-                            <a href="#!" class="modal-open" data-modal-open=".pack4">
-                                توضيح
-                            </a>
-
-                        </div>
-                    </div>
-                </div>
+                @include('includes.packages')
 
 
                 <div class="clearfix"></div>
@@ -135,27 +34,11 @@
                                 @foreach($filter as $value)
                                  &nbsp;<label class="checkbox blued">
                                         <input type="{{$value->type}}" name="{{$key}}[]" value="{{$value->id}}"><span></span> {{$value->name}}
-                                    </label>
+                                       </label>
                                 @endforeach
                             </div>
                             @endforeach
-                            {{--<div class="price-hidden">--}}
-                                {{--هل تريد وضع حد ادني للتفاوض؟ &nbsp;--}}
-                                {{--<input type="text" class="in-mini" placeholder="ريال سعودي">--}}
-                            {{--</div>--}}
                         </div>
-                        <div>
-                            الحالة : &nbsp;<label class="checkbox blued">
-                                <input type="radio" name="status" value="1"><span></span> جديد
-                            </label>
-                            <label class="checkbox blued">
-                                <input type="radio" name="status" value="2"><span></span> مستعمل
-                            </label>
-                        </div>
-
-                    </div>
-                    <div class="col l6">
-
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -217,135 +100,7 @@
                 </div>
             </div>
 
-            <div class="strip-head blue to-back">الصور</div>
-            <div class="to-back-body">
-                <div class="row no-margin">
-                    <div class="col l6">
-
-                        <div class="upload-repeater">
-
-                            <div class="upload-image active">
-                                <input type="file" name="img[]" class="single-upload">
-                                <i class="fa fa-times"></i>
-                                <span></span>
-                            </div>
-                            <div class="upload-image">
-                                <input type="file" name="img[]" class="single-upload">
-                                <i class="fa fa-times"></i>
-                                <span></span>
-                            </div>
-                            <div class="upload-image">
-                                <input type="file" name="img[]" class="single-upload">
-                                <i class="fa fa-times"></i>
-                                <span></span>
-                            </div>
-                            <div class="upload-image">
-                                <input type="file" name="img[]" class="single-upload">
-                                <i class="fa fa-times"></i>
-                                <span></span>
-                            </div>
-                            <div class="upload-image">
-                                <input type="file" name="img[]" class="single-upload">
-                                <i class="fa fa-times"></i>
-                                <span></span>
-                            </div>
-                            <div class="upload-image">
-                                <input type="file" name="img[]" class="single-upload">
-                                <i class="fa fa-times"></i>
-                                <span></span>
-                            </div>
-                            <div class="upload-image">
-                                <input type="file" name="img[]" class="single-upload">
-                                <i class="fa fa-times"></i>
-                                <span></span>
-                            </div>
-                            <div class="upload-image">
-                                <input type="file" name="img[]" class="single-upload">
-                                <i class="fa fa-times"></i>
-                                <span></span>
-                            </div>
-                            <div class="upload-image">
-                                <input type="file" name="img[]" class="single-upload">
-                                <i class="fa fa-times"></i>
-                                <span></span>
-                            </div>
-                            <div class="upload-image">
-                                <input type="file" name="img[]" class="single-upload">
-                                <i class="fa fa-times"></i>
-                                <span></span>
-                            </div>
-
-
-                            <div class="hidden-wrap">
-
-                                <div class="upload-image">
-                                    <input type="file" name="img[]" class="single-upload">
-                                    <i class="fa fa-times"></i>
-                                    <span></span>
-                                </div>
-                                <div class="upload-image">
-                                    <input type="file" name="img[]" class="single-upload">
-                                    <i class="fa fa-times"></i>
-                                    <span></span>
-                                </div>
-                                <div class="upload-image">
-                                    <input type="file" name="img[]" class="single-upload">
-                                    <i class="fa fa-times"></i>
-                                    <span></span>
-                                </div>
-                                <div class="upload-image">
-                                    <input type="file" name="img[]" class="single-upload">
-                                    <i class="fa fa-times"></i>
-                                    <span></span>
-                                </div>
-                                <div class="upload-image">
-                                    <input type="file" name="img[]" class="single-upload">
-                                    <i class="fa fa-times"></i>
-                                    <span></span>
-                                </div>
-                                <div class="upload-image">
-                                    <input type="file" name="img[]" class="single-upload">
-                                    <i class="fa fa-times"></i>
-                                    <span></span>
-                                </div>
-                                <div class="upload-image">
-                                    <input type="file" name="img[]" class="single-upload">
-                                    <i class="fa fa-times"></i>
-                                    <span></span>
-                                </div>
-                                <div class="upload-image">
-                                    <input type="file" name="img[]" class="single-upload">
-                                    <i class="fa fa-times"></i>
-                                    <span></span>
-                                </div>
-                                <div class="upload-image">
-                                    <input type="file" name="img[]" class="single-upload">
-                                    <i class="fa fa-times"></i>
-                                    <span></span>
-                                </div>
-                                <div class="upload-image">
-                                    <input type="file" name="img[]" class="single-upload">
-                                    <i class="fa fa-times"></i>
-                                    <span></span>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div>
-                            <button class="butn blue upload-btn">اضافة</button>
-                        </div>
-
-                    </div>
-                    <div class="col l6">
-                        <div class="note">
-                            <img src="assets/images/info.jpg" alt="">
-                            تأكد من اضافة عدد كافي من الصور لتوضيح تفاصيل المنتج او الخدمة ذلك يساعد المستخدم علي الاختيار مما يساعد علي زيادة مبيعاتك                                </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
+            @include('includes.uploadrepeater')
 
 
             <div class="strip-head blue to-back">انهاء الاعلان</div>
@@ -399,7 +154,7 @@
                             <img src="{{ asset('images/extra3.jpg')}}" alt="">
                             <div class="pay-text">
                                 <h3>ضمن افضل الاعلانات
-                                    <select name="isinBest">
+                                    <select name="isinTop">
                                         <option value="7">7 ايام (10) ريال</option>
                                         <option value="14">14 ايام (18) ريال</option>
                                         <option value="21">21 ايام (25) ريال</option>
@@ -411,7 +166,7 @@
                                 </p>
                             </div>
                             <div class="pay-select">
-                                <input type="checkbox" name="isinBestDeci">
+                                <input type="checkbox" name="isinTopDecision">
                                 <div class="pay-btn">اضافة</div>
                             </div>
                         </div>

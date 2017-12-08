@@ -32,4 +32,9 @@ class Posts extends Model
     {
         return $this->belongsToMany('App\Filters', 'filter_post');
     }
+
+    public function getFeatures()
+    {
+        return $this->hasMany('App\PostFeatures');
+    }
 }

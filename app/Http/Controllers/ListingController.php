@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Posts;
 use App\Categories;
 use App\Post_Photos;
+use App\PostFeatures;
 
 class ListingController extends Controller
 {
@@ -74,8 +75,9 @@ class ListingController extends Controller
     }
 
     public function CreateNewPost(Request $request, Authenticatable $user){
-//        dd($request->img);
+        // dd($request);
         $post = Posts::create([
+            'name' => $request->input('title'),
             'short_des' => $request->input('short_des'),
             'long_des' => $request->input('long_des'),
             'detailed_address' => $request->input('detailed_address'),
@@ -86,6 +88,7 @@ class ListingController extends Controller
             'user_id' => $user->id,
         ]);
         $post->searchable();
+        //create filters relations
         foreach ($request->file('img') as $image){
             $getimageName = time().'.'.$image->getClientOriginalExtension();
             $image->move(public_path('images'), $getimageName);
@@ -94,6 +97,119 @@ class ListingController extends Controller
                'photolink' => 'images/'. $getimageName
             ]);
         }
+        $cost = 0;
+        // dd($post->created_at->addDays(10));
+        //Package
+        if($request->input('pack') == 1){
+            //isColored Feature
+            if($request->input('isColoredDecision') == 1){
+                PostFeatures::create([
+                    'type' => 1,
+                    'post_id' => $post->id,
+                    'expiry_date' => $post->created_at->addDays($request->input('isColored')) ,
+                ]);
+            }
+            //isinMain Feature
+            if($request->input('isinMainDecision') == 1){
+                PostFeatures::create([
+                    'type' => 2,
+                    'post_id' => $post->id,
+                    'expiry_date' => $post->created_at->addDays($request->input('isinMain')),
+                ]);
+            }
+            //isinTop Feature
+            if($request->input('isinTopDecision') == 1){
+                PostFeatures::create([
+                    'type' => 3,
+                    'post_id' => $post->id,
+                    'expiry_date' => $post->created_at->addDays($request->input('isinTop')),
+                ]);
+            }
+        }elseif($request->input('pack') == 2){
+            //isColored Feature
+            PostFeatures::create([
+                'type' => 1,
+                'post_id' => $post->id,
+                'expiry_date' => $post->created_at->addDays(30),
+            ]);
+            //isinMain Feature
+            if($request->input('isinMainDecision') == 1){
+                PostFeatures::create([
+                    'type' => 2,
+                    'post_id' => $post->id,
+                    'expiry_date' => $post->created_at->addDays($request->input('isinMain')),
+                ]);
+            }
+            //isinTop Feature
+            if($request->input('isinTopDecision') == 1){
+                PostFeatures::create([
+                    'type' => 3,
+                    'post_id' => $post->id,
+                    'expiry_date' => $post->created_at->addDays($request->input('isinTop')),
+                ]);
+            }
+        }elseif($request->input('pack') == 3){
+            //isColored Feature
+            PostFeatures::create([
+                'type' => 1,
+                'post_id' => $post->id,
+                'expiry_date' => $post->created_at->addDays(30),
+            ]);
+            //isinMain Feature
+            PostFeatures::create([
+                'type' => 2,
+                'post_id' => $post->id,
+                'expiry_date' => $post->created_at->addDays(30),
+            ]);
+            //has20photos
+            PostFeatures::create([
+                'type' => 4,
+                'post_id' => $post->id,
+                'expiry_date' => $post->created_at->addDays(30),
+            ]);
+            //isinTop Feature
+            if($request->input('isinTopDecision') == 1){
+                PostFeatures::create([
+                    'type' => 3,
+                    'post_id' => $post->id,
+                    'expiry_date' => $post->created_at->addDays($request->input('isinTop')),
+                ]);
+            }
+        }else{
+            //isColored Feature
+            PostFeatures::create([
+                'type' => 1,
+                'post_id' => $post->id,
+                'expiry_date' => $post->created_at->addDays(30),
+            ]);
+            //isinMain Feature
+            PostFeatures::create([
+                'type' => 2,
+                'post_id' => $post->id,
+                'expiry_date' => $post->created_at->addDays(30),
+            ]);
+            //isinTop Feature
+            PostFeatures::create([
+                'type' => 3,
+                'post_id' => $post->id,
+                'expiry_date' => $post->created_at->addDays(30),
+            ]);
+            //has20photos
+            PostFeatures::create([
+                'type' => 4,
+                'post_id' => $post->id,
+                'expiry_date' => $post->created_at->addDays(30),
+            ]);
+        }
+        //isBreaking Feature
+        if($request->input('isBreaking') == 1){
+            PostFeatures::create([
+                'type' => 5,
+                'post_id' => $post->id,
+                'expiry_date' => $post->created_at->addDays($request->input('isinTop')),
+            ]);
+        }
+
         return redirect('posts/'.$post->id);
     }
 }

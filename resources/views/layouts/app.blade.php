@@ -12,7 +12,9 @@
     <meta name="author" content="Copyright (c) Viralcorners">
     <meta name="keywords" content="The keywords here"/>
     <meta name="description" content="The description here"/>
-
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('favicon/apple-touch-icon.png')}}">
     <link rel="icon" type="image/png" href="{{ asset('favicon/favicon-32x32.png" sizes="32x32')}}">
