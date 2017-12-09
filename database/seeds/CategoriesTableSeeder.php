@@ -31,14 +31,8 @@ class CategoriesTableSeeder extends Seeder
         DB::table('categories')->insert(['name' => 'الحيوانات الاليفة', 'slug' => 'حيوانات','icon' =>'paw']); // id = 17
         DB::table('categories')->insert(['name' => 'البضائع المتنوعة', 'slug' => 'بضائع','icon' =>'cubes']); // id = 18
         //SubCategories
-        DB::table('categories')->insert(['name' => '', 'sub_id'=>'1']);
-        DB::table('categories')->insert(['name' => 'الاستحمام', 'sub_id'=>'1']);
-        DB::table('categories')->insert(['name' => 'اسرة اطفال', 'sub_id'=>'1']);
-        DB::table('categories')->insert(['name' => 'تغذية', 'sub_id'=>'1']);
-        DB::table('categories')->insert(['name' => 'ملابس الرضع', 'sub_id'=>'1']);
-        DB::table('categories')->insert(['name' => 'ملابس اطفال', 'sub_id'=>'1']);
-        DB::table('categories')->insert(['name' => 'ملابس الامومة', 'sub_id'=>'1']);
-        DB::table('categories')->insert(['name' => 'اللعب - داخلي', 'sub_id'=>'1']);
+        DB::table('categories')->insert(['name' => 'السيارات', 'sub_id'=>'1']);
+        DB::table('categories')->insert(['name' => 'الدراجات النارية', 'sub_id'=>'1']);
         //
         DB::table('categories')->insert(['name' => 'الدراجات المائية', 'sub_id'=>'2']);
         DB::table('categories')->insert(['name' => 'الزوارق والتجديف', 'sub_id'=>'2']);

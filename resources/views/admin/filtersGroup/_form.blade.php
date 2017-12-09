@@ -10,8 +10,8 @@
 	    <div class="container">
 		    @foreach($filters as $filter)
 			    <div class="checkbox{{ $errors->has('$filter->id') ? ' has-error' : '' }}">
-			        <label for="{{$filter->name_en}}">
-			            {!! Form::checkbox('filters[]', $filter->id, null, ['id' => $filter->name_en]) !!} {{$filter->name_en}}
+			        <label for="{{$filter->name}}">
+			            {!! Form::checkbox('filters[]', $filter->id, null, ['id' => $filter->name]) !!} {{$filter->name}}
 			        </label>
 			    </div>
 		    	<small class="text-danger">{{ $errors->first('filters[]') }}</small>

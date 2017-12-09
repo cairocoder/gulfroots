@@ -34,9 +34,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Messages','id');
     }
 
-    public function posts()
+    public function getFavorites()
     {
-        return $this->hasMany('App\Posts');
+        return $this->hasManyThrough('App\Posts', 'App\Favorites', 'user_id', 'id');
     }
 
     public function getMessagesFrom()

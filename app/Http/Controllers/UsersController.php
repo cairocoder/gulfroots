@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Bills;
+use App\Posts;
+use App\Post_Photos;
+use App\Favorites;
 use App\Messages;
 use App\Conversation;
 use App\Categories;
@@ -18,74 +22,6 @@ class UsersController extends Controller
             'email' =>"required|email|unique:users,email,$id"
         ];
 
-    }
-
-    public function index()
-    {
-        $users = User::latest()->paginate();
-        return View('admin.users.index',compact('users'));
-    }
-
-    public function edit(User $user)
-    {
-        if($user->isCommercial())
-        {
-            $user = array_merge($user->toArray(),$user->getCommerical->toArray());
-            $user['isCommercial'] = true;
-        }else{
-            $user = $user->toArray();
-            $user['isCommercial'] =false;
-        }
-        return View('admin.users.edit',compact('user'));
-    }
-
-    public function update(Authenticatable $user,Request $request)
-    {
-        $this->validate($request,$this->rules($user->id));
-        if($request->has('password')){
-            $request->merge(['password'=>bcrypt($request->password)]);
-            $data = $request->all();
-        }else{
-            $data = $request->except('password');
-        }
-        $user->update($data);
-        return redirect()->to(Url('admin/users'));
-    }
-
-    public function destroy(User $user,$id)
-    {
-        $user->delete();
-        return redirect()->to(Url('admin/users'));
-    }
-
-    public function userMessages(User $user)
-    {
-
-        $user->mesgs = $user->getMessages();
-        //  ,$user->getMessagesTo()->toArray())
-        //dd($user->mesgs);
-        return View('admin.users.messages',compact('user'));
-    }
-
-    public function UserBills(User $user)
-    {
-        $status = ['Mark As Paid','Paid'];
-        return View('admin.users.bills',compact('user','status'));
-    }
-    public function payBill($id)
-    {
-        Bills::findOrFail($id)->update(['status'=>1]);
-        return redirect()->back();
-    }
-
-    public function UserSubscriptions(User $user)
-    {
-        return View('admin.users.subscriptions',compact('user'));
-    }
-
-    public function UserPosts(User $user)
-    {
-        return View('admin.users.posts',compact('user'));
     }
 
     public function profile(Authenticatable $user)
@@ -101,27 +37,40 @@ class UsersController extends Controller
       return view('users.profile', compact('user'));
     }
 
-    public function ads(User $user)
+    public function ads()
     {
-      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-      $subcategory = Categories::where('sub_id', '!=', null)->get();
-      $spechialcategory = Categories::where('slug', '!=', null)->get();
-      return view('users.ads', compact('categories','subcategory','spechialcategory','user'));
+        $user = Auth::user();
+        if(!$user){
+            return route('login');
+        }
+        $posts = $user->getPosts()->get();
+        $posts->map(function ($post) {
+            $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
+            return $post;
+        });
+        $favorites = $user->getFavorites()->get();
+        $favorites->map(function ($post) {
+            $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
+            return $post;
+        });
+      return view('users.ads', compact('posts', 'favorites'));
     }
 
     public function messages(User $user)
     {
-      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-      $subcategory = Categories::where('sub_id', '!=', null)->get();
-      $spechialcategory = Categories::where('slug', '!=', null)->get();
-      return view('users.messages', compact('categories','subcategory','spechialcategory','user'));
+        $user = Auth::user();
+        if(!$user){
+            return route('login');
+        }
+      return view('users.messages');
     }
 
     public function savedsearch(User $user)
     {
-      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-      $subcategory = Categories::where('sub_id', '!=', null)->get();
-      $spechialcategory = Categories::where('slug', '!=', null)->get();
-      return view('users.savedsearch', compact('categories','subcategory','spechialcategory','user'));
+        $user = Auth::user();
+        if(!$user){
+            return route('login');
+        }
+      return view('users.savedsearch');
     }
 }

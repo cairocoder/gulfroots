@@ -98,9 +98,10 @@
 
         <!-- watch ads tab -->
         <div class="home-tab-screen watch-ads">
-
+            @guest
+                
+            @else
                 <div class="row no-margin boxed-ads">
-
                         <div class="col l3">
                             <!-- ad item -->
                             <a href="#!" class="ad-item">
@@ -120,7 +121,7 @@
 
                         <div class="clearfix"></div>
                 </div>
-
+            @endguest
         </div>
 
         <!-- search ads tab -->

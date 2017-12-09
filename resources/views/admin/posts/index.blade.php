@@ -27,7 +27,7 @@
 						<td>{{$post->user->user_id}}</td>
 						<td>{{$post->category->name}}</td>
 						<td>{{$post->category->sub_id}}</td>
-						<td>{{$post->name}}</td>
+						<td>{{$post->title}}</td>
 						<td>{{$post->short_des}}</td>
 						<td>{{$post->long_des}}</td>
 						<td>{{$post->price}}</td>

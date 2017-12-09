@@ -191,124 +191,13 @@
 
                         <div class="row no-margin ads-list">
 
-                            <!-- <div class="col l4">
-                                ad item
-                                <a href="#!" class="ad-item">
-                                    <div class="image-box">
-                                        <img src="assets/images/ad-thumb.jpg" alt="">
-                                        <div class="price boxed-only">500000
-                                            <span>ر.س</span>
-                                        </div>
-                                    </div>
-                                    <h1 title="سيارة بمواصفات خاصة" class="boxed-only">سيارة بمواصفات خاصة</h1>
-                                    <div class="post-data normal-only">
-                                        <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                        <div class="price">500000
-                                            <span>ر.س</span>
-                                        </div>
-                                        <div class="desc">
-                                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص
-                                            تجريبي نص تجريبي نص تجريبي
-                                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص
-                                            تجريبي نص تجريبي نص تجريبي
-                                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص
-                                            تجريبي نص تجريبي
-                                        </div>
-                                    </div>
-                                    <small class="boxed-only">مدينة الرياض</small>
-                                    <div class="info normal-only">
-                                        <h3>السعودية
-                                            <small>الرياض</small>
-                                        </h3>
-                                        <div class="time">منذ 15 دقيقة</div>
-                                    </div>
-                                    <div class="watch-icon active">
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="col l4">
-                                ad item
-                                <a href="#!" class="ad-item">
-                                    <div class="image-box">
-                                        <img src="assets/images/ad-thumb.jpg" alt="">
-                                        <div class="price boxed-only">500000
-                                            <span>ر.س</span>
-                                        </div>
-                                    </div>
-                                    <h1 title="سيارة بمواصفات خاصة" class="boxed-only">سيارة بمواصفات خاصة</h1>
-                                    <div class="post-data normal-only">
-                                        <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                        <div class="price">500000
-                                            <span>ر.س</span>
-                                        </div>
-                                        <div class="desc">
-                                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص
-                                            تجريبي نص تجريبي نص تجريبي
-                                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص
-                                            تجريبي نص تجريبي نص تجريبي
-                                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص
-                                            تجريبي نص تجريبي
-                                        </div>
-                                    </div>
-                                    <small class="boxed-only">مدينة الرياض</small>
-                                    <div class="info normal-only">
-                                        <h3>السعودية
-                                            <small>الرياض</small>
-                                        </h3>
-                                        <div class="time">منذ 15 دقيقة</div>
-                                    </div>
-                                    <div class="watch-icon">
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="col l4">
-                                ad item
-                                <a href="#!" class="ad-item">
-                                    <div class="image-box">
-                                        <img src="assets/images/ad-thumb.jpg" alt="">
-                                        <div class="price boxed-only">500000
-                                            <span>ر.س</span>
-                                        </div>
-                                    </div>
-                                    <h1 title="سيارة بمواصفات خاصة" class="boxed-only">سيارة بمواصفات خاصة</h1>
-                                    <div class="post-data normal-only">
-                                        <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                        <div class="price">500000
-                                            <span>ر.س</span>
-                                        </div>
-                                        <div class="desc">
-                                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص
-                                            تجريبي نص تجريبي نص تجريبي
-                                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص
-                                            تجريبي نص تجريبي نص تجريبي
-                                            نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص
-                                            تجريبي نص تجريبي
-                                        </div>
-                                    </div>
-                                    <small class="boxed-only">مدينة الرياض</small>
-                                    <div class="info normal-only">
-                                        <h3>السعودية
-                                            <small>الرياض</small>
-                                        </h3>
-                                        <div class="time">منذ 15 دقيقة</div>
-                                    </div>
-                                    <div class="watch-icon">
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </a>
-                            </div> -->
-
                         </div>
 
-
+                        @if(count($posts) > 0)
                         <div class="strip-head on-top">احدث الاعلانات</div>
 
                         <div class="row no-margin ads-list">
-                            @if(count($posts) > 0)
+                            
                                 @foreach($posts as $post)
                                 <div class="col l4">
                                     <!-- ad item -->
@@ -336,7 +225,7 @@
                                             <h3>السعودية
                                                 <small>الرياض</small>
                                             </h3>
-                                            <div class="time"> {{$post->created_at}}</div>
+                                            <div class="time"> {{  strftime("%b %d %Y",strtotime($post->created_at))}}</div>
                                         </div>
                                         @if($post->liked == 1)
                                             <div class="watch-icon active">
@@ -350,8 +239,11 @@
                                     </a>
                                 </div>
                                 @endforeach
+                        </div>
                             @else
-                                <h1> No Search Results </h1>
+                            <div class="centerd">
+                                <h2>No Search Results</h2>
+                            </div>
                             @endif
                             
 
@@ -432,7 +324,7 @@
                                 </a>
                             </div> -->
 
-                        </div>
+                        
 
 
                         <div class="centerd">

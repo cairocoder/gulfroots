@@ -28,7 +28,6 @@ class PostsController extends Controller
         $post_photos = Post_Photos::with('post')->get();
         $latest->map(function ($post) use ($user) {
             $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
-            $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
             return $post;
         });
         $parents = [];

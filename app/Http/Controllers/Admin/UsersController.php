@@ -98,33 +98,21 @@ class UsersController extends Controller
           $user = $user->toArray();
           $user['isCommercial'] =false;
       }
-      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-      $subcategory = Categories::where('sub_id', '!=', null)->get();
-      $spechialcategory = Categories::where('slug', '!=', null)->get();
-      return view('users.profile', compact('categories','subcategory','spechialcategory','user'));
+      return view('users.profile');
     }
 
     public function ads(User $user)
     {
-      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-      $subcategory = Categories::where('sub_id', '!=', null)->get();
-      $spechialcategory = Categories::where('slug', '!=', null)->get();
-      return view('users.ads', compact('categories','subcategory','spechialcategory','user'));
+      return view('users.ads');
     }
 
     public function messages(User $user)
     {
-      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-      $subcategory = Categories::where('sub_id', '!=', null)->get();
-      $spechialcategory = Categories::where('slug', '!=', null)->get();
-      return view('users.messages', compact('categories','subcategory','spechialcategory','user'));
+      return view('users.messages');
     }
 
     public function savedsearch(User $user)
     {
-      $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-      $subcategory = Categories::where('sub_id', '!=', null)->get();
-      $spechialcategory = Categories::where('slug', '!=', null)->get();
-      return view('users.savedsearch', compact('categories','subcategory','spechialcategory','user'));
+      return view('users.savedsearch');
     }
 }
