@@ -12,6 +12,15 @@ class AdminsTableSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('admins')->insert(['name' => 'test', 'email' => 'test@test.com', 'password' => bcrypt('123456'), 'group_id' => '1']);
+        $faker = Faker\Factory::create();
+        //
+        for($i = 0; $i < 20; $i++) {
+            DB::table('admins')->insert([
+                'name' => $faker->name,
+                'email'=> $faker->email,
+                'password' => bcrypt('secret'),
+                'group_id' => 1,
+            ]);
+        }
     }
 }

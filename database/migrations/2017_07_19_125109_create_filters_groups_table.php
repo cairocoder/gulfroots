@@ -16,6 +16,7 @@ class CreateFiltersGroupsTable extends Migration
         Schema::create('filters_groups', function (Blueprint $table) {
             $table->increments('id');
             $table->string('group_name');
+            $table->integer('type');
             $table->timestamps();
         });
     }

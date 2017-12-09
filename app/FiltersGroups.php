@@ -7,13 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class FiltersGroups extends Model
 {
     protected $table 	= 'filters_groups';
-    protected $fillable = ['group_name'];
+    protected $fillable = ['group_name', 'type'];
 
     public function groupFilters()
     {
         return $this->hasMany('App\Filters', 'group_id');
 //      return $this->belongsToMany('App\GroupsFilters','filters', 'id','id' );
-    	//return $this->hasMany('App\GroupsFilters','group_id');
     }
     public function categories()
     {

@@ -15,6 +15,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('title');
             $table->string('short_des');
             $table->string('long_des');
             $table->string('detailed_address');
@@ -25,6 +26,7 @@ class CreatePostsTable extends Migration
             $table->string('latitude');
             $table->integer('price');
             $table->integer('isArchived')->default(0);
+            $table->integer('status');
             $table->integer('sub_category_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();

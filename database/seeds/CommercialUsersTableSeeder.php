@@ -15,7 +15,7 @@ class CommercialUsersTableSeeder extends Seeder
         $faker = Faker\Factory::create();
         //
         for($i = 1; $i <= 10; $i++) {
-            DB::table('commercial_users')->insert([
+            App\CommercialUsers::create([
                 'user_id' => $i,
                 'whatsapp_number' => $faker->phoneNumber,
                 'contact_number' => $faker->phoneNumber,

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Filters extends Model
 {
     protected $table = 'filters';
-    protected $fillable = ['name', 'type', 'value_start','value_end','range_start', 'group_id'];
+    protected $fillable = ['name', 'type', 'group_id'];
 
 
     public function filterGroup()
