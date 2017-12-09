@@ -29,7 +29,7 @@ class SearchController extends Controller
         if($request->has('search_query')) {
             if($request->get('cat-id') == 0){
                 // Using the Laravel Scout syntax to search the products table.
-                $posts = Posts::search($request->get('search_query'))->orderBy('created_at','ASC')->get();
+                $posts = Posts::search($request->get('search_query'))->where('isApproved', 1)->orderBy('created_at','ASC')->get();
                 // If there are results return them, if none, return the error message.
                 $posts->map(function ($post) use ($user) {
                     $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
