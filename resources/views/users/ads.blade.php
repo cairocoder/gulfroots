@@ -134,11 +134,16 @@
                                 <span>ر.س</span>
                             </div>
                         </div>
-                        <h1 title="سيارة بمواصفات خاصة">{{$post->short_des}}</h1>
+                        <h1 title="سيارة بمواصفات خاصة">{{$post->title}}</h1>
                         <small>مدينة الرياض</small>
-                        <div class="post-tools">
-                                    <i class="fa fa-pencil"></i>
-                                    <i class="fa fa-times"></i>
+                        @if($post->liked == 1)
+                            <div class="watch-icon active">
+                        @else
+                            <div class="watch-icon">
+                        @endif
+                            <input type="hidden" name="liked" class="liked" value="{{$post->liked}}">
+                            <input type="hidden" name="post_id" class="post_id" value="{{$post->id}}">
+                            <i class="fa fa-star"></i>
                         </div>
                     </a>
                 @endforeach

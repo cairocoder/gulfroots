@@ -101,24 +101,32 @@
             @guest
                 
             @else
+                
                 <div class="row no-margin boxed-ads">
+                    @foreach($favorites as $post)
                         <div class="col l3">
                             <!-- ad item -->
-                            <a href="#!" class="ad-item">
+                            <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
                                 <div class="image-box">
-                                    <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
-                                    <div class="price">500000
+                                    <img src="{{$post->img}}" alt="">
+                                    <div class="price">{{$post->price}}
                                         <span>ر.س</span>
                                     </div>
                                 </div>
-                                <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
+                                <h1 title="سيارة بمواصفات خاصة">{{$post->title}}</h1>
                                 <small>مدينة الرياض</small>
-                                <div class="watch-icon active">
+                                @if($post->liked == 1)
+                                    <div class="watch-icon active">
+                                @else
+                                    <div class="watch-icon">
+                                @endif
+                                    <input type="hidden" name="liked" class="liked" value="{{$post->liked}}">
+                                    <input type="hidden" name="post_id" class="post_id" value="{{$post->id}}">
                                     <i class="fa fa-star"></i>
                                 </div>
                             </a>
                         </div>
-
+                    @endforeach
                         <div class="clearfix"></div>
                 </div>
             @endguest

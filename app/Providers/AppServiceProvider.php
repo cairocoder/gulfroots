@@ -4,9 +4,12 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Auth;
 use App\Posts;
 use App\Filters;
 use App\Categories;
+use App\Post_Photos;
+use App\Favorites;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,23 +26,13 @@ class AppServiceProvider extends ServiceProvider
             $spechialcategory = Categories::where('slug', '!=', null)->get();
             $view->with(compact('categories', 'subcategory', 'spechialcategory'));
         });
-        view()->composer('posts.ad1', function($view) {
-
-            $subcategory = Categories::where('sub_id', '!=', null)->get();
-            $spechialcategory = Categories::where('slug', '!=', null)->get();
-            $view->with(compact('categories', 'subcategory', 'spechialcategory'));
-        });
         view()->composer('posts.ad2', function($view) {
             $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-            $subcategories = Categories::where('sub_id', '!=', null)->get();
-            $spechialcategory = Categories::where('slug', '!=', null)->get();
-            $view->with(compact('categories', 'subcategories', 'spechialcategory'));
+            $view->with(compact('categories'));
         });
         view()->composer('posts.ad3', function($view) {
             $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-            $subcategories = Categories::where('sub_id', '!=', null)->get();
-            $spechialcategory = Categories::where('slug', '!=', null)->get();
-            $view->with(compact('categories', 'subcategories', 'spechialcategory'));
+            $view->with(compact('categories'));
         });
         view()->composer('layouts.app', function($view) {
             $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
@@ -56,20 +49,25 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('includes.searchbar', function($view) {
           $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
           $subcategory = Categories::where('sub_id', '!=', null)->get();
-          $spechialcategory = Categories::where('slug', '!=', null)->get();
-          $view->with(compact('categories', 'subcategory', 'spechialcategory'));
+          $view->with(compact('categories', 'subcategory'));
       });
         view()->composer('home', function($view) {
-            $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-            $subcategory = Categories::where('sub_id', '!=', null)->get();
-            $spechialcategory = Categories::where('slug', '!=', null)->get();
-            $view->with(compact('categories', 'subcategory', 'spechialcategory'));
+            $user = Auth::user();
+            if(!$user){
+                $user = new User;
+                $user->id = -1;
+            }
+            $favorites = $user->getFavorites()->get();
+            $favorites->map(function ($post) use($user){
+                $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
+                $post['liked'] = 1;
+                return $post;
+            });
+            $view->with(compact('favorites'));
         });
         view()->composer('includes.specialcategories', function($view) {
-          $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-          $subcategory = Categories::where('sub_id', '!=', null)->get();
-          $spechialcategory = Categories::where('slug', '!=', null)->get();
-          $view->with(compact('categories', 'subcategory', 'spechialcategory'));
+          $specialcategory = Categories::where('slug', '!=', null)->get();
+          $view->with(compact('specialcategory'));
       });
         Schema::defaultStringLength(191);
     }

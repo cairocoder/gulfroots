@@ -49,8 +49,9 @@ class UsersController extends Controller
             return $post;
         });
         $favorites = $user->getFavorites()->get();
-        $favorites->map(function ($post) {
+        $favorites->map(function ($post){
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
+            $post['liked'] = 1;
             return $post;
         });
       return view('users.ads', compact('posts', 'favorites'));
