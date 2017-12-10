@@ -37,6 +37,37 @@ class UsersController extends Controller
       return view('users.profile', compact('user'));
     }
 
+    public function showPublicProfile($id){
+        $user = User::where('id', $id)->first();
+        if($user->isCommercial())
+        {
+            $user = array_merge($user->toArray(),$user->getCommerical->toArray());
+            $user['isCommercial'] = true;
+        }else{
+            $user = $user->toArray();
+            $user['isCommercial'] =false;
+        }
+        // dd($user);
+        return view('users.publicprofile', compact('user'));
+    }
+
+    public function showPublicPosts($id){
+        $user = User::where('id', $id)->first();
+        $posts = $user->getPosts()->where('isApproved', 1)->get();
+        $visitor = Auth::user();
+        if(!$visitor){
+            $visitor = new User;
+            $visitor->id = -1;
+        }
+        $posts->map(function ($post) use($visitor){
+            $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
+            $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $visitor->id)->count();
+            return $post;
+        });
+        // dd($posts);
+      return view('users.publicads', compact('posts', 'user'));
+    }
+
     public function ads()
     {
         $user = Auth::user();

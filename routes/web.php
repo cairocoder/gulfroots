@@ -24,6 +24,8 @@ Route::get('/privacypolicy', 'HomeController@privacypolicy')->name('privacypolic
 Route::get('/protectionadvices', 'HomeController@protectionadvices')->name('protectionadvices');
 Route::get('/publishingpolicy', 'HomeController@publishingpolicy')->name('publishingpolicy');
 Route::get('/profile', 'UsersController@profile')->name('profile');
+Route::get('/user/{id}', 'UsersController@showPublicProfile');
+Route::get('/user/{id}/ads', 'UsersController@showPublicPosts');
 Route::get('/ads', 'UsersController@ads')->name('ads');
 Route::get('/messages', 'MessagesController@index')->name('messages');
 Route::get('/allmessages/{id}', 'MessagesController@showAllMessages');
