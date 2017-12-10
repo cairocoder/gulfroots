@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 use App\Posts;
 use App\Filters;
 use App\Categories;
@@ -52,6 +53,7 @@ class AppServiceProvider extends ServiceProvider
           $view->with(compact('categories', 'subcategory'));
       });
         view()->composer('home', function($view) {
+            $latest = Posts::latest()->where('isApproved', 1)->orderBy('id', 'desc')->take(12)->get();
             $user = Auth::user();
             if(!$user){
                 $user = new User;
@@ -63,7 +65,7 @@ class AppServiceProvider extends ServiceProvider
                 $post['liked'] = 1;
                 return $post;
             });
-            $view->with(compact('favorites'));
+            $view->with(compact('favorites', 'latest'));
         });
         view()->composer('includes.specialcategories', function($view) {
           $specialcategory = Categories::where('slug', '!=', null)->get();
