@@ -23,9 +23,27 @@ class SearchController extends Controller
         }
         if($request->get('cat-id') == 0){
             // Using the Laravel Scout syntax to search the products table.
-            $posts = Posts::search($request->get('search_query'))->where('isApproved', 1)->orderBy('created_at','ASC')->get();
+            $posts = Posts::search($request->get('search_query'))->where('isArchived', 0)->where('isApproved', 1)->where('isinTop', 0)->get();
+            $top = Posts::search($request->get('search_query'))->where('isArchived', 0)->where('isApproved', 1)->where('isinTop', 1)->get();
             // If there are results return them, if none, return the error message.
             $posts->map(function ($post) use ($user) {
+                $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
+                $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
+                $features = $post->getFeatures()->get();
+                foreach($features as $feature){
+                    if($feature->type == 1){
+                        $post['isColored'] = 1;
+                    }
+                    if($feature->type == 2){
+                        $post['isinMain'] = 1;
+                    }
+                    if($feature->type == 5){
+                        $post['isBreaking'] = 1;
+                    }
+                }
+                return $post;
+            });
+            $top->map(function ($post) use ($user) {
                 $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
                 $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
                 $features = $post->getFeatures()->get();
@@ -48,10 +66,29 @@ class SearchController extends Controller
             $category = $request->get('cat-id');
             $ids = $this->buildConditions($category);
             $posts = collect();
+            $top = collect();
             foreach($ids as $id){
-                $posts = $posts->merge(Posts::search($request->get('search_query'))->where('sub_category_id', $id)->orderBy('created_at','ASC')->get());
+                $posts = $posts->merge(Posts::search($request->get('search_query'))->where('sub_category_id', $id)->where('isArchived', 0)->where('isApproved', 1)->where('isinTop', 0)->get());
+                $top = $top->merge(Posts::search($request->get('search_query'))->where('sub_category_id', $id)->where('isArchived', 0)->where('isApproved', 1)->where('isinTop', 1)->get());
             }
             $posts->map(function ($post) {
+                $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
+                $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
+                $features = $post->getFeatures()->get();
+                foreach($features as $feature){
+                    if($feature->type == 1){
+                        $post['isColored'] = 1;
+                    }
+                    if($feature->type == 2){
+                        $post['isinMain'] = 1;
+                    }
+                    if($feature->type == 5){
+                        $post['isBreaking'] = 1;
+                    }
+                }
+                return $post;
+            });
+            $top->map(function ($post) {
                 $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
                 $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
                 $features = $post->getFeatures()->get();

@@ -88,6 +88,7 @@ class ListingController extends Controller
             'price' => $request->input('price'),
             'sub_category_id' => $request->input('subcategory_id'),
             'user_id' => $user->id,
+            'isinTop' => $request->input('isinTopDecision'),
         ]);
         $post->searchable();
         $hash = $this->pageId('posts', $post->id);

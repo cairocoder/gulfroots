@@ -28,7 +28,8 @@ class PostsTableSeeder extends Seeder
                 'sub_category_id' => $faker->numberBetween(19,120),
                 'user_id' => $faker->numberBetween(1,20),
                 'isArchived' => $faker->numberBetween(0, 1),
-                'isApproved' => $faker->numberBetween(0,1),
+                'isApproved' => $faker->numberBetween(0, 1),
+                'isinTop' => $faker->numberBetween(0, 1),
             ]);
             $post->searchable();
             DB::table('post_features')->insert([

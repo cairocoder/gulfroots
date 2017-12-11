@@ -187,13 +187,60 @@
                         <div class="centerd">
                             <img src="assets/images/width-ads.jpg" alt="">
                         </div>
-
+                        @if(count($posts) > 0)
                         <div class="strip-head blue on-top">افضل الاعلانات</div>
 
                         <div class="row no-margin ads-list">
-
+                            @foreach($posts as $post)
+                                <div class="col l4">
+                                    <!-- ad item -->
+                                    @if($post->isColored)
+                                        <a href="{{Url('posts').'/'.$post->id}}" class="ad-item heigh-light">
+                                    @else
+                                        <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
+                                    @endif
+                                    @if($post->isBreaking)
+                                        <div class="important"><span></span><div>عاجل</div></div>
+                                    @endif
+                                        <div class="image-box">
+                                            <img src="{{$post->img}}" alt="">
+                                            <div class="price boxed-only">{{$post->price}}
+                                                <span>ر.س</span>
+                                            </div>
+                                        </div>
+                                        <h1 title="{{$post->title}}" class="boxed-only">{{$post->title}} </h1>
+                                        <div class="post-data normal-only">
+                                            <h1 title="{{$post->title}}">
+                                            {{$post->title}} 
+                                            </h1>
+                                            <div class="price">{{$post->price}}
+                                                <span>ر.س</span>
+                                            </div>
+                                            <div class="desc">
+                                                {{$post->short_des}}
+                                            </div>
+                                        </div>
+                                        <small class="boxed-only">مدينة الرياض</small>
+                                        <div class="info normal-only">
+                                            <h3>السعودية
+                                                <small>الرياض</small>
+                                            </h3>
+                                            <div class="time"> {{  strftime("%b %d %Y",strtotime($post->created_at))}}</div>
+                                        </div>
+                                        @if($post->liked == 1)
+                                            <div class="watch-icon active">
+                                        @else
+                                            <div class="watch-icon">
+                                        @endif
+                                            <input type="hidden" name="liked" class="liked" value="{{$post->liked}}">
+                                            <input type="hidden" name="post_id" class="post_id" value="{{$post->id}}">
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                @endforeach
                         </div>
-
+                        @endif
                         @if(count($posts) > 0)
                         <div class="strip-head on-top">احدث الاعلانات</div>
 
@@ -248,7 +295,7 @@
                                 </div>
                                 @endforeach
                         </div>
-                            @else
+                            @elseif(count($top) == 0)
                             <div class="centerd">
                                 <h2>No Search Results</h2>
                             </div>
@@ -257,7 +304,6 @@
                         <div class="centerd">
                             <img src="assets/images/width-ads.jpg" alt="">
                         </div>
-
 
                         @guest
                         @else

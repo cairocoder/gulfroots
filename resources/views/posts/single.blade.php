@@ -133,7 +133,7 @@
 
                     </div>
 
-
+                    @if(count($latest) > 1)
                     <div class="strip-head blue on-top">احدث الاعلانات لهذا البائع</div>
 
                     <div class="row no-margin ads-list">
@@ -148,9 +148,9 @@
                                                 <span>ر.س</span>
                                             </div>
                                         </div>
-                                        <h1 title="سيارة بمواصفات خاصة" class="boxed-only">سيارة بمواصفات خاصة</h1>
+                                        <h1 title="{{$listing->title}}" class="boxed-only">{{$listing->title}}</h1>
                                         <div class="post-data normal-only">
-                                            <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
+                                            <h1 title="{{$listing->title}}">{{$listing->title}}</h1>
                                             <div class="price">{{$listing->price}}
                                                 <span>ر.س</span>
                                             </div>
@@ -179,8 +179,8 @@
                             @endif    
                         @endforeach
                     </div>
-
-
+                    @endif
+                    @if(count($alike) > 0)
                     <div class="strip-head on-top">اعلانات متشابهه</div>
                     
                     <div class="row no-margin ads-list">
@@ -224,7 +224,7 @@
                             </div>
                         @endforeach
                     </div>
-
+                    @endif
                     <div class="centerd">
                         <img src="{{ asset('front-assets/images/width-ads.jpg')}}" alt="">
                     </div>

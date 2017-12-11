@@ -27,6 +27,7 @@ class CreatePostsTable extends Migration
             $table->integer('price');
             $table->integer('isArchived')->default(0);
             $table->integer('isApproved')->default(1);
+            $table->integer('isinTop');
             $table->integer('status');
             $table->integer('sub_category_id')->unsigned();
             $table->integer('user_id')->unsigned();

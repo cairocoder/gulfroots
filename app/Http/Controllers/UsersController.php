@@ -53,7 +53,7 @@ class UsersController extends Controller
 
     public function showPublicPosts($id){
         $user = User::where('id', $id)->first();
-        $posts = $user->getPosts()->where('isApproved', 1)->get();
+        $posts = $user->getPosts()->where('isArchived', 0)->where('isApproved', 1)->get();
         $visitor = Auth::user();
         if(!$visitor){
             $visitor = new User;
