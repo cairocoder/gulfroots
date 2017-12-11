@@ -11,10 +11,11 @@
             {{ csrf_field() }}
             <input type="hidden" name="subcategory_id" value="{{$subcategory_id}}">
             <div class="row no-margin centerd">
-
-                @include('includes.packages')
-
-
+                @if(Auth::user()->isCommercial() == false)
+                    @include('includes.packages')
+                @else
+                    <input type="hidden" name="pack" value="4" class="o-extra3">
+                @endif
                 <div class="clearfix"></div>
             </div>
 
@@ -47,6 +48,7 @@
                     <div class="col l6">
                         <br>
                         <input type="text" name="short_des" placeholder="عنوان">
+                        <input type="text" name="short_des" placeholder="وصف مختصر للاعلان">
                         <textarea name="long_des" placeholder="وصف الاعلان"></textarea>
                         <div class="pay-box not-payed">
                             <img src="{{ asset('front-assets/images/urgant.jpg')}}" alt="">
@@ -107,7 +109,7 @@
                 <div class="row no-margin">
                     <div class="col l6">
 
-
+                        @if(Auth::user()->isCommercial() == false)
                         <div class="pay-box not-payed extra1">
                             <img src="{{ asset('front-assets/images/extra1.jpg')}}" alt="">
                             <div class="pay-text">
@@ -169,7 +171,8 @@
                                 <div class="pay-btn">اضافة</div>
                             </div>
                         </div>
-
+                        @else
+                        @endif
                         <div class="top-50 nc bolded">كوبون الخصم</div>
 
                         <div class="pay-box not-payed">
@@ -185,6 +188,7 @@
                             </div>
                         </div>
                     </div>
+                    @if(Auth::user()->isCommercial() == false)
                     <div class="col l6">
                         <div class="note">
                             <img src="{{ asset('front-assets/images/info.jpg')}}" alt="">
@@ -193,6 +197,8 @@
                             عرضها
                         </div>
                     </div>
+                    @else
+                    @endif
                     <div class="clearfix"></div>
                 </div>
             </div>

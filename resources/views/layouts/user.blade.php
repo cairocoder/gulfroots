@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <!-- Page Title -->
-    <title>GulfRoots</title>
+    <title>GulfRoots @yield('title')</title>
     <!-- Meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -173,7 +173,7 @@
                 <div class="col l3">
                     <h3>الدعم والمساعدة</h3>
                     <a href="{{ route('about')}}">عن قلف روتس</a>
-                    <a href="{{ route('custmoerservice')}}">خدمة العملاء</a>
+                    <a href="{{ route('customerservice')}}">خدمة العملاء</a>
                     <a href="{{ route('help') }}">المساعدة</a>
                     <a href="{{ route('protectionadvices')}}">نصائح الحماية والخصوصية</a>
                     <a href="{{ route('contactus')}}">اتصل بنا</a>

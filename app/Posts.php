@@ -35,6 +35,6 @@ class Posts extends Model
 
     public function getFeatures()
     {
-        return $this->hasMany('App\PostFeatures');
+        return $this->hasMany('App\PostFeatures', 'post_id');
     }
 }

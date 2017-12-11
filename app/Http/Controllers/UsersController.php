@@ -62,6 +62,18 @@ class UsersController extends Controller
         $posts->map(function ($post) use($visitor){
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
             $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $visitor->id)->count();
+            $features = $post->getFeatures()->get();
+            foreach($features as $feature){
+                if($feature->type == 1){
+                    $post['isColored'] = 1;
+                }
+                if($feature->type == 2){
+                    $post['isinMain'] = 1;
+                }
+                if($feature->type == 5){
+                    $post['isBreaking'] = 1;
+                }
+            }
             return $post;
         });
         // dd($posts);
@@ -77,12 +89,36 @@ class UsersController extends Controller
         $posts = $user->getPosts()->get();
         $posts->map(function ($post) {
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
+            $features = $post->getFeatures()->get();
+            foreach($features as $feature){
+                if($feature->type == 1){
+                    $post['isColored'] = 1;
+                }
+                if($feature->type == 2){
+                    $post['isinMain'] = 1;
+                }
+                if($feature->type == 5){
+                    $post['isBreaking'] = 1;
+                }
+            }
             return $post;
         });
         $favorites = $user->getFavorites()->get();
         $favorites->map(function ($post){
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
             $post['liked'] = 1;
+            $features = $post->getFeatures()->get();
+            foreach($features as $feature){
+                if($feature->type == 1){
+                    $post['isColored'] = 1;
+                }
+                if($feature->type == 2){
+                    $post['isinMain'] = 1;
+                }
+                if($feature->type == 5){
+                    $post['isBreaking'] = 1;
+                }
+            }
             return $post;
         });
       return view('users.ads', compact('posts', 'favorites'));

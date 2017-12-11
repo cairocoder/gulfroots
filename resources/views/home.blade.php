@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', '')
 @section('content')
 <!-- Home -->
 <div class="home-screen">
@@ -41,9 +42,16 @@
                 @foreach($latest as $post)
                     <div class="col l3">
                         <!-- ad item -->
-                        <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
+                        @if($post->isColored)
+                            <a href="{{Url('posts').'/'.$post->id}}" class="ad-item heigh-light">
+                        @else
+                            <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
+                        @endif
+                        @if($post->isBreaking)
+                            <div class="important"><span></span><div>عاجل</div></div>
+                        @endif
                             <div class="image-box">
-                                <img src="{{$post->img}}" alt="">
+                                <img src="{{Url($post->img)}}" alt="">
                                 <div class="price">{{$post->price}}
                                     <span>ر.س</span>
                                 </div>
@@ -68,78 +76,17 @@
         <!-- prev ads tab -->
         <div class="home-tab-screen prev-ads">
                 <div class="row no-margin boxed-ads">
+                    @foreach($lastseen as $post)
                         <div class="col l3">
                             <!-- ad item -->
-                            <a href="#!" class="ad-item">
-                                <div class="image-box">
-                                    <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
-                                    <div class="price">500000
-                                        <span>ر.س</span>
-                                    </div>
-                                </div>
-                                <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                <small>مدينة الرياض</small>
-                                <div class="watch-icon active">
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="col l3">
-                                <!-- ad item -->
-                                <a href="#!" class="ad-item">
-                                    <div class="image-box">
-                                        <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
-                                        <div class="price">500000
-                                            <span>ر.س</span>
-                                        </div>
-                                    </div>
-                                    <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                    <small>مدينة الرياض</small>
-                                    <div class="watch-icon">
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="col l3">
-                                    <!-- ad item -->
-                                    <a href="#!" class="ad-item">
-                                        <div class="image-box">
-                                            <img src="{{ asset('front-assets/images/ad-thumb.jpg')}}" alt="">
-                                            <div class="price">500000
-                                                <span>ر.س</span>
-                                            </div>
-                                        </div>
-                                        <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                        <small>مدينة الرياض</small>
-                                        <div class="watch-icon">
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </a>
-                            </div>
-
-
-                            <div class="clearfix"></div>
-                </div>
-
-        </div>
-
-        <!-- watch ads tab -->
-        <div class="home-tab-screen watch-ads">
-            @guest
-                <div class="row no-margin boxed-ads no-data">
-
-                    <h2>لاتوجد قائمة رغبات</h2>
-                    <h4>ابدأ بالتسجيل واضافة منتجات لتظهر في القائمة</h4>
-
-                </div>
-            @else
-                <div class="row no-margin boxed-ads">
-                    @foreach($favorites as $post)
-                        <div class="col l3">
-                            <!-- ad item -->
-                            <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
+                            @if($post->isColored)
+                                <a href="{{Url('posts').'/'.$post->id}}" class="ad-item heigh-light">
+                            @else
+                                <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
+                            @endif
+                            @if($post->isBreaking)
+                                <div class="important"><span></span><div>عاجل</div></div>
+                            @endif
                                 <div class="image-box">
                                     <img src="{{$post->img}}" alt="">
                                     <div class="price">{{$post->price}}
@@ -160,7 +107,54 @@
                             </a>
                         </div>
                     @endforeach
-                        <div class="clearfix"></div>
+                    <div class="clearfix"></div>
+                </div>
+
+        </div>
+
+        <!-- watch ads tab -->
+        <div class="home-tab-screen watch-ads">
+            @guest
+                <div class="row no-margin boxed-ads no-data">
+
+                    <h2>لاتوجد قائمة رغبات</h2>
+                    <h4>ابدأ بالتسجيل واضافة منتجات لتظهر في القائمة</h4>
+
+                </div>
+                <div class="clearfix"></div>
+            @else
+                <div class="row no-margin boxed-ads">
+                    @foreach($favorites as $post)
+                        <div class="col l3">
+                            <!-- ad item -->
+                            @if($post->isColored)
+                                <a href="{{Url('posts').'/'.$post->id}}" class="ad-item heigh-light">
+                            @else
+                                <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
+                            @endif
+                            @if($post->isBreaking)
+                                <div class="important"><span></span><div>عاجل</div></div>
+                            @endif
+                                <div class="image-box">
+                                    <img src="{{$post->img}}" alt="">
+                                    <div class="price">{{$post->price}}
+                                        <span>ر.س</span>
+                                    </div>
+                                </div>
+                                <h1 title="سيارة بمواصفات خاصة">{{$post->title}}</h1>
+                                <small>مدينة الرياض</small>
+                                @if($post->liked == 1)
+                                    <div class="watch-icon active">
+                                @else
+                                    <div class="watch-icon">
+                                @endif
+                                    <input type="hidden" name="liked" class="liked" value="{{$post->liked}}">
+                                    <input type="hidden" name="post_id" class="post_id" value="{{$post->id}}">
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
             @endguest
         </div>

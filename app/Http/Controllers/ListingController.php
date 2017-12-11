@@ -7,6 +7,8 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Posts;
+use Ramsey\Uuid\Uuid;
+use App\PostsDictionary;
 use App\Categories;
 use App\Post_Photos;
 use App\PostFeatures;
@@ -88,6 +90,11 @@ class ListingController extends Controller
             'user_id' => $user->id,
         ]);
         $post->searchable();
+        $hash = $this->pageId('posts', $post->id);
+        PostsDictionary::create([
+            'hash' => $hash,
+            'post_id' => $post->id,
+        ]);
         //create filters relations
         foreach ($request->file('img') as $image){
             $getimageName = time().'.'.$image->getClientOriginalExtension();
@@ -211,5 +218,14 @@ class ListingController extends Controller
         }
 
         return redirect('posts/'.$post->id);
+    }
+
+    private function pageId($identifier, $id = null)
+    {
+        $uuid5 = Uuid::uuid5(Uuid::NAMESPACE_DNS, $identifier);
+        if ($id) {
+            $uuid5 = Uuid::uuid5(Uuid::NAMESPACE_DNS, $identifier . '-' . $id);
+        }
+        return $uuid5;
     }
 }

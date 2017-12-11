@@ -16,58 +16,68 @@ class SearchController extends Controller
 {
     //
     public function search(Request $request){
-        // First we define the error message we are going to show if no keywords
-        // existed or if no results found.
         $user = Auth::user();
         if(!$user){
             $user = new User;
             $user->id = -1;
         }
-        // dd($user);
-        $error = ['error' => 'No results found, please try with different keywords.'];
-        // Making sure the user entered a keyword.
-        if($request->has('search_query')) {
-            if($request->get('cat-id') == 0){
-                // Using the Laravel Scout syntax to search the products table.
-                $posts = Posts::search($request->get('search_query'))->where('isApproved', 1)->orderBy('created_at','ASC')->get();
-                // If there are results return them, if none, return the error message.
-                $posts->map(function ($post) use ($user) {
-                    $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
-                    $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
-                    return $post;
-                });
-                $parents = [];
-                // dd($posts);
-                return view('searchresult', compact('posts', 'parents'));
-                // return $posts->count() ? $posts : $error;  
-            }else{
-                $category = $request->get('cat-id');
-                $ids = $this->buildConditions($category);
-                $posts = collect();
-                foreach($ids as $id){
-                    $posts = $posts->merge(Posts::search($request->get('search_query'))->where('sub_category_id', $id)->orderBy('created_at','ASC')->get());
+        if($request->get('cat-id') == 0){
+            // Using the Laravel Scout syntax to search the products table.
+            $posts = Posts::search($request->get('search_query'))->where('isApproved', 1)->orderBy('created_at','ASC')->get();
+            // If there are results return them, if none, return the error message.
+            $posts->map(function ($post) use ($user) {
+                $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
+                $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
+                $features = $post->getFeatures()->get();
+                foreach($features as $feature){
+                    if($feature->type == 1){
+                        $post['isColored'] = 1;
+                    }
+                    if($feature->type == 2){
+                        $post['isinMain'] = 1;
+                    }
+                    if($feature->type == 5){
+                        $post['isBreaking'] = 1;
+                    }
                 }
-                $posts->map(function ($post) {
-                    $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
-                    $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
-                    return $post;
-                });
-                $parents = [];
-                $ancestor = Categories::findorfail($request->get('cat-id'));
-                array_push($parents, $ancestor);
-                while($ancestor->sub_id != null){
-                    $ancestor = Categories::findorfail($ancestor->sub_id);
-                    array_push($parents, $ancestor);
-                }
-                $parents = array_reverse($parents);
-                // If there are results return them, if none, return the error message.
-                // dd($posts);
-                return view('searchresult', compact('posts', 'parents'));
-                // return $posts->count() ? $posts : $error;  
+                return $post;
+            });
+            $parents = [];
+            return view('searchresult', compact('posts', 'parents'));
+        }else{
+            $category = $request->get('cat-id');
+            $ids = $this->buildConditions($category);
+            $posts = collect();
+            foreach($ids as $id){
+                $posts = $posts->merge(Posts::search($request->get('search_query'))->where('sub_category_id', $id)->orderBy('created_at','ASC')->get());
             }
+            $posts->map(function ($post) {
+                $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
+                $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
+                $features = $post->getFeatures()->get();
+                foreach($features as $feature){
+                    if($feature->type == 1){
+                        $post['isColored'] = 1;
+                    }
+                    if($feature->type == 2){
+                        $post['isinMain'] = 1;
+                    }
+                    if($feature->type == 5){
+                        $post['isBreaking'] = 1;
+                    }
+                }
+                return $post;
+            });
+            $parents = [];
+            $ancestor = Categories::findorfail($request->get('cat-id'));
+            array_push($parents, $ancestor);
+            while($ancestor->sub_id != null){
+                $ancestor = Categories::findorfail($ancestor->sub_id);
+                array_push($parents, $ancestor);
+            }
+            $parents = array_reverse($parents);
+            return view('searchresult', compact('posts', 'parents'));
         }
-        // Return the error message if no keywords existed
-        return $error;        
     }
 
     public function buildConditions($category){

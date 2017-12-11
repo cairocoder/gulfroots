@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Ramsey\Uuid\Uuid;
 
 class PostsTableSeeder extends Seeder
 {
@@ -35,6 +36,11 @@ class PostsTableSeeder extends Seeder
                 'post_id' => $i,
                 'expiry_date' => $post->created_at->addDays($faker->numberBetween(7,30)),
             ]);
+            $hash = $this->pageId('posts', $post->id);
+            DB::table('posts_dictionaries')->insert([
+                'hash' => $hash,
+                'post_id' => $post->id,
+            ]);
         }
         for($i = 0; $i < 50; $i++){
             for($j = 0; $j < 10; $j++){
@@ -44,5 +50,14 @@ class PostsTableSeeder extends Seeder
                 ]);
             }
         }
+        
+    }
+    private function pageId($identifier, $id = null)
+    {
+        $uuid5 = Uuid::uuid5(Uuid::NAMESPACE_DNS, $identifier);
+        if ($id) {
+            $uuid5 = Uuid::uuid5(Uuid::NAMESPACE_DNS, $identifier . '-' . $id);
+        }
+        return $uuid5;
     }
 }

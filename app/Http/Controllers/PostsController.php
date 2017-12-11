@@ -28,6 +28,24 @@ class PostsController extends Controller
         $post_photos = Post_Photos::with('post')->get();
         $latest->map(function ($post) use ($user) {
             $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
+            $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
+            $features = $post->getFeatures()->get();
+            foreach($features as $feature){
+                if($feature->type == 5){
+                    $features = $post->getFeatures()->get();
+                    foreach($features as $feature){
+                        if($feature->type == 1){
+                            $post['isColored'] = 1;
+                        }
+                        if($feature->type == 2){
+                            $post['isinMain'] = 1;
+                        }
+                        if($feature->type == 5){
+                            $post['isBreaking'] = 1;
+                        }
+                    }
+                }
+            }
             return $post;
         });
         $parents = [];
@@ -84,7 +102,18 @@ class PostsController extends Controller
         $posts->map(function ($post) use ($user) {
             $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
-            return $post;
+            $features = $post->getFeatures()->get();
+            foreach($features as $feature){
+                if($feature->type == 1){
+                    $post['isColored'] = 1;
+                }
+                if($feature->type == 2){
+                    $post['isinMain'] = 1;
+                }
+                if($feature->type == 5){
+                    $post['isBreaking'] = 1;
+                }
+            }
         });
         $parents = [];
         $ancestor = Categories::findorfail($category_id);

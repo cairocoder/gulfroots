@@ -19,7 +19,7 @@ Route::get('/savedata', 'HomeController@savedata')->name('savedata');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/contactus', 'HomeController@contactus')->name('contactus');
 Route::get('/conditions', 'HomeController@conditions')->name('conditions');
-Route::get('/custmoerservice', 'HomeController@custmoerservice')->name('custmoerservice');
+Route::get('/customerservice', 'HomeController@customerservice')->name('customerservice');
 Route::get('/privacypolicy', 'HomeController@privacypolicy')->name('privacypolicy');
 Route::get('/protectionadvices', 'HomeController@protectionadvices')->name('protectionadvices');
 Route::get('/publishingpolicy', 'HomeController@publishingpolicy')->name('publishingpolicy');

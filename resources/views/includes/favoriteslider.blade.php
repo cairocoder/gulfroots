@@ -1,82 +1,45 @@
 <div class="mini-tab-box tamany">
     <div class="swiper-container" dir="rtl">
             <div class="swiper-wrapper">
-            <!-- slide start -->
-            <div class="swiper-slide">
-                <!-- ad item -->
-                <a href="#!" class="ad-item">
-                    <div class="image-box">
-                        <img src="assets/images/ad-thumb.jpg" alt="">
-                    </div>
-                    <div class="post-data">
-                        <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                        <div class="price">500000
-                                <span>ر.س</span>
-                        </div>
-                        <small class="boxed-only">مدينة الرياض</small>
-                    </div>
-                    <div class="watch-icon">
-                        <i class="fa fa-star"></i>
-                    </div>
-                </a>
-
-                <!-- ad item -->
-                <a href="#!" class="ad-item">
-                    <div class="image-box">
-                        <img src="assets/images/ad-thumb.jpg" alt="">
-                    </div>
-                    <div class="post-data">
-                        <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                        <div class="price">500000
-                                <span>ر.س</span>
-                        </div>
-                        <small class="boxed-only">مدينة الرياض</small>
-                    </div>
-                    <div class="watch-icon">
-                        <i class="fa fa-star"></i>
-                    </div>
-                </a>
-            </div>
-            <!-- slide end -->
-
-            <!-- slide start -->
-            <div class="swiper-slide">
+            @foreach($favorites as $key=>$post)
+                <!-- slide start -->
+                @if($key % 2 == 0)
+                <div class="swiper-slide">
+                @endif
                     <!-- ad item -->
-                    <a href="#!" class="ad-item">
+                    @if($post->isColored)
+                    <a href="{{Url('posts').'/'.$post->id}}" class="ad-item heigh-light">
+                    @else
+                    <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
+                    @endif
+                    @if($post->isBreaking)
+                    <div class="important"><span></span><div>عاجل</div></div>
+                    @endif
                         <div class="image-box">
-                            <img src="assets/images/ad-thumb.jpg" alt="">
+                            <img src="{{Url($post->img)}}" alt="">
                         </div>
                         <div class="post-data">
-                            <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                            <div class="price">500000
+                            <h1 title="{{$post->title}}">{{$post->title}}</h1>
+                            <div class="price">{{$post->price}}
                                     <span>ر.س</span>
                             </div>
                             <small class="boxed-only">مدينة الرياض</small>
                         </div>
-                        <div class="watch-icon">
+                        @if($post->liked == 1)
+                            <div class="watch-icon active">
+                        @else
+                            <div class="watch-icon">
+                        @endif
+                            <input type="hidden" name="liked" class="liked" value="{{$post->liked}}">
+                            <input type="hidden" name="post_id" class="post_id" value="{{$post->id}}">
                             <i class="fa fa-star"></i>
                         </div>
                     </a>
-
-                    <!-- ad item -->
-                    <a href="#!" class="ad-item">
-                        <div class="image-box">
-                            <img src="assets/images/ad-thumb.jpg" alt="">
-                        </div>
-                        <div class="post-data">
-                            <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                            <div class="price">500000
-                                    <span>ر.س</span>
-                            </div>
-                            <small class="boxed-only">مدينة الرياض</small>
-                        </div>
-                        <div class="watch-icon">
-                            <i class="fa fa-star"></i>
-                        </div>
-                    </a>
-            </div>
-            <!-- slide end -->
-
+                @if($key % 2 != 0)
+                </div>
+                @endif
+                <!-- slide end -->
+            @endforeach
             </div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>

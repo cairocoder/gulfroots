@@ -1,8 +1,11 @@
 @extends('layouts.app')
+@section('title', ' - ' . $category->name)
 @section('content')
+    @if($category->sub_id == null)
     <div class="cat-banner" style="background-image:url('{{ asset('front-assets/images/cat.jpg')}}')">
         <h1>{{$category->name}}</h1>
     </div>
+    @endif
     <!-- normal body -->
     <div class="normal-body">
         <div class="big-container">
@@ -145,11 +148,25 @@
                     <div>
                         <div class="row no-margin boxed-ads">
                             @foreach($posts as $key=>$post)
+                            @if($key == 2)
+                                <div class="col l4">
+                                    <div class="google-ads">
+                                        <img src="{{ asset('front-assets/images/ads.png')}}" alt="">
+                                    </div>
+                                </div>
+                            @endif
                                 <div class="col l4">
                                     <!-- ad item -->
-                                    <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
+                                    @if($post->isColored)
+                                        <a href="{{Url('posts').'/'.$post->id}}" class="ad-item heigh-light">
+                                    @else
+                                        <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
+                                    @endif
+                                    @if($post->isBreaking)
+                                        <div class="important"><span></span><div>عاجل</div></div>
+                                    @endif
                                         <div class="image-box">
-                                            <img src="{{ asset($post->img)}}" alt="">
+                                            <img src="{{Url($post->img)}}" alt="">
                                             <div class="price">{{$post->price}}
                                                 <span>ر.س</span>
                                             </div>
@@ -168,11 +185,7 @@
                                     </a>
                                 </div>
                             @endforeach
-                            <div class="col l4">
-                                <div class="google-ads">
-                                    <img src="{{ asset('front-assets/images/ads.png')}}" alt="">
-                                </div>
-                            </div>
+                            
                             <div class="clearfix"></div>
                             <div class="centerd top-50 bottom-50">
                                 <a href="#!" class="butn blue">شاهد الجميع</a>
@@ -183,6 +196,8 @@
                 </div>
 
 
+                @guest
+                @else
                 <div class="strip-head on-top">
                     <div class="mini-tabs">
                         <div class="tab-button active" data-tab-btn=".m25ran">شوهد مؤخرا</div>
@@ -192,181 +207,14 @@
                 </div>
                 <div class="tabs-body">
 
-                    <div class="mini-tab-box m25ran active swiped">
-                        <div class="swiper-container" dir="rtl">
-                        <div class="swiper-wrapper">
-                    
-                        <!-- slide start -->
-                        <div class="swiper-slide">
-                        <!-- ad item -->
-                        <a href="#!" class="ad-item">
-                            <div class="image-box">
-                                <img src="assets/images/ad-thumb.jpg" alt="">
-                            </div>
-                            <div class="post-data">
-                                <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                <div class="price">500000
-                                        <span>ر.س</span>
-                                </div>
-                                <small class="boxed-only">مدينة الرياض</small>
-                            </div>
-                            <div class="watch-icon">
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </a>
-
-                        <!-- ad item -->
-                        <a href="#!" class="ad-item">
-                            <div class="image-box">
-                                <img src="assets/images/ad-thumb.jpg" alt="">
-                            </div>
-                            <div class="post-data">
-                                <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                <div class="price">500000
-                                        <span>ر.س</span>
-                                </div>
-                                <small class="boxed-only">مدينة الرياض</small>
-                            </div>
-                            <div class="watch-icon">
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </a>
-                        </div>
-                        <!-- slide end -->
-
-                        <!-- slide start -->
-                        <div class="swiper-slide">
-                                <!-- ad item -->
-                                <a href="#!" class="ad-item">
-                                    <div class="image-box">
-                                        <img src="assets/images/ad-thumb.jpg" alt="">
-                                    </div>
-                                    <div class="post-data">
-                                        <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                        <div class="price">500000
-                                                <span>ر.س</span>
-                                        </div>
-                                        <small class="boxed-only">مدينة الرياض</small>
-                                    </div>
-                                    <div class="watch-icon">
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </a>
-
-                                <!-- ad item -->
-                                <a href="#!" class="ad-item">
-                                    <div class="image-box">
-                                        <img src="assets/images/ad-thumb.jpg" alt="">
-                                    </div>
-                                    <div class="post-data">
-                                        <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                        <div class="price">500000
-                                                <span>ر.س</span>
-                                        </div>
-                                        <small class="boxed-only">مدينة الرياض</small>
-                                    </div>
-                                    <div class="watch-icon">
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </a>
-                                </div>
-                                <!-- slide end -->
-
-                        </div>
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-button-next"></div>
-                        </div>
-                    </div>
+                    @include('includes.lastseenslider')
 
                     @include('includes.favoriteslider')
 
-                    <div class="mini-tab-box ma7foz">
-                            <div class="swiper-container" dir="rtl">
-                                    <div class="swiper-wrapper">
-                                
-                                    <!-- slide start -->
-                                    <div class="swiper-slide">
-                                    <!-- ad item -->
-                                    <a href="#!" class="ad-item">
-                                        <div class="image-box">
-                                            <img src="assets/images/ad-thumb.jpg" alt="">
-                                        </div>
-                                        <div class="post-data">
-                                            <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                            <div class="price">500000
-                                                    <span>ر.س</span>
-                                            </div>
-                                            <small class="boxed-only">مدينة الرياض</small>
-                                        </div>
-                                        <div class="watch-icon">
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </a>
-
-                                    <!-- ad item -->
-                                    <a href="#!" class="ad-item">
-                                        <div class="image-box">
-                                            <img src="assets/images/ad-thumb.jpg" alt="">
-                                        </div>
-                                        <div class="post-data">
-                                            <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                            <div class="price">500000
-                                                    <span>ر.س</span>
-                                            </div>
-                                            <small class="boxed-only">مدينة الرياض</small>
-                                        </div>
-                                        <div class="watch-icon">
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </a>
-                                    </div>
-                                    <!-- slide end -->
-
-                                    <!-- slide start -->
-                                    <div class="swiper-slide">
-                                            <!-- ad item -->
-                                            <a href="#!" class="ad-item">
-                                                <div class="image-box">
-                                                    <img src="assets/images/ad-thumb.jpg" alt="">
-                                                </div>
-                                                <div class="post-data">
-                                                    <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                                    <div class="price">500000
-                                                            <span>ر.س</span>
-                                                    </div>
-                                                    <small class="boxed-only">مدينة الرياض</small>
-                                                </div>
-                                                <div class="watch-icon">
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                            </a>
-
-                                            <!-- ad item -->
-                                            <a href="#!" class="ad-item">
-                                                <div class="image-box">
-                                                    <img src="assets/images/ad-thumb.jpg" alt="">
-                                                </div>
-                                                <div class="post-data">
-                                                    <h1 title="سيارة بمواصفات خاصة">سيارة بمواصفات خاصة</h1>
-                                                    <div class="price">500000
-                                                            <span>ر.س</span>
-                                                    </div>
-                                                    <small class="boxed-only">مدينة الرياض</small>
-                                                </div>
-                                                <div class="watch-icon">
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                            </a>
-                                            </div>
-                                            <!-- slide end -->
-
-                                    </div>
-                                        <div class="swiper-button-prev"></div>
-                                        <div class="swiper-button-next"></div>
-                                    </div>
-                    </div>
+                    @include('includes.savedsearchslider')
 
                 </div>
+                @endguest
 
 
                 <div class="centerd">
