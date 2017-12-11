@@ -1,5 +1,5 @@
 @extends('layouts.user')
-@section('title', {{$user['name']}})
+@section('title', $user['name'])
 @section('content')
 <!-- profile -->
 <div class="big-container register bottom-100 top-100">

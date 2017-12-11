@@ -59,6 +59,13 @@ class UsersController extends Controller
             $visitor = new User;
             $visitor->id = -1;
         }
+        $active = 0;
+        $archived = 0;
+        foreach($posts as $post){
+            if($post->isArchived)
+                $archived++;
+            else $active++;
+        }
         $posts->map(function ($post) use($visitor){
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
             $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $visitor->id)->count();
@@ -77,7 +84,7 @@ class UsersController extends Controller
             return $post;
         });
         // dd($posts);
-      return view('users.publicads', compact('posts', 'user'));
+      return view('users.publicads', compact('posts', 'user', 'archived', 'active'));
     }
 
     public function ads()
@@ -86,7 +93,14 @@ class UsersController extends Controller
         if(!$user){
             return route('login');
         }
+        $active = 0;
+        $archived = 0;
         $posts = $user->getPosts()->get();
+        foreach($posts as $post){
+            if($post->isArchived)
+                $archived++;
+            else $active++;
+        }
         $posts->map(function ($post) {
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
             $features = $post->getFeatures()->get();
@@ -103,6 +117,7 @@ class UsersController extends Controller
             }
             return $post;
         });
+        
         $favorites = $user->getFavorites()->get();
         $favorites->map(function ($post){
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;

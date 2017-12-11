@@ -182,9 +182,47 @@
 
 
                     <div class="strip-head on-top">اعلانات متشابهه</div>
-
-                    <div class="row no-margin ads-list">
                     
+                    <div class="row no-margin ads-list">
+                        @foreach($alike as $listing)
+                            <div class="col l4">
+                                <!-- ad item -->
+                                <a href="{{Url('posts').'/'.$listing->id}}" class="ad-item">
+                                    <div class="image-box">
+                                        <img src="{{asset($listing->img)}}" alt="">
+                                        <div class="price boxed-only">{{$listing->price}}
+                                            <span>ر.س</span>
+                                        </div>
+                                    </div>
+                                    <h1 title="{{$listing->title}}" class="boxed-only">{{$listing->title}}</h1>
+                                    <div class="post-data normal-only">
+                                        <h1 title="{{$listing->title}}">{{$listing->title}}</h1>
+                                        <div class="price">{{$listing->price}}
+                                            <span>ر.س</span>
+                                        </div>
+                                        <div class="desc">
+                                            {{$listing->short_des}}
+                                        </div>
+                                    </div>
+                                    <small class="boxed-only">مدينة الرياض</small>
+                                    <div class="info normal-only">
+                                        <h3>السعودية
+                                            <small>الرياض</small>
+                                        </h3>
+                                        <div class="time">{{  strftime("%b %d %Y",strtotime($listing->created_at))}}</div>
+                                    </div>
+                                    @if($listing->liked == 1)
+                                        <div class="watch-icon active">
+                                    @else
+                                        <div class="watch-icon">
+                                    @endif
+                                        <input type="hidden" name="liked" class="liked" value="{{$listing->liked}}">
+                                        <input type="hidden" name="post_id" class="post_id" value="{{$listing->id}}">
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
                     </div>
 
                     <div class="centerd">
@@ -199,6 +237,7 @@
                             <div class="tab-button" data-tab-btn=".ma7foz">بحث محفوظ</div>
                         </div>
                     </div>
+                    
                     <div class="tabs-body">
 
                         @include('includes.lastseenslider')
@@ -273,7 +312,7 @@
                         </div>
 
                         <div class="borderd ebay">
-                            <a href="#!" target="_blank">
+                            <a href="{{Url('user/'.$seller->id)}}" target="_blank">
                                 <i class="fa fa-link"></i>
                                 رابط التاجر</a>
 
