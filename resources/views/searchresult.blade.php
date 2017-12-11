@@ -187,11 +187,11 @@
                         <div class="centerd">
                             <img src="assets/images/width-ads.jpg" alt="">
                         </div>
-                        @if(count($posts) > 0)
+                        @if(count($top) > 0)
                         <div class="strip-head blue on-top">افضل الاعلانات</div>
 
                         <div class="row no-margin ads-list">
-                            @foreach($posts as $post)
+                            @foreach($top as $post)
                                 <div class="col l4">
                                     <!-- ad item -->
                                     @if($post->isColored)
