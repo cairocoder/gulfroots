@@ -33,6 +33,7 @@ Route::get('/allmessages/{id}', 'MessagesController@showAllMessages');
 Route::post('/messages', 'MessagesController@SendMessage');
 Route::get('/savedsearch', 'UsersController@savedsearch')->name('savedsearch');
 Route::get('/posts/{id}', 'PostsController@ShowPost');
+Route::post('/report/{id}', 'PostsController@ReportPost');
 
 Route::post('/search', 'SearchController@search');
 Route::post('/favorite/posts/{id}', 'PostsController@toggleFavorite');

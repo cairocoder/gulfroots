@@ -61,7 +61,7 @@
 
     <!-- search bar -->
     <div class="main-search">
-        <input type="text" placeholder="ابحث عن ..." name="search_query">
+        <input type="text" placeholder="" name="search_query">
     </div>
 
     <!-- city box -->
@@ -69,7 +69,7 @@
         <div class="city-form">
         <i  class="fa fa-map-marker"></i>
         <input type="text" placeholder="المدينة" name="search_city">
-        <select>
+        <select name="search_distance">
             <option selected>0 كم</option>
             <option>5 كم</option>
             <option>10 كم</option>

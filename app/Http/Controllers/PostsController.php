@@ -11,6 +11,7 @@ use App\Categories;
 use App\User;
 use App\CommercialUsers;
 use App\Post_Photos;
+use App\Reports;
 
 class PostsController extends Controller
 {
@@ -148,5 +149,13 @@ class PostsController extends Controller
         }
         $parents = array_reverse($parents);
         return view('categories.maincategory', compact('posts', 'category', 'parents'));
+    }
+
+    public function ReportPost(Request $request, $id){
+        Reports::create([
+            'type'=> $request->input('type'),
+            'post_id' => $id,
+        ]);
+        return route('landing');
     }
 }

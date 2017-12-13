@@ -17,8 +17,8 @@ class CreateReportsTable extends Migration
             $table->increments('id');
             $table->integer('post_id');
             $table->integer('type');
-            $table->integer('status');
-            $table->integer('seen');
+            $table->integer('status')->default(0);
+            $table->integer('seen')->default(0);
             $table->timestamps();
         });
     }

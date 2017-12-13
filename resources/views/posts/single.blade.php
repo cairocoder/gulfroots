@@ -53,24 +53,25 @@
                                     <i class="fa fa-ban"></i> ابلغ عن اعلان مسئ
                                 </a>
                                 <div class="report-box my-drop">
-                                    <form>
+                                    <form method="POST" action="{{Url('report/'.$post->id)}}">
+                                        {{csrf_field()}}
                                         <label class="checkbox blued">
-                                            <input type="checkbox"><span></span> اعلان مكرر
+                                            <input type="checkbox" name="type" value="1"><span></span> اعلان مكرر
                                         </label>
                                         <label class="checkbox blued">
-                                            <input type="checkbox"><span></span> اعلان زائف
+                                            <input type="checkbox" name="type" value="2"><span></span> اعلان زائف
                                         </label>
                                         <label class="checkbox blued">
-                                            <input type="checkbox"><span></span> تصنيف خاطئ
+                                            <input type="checkbox" name="type" value="3"><span></span> تصنيف خاطئ
                                         </label>
                                         <label class="checkbox blued">
-                                            <input type="checkbox"><span></span> غير متاحة
+                                            <input type="checkbox" name="type" value="4"><span></span> غير متاحة
                                         </label>
                                         <label class="checkbox blued">
-                                            <input type="checkbox"><span></span> المعلن لا يستجيب
+                                            <input type="checkbox" name="type" value="5"><span></span> المعلن لا يستجيب
                                         </label>
                                         <label class="checkbox blued">
-                                            <input type="checkbox"><span></span> اخري
+                                            <input type="checkbox" name="type" value="6"><span></span> اخري
                                         </label>
                                         <input type="submit" value="تبليغ">
                                     </form>

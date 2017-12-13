@@ -26,6 +26,10 @@ class SearchController extends Controller
             // Using the Laravel Scout syntax to search the products table.
             $posts = Posts::search($request->get('search_query'))->where('isArchived', 0)->where('isApproved', 1)->where('isinTop', 0)->get();
             $top = Posts::search($request->get('search_query'))->where('isArchived', 0)->where('isApproved', 1)->where('isinTop', 1)->get();
+            foreach($posts as $key=>$post){
+                $filters = $post->filters()->get();
+                // dd($filters);
+            }
             $top = $top->shuffle();
             $top = $top->random(3);
             // If there are results return them, if none, return the error message.
@@ -33,6 +37,8 @@ class SearchController extends Controller
                 $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
                 $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
                 $features = $post->getFeatures()->get();
+                // $filters = $post->filters()->with('filters_groups')->whereHas('id', 1)->get();
+
                 foreach($features as $feature){
                     if($feature->type == 1){
                         $post['isColored'] = 1;
