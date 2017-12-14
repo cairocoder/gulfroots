@@ -27,7 +27,7 @@ class PostsController extends Controller
         $seller = User::where('id', $post->user_id)->first();
         $seller->whatsapp_number = "";//CommercialUsers::where('id', $post->user_id)->first()->whatsapp_number;
         $latest = Posts::where('user_id', $post->user_id)->where('isArchived', 0)->where('isApproved', 1)->orderBy('created_at', 'desc')->take(3)->get();
-        $post_photos = Post_Photos::with('post')->get();
+        $post_photos = Post_Photos::with('post')->where('post_id', $id)->get();
         $latest->map(function ($post) use ($user) {
             $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
