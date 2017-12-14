@@ -40,10 +40,9 @@
                 @endif
                 <!-- slide end -->
             @endforeach
-            @if(count($favorites) % 2 != 0)
+            @if(count($favorites) > 0 && count($favorites) % 2 == 0)
             </div>
             @endif
-            </div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
             </div>

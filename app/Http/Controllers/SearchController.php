@@ -73,7 +73,7 @@ class SearchController extends Controller
             return view('searchresult', compact('posts', 'parents', 'top'));
         }else{
             $category = $request->get('cat-id');
-            $ids = $this->buildConditions($category);
+            $ids = $this->getIdsOfChildrenCategories($category);
             $posts = collect();
             $top = collect();
             foreach($ids as $id){
@@ -128,7 +128,7 @@ class SearchController extends Controller
         }
     }
 
-    public function buildConditions($category){
+    public function getIdsOfChildrenCategories($category){
         $ids = [];
         $categories = Categories::all();
         foreach($categories as $cat){

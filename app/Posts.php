@@ -10,8 +10,8 @@ class Posts extends Model
     use Searchable;
     //
     protected $table = 'posts';
-    protected $fillable = ['title', 'short_des', 'long_des', 'detailed_address', 'seller_name', 'seller_email',
-        'seller_contact_no', 'longitude', 'latitude', 'price', 'sub_category_id', 'user_id'];
+    protected $fillable = ['title', 'short_des', 'long_des', 'detailed_address', 'seller_name', 'seller_email', 'seller_contact_no', 
+        'longitude', 'latitude', 'price', 'sub_category_id', 'user_id', 'search_sentence'];
 
     public function category()
     {

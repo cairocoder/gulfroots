@@ -9,10 +9,9 @@ class FiltersGroups extends Model
     protected $table 	= 'filters_groups';
     protected $fillable = ['group_name', 'type'];
 
-    public function groupFilters()
+    public function getFilters()
     {
         return $this->hasMany('App\Filters', 'group_id');
-//      return $this->belongsToMany('App\GroupsFilters','filters', 'id','id' );
     }
     public function categories()
     {

@@ -31,10 +31,15 @@
                             <input type="text" class="in-mini" name="price" placeholder="السعر">
                             @foreach($filters as $key => $filter)
                             <div>
+                                </br>
                                 {{ $key }} :
                                 @foreach($filter as $value)
                                  &nbsp;<label class="checkbox blued">
-                                        <input type="{{$value->type}}" name="{{$key}}[]" value="{{$value->id}}"><span></span> {{$value->name}}
+                                    @if($SupplyOrDemand == 'Supply')
+                                        <input type="radio" name="{{$key}}[]" value="{{$value->id}}"><span></span> {{$value->name}}
+                                    @else
+                                        <input type="checkbox" name="{{$key}}[]" value="{{$value->id}}"><span></span> {{$value->name}}
+                                    @endif
                                        </label>
                                 @endforeach
                             </div>

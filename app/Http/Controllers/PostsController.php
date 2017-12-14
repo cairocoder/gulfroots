@@ -26,7 +26,8 @@ class PostsController extends Controller
         $post->liked = Favorites::where('post_id', $id)->where('user_id', $user->id)->count();
         $seller = User::where('id', $post->user_id)->first();
         $seller->whatsapp_number = "";//CommercialUsers::where('id', $post->user_id)->first()->whatsapp_number;
-        $latest = Posts::where('user_id', $post->user_id)->where('isArchived', 0)->where('isApproved', 1)->orderBy('created_at', 'desc')->take(3)->get();
+        $latest = Posts::where('user_id', $post->user_id)->where('isArchived', 0)->where('isApproved', 1)->where('id', '!=', $id)->orderBy('created_at', 'desc')->get();
+        $latest = $latest->splice(0, 3);
         $post_photos = Post_Photos::with('post')->where('post_id', $id)->get();
         $latest->map(function ($post) use ($user) {
             $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
@@ -51,7 +52,8 @@ class PostsController extends Controller
             return $post;
         });
         $parents = [];
-        $alike = Posts::orderBy(DB::raw('RAND()'))->where('isArchived', 0)->where('isApproved', 1)->where('sub_category_id', $post->sub_category_id)->where('id', '!=', $post->id)->take(3)->get();
+        $alike = Posts::orderBy(DB::raw('RAND()'))->where('id', '!=', $id)->where('isArchived', 0)->where('isApproved', 1)->where('sub_category_id', $post->sub_category_id)->where('id', '!=', $post->id)->get();
+        $alike = $alike->splice(0, 3);
         $alike->map(function ($post) use ($user) {
             $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
@@ -139,6 +141,7 @@ class PostsController extends Controller
                     $post['isBreaking'] = 1;
                 }
             }
+            return $post;
         });
         $parents = [];
         $ancestor = Categories::findorfail($category_id);

@@ -31,7 +31,6 @@
     <!-- <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/authy-forms.js/2.2/form.authy.min.js"></script>
-</head>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -130,30 +129,19 @@
         <!-- Menu Start -->
             <nav>
                 <ul class="start {{Request::is('/categories*')?"active":""}}">
-                    @if(count($categories) > 0)
-                        @foreach($categories as $category)
-                            <li><a href="{{Url('/')}}/categories/{{$category->id}}">{{$category->name}}</a>
-                              @if($category->id === 6)
-                              @break
-                              @endif
-                                <ul class="level2">
-                                    @if(count($subcategory) > 0)
-                                        @foreach($subcategory as $subcat)
-                                            @if($subcat->sub_id == $category->id)
-                                                <li><a href="{{Url('/')}}/categories/{{$category->id}}">{{$subcat->name}}</a>
-                                                </li>
-                                            @endif
-                                        @endforeach
-                                    @else
-                                    @endif
-                                </ul>
-                            </li>
-                        @endforeach
-                    @else
-                    @endif
+                    @foreach($categories as $category)
+                        <li><a href="{{Url('/')}}/categories/{{$category->id}}">{{$category->name}}</a>
+                            <ul class="level2">
+                                @foreach($category->subcategories as $subcat)
+                                    <li><a href="{{Url('/')}}/categories/{{$subcat->id}}">{{$subcat->name}}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endforeach
                 </ul>
             </nav>
-            <!-- Menu End -->
+        <!-- Menu End -->
 </header>
 <!-- Header End -->
 <div class="">

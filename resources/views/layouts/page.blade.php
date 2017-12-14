@@ -29,7 +29,6 @@
     <!-- <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/authy-forms.js/2.2/form.authy.min.js"></script>
-</head>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,7 +40,7 @@
 <body class="white-header">
 <!-- Header Strat -->
 <header>
-    @guest
+        @guest
         <div class="header-box">
             <div class="header-top">
                 <div class="row no-margin">
@@ -126,32 +125,21 @@
             </div>
         @endguest
         <!-- Menu Start -->
-            <nav>
-                <ul class="start {{Request::is('/categories*')?"active":""}}">
-                    @if(count($categories) > 0)
-                        @foreach($categories as $category)
-                            <li><a href="{{Url('/')}}/categories/{{$category->id}}">{{$category->name}}</a>
-                              @if($category->id === 6)
-                              @break
-                              @endif
-                                <ul class="level2">
-                                    @if(count($subcategory) > 0)
-                                        @foreach($subcategory as $t)
-                                            @if($t->sub_id == $category->id)
-                                                <li><a href="{{Url('/')}}/categories/{{$category->id}}">{{$t->name}}</a>
-                                                </li>
-                                            @endif
-                                        @endforeach
-                                    @else
-                                    @endif
-                                </ul>
-                            </li>
-                        @endforeach
-                    @else
-                    @endif
-                </ul>
-            </nav>
-            <!-- Menu End -->
+        <nav>
+            <ul class="start {{Request::is('/categories*')?"active":""}}">
+                @foreach($categories as $category)
+                    <li><a href="{{Url('/')}}/categories/{{$category->id}}">{{$category->name}}</a>
+                        <ul class="level2">
+                            @foreach($category->subcategories as $subcat)
+                                <li><a href="{{Url('/')}}/categories/{{$subcat->id}}">{{$subcat->name}}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                @endforeach
+            </ul>
+        </nav>
+        <!-- Menu End -->
 </header>
 <!-- Header End -->
 <!-- search & spesial products -->
@@ -160,215 +148,8 @@
 
 <div class="big-container">
 
-<!-- filter start -->
-<div class="main-filter">
-<form>
-<!-- select dropdown start -->
-<div class="select-cat">
-<!-- hidden input to catch the id -->
-<input id="cat-id" type="text" hidden>
-<!-- select icon in the search bar -->
-<div class="select-head">
-<div class="select-icon">
-<i class="fa fa-bars"></i>
-</div>
-<i class="fa fa-caret-down"></i>
-</div>
-<!-- dropdown wrapper -->
-<div class="select-box">
-<!-- select all cats -->
-<div class="select-group" data-cat-icon="bars" data-cat-id="0">
-<i class="fa fa-bars"></i> جميع الاقسام
-</div>
-<!-- select group level 1 start  -->
-<div class="select-group" data-cat-icon="car" data-cat-id="1">
-<i class="fa fa-car"></i> السيارات والمركبات
-<div class="group-toggle"><i class="fa fa-caret-down"></i></div>
-
-<!-- select group level 2 start  -->
-<div class="group-box">
-<!-- group item -->
-<div class="select-item-level1" data-cat-id="2">
-  رابط
-  <div class="group-toggle"><i class="fa fa-caret-down"></i></div>
-
-  <!-- select group level 3 start  -->
-  <div class="group-box2">
-      <!-- group item -->
-      <div class="select-item-level2" data-cat-id="3">
-              رابط
-      </div>
-      <!-- group item -->
-      <div class="select-item-level2" data-cat-id="4">
-              رابط
-      </div>
-      <!-- group item -->
-      <div class="select-item-level2" data-cat-id="5">
-              رابط
-      </div>
-      <!-- group item -->
-      <div class="select-item-level2" data-cat-id="6">
-              رابط
-      </div>
-  </div>
-  <!-- select group level 3 end  -->
-
-</div>
-<!-- group item -->
-<div class="select-item-level1" data-cat-id="7">
-      رابط
-      <div class="group-toggle"><i class="fa fa-caret-down"></i></div>
-
-      <!-- select group level 3 start  -->
-      <div class="group-box2">
-          <!-- group item -->
-          <div class="select-item-level2" data-cat-id="8">
-                  رابط
-          </div>
-          <!-- group item -->
-          <div class="select-item-level2" data-cat-id="9">
-                  رابط
-          </div>
-          <!-- group item -->
-          <div class="select-item-level2" data-cat-id="10">
-                  رابط
-          </div>
-          <!-- group item -->
-          <div class="select-item-level2" data-cat-id="11">
-                  رابط
-          </div>
-      </div>
-      <!-- select group level 3 end  -->
-
-</div>
-<!-- group item -->
-<div class="select-item-level1" data-cat-id="12">
-      رابط
-</div>
-</div>
-<!-- select group level 2 end  -->
-
-</div>
-<!-- select group level 1 end  -->
-
-<!-- select group level 1 start  -->
-<div class="select-group" data-cat-icon="ship" data-cat-id="13">
-<i class="fa fa-ship"></i>قوارب والدراجات المائية
-<div class="group-toggle"><i class="fa fa-caret-down"></i></div>
-
-<!-- select group level 2 start  -->
-<div class="group-box">
-  <!-- group item -->
-  <div class="select-item-level1" data-cat-id="14">
-      رابط
-      <div class="group-toggle"><i class="fa fa-caret-down"></i></div>
-
-      <!-- select group level 3 start  -->
-      <div class="group-box2">
-          <!-- group item -->
-          <div class="select-item-level2" data-cat-id="15">
-                  رابط
-          </div>
-          <!-- group item -->
-          <div class="select-item-level2" data-cat-id="16">
-                  رابط
-          </div>
-          <!-- group item -->
-          <div class="select-item-level2" data-cat-id="17">
-                  رابط
-          </div>
-          <!-- group item -->
-          <div class="select-item-level2" data-cat-id="18">
-                  رابط
-          </div>
-      </div>
-      <!-- select group level 3 end  -->
-
-  </div>
-  <!-- group item -->
-  <div class="select-item-level1" data-cat-id="19">
-          رابط
-          <div class="group-toggle"><i class="fa fa-caret-down"></i></div>
-
-          <!-- select group level 3 start  -->
-          <div class="group-box2">
-              <!-- group item -->
-              <div class="select-item-level2" data-cat-id="20">
-                      رابط
-              </div>
-              <!-- group item -->
-              <div class="select-item-level2" data-cat-id="21">
-                      رابط
-              </div>
-              <!-- group item -->
-              <div class="select-item-level2" data-cat-id="22">
-                      رابط
-              </div>
-              <!-- group item -->
-              <div class="select-item-level2" data-cat-id="23">
-                      رابط
-              </div>
-          </div>
-          <!-- select group level 3 end  -->
-
-  </div>
-  <!-- group item -->
-  <div class="select-item-level1" data-cat-id="24">
-          رابط
-  </div>
-</div>
-<!-- select group level 2 end  -->
-
-</div>
-<!-- select group level 1 end  -->
-</div>
-</div>
-<!-- select dropdown end -->
-
-<!-- search bar -->
-<div class="main-search">
-<input type="text" placeholder="ابحث عن ...">
-</div>
-
-<!-- city box -->
-<div class="city-box">
-<div class="city-form">
-<i  class="fa fa-map-marker"></i>
-<input type="text" placeholder="المدينة">
-<select>
-<option selected>0 كم</option>
-<option>5 كم</option>
-<option>10 كم</option>
-<option>20 كم</option>
-<option>40 كم</option>
-<option>80 كم</option>
-<option>100 كم</option>
-</select>
-</div>
-</div>
-
-<!-- submit -->
-<input type="submit" value="إبحث">
-
-
-
-</form>
-</div>
-<!-- filter end -->
-
-<!-- spical inside -->
-<div class="spical-inside">
-<div class="spical-head">المنتجات المميزة</div>
-@if(count($spechialcategory) > 0)
-@foreach($spechialcategory as $spechial)
-<a href="{{Url('/')}}/categories/{{$spechial->id}}">{{$spechial->slug}}</a>
-@if($spechial->id === 10)
-@break
-@endif
-@endforeach
-@else
-@endif
-</div>
+    @include('includes.searchbar')
+    @include('includes.specialcategories')
 <div class="">
     @yield('content')
 </div>

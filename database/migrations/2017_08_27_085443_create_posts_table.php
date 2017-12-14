@@ -31,6 +31,7 @@ class CreatePostsTable extends Migration
             $table->integer('status');
             $table->integer('sub_category_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->text('search_sentence')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

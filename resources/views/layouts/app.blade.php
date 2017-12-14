@@ -131,29 +131,19 @@
         <!-- Menu Start -->
             <nav>
                 <ul class="start {{Request::is('/categories*')?"active":""}}">
-                    @if(count($categories) > 0)
-                        @foreach($categories as $category)
-                            <li><a href="{{Url('/')}}/categories/{{$category->id}}">{{$category->name}}</a>
-                              @if($category->id === 6)
-                              @break
-                              @endif
-                                <ul class="level2">
-                                    @if(count($subcategory) > 0)
-                                        @foreach($subcategory as $t)
-                                            @if($t->sub_id == $category->id)
-                                                <li><a href="{{Url('/')}}/categories/{{$t->id}}">{{$t->name}}</a></li>
-                                            @endif
-                                        @endforeach
-                                    @else
-                                    @endif
-                                </ul>
-                            </li>
-                        @endforeach
-                    @else
-                    @endif
+                    @foreach($categories as $category)
+                        <li><a href="{{Url('/')}}/categories/{{$category->id}}">{{$category->name}}</a>
+                            <ul class="level2">
+                                @foreach($category->subcategories as $subcat)
+                                    <li><a href="{{Url('/')}}/categories/{{$subcat->id}}">{{$subcat->name}}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endforeach
                 </ul>
             </nav>
-            <!-- Menu End -->
+        <!-- Menu End -->
 </header>
 <!-- Header End -->
 <div class="">

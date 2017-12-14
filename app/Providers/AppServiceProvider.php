@@ -25,10 +25,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('layouts.user', function($view) {
-            $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-            $subcategory = Categories::where('sub_id', '!=', null)->get();
-            $spechialcategory = Categories::where('slug', '!=', null)->get();
-            $view->with(compact('categories', 'subcategory', 'spechialcategory'));
+            $categories = $this->getCategoriesForLayouts();
+            $view->with(compact('categories'));
+        });
+        view()->composer('layouts.app', function($view) {
+            $categories = $this->getCategoriesForLayouts();
+            $view->with(compact('categories'));
+        });
+        view()->composer('layouts.page', function($view) {
+            $categories = $this->getCategoriesForLayouts();
+            $view->with(compact('categories'));
         });
         view()->composer('posts.ad2', function($view) {
             $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
@@ -37,18 +43,6 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('posts.ad3', function($view) {
             $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
             $view->with(compact('categories'));
-        });
-        view()->composer('layouts.app', function($view) {
-            $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-            $subcategory = Categories::where('sub_id', '!=', null)->get();
-            $spechialcategory = Categories::where('slug', '!=', null)->get();
-            $view->with(compact('categories', 'subcategory', 'spechialcategory'));
-        });
-        view()->composer('layouts.page', function($view) {
-            $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-            $subcategory = Categories::where('sub_id', '!=', null)->get();
-            $spechialcategory = Categories::where('slug', '!=', null)->get();
-            $view->with(compact('categories', 'subcategory', 'spechialcategory'));
         });
         view()->composer('includes.searchbar', function($view) {
           $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
@@ -82,7 +76,8 @@ class AppServiceProvider extends ServiceProvider
             $view->with(compact('favorites'));
           });
         view()->composer('home', function($view) {
-            $features = PostFeatures::orderBy(DB::raw('RAND()'))->where('type', 2)->orderBy('id', 'desc')->take(12)->get();
+            $features = PostFeatures::orderBy(DB::raw('RAND()'))->where('type', 2)->orderBy('id', 'desc')->get();
+            $features = $features->splice(0, 12);
             $latest = collect();
             foreach($features as $feature){
                 $latest = $latest->merge($feature->getPost()->get());
@@ -141,7 +136,8 @@ class AppServiceProvider extends ServiceProvider
             $lastseen = collect();
             $visitor = DB::table('kryptonit3_counter_visitor')->where('visitor', $id)->first();
             if($visitor){
-              $visits = DB::table('kryptonit3_counter_page_visitor')->where('visitor_id', $visitor->id)->orderBy('created_at', 'desc')->take(12)->get();
+              $visits = DB::table('kryptonit3_counter_page_visitor')->where('visitor_id', $visitor->id)->orderBy('created_at', 'desc')->get();
+              $visits = $visits->splice(0, 12);
               $visitedList = collect();
               foreach($visits as $visit){
                 $visitedList = $visitedList->merge(DB::table('kryptonit3_counter_page')->where('id', $visit->page_id)->get());
@@ -191,7 +187,8 @@ class AppServiceProvider extends ServiceProvider
             $lastseen = collect();
             $visitor = DB::table('kryptonit3_counter_visitor')->where('visitor', $id)->first();
             if($visitor){
-              $visits = DB::table('kryptonit3_counter_page_visitor')->where('visitor_id', $visitor->id)->orderBy('created_at', 'desc')->take(12)->get();
+              $visits = DB::table('kryptonit3_counter_page_visitor')->where('visitor_id', $visitor->id)->orderBy('created_at', 'desc')->get();
+              $visits = $visits->splice(0, 12);              
               $visitedList = collect();
               foreach($visits as $visit){
                 $visitedList = $visitedList->merge(DB::table('kryptonit3_counter_page')->where('id', $visit->page_id)->get());
@@ -248,5 +245,45 @@ class AppServiceProvider extends ServiceProvider
         $cookie = Cookie::get(env('COUNTER_COOKIE', 'kryptonit3-counter'));
         $visitor = ($cookie !== false) ? $cookie : $_SERVER['REMOTE_ADDR'];
         return hash("SHA256", env('APP_KEY') . $visitor);
+    }
+
+    private function getIdsOfChildrenCategories($category){
+        $ids = [];
+        $categories = Categories::all();
+        foreach($categories as $cat){
+            if($cat->id == $category){
+                array_push($ids, $cat->id);
+            }else{
+                $tmp = $cat->sub_id;
+                while($tmp != NULL){
+                    if($tmp == $category){
+                        array_push($ids, $cat->id);
+                    }
+                    $tmp = Categories::where('id', $tmp)->first()->sub_id;
+                }
+            }
+        }
+        return $ids;
+    }
+
+    private function getCategoriesForLayouts(){
+        $categories = Categories::where('sub_id', null)->get();
+        $allsubcategories = Categories::where('sub_id', '!=', null)->get();
+        $categories->map(function ($category) use($allsubcategories){
+            $ids = $this->getIdsOfChildrenCategories($category->id);
+            $category['posts_count'] = 0;
+            $subcategories = [];
+            foreach($ids as $id){
+                $category['posts_count'] += Posts::where('sub_category_id', $id)->count();  
+            }
+            foreach($allsubcategories as $sub){
+                if($sub->sub_id == $category->id)
+                    array_push($subcategories, $sub);
+            }
+            $category['subcategories'] = array_slice($subcategories, 0, 8);
+            return $category;
+        });
+        $categories = $categories->sortByDesc('posts_count')->splice(0, 6);
+        return $categories;
     }
 }

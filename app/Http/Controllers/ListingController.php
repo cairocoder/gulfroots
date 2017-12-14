@@ -10,6 +10,7 @@ use App\Posts;
 use Ramsey\Uuid\Uuid;
 use App\PostsDictionary;
 use App\Categories;
+use App\Filters;
 use App\Post_Photos;
 use App\PostFeatures;
 
@@ -30,7 +31,7 @@ class ListingController extends Controller
             array_push($parents, $ancestor->id);
         while($ancestor->sub_id != null){
             $ancestor = Categories::findorfail($ancestor->sub_id);
-            array_push($parents,$ancestor->id);
+            array_push($parents, $ancestor->id);
         }
         $ancestor = $ancestor->id;
         if($subcategories->isEmpty()){
@@ -46,8 +47,12 @@ class ListingController extends Controller
     public function ShowNewProduct(Request $request){
         $subcategory_id = $request->input('subcategory_id');
         $SupplyOrDemand = $request->input('SupplyOrDemand');
+        $filters = $this->getFiltersOfSubCategory($subcategory_id);
+        return view('posts.newpost', compact( 'subcategory_id', 'SupplyOrDemand', 'filters'));
+    }
+
+    public function getFiltersOfSubCategory($subcategory_id){
         $groupsoffilters = [];
-        //
         $ancestor = Categories::findorfail($subcategory_id);
         $filterss = $ancestor->filtersgroups()->get();
         foreach ($filterss as $item) {
@@ -60,24 +65,17 @@ class ListingController extends Controller
                 $groupsoffilters[$item['id']] = $item;
             }
         }
-//        dd($groupsoffilters);
         $filters = [];
         foreach ($groupsoffilters as $key => $group) {
-            $tmp = FiltersGroups::findorfail($key)->first();
-//            dd($group->first());
+            $tmp = FiltersGroups::findorfail($group->id)->first();
             $var = $group['group_name'];
-//            dd($var);
-            $filters[$var] = $tmp->groupFilters()->get();
-//            array_push($filters, $var => $tmp->groupFilters()->get());
+            $filters[$var] = $group->getFilters()->get();
         }
-//        dd($filters);
-        $ancestor = $ancestor->id;
-        //
-        return view('posts.newpost', compact( 'subcategory_id', 'SupplyOrDemand', 'filters'));
+        return $filters;
     }
 
     public function CreateNewPost(Request $request, Authenticatable $user){
-        // dd($request);
+        $search_sentence = "";
         $post = Posts::create([
             'name' => $request->input('title'),
             'short_des' => $request->input('short_des'),
@@ -90,7 +88,23 @@ class ListingController extends Controller
             'user_id' => $user->id,
             'isinTop' => $request->input('isinTopDecision'),
         ]);
-        $post->searchable();
+        $filters = $this->getFiltersOfSubCategory($request->input('subcategory_id'));
+        foreach($filters as $group_name=>$value){
+            // dd($request->input($group_name));
+            $var = $request->input($group_name);
+            // dd($var[0]);
+            for($i = 0; $i < count($var); ++$i){
+                // $another_var = ;
+                // dd($another_var);
+                $search_sentence .= ' ' . Filters::where('id', $var[$i])->first()->name;
+            }
+        }
+        $ancestor = Categories::findorfail($post->sub_category_id);
+        $search_sentence .= ' ' . $ancestor->name;
+        while($ancestor->sub_id != null){
+            $ancestor = Categories::findorfail($ancestor->sub_id);
+            $search_sentence .= ' ' . $ancestor->name;
+        }
         $hash = $this->pageId('posts', $post->id);
         PostsDictionary::create([
             'hash' => $hash,
@@ -106,11 +120,11 @@ class ListingController extends Controller
             ]);
         }
         $cost = 0;
-        // dd($post->created_at->addDays(10));
         //Package
         if($request->input('pack') == 1){
             //isColored Feature
             if($request->input('isColoredDecision') == 1){
+                $search_sentence .= ' isColored';
                 PostFeatures::create([
                     'type' => 1,
                     'post_id' => $post->id,
@@ -119,6 +133,7 @@ class ListingController extends Controller
             }
             //isinMain Feature
             if($request->input('isinMainDecision') == 1){
+                $search_sentence .= ' isinMain';
                 PostFeatures::create([
                     'type' => 2,
                     'post_id' => $post->id,
@@ -127,6 +142,7 @@ class ListingController extends Controller
             }
             //isinTop Feature
             if($request->input('isinTopDecision') == 1){
+                $search_sentence .= ' isinTop';
                 PostFeatures::create([
                     'type' => 3,
                     'post_id' => $post->id,
@@ -135,6 +151,7 @@ class ListingController extends Controller
             }
         }elseif($request->input('pack') == 2){
             //isColored Feature
+            $search_sentence .= ' isColored';
             PostFeatures::create([
                 'type' => 1,
                 'post_id' => $post->id,
@@ -142,6 +159,7 @@ class ListingController extends Controller
             ]);
             //isinMain Feature
             if($request->input('isinMainDecision') == 1){
+                $search_sentence .= ' isinMain';
                 PostFeatures::create([
                     'type' => 2,
                     'post_id' => $post->id,
@@ -150,6 +168,7 @@ class ListingController extends Controller
             }
             //isinTop Feature
             if($request->input('isinTopDecision') == 1){
+                $search_sentence .= ' isinTop';
                 PostFeatures::create([
                     'type' => 3,
                     'post_id' => $post->id,
@@ -175,8 +194,11 @@ class ListingController extends Controller
                 'post_id' => $post->id,
                 'expiry_date' => $post->created_at->addDays(30),
             ]);
+            $search_sentence .= ' isColored';
+            $search_sentence .= ' isinMain';
             //isinTop Feature
             if($request->input('isinTopDecision') == 1){
+                $search_sentence .= ' isinTop';
                 PostFeatures::create([
                     'type' => 3,
                     'post_id' => $post->id,
@@ -208,16 +230,23 @@ class ListingController extends Controller
                 'post_id' => $post->id,
                 'expiry_date' => $post->created_at->addDays(30),
             ]);
+            $search_sentence .= ' isColored';
+            $search_sentence .= ' isinMain';
+            $search_sentence .= ' isinTop';
         }
         //isBreaking Feature
         if($request->input('isBreaking') == 1){
+            $search_sentence .= ' isBreaking';
             PostFeatures::create([
                 'type' => 5,
                 'post_id' => $post->id,
                 'expiry_date' => $post->created_at->addDays($request->input('isinTop')),
             ]);
         }
-
+        // dd($search_sentence);
+        $post->search_sentence = $search_sentence;
+        $post->save();
+        $post->searchable();
         return redirect('posts/'.$post->id);
     }
 

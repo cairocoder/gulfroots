@@ -25,18 +25,22 @@ class PostsTableSeeder extends Seeder
                 'seller_email' => $faker->email,
                 'seller_contact_no' => $faker->phoneNumber,
                 'price' => $faker->numberBetween(1000,2500),
-                'sub_category_id' => $faker->numberBetween(19,120),
+                'sub_category_id' => $faker->numberBetween(19,50),
                 'user_id' => $faker->numberBetween(1,20),
                 'isArchived' => $faker->numberBetween(0, 1),
                 'isApproved' => $faker->numberBetween(0, 1),
                 'isinTop' => $faker->numberBetween(0, 1),
             ]);
-            $post->searchable();
+            // $search_sentence .= ' ' . $ancestor->name;
+            //add post_features
             DB::table('post_features')->insert([
                 'type' => $faker->numberBetween(1,5),
                 'post_id' => $i,
                 'expiry_date' => $post->created_at->addDays($faker->numberBetween(7,30)),
             ]);
+            //add post filters
+            if($post)
+            $post->searchable();
             $hash = $this->pageId('posts', $post->id);
             DB::table('posts_dictionaries')->insert([
                 'hash' => $hash,
@@ -51,7 +55,6 @@ class PostsTableSeeder extends Seeder
                 ]);
             }
         }
-        
     }
     private function pageId($identifier, $id = null)
     {
