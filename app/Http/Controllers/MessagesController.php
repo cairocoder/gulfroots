@@ -63,20 +63,21 @@ class MessagesController extends Controller
       {
 
       }
+      
       public function SendMessage(Request $request)
       {
-        //dd($request);
-        $body = $request->input('message-data');
+        // dd($request);
+        $body   = $request->input('message-data');
         $userId = $request->input('_id');
         if ($conversationId = Talk::isConversationExists($userId)) {
-        Talk::sendMessage($conversationId, $body);
-        return redirect('/messages');
+          Talk::sendMessage($conversationId, $body);
+          return back();
+        } else {
+          Talk::sendMessageByUserId($userId, $body);
+          return back();
         }
-        else {
-          $message = Talk::sendMessage($conversationId, $body);
-        }
-
       }
+
       public function DeleteMessage(Request $request, $id)
       {
 
