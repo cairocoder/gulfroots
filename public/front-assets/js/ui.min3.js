@@ -9535,35 +9535,31 @@ $(document).on('click', '.watch-icon', function(e){
 $('.watch-icon').click(function(e){ 
 	e.preventDefault();
 });
-
-$('.frmSendMessge').on('submit', function(){
-	$(this).find('txtarea, input[type=text]').val('');
-});
+  
+  
   
 $(document).on('click', '.open-msgs', function() {
     var thispop = $(this);
-    var msgsid = $(this).parent().find('.msgs-id').val();
+    var msgsid = $(this).parent().find('#msgs-id').val();
     var getpop = $(this).data('modal-open');
     $(getpop).find('.maseges-container').empty();
-    $(getpop).find('.my-modal-body h1').remove();
-    console.log(msgsid);
+
     $.ajax({
         url: '/allmessages/' + msgsid,
         type: 'get',
         dataType: 'json',
         success: function(data) {
-
-           $(getpop).find('.my-modal-body').prepend('<h1 class="no-margin nb sp">رسالة خاصة من : '+ data.withUser.name +'</h1>');
+  
             $.each(data.messages, function() {
                 $(getpop).find('.maseges-container').append('<small class="small-head user-inpop"><span>بواسطة</span>' + this.sender.name + '</small>');
                 $(getpop).find('.maseges-container').append('<small class="small-head"><span>تاريخ الارسال</span>' + this.created_at + '</small>');
                 $(getpop).find('.maseges-container').append('<div class="massege-box massegs">' + this.message + '</div>');
             });
-
+  
          },
         error: function() {
             console.log('error');
         }
       });
-});
+  });
   

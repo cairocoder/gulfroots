@@ -18,6 +18,7 @@
       </div>
       <div class="row no-margin table-row">
         @foreach($inboxes as $inbox)
+        @if(!empty($inbox))
           <div class="col l1">
               <label class="checkbox blued">
                   <input type="checkbox" name="status"><span></span>
@@ -31,6 +32,7 @@
                   <a href="#!"><i class="fa fa-times"></i></a>
               </div>
           </div>
+          @endif
           @endforeach
       </div>
       <div>
@@ -48,7 +50,9 @@
             </div>
             <div class="send-bar">
                 <textarea name="message-data" id="message-data" class="send-massege" placeholder="اكتب رسالتك"></textarea>
+                @if(!empty($inbox))
                 <input type="hidden" name="_id" value="{{$inbox->withUser->id}}">
+                @endif
                 <button class="send-btn" type="submit">ارسال</button>
             </div>
         </form>

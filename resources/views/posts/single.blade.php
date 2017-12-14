@@ -275,10 +275,10 @@
                         <div class="closer"></div>
                         <div class="my-modal-body">
                             <h1 class="no-margin nb">ارسل رسالة الي : </h1>
-                            <form form role="form" method="POST" action="">
+                            <form class="frmSendMessge" role="form" method="POST" action="{{ action('MessagesController@SendMessage') }}">
                               {!! csrf_field() !!}
                               <input type="text" placeholder="عنوان الرساله">
-                              <<textarea name="message-data" id="message-data" class="send-massege" placeholder="اكتب رسالتك"></textarea>
+                              <textarea name="message-data" id="message-data" class="send-massege" placeholder="اكتب رسالتك"></textarea>
                               <input type="hidden" name="_id" value="{{$seller->id}}">
                               <button class="send-btn" type="submit">ارسال</button>
                             </form>
