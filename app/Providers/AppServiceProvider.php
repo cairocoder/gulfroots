@@ -24,31 +24,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('layouts.user', function($view) {
+        view()->composer(['layouts.user', 'layouts.app', 'layouts.page'], function($view) {
             $categories = $this->getCategoriesForLayouts();
             $view->with(compact('categories'));
         });
-        view()->composer('layouts.app', function($view) {
-            $categories = $this->getCategoriesForLayouts();
-            $view->with(compact('categories'));
-        });
-        view()->composer('layouts.page', function($view) {
-            $categories = $this->getCategoriesForLayouts();
-            $view->with(compact('categories'));
-        });
-        view()->composer('posts.ad2', function($view) {
-            $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-            $view->with(compact('categories'));
-        });
-        view()->composer('posts.ad3', function($view) {
-            $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-            $view->with(compact('categories'));
-        });
-        view()->composer('includes.searchbar', function($view) {
+        view()->composer(['posts.ad2', 'posts.ad3','includes.searchbar', 'categories.maincategory'], function($view) {
           $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
           $subcategory = Categories::where('sub_id', '!=', null)->get();
           $view->with(compact('categories', 'subcategory'));
         });
+        view()->composer('includes.specialcategories', function($view) {
+            $specialcategory = Categories::where('slug', '!=', null)->get();
+            $view->with(compact('specialcategory'));
+          });
         view()->composer('includes.favoriteslider', function($view) {
             $user = Auth::user();
             if(!$user){
@@ -172,10 +160,6 @@ class AppServiceProvider extends ServiceProvider
               });
             }
             $view->with(compact('favorites', 'latest', 'lastseen'));
-        });
-        view()->composer('includes.specialcategories', function($view) {
-          $specialcategory = Categories::where('slug', '!=', null)->get();
-          $view->with(compact('specialcategory'));
         });
         view()->composer('includes.lastseenslider', function($view){
             $user = Auth::user();

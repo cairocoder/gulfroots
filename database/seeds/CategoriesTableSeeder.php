@@ -149,5 +149,10 @@ class CategoriesTableSeeder extends Seeder
         DB::table('categories')->insert(['name' => 'الارانب', 'sub_id'=>'17']);
         DB::table('categories')->insert(['name' => 'الزواحف والبرمائيات', 'sub_id'=>'17']);
         DB::table('categories')->insert(['name' => 'أخري', 'sub_id'=>'17']);
+        for($i = 19; $i <= 120; $i++){
+            for($j = 1; $j <= 5; $j++){
+                DB::table('categories_filters_groups')->insert(['categories_id' => $i, 'filters_groups_id' =>$j]);
+            }
+        }
     }
 }

@@ -29,60 +29,11 @@ class PostsController extends Controller
         $latest = Posts::where('user_id', $post->user_id)->where('isArchived', 0)->where('isApproved', 1)->where('id', '!=', $id)->orderBy('created_at', 'desc')->get();
         $latest = $latest->splice(0, 3);
         $post_photos = Post_Photos::with('post')->where('post_id', $id)->get();
-        $latest->map(function ($post) use ($user) {
-            $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
-            $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
-            $features = $post->getFeatures()->get();
-            foreach($features as $feature){
-                if($feature->type == 5){
-                    $features = $post->getFeatures()->get();
-                    foreach($features as $feature){
-                        if($feature->type == 1){
-                            $post['isColored'] = 1;
-                        }
-                        if($feature->type == 2){
-                            $post['isinMain'] = 1;
-                        }
-                        if($feature->type == 5){
-                            $post['isBreaking'] = 1;
-                        }
-                    }
-                }
-            }
-            return $post;
-        });
-        $parents = [];
+        $latest = $this->getInfoOfPost($latest, $user);
         $alike = Posts::orderBy(DB::raw('RAND()'))->where('id', '!=', $id)->where('isArchived', 0)->where('isApproved', 1)->where('sub_category_id', $post->sub_category_id)->where('id', '!=', $post->id)->get();
         $alike = $alike->splice(0, 3);
-        $alike->map(function ($post) use ($user) {
-            $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
-            $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
-            $features = $post->getFeatures()->get();
-            foreach($features as $feature){
-                if($feature->type == 5){
-                    $features = $post->getFeatures()->get();
-                    foreach($features as $feature){
-                        if($feature->type == 1){
-                            $post['isColored'] = 1;
-                        }
-                        if($feature->type == 2){
-                            $post['isinMain'] = 1;
-                        }
-                        if($feature->type == 5){
-                            $post['isBreaking'] = 1;
-                        }
-                    }
-                }
-            }
-            return $post;
-        });
-        $ancestor = Categories::findorfail($post->sub_category_id);
-        array_push($parents, $ancestor);
-        while($ancestor->sub_id != null){
-            $ancestor = Categories::findorfail($ancestor->sub_id);
-            array_push($parents, $ancestor);
-        }
-        $parents = array_reverse($parents);
+        $alike = $this->getInfoOfPost($alike, $user);
+        $parents = $this->getParents($post->sub_category_id);
         return view('posts.single', compact('post', 'post_photos', 'latest', 'alike', 'seller', 'parents'));
     }
     //
@@ -110,23 +61,22 @@ class PostsController extends Controller
             $user->id = -1;
         }
         $category = Categories::findorfail($category_id);
-        $subcategories = [];
-        $subcategoriesALL = Categories::where('sub_id', '!=', null)->get();
-        foreach($subcategoriesALL as $subcat){
-            $ancestor = $subcat;
-            if($ancestor->id == $category_id)
-                array_push($subcategories, $subcat);
-            while($ancestor->sub_id != null){
-                $ancestor = Categories::findorfail($ancestor->sub_id);
-                if($ancestor->id == $category_id)
-                    array_push($subcategories, $subcat);
-            }
-        }
-        $posts = new \Illuminate\Database\Eloquent\Collection;
-        foreach($subcategories as $subcat){
-            $posts = $posts->merge(Posts::where('sub_category_id', $subcat->id)->get());
-        }
-        $posts->map(function ($post) use ($user) {
+        $posts = Posts::search($category->name)->get();
+        $posts = $this->getInfoOfPost($posts, $user);
+        $parents = $this->getParents($category_id);
+        return view('categories.maincategory', compact('posts', 'category', 'parents'));
+    }
+
+    public function ReportPost(Request $request, $id){
+        Reports::create([
+            'type'=> $request->input('type'),
+            'post_id' => $id,
+        ]);
+        return route('landing');
+    }
+
+    private function getInfoOfPost($posts, $user){
+        $posts->map(function ($post) use($user) {
             $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
             $features = $post->getFeatures()->get();
@@ -143,6 +93,10 @@ class PostsController extends Controller
             }
             return $post;
         });
+        return $posts;
+    }
+
+    private function getParents($category_id){
         $parents = [];
         $ancestor = Categories::findorfail($category_id);
         array_push($parents, $ancestor);
@@ -151,14 +105,6 @@ class PostsController extends Controller
             array_push($parents, $ancestor);
         }
         $parents = array_reverse($parents);
-        return view('categories.maincategory', compact('posts', 'category', 'parents'));
-    }
-
-    public function ReportPost(Request $request, $id){
-        Reports::create([
-            'type'=> $request->input('type'),
-            'post_id' => $id,
-        ]);
-        return route('landing');
+        return $parents;
     }
 }

@@ -25,16 +25,26 @@
                     <div class="side-filters">
                         <h2>تصفية النتائج</h2>
                         <div class="side-filter-level1 active">
-                            <div class="filter-title active">
-                                <span>السفر والسياحة</span>
-                                <i class="fa fa-caret-down"></i>
-                            </div>
-                            <ul div class="filter-level1-data active">
-                                <li><a href="#!" class="active">جميع الاقسام</a></li>
-                                <li><a href="#!">رابط</a></li>
-                                <li><a href="#!">رابط</a></li>
-                                <li><a href="#!">رابط</a></li>
-                            </ul>
+                            @foreach($parents as $key=>$cat)
+                                <div class="filter-title active">
+                                    <span>{{$cat->name}}</span>
+                                    <i class="fa fa-caret-down"></i>
+                                </div>
+                            @if($key == count($parents) - 1)
+                                <ul div class="filter-level1-data active">
+                                    <li><a href="{{ Url('categories/'.$cat->id) }}" class="active">جميع الاقسام</a></li>
+                                    @foreach($subcategory as $category)
+                                        @if($category->sub_id == $cat->id)
+                                            <li><a href="{{ Url('categories/'.$category->id) }}">{{$category->name}}</a></li>
+                                        @endif
+                                    @endforeach
+                                </ul>                            
+                            @else
+                                <ul div class="filter-level1-data active">
+                                    <li><a href="{{ Url('categories/'.$cat->id) }}">جميع الاقسام</a></li>
+                                </ul>
+                            @endif
+                            @endforeach
                         </div>
                         <div class="side-filter-level1">
                             <div class="filter-title active">

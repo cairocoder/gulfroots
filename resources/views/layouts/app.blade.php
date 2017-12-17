@@ -98,7 +98,7 @@
                                 <div class="account-head">
                                     <img src="{{ Auth::user()->profile_picture }}" alt="">
                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false">
-                                        {{ Auth::user()->name }} <span></span>
+                                        {{ strtok(Auth::user()->name, ' ') }} <span></span>
                                     </a>
                                     <i class="fa fa-caret-down"></i>
                                 </div>

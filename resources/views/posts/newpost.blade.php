@@ -90,9 +90,11 @@
                         <input type="text" name="seller_name" placeholder="اسم البائع*">
                         {{--<input type="email" placeholder="البريد الاليكتروني*">--}}
                         <input type="text" name="seller_contact_no" placeholder="رقم الاتصال">
+                        <input class="my-lat" type="hidden">
+                        <input class="my-long" type="hidden">
                         <div class="input-wrap">
                             <input type="text" name="detailed_address" placeholder="العنوان*">
-                            <a href="#!"><i class="fa fa-map-marker"></i>تحديد الموقع الجغرافي</a>
+                            <a href="#!" class="get-location"><i class="fa fa-map-marker"></i>تحديد الموقع الجغرافي</a>
                         </div>
                     </div>
                     <div class="col l6">

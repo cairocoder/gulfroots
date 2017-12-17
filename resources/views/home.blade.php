@@ -56,7 +56,7 @@
                                     <span>ر.س</span>
                                 </div>
                             </div>
-                            <h1 title="سيارة بمواصفات خاصة">{{$post->title}}</h1>
+                            <h1 title="{{$post->title}}">{{$post->title}}</h1>
                             <small>مدينة الرياض</small>
                             @if($post->liked == 1)
                                 <div class="watch-icon active">
@@ -93,7 +93,7 @@
                                         <span>ر.س</span>
                                     </div>
                                 </div>
-                                <h1 title="سيارة بمواصفات خاصة">{{$post->title}}</h1>
+                                <h1 title="{{$post->title}}">{{$post->title}}</h1>
                                 <small>مدينة الرياض</small>
                                 @if($post->liked == 1)
                                     <div class="watch-icon active">
