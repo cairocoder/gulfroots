@@ -51,7 +51,7 @@ class ListingController extends Controller
         return view('posts.newpost', compact( 'subcategory_id', 'SupplyOrDemand', 'filters'));
     }
 
-    public function getFiltersOfSubCategory($subcategory_id){
+    private function getFiltersOfSubCategory($subcategory_id){
         $groupsoffilters = [];
         $ancestor = Categories::findorfail($subcategory_id);
         $filterss = $ancestor->filtersgroups()->get();
@@ -75,7 +75,7 @@ class ListingController extends Controller
     }
 
     public function CreateNewPost(Request $request, Authenticatable $user){
-        $search_sentence = "";
+        $search_sentence = "جميع الاعلانات ";
         $post = Posts::create([
             'name' => $request->input('title'),
             'short_des' => $request->input('short_des'),
@@ -87,6 +87,8 @@ class ListingController extends Controller
             'sub_category_id' => $request->input('subcategory_id'),
             'user_id' => $user->id,
             'isinTop' => $request->input('isinTopDecision'),
+            'longitude' => $request->input('my-long'),
+            'latitude' => $request->input('my-lat'),
         ]);
         $filters = $this->getFiltersOfSubCategory($request->input('subcategory_id'));
         foreach($filters as $group_name=>$value){
@@ -124,7 +126,7 @@ class ListingController extends Controller
         if($request->input('pack') == 1){
             //isColored Feature
             if($request->input('isColoredDecision') == 1){
-                $search_sentence .= ' isColored';
+                $search_sentence .= ' isColored اعلانات مدفوعه ملونة';
                 PostFeatures::create([
                     'type' => 1,
                     'post_id' => $post->id,
@@ -133,7 +135,7 @@ class ListingController extends Controller
             }
             //isinMain Feature
             if($request->input('isinMainDecision') == 1){
-                $search_sentence .= ' isinMain';
+                $search_sentence .= ' isinMain اعلانات مدفوعه مميزة';
                 PostFeatures::create([
                     'type' => 2,
                     'post_id' => $post->id,
@@ -142,7 +144,7 @@ class ListingController extends Controller
             }
             //isinTop Feature
             if($request->input('isinTopDecision') == 1){
-                $search_sentence .= ' isinTop';
+                $search_sentence .= ' isinTop أفضل الاعلانات';
                 PostFeatures::create([
                     'type' => 3,
                     'post_id' => $post->id,
@@ -150,8 +152,9 @@ class ListingController extends Controller
                 ]);
             }
         }elseif($request->input('pack') == 2){
+            $search_sentence .= " اعلانات مدفوعه عادية";
             //isColored Feature
-            $search_sentence .= ' isColored';
+            $search_sentence .= ' isColored اعلانات مدفوعه ملونة';
             PostFeatures::create([
                 'type' => 1,
                 'post_id' => $post->id,
@@ -159,7 +162,7 @@ class ListingController extends Controller
             ]);
             //isinMain Feature
             if($request->input('isinMainDecision') == 1){
-                $search_sentence .= ' isinMain';
+                $search_sentence .= ' isinMain اعلانات مدفوعه مميزة';
                 PostFeatures::create([
                     'type' => 2,
                     'post_id' => $post->id,
@@ -168,7 +171,7 @@ class ListingController extends Controller
             }
             //isinTop Feature
             if($request->input('isinTopDecision') == 1){
-                $search_sentence .= ' isinTop';
+                $search_sentence .= ' isinTop أفضل الاعلانات';
                 PostFeatures::create([
                     'type' => 3,
                     'post_id' => $post->id,
@@ -194,11 +197,11 @@ class ListingController extends Controller
                 'post_id' => $post->id,
                 'expiry_date' => $post->created_at->addDays(30),
             ]);
-            $search_sentence .= ' isColored';
-            $search_sentence .= ' isinMain';
+            $search_sentence .= ' isColored اعلانات مدفوعه ملونة';
+            $search_sentence .= ' isinMain اعلانات مدفوعه مميزة';
             //isinTop Feature
             if($request->input('isinTopDecision') == 1){
-                $search_sentence .= ' isinTop';
+                $search_sentence .= ' isinTop أفضل الاعلانات';
                 PostFeatures::create([
                     'type' => 3,
                     'post_id' => $post->id,
@@ -230,13 +233,13 @@ class ListingController extends Controller
                 'post_id' => $post->id,
                 'expiry_date' => $post->created_at->addDays(30),
             ]);
-            $search_sentence .= ' isColored';
-            $search_sentence .= ' isinMain';
-            $search_sentence .= ' isinTop';
+            $search_sentence .= ' isColored اعلانات مدفوعه ملونة';
+            $search_sentence .= ' isinMain اعلانات مدفوعه مميزة';
+            $search_sentence .= ' isinTop أفضل الاعلانات';
         }
         //isBreaking Feature
         if($request->input('isBreaking') == 1){
-            $search_sentence .= ' isBreaking';
+            $search_sentence .= ' isBreaking اعلانات مدفوعه عاجلة';
             PostFeatures::create([
                 'type' => 5,
                 'post_id' => $post->id,

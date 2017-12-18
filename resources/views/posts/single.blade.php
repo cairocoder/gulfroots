@@ -158,10 +158,10 @@
                                                 {{$listing->short_des}}
                                             </div>
                                         </div>
-                                        <small class="boxed-only">مدينة الرياض</small>
+                                        <small class="boxed-only">{{$listing->city}}</small>
                                         <div class="info normal-only">
-                                            <h3>السعودية
-                                                <small>الرياض</small>
+                                            <h3>{{$listing->country}}
+                                                <small>{{$listing->city}}</small>
                                             </h3>
                                             <div class="time">{{  strftime("%b %d %Y",strtotime($listing->created_at))}}</div>
                                         </div>
@@ -204,10 +204,10 @@
                                             {{$listing->short_des}}
                                         </div>
                                     </div>
-                                    <small class="boxed-only">مدينة الرياض</small>
+                                    <small class="boxed-only">{{$listing->city}}</small>
                                     <div class="info normal-only">
-                                        <h3>السعودية
-                                            <small>الرياض</small>
+                                        <h3>{{$listing->country}}
+                                            <small>{{$listing->city}}</small>
                                         </h3>
                                         <div class="time">{{  strftime("%b %d %Y",strtotime($listing->created_at))}}</div>
                                     </div>

@@ -6,7 +6,103 @@
 
         <div class="big-container">
 
-            @include('includes.searchbar')
+            <!-- filter start -->
+            <div class="main-filter">
+                <form method="POST" class="search" action="{{Url('search')}}">
+                {{ csrf_field() }}
+                <input type="hidden" class="applied-filters" name="applied_filters" value="{{$applied_ret}}">
+                    <!-- select dropdown start -->
+                <div class="select-cat">
+                    <!-- hidden input to catch the id -->
+                    <input id="cat-id" type="text" name="cat-id" value="{{$request->input('cat-id')}}" hidden>
+                    <!-- select icon in the search bar -->
+                    <div class="select-head">
+                        <div class="select-icon">
+                        @if($request['cat-id'] == 0)
+                            <i class="fa fa-bars"></i>
+                        @else
+                            @foreach($categories as $category)
+                                @if($category->id == $request['cat-id'])
+                                <i class="fa fa-{{$category->icon}}"></i>
+                                @endif
+                            @endforeach
+                        @endif
+                        </div>
+                        <i class="fa fa-caret-down"></i>
+                    </div>
+                    <!-- dropdown wrapper -->
+                    <div class="select-box">
+                        <!-- select all cats -->
+                        <div class="select-group" data-cat-icon="bars" data-cat-id="0">
+                                <i class="fa fa-bars"></i> جميع الاقسام
+                        </div>
+
+                        <!-- select group level 1 start  -->
+                        @foreach($categories as $category)
+                            <!-- select group level 1 start  -->
+                            <div class="select-group" data-cat-icon="{{$category->icon}}" data-cat-id="{{$category->id}}">
+                                <i class="fa fa-{{$category->icon}}"></i> {{$category->name}}
+                                @foreach($subcategory as $subcat)
+                                    @if($subcat->sub_id == $category->id)
+                                    <div class="group-toggle"><i class="fa fa-caret-down"></i></div>
+                                    <!-- select group level 2 start  -->
+                                    <div class="group-box">
+                                        <!-- group item -->
+                                        <div class="select-item-level1" data-cat-id="{{$subcat->id}}">
+                                            {{$subcat->name}}
+                                            @foreach($subcategory as $subOfsubcat)
+                                                @if($subcat->id == $subOfsubcat->sub_id)
+                                                <div class="group-toggle"><i class="fa fa-caret-down"></i></div>
+                                                <!-- select group level 3 start  -->
+                                                <div class="group-box2">
+                                                    <!-- group item -->
+                                                    <div class="select-item-level2" data-cat-id="{{$subOfsubcat->id}}">
+                                                        {{$subOfsubcat->name}}
+                                                    </div>
+                                                </div>
+                                                <!-- select group level 3 end  -->
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <!-- select group level 2 end  -->
+                                    @endif
+                                @endforeach
+                            </div>
+                            <!-- select group level 1 end  -->
+                        @endforeach
+                            <!-- select group level 1 end  -->
+                    </div>
+                </div>
+                <!-- select dropdown end -->
+
+                <!-- search bar -->
+                <div class="main-search">
+                    <input type="text" placeholder="{{$request->search_query}}" value="{{$request->search_query}}" name="search_query">
+                </div>
+
+                <!-- city box -->
+                <div class="city-box">
+                    <div class="city-form">
+                    <i  class="fa fa-map-marker"></i>
+                    <input type="text" placeholder="{{$request->search_city}}" value="{{$request->search_city}}" name="search_city">
+                    <select name="search_distance">
+                        <option selected>0 كم</option>
+                        <option>5 كم</option>
+                        <option>10 كم</option>
+                        <option>20 كم</option>
+                        <option>40 كم</option>
+                        <option>80 كم</option>
+                        <option>100 كم</option>
+                    </select>
+                    </div>
+                </div>
+
+                <!-- submit -->
+                <input type="submit" value="إبحث">
+                </form>
+            </div>
+            <!-- filter end -->
 
             @include('includes.specialcategories')
 
@@ -28,58 +124,28 @@
                         <h2>تصفية النتائج</h2>
 
                         <div class="side-filter-level1 active">
-                        @foreach($parents as $key=>$cat)
-                            <div class="filter-title active">
-                                <span>{{$cat->name}}</span>
-                                <i class="fa fa-caret-down"></i>
-                            </div>
-                        @if($key == count($parents) - 1)
-                            <ul div class="filter-level1-data active">
-                                <li><a href="{{ Url('categories/'.$cat->id) }}" class="active">جميع الاقسام</a></li>
-                                @foreach($subcategory as $category)
-                                    @if($category->sub_id == $cat->id)
-                                        <li><a href="{{ Url('categories/'.$category->id) }}">{{$category->name}}</a></li>
-                                    @endif
-                                @endforeach
-                            </ul>                            
-                        @else
-                            <ul div class="filter-level1-data active">
-                                <li><a href="{{ Url('categories/'.$cat->id) }}">جميع الاقسام</a></li>
-                            </ul>
+                        @if(count($parents) > 0)
+                            @foreach($parents as $key=>$cat)
+                                <div class="filter-title active">
+                                    <span>{{$cat->name}}</span>
+                                    <i class="fa fa-caret-down"></i>
+                                </div>
+                            @if($key == count($parents) - 1)
+                                <ul div class="filter-level1-data active">
+                                    <li><a href="{{ Url('categories/'.$cat->id) }}" class="active">جميع الاقسام</a></li>
+                                    @foreach($subcategory as $category)
+                                        @if($category->sub_id == $cat->id)
+                                            <li><a href="{{ Url('categories/'.$category->id) }}">{{$category->name}}</a></li>
+                                        @endif
+                                    @endforeach
+                                </ul>                            
+                            @else
+                                <ul div class="filter-level1-data active">
+                                    <li><a href="{{ Url('categories/'.$cat->id) }}">جميع الاقسام</a></li>
+                                </ul>
+                            @endif
+                            @endforeach
                         @endif
-                        @endforeach
-                        </div>
-
-
-                        <div class="side-filter-level1">
-                            <div class="filter-title active">
-                                <span>الاماكن</span>
-                                <i class="fa fa-caret-down"></i>
-                            </div>
-                            <ul div class="filter-level1-data active">
-                                <li class="has-sub">
-                                    <div class="filter-title active">
-                                        <span>السعودية</span>
-                                        <i class="fa fa-caret-down"></i>
-                                    </div>
-                                    <ul class="filter-level2-data active">
-                                        <li><a href="#!" class="active">رابط</a></li>
-                                        <li><a href="#!">رابط</a></li>
-                                        <li><a href="#!">رابط</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-sub">
-                                    <div class="filter-title">
-                                        <span>الامارات</span>
-                                        <i class="fa fa-caret-down"></i>
-                                    </div>
-                                    <ul class="filter-level2-data">
-                                        <li><a href="#!">رابط</a></li>
-                                        <li><a href="#!">رابط</a></li>
-                                        <li><a href="#!">رابط</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
                         </div>
 
 
@@ -99,67 +165,20 @@
                             </ul>
                         </div>
 
-
+                        @foreach($filters as $group_name=>$values)
                         <div class="side-filter-level1 active">
                             <div class="filter-title active">
-                                <span>نوع الاعلان</span>
+                                <span>{{$group_name}}</span>
                                 <i class="fa fa-caret-down"></i>
                             </div>
-                            <ul div class="filter-level1-data active">
+                                <ul div class="filter-level1-data active">
                                 <li><a href="#!" class="active">جميع الاعلانات</a></li>
-                                <li><a href="#!">اعلانات مدفوعة عادية</a></li>
-                                <li><a href="#!">اعلانات مدفوعة مميزة</a></li>
-                                <li><a href="#!">اعلانات مدفوعة عاجلة</a></li>
-                                <li><a href="#!">اعلانات مدفوعة ملونة</a></li>
-                                <li><a href="#!">افضل الاعلانات</a></li>
-                            </ul>
+                                @foreach($values as $value)
+                                    <li><a href="#!">{{$value->name}}</a></li>
+                                @endforeach
+                                </ul>
                         </div>
-
-
-                        <div class="side-filter-level1 active">
-                            <div class="filter-title active">
-                                <span>عدد الافراد</span>
-                                <i class="fa fa-caret-down"></i>
-                            </div>
-                            <ul div class="filter-level1-data active">
-                                <li>
-                                    <form>
-                                        <select>
-                                            <option selected disabled>اختر عدد الافراد</option>
-                                            <option>فرد</option>
-                                            <option>فردين</option>
-                                            <option>3 افراد</option>
-                                            <option>4 افراد</option>
-                                            <option>5 افراد</option>
-                                        </select>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-
-
-                        <div class="side-filter-level1 active">
-                            <div class="filter-title active">
-                                <span>نوع البيع</span>
-                                <i class="fa fa-caret-down"></i>
-                            </div>
-                            <ul div class="filter-level1-data active">
-                                <li><a href="#!">عرض</a></li>
-                                <li><a href="#!">طلب</a></li>
-                            </ul>
-                        </div>
-
-
-                        <div class="side-filter-level1 active">
-                            <div class="filter-title active">
-                                <span>نوع العرض</span>
-                                <i class="fa fa-caret-down"></i>
-                            </div>
-                            <ul div class="filter-level1-data active">
-                                <li><a href="#!">قابل للتفاوض</a></li>
-                                <li><a href="#!">نهائي</a></li>
-                            </ul>
-                        </div>
+                        @endforeach
 
                         <div class="google-ads">
                             <img src="assets/images/ads.png" alt="">
@@ -230,10 +249,10 @@
                                                 {{$post->short_des}}
                                             </div>
                                         </div>
-                                        <small class="boxed-only">مدينة الرياض</small>
+                                        <small class="boxed-only">{{$post->city}}</small>
                                         <div class="info normal-only">
-                                            <h3>السعودية
-                                                <small>الرياض</small>
+                                            <h3>{{$post->country}}
+                                                <small>{{$post->city}}</small>
                                             </h3>
                                             <div class="time"> {{  strftime("%b %d %Y",strtotime($post->created_at))}}</div>
                                         </div>

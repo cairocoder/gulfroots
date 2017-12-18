@@ -35,12 +35,12 @@ class PostsTableSeeder extends Seeder
             ]);
             for($j = 0; $j < 2; $j++){
                 $search_sentence .= ' ' . App\Filters::where('id', $faker->numberBetween(1,5))->first()->name;
-                App\Filters::create(['filters_id' => $faker->numberBetween(1,5), 'posts_id' => $i]);
+                App\FiltersPosts::create(['filters_id' => $faker->numberBetween(1,5), 'posts_id' => $i]);
                 $search_sentence .= ' ' . App\Filters::where('id', $faker->numberBetween(6,10))->first()->name;
                 $search_sentence .= ' ' . App\Filters::where('id', $faker->numberBetween(11,12))->first()->name;
-                App\Filters::create(['filters_id' => $faker->numberBetween(11,12), 'posts_id' => $i]);
+                App\FiltersPosts::create(['filters_id' => $faker->numberBetween(11,12), 'posts_id' => $i]);
                 $search_sentence .= ' ' . App\Filters::where('id', $faker->numberBetween(13,14))->first()->name;
-                App\Filters::create(['filters_id' => $faker->numberBetween(13,14), 'posts_id' => $i]);
+                App\FiltersPosts::create(['filters_id' => $faker->numberBetween(13,14), 'posts_id' => $i]);
             }
             $ancestor = App\Categories::findorfail($post->sub_category_id);
             $search_sentence .= ' ' . $ancestor->name;
@@ -56,15 +56,15 @@ class PostsTableSeeder extends Seeder
                     'post_id' => $i,
                     'expiry_date' => $post->created_at->addDays($faker->numberBetween(7,30)),
                 ]);
-                App\Filters::create(['filters_id' => $tmp->type + 5, 'posts_id' => $i]);
+                App\FiltersPosts::create(['filters_id' => $tmp->type + 5, 'posts_id' => $i]);
                 if($tmp->type == 1){
-                    $search_sentence .= ' isColored';
+                    $search_sentence .= ' isColored اعلانات مدفوعه ملونة';
                 }else if($tmp->type == 2){
-                    $search_sentence .= ' isinMain';
+                    $search_sentence .= ' isinMain اعلانات مدفوعه مميزة';
                 }else if($tmp->type == 3){
-                    $search_sentence .= ' isinTop';
+                    $search_sentence .= ' isinTop أفضل الاعلانات';
                 }else if($tmp->type == 5){
-                    $search_sentence .= ' isBreaking';
+                    $search_sentence .= ' isBreaking اعلانات مدفوعه عاجلة';
                 }
             }
             //add post filters

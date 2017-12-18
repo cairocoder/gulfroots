@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                             <h1 title="{{$post->title}}">{{$post->title}}</h1>
-                            <small>مدينة الرياض</small>
+                            <small>مدينة {{$post->city}}</small>
                             @if($post->liked == 1)
                                 <div class="watch-icon active">
                             @else
@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
                                 <h1 title="{{$post->title}}">{{$post->title}}</h1>
-                                <small>مدينة الرياض</small>
+                                <small>مدينة {{$post->city}}</small>
                                 @if($post->liked == 1)
                                     <div class="watch-icon active">
                                 @else
@@ -142,7 +142,7 @@
                                     </div>
                                 </div>
                                 <h1 title="سيارة بمواصفات خاصة">{{$post->title}}</h1>
-                                <small>مدينة الرياض</small>
+                                <small>مدينة {{$post->city}}</small>
                                 @if($post->liked == 1)
                                     <div class="watch-icon active">
                                 @else

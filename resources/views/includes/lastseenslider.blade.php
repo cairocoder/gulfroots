@@ -23,7 +23,7 @@
                         <div class="price">{{$post->price}}
                                 <span>ر.س</span>
                         </div>
-                        <small class="boxed-only">مدينة الرياض</small>
+                        <small class="boxed-only">مدينة {{$post->city}}</small>
                     </div>
                     @if($post->liked == 1)
                         <div class="watch-icon active">
@@ -40,10 +40,11 @@
             @endif
             <!-- slide end -->
         @endforeach
-        @if(count($lastseen) > 0 && count($lastseen) % 2 == 0)
+        @if(count($lastseen) != 0 && count($lastseen) % 2 != 0)
         </div>
         @endif
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
+        </div>
     </div>
 </div>

@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
             $categories = $this->getCategoriesForLayouts();
             $view->with(compact('categories'));
         });
-        view()->composer(['posts.ad2', 'posts.ad3','includes.searchbar', 'categories.maincategory'], function($view) {
+        view()->composer(['posts.ad2', 'posts.ad3','includes.searchbar', 'categories.maincategory', 'searchresult'], function($view) {
           $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
           $subcategory = Categories::where('sub_id', '!=', null)->get();
           $view->with(compact('categories', 'subcategory'));
@@ -44,23 +44,7 @@ class AppServiceProvider extends ServiceProvider
                 $user->id = -1;
             }
             $favorites = $user->getFavorites()->get();
-            $favorites->map(function ($post) use($user){
-                $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
-                $post['liked'] = 1;
-                $features = $post->getFeatures()->get();
-                foreach($features as $feature){
-                    if($feature->type == 1){
-                        $post['isColored'] = 1;
-                    }
-                    if($feature->type == 2){
-                        $post['isinMain'] = 1;
-                    }
-                    if($feature->type == 5){
-                        $post['isBreaking'] = 1;
-                    }
-                }
-                return $post;
-            });
+            $favorites = $this->getInfoOfPost($favorites, $user);
             $view->with(compact('favorites'));
           });
         view()->composer('home', function($view) {
@@ -75,46 +59,9 @@ class AppServiceProvider extends ServiceProvider
                 $user = new User;
                 $user->id = -1;
             }
-            $latest->map(function ($post) use ($user) {
-                $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
-                $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
-                $features = $post->getFeatures()->get();
-                foreach($features as $feature){
-                    if($feature->type == 5){
-                        $features = $post->getFeatures()->get();
-                        foreach($features as $feature){
-                            if($feature->type == 1){
-                                $post['isColored'] = 1;
-                            }
-                            if($feature->type == 2){
-                                $post['isinMain'] = 1;
-                            }
-                            if($feature->type == 5){
-                                $post['isBreaking'] = 1;
-                            }
-                        }
-                    }
-                }
-                return $post;
-            });
+            $latest = $this->getInfoOfPost($latest, $user);
             $favorites = $user->getFavorites()->get();
-            $favorites->map(function ($post) use($user){
-                $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
-                $post['liked'] = 1;
-                $features = $post->getFeatures()->get();
-                foreach($features as $feature){
-                    if($feature->type == 1){
-                        $post['isColored'] = 1;
-                    }
-                    if($feature->type == 2){
-                        $post['isinMain'] = 1;
-                    }
-                    if($feature->type == 5){
-                        $post['isBreaking'] = 1;
-                    }
-                }
-                return $post;
-            });
+            $favorites = $this->getInfoOfPost($favorites, $user);
             $user = Auth::user();
             if(!$user){
                 $user = new User;
@@ -136,28 +83,7 @@ class AppServiceProvider extends ServiceProvider
                 if(!$postHash)continue;
                 $lastseen = $lastseen->merge(Posts::where('id', $postHash->post_id)->get());
               }
-              $lastseen->map(function ($post) use ($user) {
-                $post['liked'] = DB::table('favorites')->where('post_id', $post['id'])->where('user_id', $user->id)->count();
-                $post['img'] =  DB::table('post__photos')->where('post_id', $post['id'])->first()->photolink;
-                $features = $post->getFeatures()->get();
-                foreach($features as $feature){
-                    if($feature->type == 5){
-                        $features = $post->getFeatures()->get();
-                        foreach($features as $feature){
-                            if($feature->type == 1){
-                                $post['isColored'] = 1;
-                            }
-                            if($feature->type == 2){
-                                $post['isinMain'] = 1;
-                            }
-                            if($feature->type == 5){
-                                $post['isBreaking'] = 1;
-                            }
-                        }
-                    }
-                }
-                return $post;
-              });
+              $lastseen = $this->getInfoOfPost($lastseen, $user);
             }
             $view->with(compact('favorites', 'latest', 'lastseen'));
         });
@@ -183,28 +109,7 @@ class AppServiceProvider extends ServiceProvider
                 if(!$postHash)continue;
                 $lastseen = $lastseen->merge(Posts::where('id', $postHash->post_id)->get());
               }
-              $lastseen->map(function ($post) use ($user) {
-                $post['liked'] = DB::table('favorites')->where('post_id', $post['id'])->where('user_id', $user->id)->count();
-                $post['img'] =  DB::table('post__photos')->where('post_id', $post['id'])->first()->photolink;
-                $features = $post->getFeatures()->get();
-                foreach($features as $feature){
-                    if($feature->type == 5){
-                        $features = $post->getFeatures()->get();
-                        foreach($features as $feature){
-                            if($feature->type == 1){
-                                $post['isColored'] = 1;
-                            }
-                            if($feature->type == 2){
-                                $post['isinMain'] = 1;
-                            }
-                            if($feature->type == 5){
-                                $post['isBreaking'] = 1;
-                            }
-                        }
-                    }
-                }
-                return $post;
-              });
+              $lastseen = $this->getInfoOfPost($lastseen, $user);
             }
             $view->with(compact('lastseen'));
         });
@@ -248,6 +153,30 @@ class AppServiceProvider extends ServiceProvider
             }
         }
         return $ids;
+    }
+
+    private function getInfoOfPost($posts, $user){
+        $posts->map(function ($post) use($user) {
+            $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
+            $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
+            $tmp = explode(' - ', $post->filters()->where('group_id', 1)->first()->name);
+            $post['country'] = $tmp[1];
+            $post['city'] = $tmp[0];
+            $features = $post->getFeatures()->get();
+            foreach($features as $feature){
+                if($feature->type == 1){
+                    $post['isColored'] = 1;
+                }
+                if($feature->type == 2){
+                    $post['isinMain'] = 1;
+                }
+                if($feature->type == 5){
+                    $post['isBreaking'] = 1;
+                }
+            }
+            return $post;
+        });
+        return $posts;
     }
 
     private function getCategoriesForLayouts(){

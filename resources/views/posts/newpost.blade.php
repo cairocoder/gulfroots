@@ -35,7 +35,7 @@
                                 {{ $key }} :
                                 @foreach($filter as $value)
                                  &nbsp;<label class="checkbox blued">
-                                    @if($SupplyOrDemand == 'Supply')
+                                    @if($SupplyOrDemand == 'Demand')
                                         <input type="radio" name="{{$key}}[]" value="{{$value->id}}"><span></span> {{$value->name}}
                                     @else
                                         <input type="checkbox" name="{{$key}}[]" value="{{$value->id}}"><span></span> {{$value->name}}

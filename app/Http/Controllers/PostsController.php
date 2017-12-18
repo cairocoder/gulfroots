@@ -79,6 +79,10 @@ class PostsController extends Controller
         $posts->map(function ($post) use($user) {
             $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
+            $tmp = explode(' - ', $post->filters()->where('group_id', 1)->first()->name);
+            $post['country'] = $tmp[1];
+            $post['city'] = $tmp[0];
+            $post['status'] = $post->filters()->where('group_id', 4)->first()->name;
             $features = $post->getFeatures()->get();
             foreach($features as $feature){
                 if($feature->type == 1){
