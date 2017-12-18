@@ -126,7 +126,7 @@ class ListingController extends Controller
         if($request->input('pack') == 1){
             //isColored Feature
             if($request->input('isColoredDecision') == 1){
-                $search_sentence .= ' isColored اعلانات مدفوعه ملونة';
+                $search_sentence .= ' paid isColored اعلانات مدفوعه ملونة';
                 PostFeatures::create([
                     'type' => 1,
                     'post_id' => $post->id,
@@ -135,7 +135,7 @@ class ListingController extends Controller
             }
             //isinMain Feature
             if($request->input('isinMainDecision') == 1){
-                $search_sentence .= ' isinMain اعلانات مدفوعه مميزة';
+                $search_sentence .= ' paid isinMain اعلانات مدفوعه مميزة';
                 PostFeatures::create([
                     'type' => 2,
                     'post_id' => $post->id,
@@ -144,7 +144,7 @@ class ListingController extends Controller
             }
             //isinTop Feature
             if($request->input('isinTopDecision') == 1){
-                $search_sentence .= ' isinTop أفضل الاعلانات';
+                $search_sentence .= ' paid isinTop أفضل الاعلانات';
                 PostFeatures::create([
                     'type' => 3,
                     'post_id' => $post->id,
@@ -154,7 +154,7 @@ class ListingController extends Controller
         }elseif($request->input('pack') == 2){
             $search_sentence .= " اعلانات مدفوعه عادية";
             //isColored Feature
-            $search_sentence .= ' isColored اعلانات مدفوعه ملونة';
+            $search_sentence .= ' paid isColored اعلانات مدفوعه ملونة';
             PostFeatures::create([
                 'type' => 1,
                 'post_id' => $post->id,
@@ -162,7 +162,7 @@ class ListingController extends Controller
             ]);
             //isinMain Feature
             if($request->input('isinMainDecision') == 1){
-                $search_sentence .= ' isinMain اعلانات مدفوعه مميزة';
+                $search_sentence .= ' paid isinMain اعلانات مدفوعه مميزة';
                 PostFeatures::create([
                     'type' => 2,
                     'post_id' => $post->id,
@@ -171,7 +171,7 @@ class ListingController extends Controller
             }
             //isinTop Feature
             if($request->input('isinTopDecision') == 1){
-                $search_sentence .= ' isinTop أفضل الاعلانات';
+                $search_sentence .= ' paid isinTop أفضل الاعلانات';
                 PostFeatures::create([
                     'type' => 3,
                     'post_id' => $post->id,
@@ -197,11 +197,11 @@ class ListingController extends Controller
                 'post_id' => $post->id,
                 'expiry_date' => $post->created_at->addDays(30),
             ]);
-            $search_sentence .= ' isColored اعلانات مدفوعه ملونة';
-            $search_sentence .= ' isinMain اعلانات مدفوعه مميزة';
+            $search_sentence .= ' paid isColored اعلانات مدفوعه ملونة';
+            $search_sentence .= ' paid isinMain اعلانات مدفوعه مميزة';
             //isinTop Feature
             if($request->input('isinTopDecision') == 1){
-                $search_sentence .= ' isinTop أفضل الاعلانات';
+                $search_sentence .= ' paid isinTop أفضل الاعلانات';
                 PostFeatures::create([
                     'type' => 3,
                     'post_id' => $post->id,
@@ -233,9 +233,9 @@ class ListingController extends Controller
                 'post_id' => $post->id,
                 'expiry_date' => $post->created_at->addDays(30),
             ]);
-            $search_sentence .= ' isColored اعلانات مدفوعه ملونة';
-            $search_sentence .= ' isinMain اعلانات مدفوعه مميزة';
-            $search_sentence .= ' isinTop أفضل الاعلانات';
+            $search_sentence .= ' paid isColored اعلانات مدفوعه ملونة';
+            $search_sentence .= ' paid isinMain اعلانات مدفوعه مميزة';
+            $search_sentence .= ' paid isinTop أفضل الاعلانات';
         }
         //isBreaking Feature
         if($request->input('isBreaking') == 1){

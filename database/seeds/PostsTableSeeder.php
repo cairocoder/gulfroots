@@ -16,7 +16,7 @@ class PostsTableSeeder extends Seeder
         $faker = Faker\Factory::create();
         //
         for($i = 1; $i <= 500; $i++) {
-            $search_sentence = "جميع الاعلانات";
+            $search_sentence = " جميع الاعلانات";
             $post = App\Posts::create([
                 'title' => $faker->realText(20),
                 'short_des' => $faker->realText(20),
@@ -33,14 +33,15 @@ class PostsTableSeeder extends Seeder
                 'isinTop' => $faker->numberBetween(0, 1),
                 'search_sentence' => "",
             ]);
-            for($j = 0; $j < 2; $j++){
-                $search_sentence .= ' ' . App\Filters::where('id', $faker->numberBetween(1,5))->first()->name;
-                App\FiltersPosts::create(['filters_id' => $faker->numberBetween(1,5), 'posts_id' => $i]);
-                $search_sentence .= ' ' . App\Filters::where('id', $faker->numberBetween(6,10))->first()->name;
-                $search_sentence .= ' ' . App\Filters::where('id', $faker->numberBetween(11,12))->first()->name;
-                App\FiltersPosts::create(['filters_id' => $faker->numberBetween(11,12), 'posts_id' => $i]);
-                $search_sentence .= ' ' . App\Filters::where('id', $faker->numberBetween(13,14))->first()->name;
-                App\FiltersPosts::create(['filters_id' => $faker->numberBetween(13,14), 'posts_id' => $i]);
+            for($j = 0; $j < 1; $j++){
+                $filter = App\FiltersPosts::create(['filters_id' => $faker->numberBetween(1,5), 'posts_id' => $i]);
+                $search_sentence .= ' ' . $filter->name;
+                $filter = App\FiltersPosts::create(['filters_id' => $faker->numberBetween(15,16), 'posts_id' => $i]);
+                $search_sentence .= ' ' . $filter->name;
+                $filter = App\FiltersPosts::create(['filters_id' => $faker->numberBetween(11,12), 'posts_id' => $i]);
+                $search_sentence .= ' ' . $filter->name;
+                $filter = App\FiltersPosts::create(['filters_id' => $faker->numberBetween(13,14), 'posts_id' => $i]);
+                $search_sentence .= ' ' . $filter->name;
             }
             $ancestor = App\Categories::findorfail($post->sub_category_id);
             $search_sentence .= ' ' . $ancestor->name;
@@ -48,23 +49,27 @@ class PostsTableSeeder extends Seeder
                 $ancestor = App\Categories::findorfail($ancestor->sub_id);
                 $search_sentence .= ' ' . $ancestor->name;
             }
-            // $search_sentence .= ' ' . $ancestor->name;
             //add post_features
-            for($j = 0; $j < 2; $j++){
-                $tmp = App\PostFeatures::create([
-                    'type' => $faker->numberBetween(1,5),
-                    'post_id' => $i,
-                    'expiry_date' => $post->created_at->addDays($faker->numberBetween(7,30)),
-                ]);
-                App\FiltersPosts::create(['filters_id' => $tmp->type + 5, 'posts_id' => $i]);
-                if($tmp->type == 1){
-                    $search_sentence .= ' isColored اعلانات مدفوعه ملونة';
-                }else if($tmp->type == 2){
-                    $search_sentence .= ' isinMain اعلانات مدفوعه مميزة';
-                }else if($tmp->type == 3){
-                    $search_sentence .= ' isinTop أفضل الاعلانات';
-                }else if($tmp->type == 5){
-                    $search_sentence .= ' isBreaking اعلانات مدفوعه عاجلة';
+            if($i % 2){
+                for($j = 0; $j < 2; $j++){
+                    $tmp = App\PostFeatures::create([
+                        'type' => 5 + $faker->numberBetween(1,5),
+                        'post_id' => $i,
+                        'expiry_date' => $post->created_at->addDays($faker->numberBetween(7,30)),
+                    ]);
+                    App\FiltersPosts::create(['filters_id' => $tmp->type, 'posts_id' => $i]);
+                    if($tmp->type == 7){
+                        $search_sentence .= ' paid isinMain اعلانات مدفوعه مميزة';
+                    }
+                    if($tmp->type == 8){
+                        $search_sentence .= ' isBreaking اعلانات مدفوعه عاجلة';
+                    }
+                    if($tmp->type == 9){
+                        $search_sentence .= ' paid isColored اعلانات مدفوعه ملونة';
+                    }
+                    if($tmp->type == 10){
+                        $search_sentence .= ' paid isinTop أفضل الاعلانات';
+                    }
                 }
             }
             //add post filters

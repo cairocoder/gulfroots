@@ -18,11 +18,11 @@ class FiltersTableSeeder extends Seeder
         DB::table('filters')->insert(['name' => 'الاسكندرية - مصر', 'group_id' => '1']);
         DB::table('filters')->insert(['name' => 'القاهره - مصر', 'group_id' => '1']);
 
-        DB::table('filters')->insert(['name' => 'اعلانات مدفوعه عادية', 'group_id' => '2']);
-        DB::table('filters')->insert(['name' => 'اعلانات مدفوعه مميزة', 'group_id' => '2']);
-        DB::table('filters')->insert(['name' => 'اعلانات مدفوعه عاجلة', 'group_id' => '2']);
-        DB::table('filters')->insert(['name' => 'اعلانات مدفوعه ملونة', 'group_id' => '2']);
-        DB::table('filters')->insert(['name' => 'أفضل الاعلانات', 'group_id' => '2']);
+        DB::table('filters')->insert(['name' => 'اعلانات مدفوعه عادية', 'type' => 'paid',  'group_id' => '2']);
+        DB::table('filters')->insert(['name' => 'اعلانات مدفوعه مميزة', 'type' => 'isinMain', 'group_id' => '2']);
+        DB::table('filters')->insert(['name' => 'اعلانات مدفوعه عاجلة', 'type' => 'isBreaking', 'group_id' => '2']);
+        DB::table('filters')->insert(['name' => 'اعلانات مدفوعه ملونة', 'type' => 'isColored', 'group_id' => '2']);
+        DB::table('filters')->insert(['name' => 'أفضل الاعلانات', 'isinTop' => '', 'group_id' => '2']);
 
         DB::table('filters')->insert(['name' => 'عرض', 'group_id' => '3']);
         DB::table('filters')->insert(['name' => 'طلب', 'group_id' => '3']);

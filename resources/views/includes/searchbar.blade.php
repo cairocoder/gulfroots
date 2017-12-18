@@ -2,6 +2,7 @@
 <div class="main-filter">
     <form method="POST" action="{{Url('search')}}">
     {{ csrf_field() }}
+    <input type="hidden" class="applied-filters" name="applied_filters" value="{{$applied_ret or ''}}">
         <!-- select dropdown start -->
     <div class="select-cat">
         <!-- hidden input to catch the id -->

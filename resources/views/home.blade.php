@@ -76,6 +76,7 @@
         <!-- prev ads tab -->
         <div class="home-tab-screen prev-ads">
                 <div class="row no-margin boxed-ads">
+                @if(count($lastseen) > 0)
                     @foreach($lastseen as $post)
                         <div class="col l3">
                             <!-- ad item -->
@@ -107,9 +108,16 @@
                             </a>
                         </div>
                     @endforeach
-                    <div class="clearfix"></div>
-                </div>
+                @else
+                <div class="row no-margin boxed-ads no-data">
 
+                    <h2>لاتوجد مشاهدات سابقة</h2>
+                    <h4>ابدأ بالتصفح اﻵن</h4>
+
+                    </div>
+                    <div class="clearfix"></div>
+                @endif
+                </div>
         </div>
 
         <!-- watch ads tab -->
@@ -124,6 +132,7 @@
                 <div class="clearfix"></div>
             @else
                 <div class="row no-margin boxed-ads">
+                @if(count($favorites) > 0)
                     @foreach($favorites as $post)
                         <div class="col l3">
                             <!-- ad item -->
@@ -155,6 +164,14 @@
                             </a>
                         </div>
                     @endforeach
+                @else
+                    <div class="row no-margin boxed-ads no-data">
+
+                    <h2>لاتوجد قائمة رغبات</h2>
+
+                    </div>
+                    <div class="clearfix"></div>
+                @endif
                 </div>
             @endguest
         </div>

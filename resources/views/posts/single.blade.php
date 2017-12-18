@@ -291,7 +291,7 @@
                             اظهر الرقم
                             <span>
                                 
-                                +996******
+                            {{substr($seller->whatsapp_number, 0, 3)}}******
                             </span>
                             <span>
                                 {{$seller->whatsapp_number}}
