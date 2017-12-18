@@ -304,10 +304,10 @@
                                                 {{$post->short_des}}
                                             </div>
                                         </div>
-                                        <small class="boxed-only">مدينة الرياض</small>
+                                        <small class="boxed-only">مدينة {{$post->city}}</small>
                                         <div class="info normal-only">
-                                            <h3>السعودية
-                                                <small>الرياض</small>
+                                            <h3>{{$post->country}}
+                                                <small>{{$post->city}}</small>
                                             </h3>
                                             <div class="time"> {{  strftime("%b %d %Y",strtotime($post->created_at))}}</div>
                                         </div>
@@ -329,7 +329,7 @@
                                 <h2>No Search Results</h2>
                             </div>
                             @endif
-
+                            {{$posts->links()}}
                         <div class="centerd">
                             <img src="assets/images/width-ads.jpg" alt="">
                         </div>

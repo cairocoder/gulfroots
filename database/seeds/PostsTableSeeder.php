@@ -16,7 +16,7 @@ class PostsTableSeeder extends Seeder
         $faker = Faker\Factory::create();
         //
         for($i = 1; $i <= 500; $i++) {
-            $search_sentence = "";
+            $search_sentence = "جميع الاعلانات";
             $post = App\Posts::create([
                 'title' => $faker->realText(20),
                 'short_des' => $faker->realText(20),

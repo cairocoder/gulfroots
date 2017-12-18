@@ -43,7 +43,7 @@ class SearchController extends Controller
             }
         }
         // dd($search_sentence);
-        $posts = Posts::search($search_sentence)->where('isArchived', 0)->where('isApproved', 1)->where('isinTop', 0)->get();
+        $posts = Posts::search($search_sentence)->where('isArchived', 0)->where('isApproved', 1)->where('isinTop', 0)->paginate(11);
         $top = Posts::search($search_sentence.' isinTop')->where('isArchived', 0)->where('isApproved', 1)->get();
         $top = $top->shuffle();
         $top = $top->take(3);
@@ -61,7 +61,7 @@ class SearchController extends Controller
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
             $tmp = explode(' - ', $post->filters()->where('group_id', 1)->first()->name);
             $post['country'] = $tmp[1];
-            $post['city'] = $tmp[0];
+            $post['city'] = $tmp[1];
             $features = $post->getFeatures()->get();
             foreach($features as $feature){
                 if($feature->type == 1){

@@ -37,7 +37,7 @@
                         <div class="row no-margin borderd">
                             <div class="col l6">
                                 <i class="fa fa-map-marker"></i>
-                                {{$post->country}} - {{$post->city}} |<span dir="ltr">مشاهدة {{Counter::showAndCount('posts', $post->id)}} </span>
+                                {{$post->country}} - {{$post->city}} | <span dir="ltr">مشاهدة {{Counter::showAndCount('posts', $post->id)}} </span>
                             </div>
                             <div class="col l6 lefted">
                                 <a href="{{Url('newad') .'/'. $post->sub_category_id}}">
@@ -125,7 +125,7 @@
                                     </div>
                                     <div>
                                         الحالة
-                                        <span>مستعمل</span>
+                                        <span>{{$post->status}}</span>
                                     </div>
                                 </div>
                             </div>

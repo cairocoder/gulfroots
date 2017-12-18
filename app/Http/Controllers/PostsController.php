@@ -12,6 +12,7 @@ use App\User;
 use App\CommercialUsers;
 use App\Post_Photos;
 use App\Reports;
+use App\FiltersGroups;
 
 class PostsController extends Controller
 {
@@ -24,6 +25,10 @@ class PostsController extends Controller
         }
         $post = Posts::findorfail($id);
         $post->liked = Favorites::where('post_id', $id)->where('user_id', $user->id)->count();
+        $tmp = explode(' - ', $post->filters()->where('group_id', 1)->first()->name);
+        $post['country'] = $tmp[1];
+        $post['city'] = $tmp[0];
+        $post['status'] = $post->filters()->where('group_id', 4)->first()->name;
         $seller = User::where('id', $post->user_id)->first();
         $seller->whatsapp_number = "";//CommercialUsers::where('id', $post->user_id)->first()->whatsapp_number;
         $latest = Posts::where('user_id', $post->user_id)->where('isArchived', 0)->where('isApproved', 1)->where('id', '!=', $id)->orderBy('created_at', 'desc')->get();
@@ -61,10 +66,11 @@ class PostsController extends Controller
             $user->id = -1;
         }
         $category = Categories::findorfail($category_id);
-        $posts = Posts::search($category->name)->get();
+        $posts = Posts::search($category->name)->paginate(14);
+        $filters = $this->getFiltersOfSubCategory(1);;
         $posts = $this->getInfoOfPost($posts, $user);
         $parents = $this->getParents($category_id);
-        return view('categories.maincategory', compact('posts', 'category', 'parents'));
+        return view('categories.maincategory', compact('posts', 'category', 'parents', 'filters'));
     }
 
     public function ReportPost(Request $request, $id){
@@ -73,6 +79,29 @@ class PostsController extends Controller
             'post_id' => $id,
         ]);
         return route('landing');
+    }
+
+    private function getFiltersOfSubCategory($subcategory_id){
+        $groupsoffilters = [];
+        $ancestor = Categories::findorfail($subcategory_id);
+        $filterss = $ancestor->filtersgroups()->get();
+        foreach ($filterss as $item) {
+            $groupsoffilters[$item['id']] = $item;
+        }
+        while($ancestor->sub_id != null){
+            $ancestor = Categories::findorfail($ancestor->sub_id);
+            $filterss = $ancestor->filtersgroups()->get();
+            foreach ($filterss as $item) {
+                $groupsoffilters[$item['id']] = $item;
+            }
+        }
+        $filters = [];
+        foreach ($groupsoffilters as $key => $group) {
+            $tmp = FiltersGroups::findorfail($group->id)->first();
+            $var = $group['group_name'];
+            $filters[$var] = $group->getFilters()->get();
+        }
+        return $filters;
     }
 
     private function getInfoOfPost($posts, $user){

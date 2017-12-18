@@ -46,36 +46,6 @@
                             @endif
                             @endforeach
                         </div>
-                        <div class="side-filter-level1">
-                            <div class="filter-title active">
-                                <span>الاماكن</span>
-                                <i class="fa fa-caret-down"></i>
-                            </div>
-                            <ul div class="filter-level1-data active">
-                                <li class="has-sub">
-                                    <div class="filter-title active">
-                                        <span>السعودية</span>
-                                        <i class="fa fa-caret-down"></i>
-                                    </div>
-                                    <ul class="filter-level2-data active">
-                                        <li><a href="#!" class="active">رابط</a></li>
-                                        <li><a href="#!">رابط</a></li>
-                                        <li><a href="#!">رابط</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-sub">
-                                    <div class="filter-title">
-                                        <span>الامارات</span>
-                                        <i class="fa fa-caret-down"></i>
-                                    </div>
-                                    <ul class="filter-level2-data">
-                                        <li><a href="#!">رابط</a></li>
-                                        <li><a href="#!">رابط</a></li>
-                                        <li><a href="#!">رابط</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
                         <div class="side-filter-level1 active">
                             <div class="filter-title active">
                                 <span>حسب السعر</span>
@@ -91,60 +61,20 @@
                                 </li>
                             </ul>
                         </div>
+                        @foreach($filters as $group_name=>$values)
                         <div class="side-filter-level1 active">
                             <div class="filter-title active">
-                                <span>نوع الاعلان</span>
+                                <span>{{$group_name}}</span>
                                 <i class="fa fa-caret-down"></i>
                             </div>
-                            <ul div class="filter-level1-data active">
+                                <ul div class="filter-level1-data active">
                                 <li><a href="#!" class="active">جميع الاعلانات</a></li>
-                                <li><a href="#!">اعلانات مدفوعة عادية</a></li>
-                                <li><a href="#!">اعلانات مدفوعة مميزة</a></li>
-                                <li><a href="#!">اعلانات مدفوعة عاجلة</a></li>
-                                <li><a href="#!">اعلانات مدفوعة ملونة</a></li>
-                                <li><a href="#!">افضل الاعلانات</a></li>
-                            </ul>
+                                @foreach($values as $value)
+                                    <li><a href="#!">{{$value->name}}</a></li>
+                                @endforeach
+                                </ul>
                         </div>
-                        <div class="side-filter-level1 active">
-                            <div class="filter-title active">
-                                <span>عدد الافراد</span>
-                                <i class="fa fa-caret-down"></i>
-                            </div>
-                            <ul div class="filter-level1-data active">
-                                <li>
-                                    <form>
-                                        <select>
-                                            <option selected disabled>اختر عدد الافراد</option>
-                                            <option>فرد</option>
-                                            <option>فردين</option>
-                                            <option>3 افراد</option>
-                                            <option>4 افراد</option>
-                                            <option>5 افراد</option>
-                                        </select>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="side-filter-level1 active">
-                            <div class="filter-title active">
-                                <span>نوع البيع</span>
-                                <i class="fa fa-caret-down"></i>
-                            </div>
-                            <ul div class="filter-level1-data active">
-                                <li><a href="#!">عرض</a></li>
-                                <li><a href="#!">طلب</a></li>
-                            </ul>
-                        </div>
-                        <div class="side-filter-level1 active">
-                            <div class="filter-title active">
-                                <span>نوع العرض</span>
-                                <i class="fa fa-caret-down"></i>
-                            </div>
-                            <ul div class="filter-level1-data active">
-                                <li><a href="#!">قابل للتفاوض</a></li>
-                                <li><a href="#!">نهائي</a></li>
-                            </ul>
-                        </div>
+                        @endforeach
                         <div class="google-ads">
                             <img src="{{ asset('images/ads.png')}}" alt="">
                         </div>
@@ -182,7 +112,7 @@
                                             </div>
                                         </div>
                                         <h1 title="{{$post->short_des}}">{{$post->short_des}}</h1>
-                                        <small>مدينة الرياض</small>
+                                        <small>مدينة {{$post->city}}</small>
                                         @if($post->liked == 1)
                                             <div class="watch-icon active">
                                         @else
@@ -198,6 +128,7 @@
                             
                             <div class="clearfix"></div>
                             <div class="centerd top-50 bottom-50">
+                            {{$posts->links()}}
                                 <a href="#!" class="butn blue">شاهد الجميع</a>
                             </div>
                         </div>
