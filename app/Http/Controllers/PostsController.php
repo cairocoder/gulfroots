@@ -30,7 +30,7 @@ class PostsController extends Controller
         $post['city'] = $tmp[0];
         $post['status'] = $post->filters()->where('group_id', 4)->first()->name;
         $seller = User::where('id', $post->user_id)->first();
-        $seller->whatsapp_number = "";//CommercialUsers::where('id', $post->user_id)->first()->whatsapp_number;
+        $seller->whatsapp_number = $post->seller_contact_no;
         $latest = Posts::where('user_id', $post->user_id)->where('isArchived', 0)->where('isApproved', 1)->where('id', '!=', $id)->orderBy('created_at', 'desc')->get();
         $latest = $latest->splice(0, 3);
         $post_photos = Post_Photos::with('post')->where('post_id', $id)->get();
