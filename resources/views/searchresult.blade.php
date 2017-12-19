@@ -8,10 +8,13 @@
 
             <!-- filter start -->
             <div class="main-filter">
-                <form method="POST" class="search" action="{{Url('search')}}">
+                <form method="POST" class="search" action="{{Url('search')}}" id="form1">
                 {{ csrf_field() }}
                 <input type="hidden" class="applied-filters" name="applied_filters" value="{{$applied_ret}}">
-                    <!-- select dropdown start -->
+                <input type="hidden" class="mini_price" id="mini_price" name="mini_price" value="{{$request['mini-price']}}">
+                <input type="hidden" class="maxi_price" id="maxi_price" name="maxi_price" value="{{$request['maxi_price']}}">
+                <input type="hidden" class="sort" id="sort" name="sort" value="{{$request['sort'] or ''}}">
+                <!-- select dropdown start -->
                 <div class="select-cat">
                     <!-- hidden input to catch the id -->
                     <input id="cat-id" type="text" name="cat-id" value="{{$request->input('cat-id')}}" hidden>
@@ -85,8 +88,8 @@
                 <div class="city-box">
                     <div class="city-form">
                     <i  class="fa fa-map-marker"></i>
-                    <input type="text" placeholder="{{$request->search_city}}" value="{{$request->search_city}}" name="search_city">
-                    <select name="search_distance">
+                    <input type="text" placeholder="المدينة" value="{{$request->search_city}}" name="search_city">
+                    <select name="search_distance" onchange="document.getElementById('form1').submit();">
                         <option selected>0 كم</option>
                         <option>5 كم</option>
                         <option>10 كم</option>
@@ -156,10 +159,12 @@
                             </div>
                             <ul div class="filter-level1-data active">
                                 <li>
-                                    <form>
-                                        <input type="text" placeholder="السعر الادني">
-                                        <input type="text" placeholder="السعر الاقصي">
-                                        <input type="submit" value="تصفية">
+                                    <form id="abdallah">
+                                        <input type="text" placeholder="السعر الادني" value="{{$request['mini-price'] or ''}}" id="mini">
+                                        <input type="text" placeholder="السعر الاقصي" value="{{$request['maxi-price'] or ''}}" id="maxi">
+                                        <input type="submit" value="تصفية" onclick="document.getElementById('maxi_price').value=document.getElementById('maxi').value;
+                                        document.getElementById('maxi_price').value=document.getElementById('maxi').value;
+                                        document.getElementById('form1').submit();">
                                     </form>
                                 </li>
                             </ul>
@@ -204,11 +209,11 @@
                                 </div>
                             </div>
                             <div class="sort-box">
-                                <select>
-                                    <option>الاحدث اولا</option>
-                                    <option>الاكثر تشابه</option>
-                                    <option>الاقل سعر</option>
-                                    <option>الاعلي سعر</option>
+                                <select onchange="console.log(document.getElementById('sort').value);document.getElementById('sort').value=this.value;document.getElementById('form1').submit();">
+                                    <option value="0">الاكثر تشابه</option>
+                                    <option value="1"{{ (isset($request['sort']) and $request['sort'] == 1) ? 'selected' : ''}}>الاحدث اولا</option>
+                                    <option value="2"{{ (isset($request['sort']) and $request['sort'] == 2) ? 'selected' : ''}}>الاقل سعر</option>
+                                    <option value="3"{{ (isset($request['sort']) and $request['sort'] == 3) ? 'selected' : ''}}>الاعلي سعر</option>
                                 </select>
                             </div>
                         </div>

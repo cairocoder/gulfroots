@@ -1,16 +1,19 @@
 <!-- filter start -->
 <div class="main-filter">
-    <form method="POST" action="{{Url('search')}}">
+    <form method="POST" action="{{Url('search')}}" id="form1">
     {{ csrf_field() }}
     <input type="hidden" class="applied-filters" name="applied_filters" value="{{$applied_ret or ''}}">
+    <input type="hidden" class="mini_price" id="mini_price" name="mini_price" value="{{$request['mini_price'] or ''}}">
+    <input type="hidden" class="maxi_price" id="maxi_price" name="maxi_price" value="{{$request['maxi_price'] or ''}}">
+    <input type="hidden" class="sort" id="sort" name="sort" value="{{$request['sort'] or ''}}">
         <!-- select dropdown start -->
     <div class="select-cat">
         <!-- hidden input to catch the id -->
-        <input id="cat-id" type="text" name="cat-id" value="0" hidden>
+        <input id="cat-id" type="text" name="cat-id" value="{{$category->id or 0}}" hidden>
         <!-- select icon in the search bar -->
         <div class="select-head">
             <div class="select-icon">
-                <i class="fa fa-bars"></i>
+                <i class="fa fa-{{$category->icon or 'bars'}}"></i>
             </div>
             <i class="fa fa-caret-down"></i>
         </div>

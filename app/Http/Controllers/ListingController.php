@@ -75,7 +75,7 @@ class ListingController extends Controller
     }
 
     public function CreateNewPost(Request $request, Authenticatable $user){
-        $search_sentence = "جميع الاعلانات ";
+        $search_sentence = "";
         $post = Posts::create([
             'name' => $request->input('title'),
             'short_des' => $request->input('short_des'),
@@ -152,7 +152,7 @@ class ListingController extends Controller
                 ]);
             }
         }elseif($request->input('pack') == 2){
-            $search_sentence .= " اعلانات مدفوعه عادية";
+            // $search_sentence .= " اعلانات مدفوعه عادية";
             //isColored Feature
             $search_sentence .= ' paid isColored اعلانات مدفوعه ملونة';
             PostFeatures::create([

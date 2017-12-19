@@ -22,8 +22,8 @@ class CreatePostsTable extends Migration
             $table->string('seller_name');
             $table->string('seller_email');
             $table->string('seller_contact_no');
-            $table->string('longitude');
-            $table->string('latitude');
+            $table->string('longitude')->nullable();
+            $table->string('latitude')->nullable();
             $table->integer('price');
             $table->integer('isArchived')->default(0);
             $table->integer('isApproved')->default(1);

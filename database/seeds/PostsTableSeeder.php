@@ -15,8 +15,8 @@ class PostsTableSeeder extends Seeder
         //
         $faker = Faker\Factory::create();
         //
-        for($i = 1; $i <= 500; $i++) {
-            $search_sentence = " جميع الاعلانات";
+        for($i = 1; $i <= 1; $i++) {
+            $search_sentence = "";
             $post = App\Posts::create([
                 'title' => $faker->realText(20),
                 'short_des' => $faker->realText(20),
@@ -35,13 +35,13 @@ class PostsTableSeeder extends Seeder
             ]);
             for($j = 0; $j < 1; $j++){
                 $filter = App\FiltersPosts::create(['filters_id' => $faker->numberBetween(1,5), 'posts_id' => $i]);
-                $search_sentence .= ' ' . $filter->name;
+                $search_sentence .= ' ' . App\Filters::where('id', $filter->filters_id)->first()->name;
                 $filter = App\FiltersPosts::create(['filters_id' => $faker->numberBetween(15,16), 'posts_id' => $i]);
-                $search_sentence .= ' ' . $filter->name;
+                $search_sentence .= ' ' . App\Filters::where('id', $filter->filters_id)->first()->name;
                 $filter = App\FiltersPosts::create(['filters_id' => $faker->numberBetween(11,12), 'posts_id' => $i]);
-                $search_sentence .= ' ' . $filter->name;
+                $search_sentence .= ' ' . App\Filters::where('id', $filter->filters_id)->first()->name;
                 $filter = App\FiltersPosts::create(['filters_id' => $faker->numberBetween(13,14), 'posts_id' => $i]);
-                $search_sentence .= ' ' . $filter->name;
+                $search_sentence .= ' ' . App\Filters::where('id', $filter->filters_id)->first()->name;
             }
             $ancestor = App\Categories::findorfail($post->sub_category_id);
             $search_sentence .= ' ' . $ancestor->name;
@@ -51,26 +51,41 @@ class PostsTableSeeder extends Seeder
             }
             //add post_features
             if($i % 2){
-                for($j = 0; $j < 2; $j++){
+                for($j = 0; $j < 1; $j++){
                     $tmp = App\PostFeatures::create([
-                        'type' => 5 + $faker->numberBetween(1,5),
+                        'type' => $faker->numberBetween(1,2),
+                        'post_id' => $i,
+                        'expiry_date' => $post->created_at->addDays($faker->numberBetween(7,30)),
+                    ]);
+                    
+                    if($tmp->type == 1){
+                        App\FiltersPosts::create(['filters_id' => 9, 'posts_id' => $i]);
+                        $search_sentence .= ' paid isColored اعلانات مدفوعه ملونة';
+                    }
+                    if($tmp->type == 2){
+                        App\FiltersPosts::create(['filters_id' => 7, 'posts_id' => $i]);
+                        $search_sentence .= ' paid isinMain اعلانات مدفوعه مميزة';
+                    }
+                }
+            }else{
+                for($j = 0; $j < 1; $j++){
+                    $tmp = App\PostFeatures::create([
+                        'type' => 5,
                         'post_id' => $i,
                         'expiry_date' => $post->created_at->addDays($faker->numberBetween(7,30)),
                     ]);
                     App\FiltersPosts::create(['filters_id' => $tmp->type, 'posts_id' => $i]);
-                    if($tmp->type == 7){
-                        $search_sentence .= ' paid isinMain اعلانات مدفوعه مميزة';
-                    }
-                    if($tmp->type == 8){
-                        $search_sentence .= ' isBreaking اعلانات مدفوعه عاجلة';
-                    }
-                    if($tmp->type == 9){
-                        $search_sentence .= ' paid isColored اعلانات مدفوعه ملونة';
-                    }
-                    if($tmp->type == 10){
-                        $search_sentence .= ' paid isinTop أفضل الاعلانات';
-                    }
+                    $search_sentence .= ' isBreaking اعلانات مدفوعه عاجلة';
                 }
+            }
+            if($post->isinTop = 1){
+                App\PostFeatures::create([
+                    'type' => 3,
+                    'post_id' => $i,
+                    'expiry_date' => $post->created_at->addDays($faker->numberBetween(7,30)),
+                ]);
+                App\FiltersPosts::create(['filters_id' => 10, 'posts_id' => $i]);
+                $search_sentence .= ' paid isinTop أفضل الاعلانات';
             }
             //add post filters
             $post->search_sentence = $search_sentence;

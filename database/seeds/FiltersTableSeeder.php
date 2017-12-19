@@ -30,8 +30,8 @@ class FiltersTableSeeder extends Seeder
         DB::table('filters')->insert(['name' => 'جديد', 'group_id' => '4']);
         DB::table('filters')->insert(['name' => 'مستعمل', 'group_id' => '4']);
 
-        DB::table('filters')->insert(['name' => 'فرد', 'group_id' => '4']);
-        DB::table('filters')->insert(['name' => 'أسره منتجه', 'group_id' => '4']);
-        DB::table('filters')->insert(['name' => 'شركة', 'group_id' => '4']);
+        DB::table('filters')->insert(['name' => 'فرد', 'group_id' => '5']);
+        DB::table('filters')->insert(['name' => 'أسره منتجه', 'group_id' => '5']);
+        DB::table('filters')->insert(['name' => 'شركة', 'group_id' => '5']);
     }
 }

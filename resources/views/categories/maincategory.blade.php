@@ -54,9 +54,11 @@
                             <ul div class="filter-level1-data active">
                                 <li>
                                     <form>
-                                        <input type="text" placeholder="السعر الادني">
-                                        <input type="text" placeholder="السعر الاقصي">
-                                        <input type="submit" value="تصفية">
+                                        <input type="text" placeholder="السعر الادني" id="mini">
+                                        <input type="text" placeholder="السعر الاقصي" id="maxi">
+                                        <input type="submit" value="تصفية" onclick="document.getElementById('maxi_price').value=document.getElementById('maxi').value;
+                                        document.getElementById('maxi_price').value=document.getElementById('maxi').value;
+                                        document.getElementById('form1').submit();">
                                     </form>
                                 </li>
                             </ul>
@@ -70,7 +72,7 @@
                                 <ul div class="filter-level1-data active">
                                 <li><a href="#!" class="active">جميع الاعلانات</a></li>
                                 @foreach($values as $value)
-                                    <li><a href="#!">{{$value->name}}</a></li>
+                                    <li><a href="#!" onclick="document.getElementById('form1').submit();">{{$value->name}}</a></li>
                                 @endforeach
                                 </ul>
                         </div>

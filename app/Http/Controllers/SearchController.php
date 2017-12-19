@@ -18,6 +18,7 @@ class SearchController extends Controller
 {
     //
     public function search(Request $request){
+        // dd($request);
         $applied_ret = $request->get('applied_filters');
         $applied_filters = explode(',', $request->get('applied_filters'));
         // dd(explode(' : ', $applied_filters[0])[1]);
@@ -30,7 +31,7 @@ class SearchController extends Controller
         $search_sentence = $request->get('search_query') . $request->get('search_city');
         foreach($applied_filters as $applied){
             if($applied)
-                $search_sentence .= ' ' . explode(' : ', $applied_filters[0])[1];
+                $search_sentence .= ' ' . explode(' : ', $applied)[1];
         }
         $parents = [];
         if($category > 0){
@@ -42,9 +43,14 @@ class SearchController extends Controller
                 array_push($parents, $ancestor);
             }
         }
+        $request['maxi_price'] = min($request['maxi_price'], PHP_INT_MAX);
+        $request['mini_price'] = max($request['mini_price'], PHP_INT_MIN);
+        // dd($search_sentence);
+        $search_sentence = $this->clean($search_sentence);
         // dd($search_sentence);
         $posts = Posts::search($search_sentence)->where('isArchived', 0)->where('isApproved', 1)->where('isinTop', 0)->paginate(11);
         $top = Posts::search($search_sentence.' isinTop')->where('isArchived', 0)->where('isApproved', 1)->get();
+        // $posts = $posts->sortBy('price');
         $top = $top->shuffle();
         $top = $top->take(3);
         $posts = $this->getInfoOfPost($posts, $user);
@@ -55,13 +61,23 @@ class SearchController extends Controller
         return view('searchresult', compact('posts', 'parents', 'top', 'request', 'filters', 'applied_ret'));
     }
     
+    private function clean($search_sentence){
+        $ret = "";
+        $strings = explode(' ', $search_sentence);
+        foreach($strings as $tmp){
+            if($tmp != 'جميع' && $tmp != 'الاعلانات')
+                $ret .= ' ' . $tmp;    
+        }
+        return $ret;
+    }
+
     private function getInfoOfPost($posts, $user){
         $posts->map(function ($post) use($user) {
             $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
             $tmp = explode(' - ', $post->filters()->where('group_id', 1)->first()->name);
             $post['country'] = $tmp[1];
-            $post['city'] = $tmp[1];
+            $post['city'] = $tmp[0];
             $features = $post->getFeatures()->get();
             foreach($features as $feature){
                 if($feature->type == 1){
