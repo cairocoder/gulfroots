@@ -26,7 +26,7 @@
                         @else
                             @foreach($categories as $category)
                                 @if($category['id'] == $request['cat-id'])
-                                <i class="fa fa-{{$category->icon}}"></i>
+                                <i class="fa fa-{{$category['icon']}}"></i>
                                 @endif
                             @endforeach
                         @endif
@@ -138,7 +138,7 @@
                                     <li><a href="{{ Url('categories/'.$cat->id) }}" class="active">جميع الاقسام</a></li>
                                     @foreach($subcategory as $category)
                                         @if($category['sub_id'] == $cat->id)
-                                            <li><a href="{{ Url('categories/'.$category->id) }}">{{$category->name}}</a></li>
+                                            <li><a href="{{ Url('categories/'.$category['id']) }}">{{$category['name']}}</a></li>
                                         @endif
                                     @endforeach
                                 </ul>                            
@@ -228,46 +228,46 @@
                             @foreach($top as $post)
                                 <div class="col l4">
                                     <!-- ad item -->
-                                    @if($post->isColored)
-                                        <a href="{{Url('posts').'/'.$post->id}}" class="ad-item heigh-light">
+                                    @if($post['isColored'])
+                                        <a href="{{Url('posts').'/'.$post['id']}}" class="ad-item heigh-light">
                                     @else
-                                        <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
+                                        <a href="{{Url('posts').'/'.$post['id']}}" class="ad-item">
                                     @endif
-                                    @if($post->isBreaking)
+                                    @if($post['isBreaking'])
                                         <div class="important"><span></span><div>عاجل</div></div>
                                     @endif
                                         <div class="image-box">
-                                            <img src="{{$post->img}}" alt="">
-                                            <div class="price boxed-only">{{$post->price}}
+                                            <img src="{{$post['img']}}" alt="">
+                                            <div class="price boxed-only">{{$post['price']}}
                                                 <span>ر.س</span>
                                             </div>
                                         </div>
-                                        <h1 title="{{$post->title}}" class="boxed-only">{{$post->title}} </h1>
+                                        <h1 title="{{$post['title']}}" class="boxed-only">{{$post['title']}} </h1>
                                         <div class="post-data normal-only">
-                                            <h1 title="{{$post->title}}">
-                                            {{$post->title}} 
+                                            <h1 title="{{$post['title']}}">
+                                            {{$post['title']}} 
                                             </h1>
-                                            <div class="price">{{$post->price}}
+                                            <div class="price">{{$post['price']}}
                                                 <span>ر.س</span>
                                             </div>
                                             <div class="desc">
-                                                {{$post->short_des}}
+                                                {{$post['short_des']}}
                                             </div>
                                         </div>
-                                        <small class="boxed-only">{{$post->city}}</small>
+                                        <small class="boxed-only">{{$post['city']}}</small>
                                         <div class="info normal-only">
-                                            <h3>{{$post->country}}
-                                                <small>{{$post->city}}</small>
+                                            <h3>{{$post['country']}}
+                                                <small>{{$post['city']}}</small>
                                             </h3>
-                                            <div class="time"> {{  strftime("%b %d %Y",strtotime($post->created_at))}}</div>
+                                            <div class="time"> {{  strftime("%b %d %Y",strtotime($post['created_at']))}}</div>
                                         </div>
-                                        @if($post->liked == 1)
+                                        @if($post['liked'] == 1)
                                             <div class="watch-icon active">
                                         @else
                                             <div class="watch-icon">
                                         @endif
-                                            <input type="hidden" name="liked" class="liked" value="{{$post->liked}}">
-                                            <input type="hidden" name="post_id" class="post_id" value="{{$post->id}}">
+                                            <input type="hidden" name="liked" class="liked" value="{{$post['liked']}}">
+                                            <input type="hidden" name="post_id" class="post_id" value="{{$post['id']}}">
                                             <i class="fa fa-star"></i>
                                         </div>
                                     </a>
@@ -334,7 +334,6 @@
                                 <h2>No Search Results</h2>
                             </div>
                             @endif
-                            {{$posts->links()}}
                         <div class="centerd">
                             <img src="assets/images/width-ads.jpg" alt="">
                         </div>

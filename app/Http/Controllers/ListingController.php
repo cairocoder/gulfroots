@@ -37,7 +37,7 @@ class ListingController extends Controller
         if(empty($subcategories)){
             return $this->ChooseSupplyOrDemand($category_id, $parents, $ancestor, $subcategoriesALL);
         }
-        dd($subcategories);
+        // dd($subcategories);
         return view('posts.ad2', compact('subcategories', 'subcategoriesALL', 'parents', 'ancestor', 'category_id'));
     }
 

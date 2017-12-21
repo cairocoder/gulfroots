@@ -28,7 +28,7 @@ class SearchController extends Controller
             $user->id = -1;
         }
         $category = $request->get('cat-id');
-        $search_sentence = $request->get('search_query') . $request->get('search_city');
+        $search_sentence = $request->get('search_query') . ' ' . $request->get('search_city');
         foreach($applied_filters as $applied){
             if($applied)
                 $search_sentence .= ' ' . explode(' : ', $applied)[1];
@@ -43,29 +43,76 @@ class SearchController extends Controller
                 array_push($parents, $ancestor);
             }
         }
-        $request['maxi_price'] = min($request['maxi_price'], PHP_INT_MAX);
-        $request['mini_price'] = max($request['mini_price'], PHP_INT_MIN);
+        if(!$request['maxi_price'])
+            $request['maxi_price'] = PHP_INT_MAX;
+        if(!$request['mini_price'])
+            $request['mini_price'] = PHP_INT_MIN;
+        // dd($request['maxi_price']);
         // dd($search_sentence);
         $search_sentence = $this->clean($search_sentence);
         // dd($search_sentence);
         $posts = Posts::search($search_sentence)->where('isArchived', 0)->where('isApproved', 1)->where('isinTop', 0)->paginate(11);
         $top = Posts::search($search_sentence.' isinTop')->where('isArchived', 0)->where('isApproved', 1)->get();
+        // dd($top);
         // $posts = $posts->sortBy('price');
-        $top = $top->shuffle();
-        $top = $top->take(3);
         $posts = $this->getInfoOfPost($posts, $user);
         $top = $this->getInfoOfPost($top, $user);
+        $top = $this->filterByPrice($top, $request['maxi_price'], $request['mini_price']);
+        $posts = $this->filterByPrice($posts, $request['maxi_price'], $request['mini_price']);
         $parents = array_reverse($parents);
         $filters = $this->getFiltersOfSubCategory(1);
-        // dd($filters);
+        shuffle($top);
+        $top = array_slice($top, 0, 3); 
+        // dd($top);
+        foreach($top as $key=>$post){
+            $top[$key] = $post->toArray();
+        }
+        foreach($posts as $key=>$post){
+            $posts[$key] = $post->toArray();
+        }
+        if($request['sort'] > 0){
+            $top = $this->sortResults($top, $request['sort']);
+            $posts = $this->sortResults($posts, $request['sort']);
+        }
+        // dd($top);
         return view('searchresult', compact('posts', 'parents', 'top', 'request', 'filters', 'applied_ret'));
     }
+
+    private function sortResults($posts, $sort){
+        if($sort == 1){
+            //sort by last created 
+            $posts = array_values(array_sort($posts, function ($value) {
+                return $value['created_at'];
+            }));
+        }else if($sort == 2){
+            // sort by least price
+            $posts = array_values(array_sort($posts, function ($value) {
+                return $value['price'];
+            }));
+        }else if($sort == 3){
+            // sort by highest price
+            $posts = array_values(array_sort($posts, function ($value) {
+                return $value['price'];
+            }));
+            $posts = array_reverse($posts);
+        }
+        return $posts;
+    }
     
+    private function filterByPrice($posts, $maxi_price, $mini_price){
+        $filteredPosts = [];
+        foreach($posts as $post){
+            if($post['price'] >= $mini_price && $post['price'] <= $maxi_price)
+                array_push($filteredPosts, $post);
+        }
+        return $filteredPosts;
+    }
+
     private function clean($search_sentence){
         $ret = "";
         $strings = explode(' ', $search_sentence);
         foreach($strings as $tmp){
-            if($tmp != 'جميع' && $tmp != 'الاعلانات')
+            if($tmp && $tmp != 'جميع' && $tmp != 'الاعلانات')
                 $ret .= ' ' . $tmp;    
         }
         return $ret;
@@ -79,6 +126,7 @@ class SearchController extends Controller
             $post['country'] = $tmp[1];
             $post['city'] = $tmp[0];
             $features = $post->getFeatures()->get();
+            $post['isColored'] = $post['isinMain'] = $post['isBreaking'] = 0;
             foreach($features as $feature){
                 if($feature->type == 1){
                     $post['isColored'] = 1;

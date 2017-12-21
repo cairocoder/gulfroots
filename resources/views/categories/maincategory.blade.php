@@ -2,7 +2,7 @@
 @section('title', ' - ' . $category->name)
 @section('content')
     @if($category->sub_id == null)
-    <div class="cat-banner" style="background-image:url('{{ asset('front-assets/images/cat.jpg')}}')">
+    <div class="cat-banner" style="background-image:url('{{ asset($category->photo)}}')">
         <h1>{{$category->name}}</h1>
     </div>
     @endif
