@@ -14,7 +14,7 @@
                 @foreach($parents as $cat)
                     <div class="map-item"><a href="{{ Url('categories/'.$cat->id) }}">{{$cat->name}}</a></div>
                 @endforeach
-                <div class="map-item">{{$post->title}}</div>
+                <div class="map-item">{{$post['title']}}</div>
             </div>
 
 
@@ -23,24 +23,24 @@
 
                 <div class="col l9">
                     <div class="single-box">
-                        @if($post->liked == 1)
+                        @if($post['liked'] == 1)
                             <div class="watch-icon active">
                         @else
                             <div class="watch-icon">
                         @endif
-                            <input type="hidden" name="liked" class="liked" value="{{$post->liked}}">
-                            <input type="hidden" name="post_id" class="post_id" value="{{$post->id}}">
+                            <input type="hidden" name="liked" class="liked" value="{{$post['liked']}}">
+                            <input type="hidden" name="post_id" class="post_id" value="{{$post['id']}}">
                             <i class="fa fa-star"></i>
                         </div>
-                        <h1>{{$post->short_des}}</h1>
-                        <h3> {{$post->price}} <span>ريال</span></h3>
+                        <h1>{{$post['short_des']}}</h1>
+                        <h3> {{$post['price']}} <span>ريال</span></h3>
                         <div class="row no-margin borderd">
                             <div class="col l6">
                                 <i class="fa fa-map-marker"></i>
-                                {{$post->country}} - {{$post->city}} | <span dir="ltr">مشاهدة {{Counter::showAndCount('posts', $post->id)}} </span>
+                                {{$post['country']}} - {{$post['city']}} | <span dir="ltr">مشاهدة {{Counter::showAndCount('posts', $post['id'])}} </span>
                             </div>
                             <div class="col l6 lefted">
-                                <a href="{{Url('newad') .'/'. $post->sub_category_id}}">
+                                <a href="{{Url('newad') .'/'. $post['sub_category_id']}}">
                                     <i class="fa fa-plus crcl"></i> اضف اعلان مشابة
                                 </a>
                                 |
@@ -52,7 +52,7 @@
                                     <i class="fa fa-ban"></i> ابلغ عن اعلان مسئ
                                 </a>
                                 <div class="report-box my-drop">
-                                    <form method="POST" action="{{Url('report/'.$post->id)}}">
+                                    <form method="POST" action="{{Url('report/'.$post['id'])}}">
                                         {{csrf_field()}}
                                         <label class="checkbox blued">
                                             <input type="checkbox" name="type" value="1"><span></span> اعلان مكرر
@@ -110,22 +110,22 @@
                             <div class="col l7">
                                 <h2>وصف المنتج</h2>
                                 <p>
-                                  {{$post->long_des}}
+                                  {{$post['long_des']}}
                                 </p>
                             </div>
                             <div class="col l5">
                                 <div class="product-det">
                                     <div>
                                         تاريخ الاعلان
-                                        <span>{{  strftime("%b %d %Y",strtotime($post->created_at))}}</span>
+                                        <span>{{  strftime("%b %d %Y",strtotime($post['created_at']))}}</span>
                                     </div>
                                     <div>
                                         تاريخ التعديل
-                                        <span>{{  strftime("%b %d %Y",strtotime($post->updated_at))}}</span>
+                                        <span>{{  strftime("%b %d %Y",strtotime($post['updated_at']))}}</span>
                                     </div>
                                     <div>
                                         الحالة
-                                        <span>{{$post->status}}</span>
+                                        <span>{{$post['status']}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@
 
                     <div class="row no-margin ads-list">
                         @foreach($latest as $listing)
-                            @if($listing->id != $post->id)
+                            @if($listing->id != $post['id'])
                                 <div class="col l4">
                                     <!-- ad item -->
                                     <a href="{{Url('posts').'/'.$listing->id}}" class="ad-item">

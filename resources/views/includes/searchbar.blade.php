@@ -9,11 +9,11 @@
         <!-- select dropdown start -->
     <div class="select-cat">
         <!-- hidden input to catch the id -->
-        <input id="cat-id" type="text" name="cat-id" value="{{$category->id or 0}}" hidden>
+        <input id="cat-id" type="text" name="cat-id" value="{{$category['id'] or 0}}" hidden>
         <!-- select icon in the search bar -->
         <div class="select-head">
             <div class="select-icon">
-                <i class="fa fa-{{$category->icon or 'bars'}}"></i>
+                <i class="fa fa-{{$category['icon'] or 'bars'}}"></i>
             </div>
             <i class="fa fa-caret-down"></i>
         </div>
@@ -27,24 +27,24 @@
             <!-- select group level 1 start  -->
             @foreach($categories as $category)
                 <!-- select group level 1 start  -->
-                <div class="select-group" data-cat-icon="{{$category->icon}}" data-cat-id="{{$category->id}}">
-                    <i class="fa fa-{{$category->icon}}"></i> {{$category->name}}
+                <div class="select-group" data-cat-icon="{{$category['icon']}}" data-cat-id="{{$category['id']}}">
+                    <i class="fa fa-{{$category['icon']}}"></i> {{$category['name']}}
                     @foreach($subcategory as $subcat)
-                        @if($subcat->sub_id == $category->id)
+                        @if($subcat['sub_id'] == $category['id'])
                         <div class="group-toggle"><i class="fa fa-caret-down"></i></div>
                         <!-- select group level 2 start  -->
                         <div class="group-box">
                             <!-- group item -->
-                            <div class="select-item-level1" data-cat-id="{{$subcat->id}}">
-                                {{$subcat->name}}
+                            <div class="select-item-level1" data-cat-id="{{$subcat['id']}}">
+                                {{$subcat['name']}}
                                 @foreach($subcategory as $subOfsubcat)
-                                    @if($subcat->id == $subOfsubcat->sub_id)
+                                    @if($subcat['id'] == $subOfsubcat['sub_id'])
                                     <div class="group-toggle"><i class="fa fa-caret-down"></i></div>
                                     <!-- select group level 3 start  -->
                                     <div class="group-box2">
                                         <!-- group item -->
-                                        <div class="select-item-level2" data-cat-id="{{$subOfsubcat->id}}">
-                                            {{$subOfsubcat->name}}
+                                        <div class="select-item-level2" data-cat-id="{{$subOfsubcat['id']}}">
+                                            {{$subOfsubcat['name']}}
                                         </div>
                                     </div>
                                     <!-- select group level 3 end  -->

@@ -29,8 +29,9 @@ class AppServiceProvider extends ServiceProvider
             $view->with(compact('categories'));
         });
         view()->composer(['posts.ad2', 'posts.ad3','includes.searchbar', 'categories.maincategory', 'searchresult'], function($view) {
-          $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get();
-          $subcategory = Categories::where('sub_id', '!=', null)->get();
+          $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get()->toArray();
+          $subcategory = Categories::where('sub_id', '!=', null)->get()->toArray();
+        //   dd($categories);
           $view->with(compact('categories', 'subcategory'));
         });
         view()->composer('includes.specialcategories', function($view) {
@@ -85,6 +86,9 @@ class AppServiceProvider extends ServiceProvider
               }
               $lastseen = $this->getInfoOfPost($lastseen, $user);
             }
+            $favorites = $favorites->toArray();
+            $lastseen = $lastseen->toArray();
+            $latest = $latest->toArray();
             $view->with(compact('favorites', 'latest', 'lastseen'));
         });
         view()->composer('includes.lastseenslider', function($view){
@@ -111,6 +115,7 @@ class AppServiceProvider extends ServiceProvider
               }
               $lastseen = $this->getInfoOfPost($lastseen, $user);
             }
+            $lastseen = $lastseen->toArray();
             $view->with(compact('lastseen'));
         });
         Schema::defaultStringLength(191);
@@ -163,6 +168,7 @@ class AppServiceProvider extends ServiceProvider
             $post['country'] = $tmp[1];
             $post['city'] = $tmp[0];
             $features = $post->getFeatures()->get();
+            $post['isColored'] = $post['isinMain'] = $post['isBreaking'] = 0;
             foreach($features as $feature){
                 if($feature->type == 1){
                     $post['isColored'] = 1;

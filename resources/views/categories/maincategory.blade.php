@@ -34,8 +34,8 @@
                                 <ul div class="filter-level1-data active">
                                     <li><a href="{{ Url('categories/'.$cat->id) }}" class="active">جميع الاقسام</a></li>
                                     @foreach($subcategory as $category)
-                                        @if($category->sub_id == $cat->id)
-                                            <li><a href="{{ Url('categories/'.$category->id) }}">{{$category->name}}</a></li>
+                                        @if($category['sub_id'] == $cat['id'])
+                                            <li><a href="{{ Url('categories/'.$category['id']) }}">{{$category['name']}}</a></li>
                                         @endif
                                     @endforeach
                                 </ul>                            

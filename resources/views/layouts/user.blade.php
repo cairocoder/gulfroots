@@ -222,7 +222,7 @@
 <!-- jQuery plugins -->
 <script defer src="{{Url('/')}}/front-assets/js/ui.min.js"></script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeJnaxQPZCYRVuuWv5wAdVqfG18OKNQ_A&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeJnaxQPZCYRVuuWv5wAdVqfG18OKNQ_A">
     </script>
 </body>
 </html>

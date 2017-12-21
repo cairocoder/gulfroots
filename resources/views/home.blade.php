@@ -42,29 +42,29 @@
                 @foreach($latest as $post)
                     <div class="col l3">
                         <!-- ad item -->
-                        @if($post->isColored)
-                            <a href="{{Url('posts').'/'.$post->id}}" class="ad-item heigh-light">
+                        @if($post['isColored'])
+                            <a href="{{Url('posts').'/'.$post['id']}}" class="ad-item heigh-light">
                         @else
-                            <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
+                            <a href="{{Url('posts').'/'.$post['id']}}" class="ad-item">
                         @endif
-                        @if($post->isBreaking)
+                        @if($post['isBreaking'])
                             <div class="important"><span></span><div>عاجل</div></div>
                         @endif
                             <div class="image-box">
-                                <img src="{{Url($post->img)}}" alt="">
-                                <div class="price">{{$post->price}}
+                                <img src="{{Url($post['img'])}}" alt="">
+                                <div class="price">{{$post['price']}}
                                     <span>ر.س</span>
                                 </div>
                             </div>
-                            <h1 title="{{$post->title}}">{{$post->title}}</h1>
-                            <small>مدينة {{$post->city}}</small>
-                            @if($post->liked == 1)
+                            <h1 title="{{$post['title']}}">{{$post['title']}}</h1>
+                            <small>مدينة {{$post['city']}}</small>
+                            @if($post['liked'] == 1)
                                 <div class="watch-icon active">
                             @else
                                 <div class="watch-icon">
                             @endif
-                                <input type="hidden" name="liked" class="liked" value="{{$post->liked}}">
-                                <input type="hidden" name="post_id" class="post_id" value="{{$post->id}}">
+                                <input type="hidden" name="liked" class="liked" value="{{$post['liked']}}">
+                                <input type="hidden" name="post_id" class="post_id" value="{{$post['id']}}">
                                 <i class="fa fa-star"></i>
                             </div>
                         </a>
@@ -80,29 +80,29 @@
                     @foreach($lastseen as $post)
                         <div class="col l3">
                             <!-- ad item -->
-                            @if($post->isColored)
-                                <a href="{{Url('posts').'/'.$post->id}}" class="ad-item heigh-light">
+                            @if($post['isColored'])
+                                <a href="{{Url('posts').'/'.$post['id']}}" class="ad-item heigh-light">
                             @else
-                                <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
+                                <a href="{{Url('posts').'/'.$post['id']}}" class="ad-item">
                             @endif
-                            @if($post->isBreaking)
+                            @if($post['isBreaking'])
                                 <div class="important"><span></span><div>عاجل</div></div>
                             @endif
                                 <div class="image-box">
-                                    <img src="{{$post->img}}" alt="">
-                                    <div class="price">{{$post->price}}
+                                    <img src="{{$post['img']}}" alt="">
+                                    <div class="price">{{$post['price']}}
                                         <span>ر.س</span>
                                     </div>
                                 </div>
-                                <h1 title="{{$post->title}}">{{$post->title}}</h1>
-                                <small>مدينة {{$post->city}}</small>
-                                @if($post->liked == 1)
+                                <h1 title="{{$post['title']}}">{{$post['title']}}</h1>
+                                <small>مدينة {{$post['city']}}</small>
+                                @if($post['liked'] == 1)
                                     <div class="watch-icon active">
                                 @else
                                     <div class="watch-icon">
                                 @endif
-                                    <input type="hidden" name="liked" class="liked" value="{{$post->liked}}">
-                                    <input type="hidden" name="post_id" class="post_id" value="{{$post->id}}">
+                                    <input type="hidden" name="liked" class="liked" value="{{$post['liked']}}">
+                                    <input type="hidden" name="post_id" class="post_id" value="{{$post['id']}}">
                                     <i class="fa fa-star"></i>
                                 </div>
                             </a>
@@ -136,29 +136,29 @@
                     @foreach($favorites as $post)
                         <div class="col l3">
                             <!-- ad item -->
-                            @if($post->isColored)
-                                <a href="{{Url('posts').'/'.$post->id}}" class="ad-item heigh-light">
+                            @if($post['isColored'])
+                                <a href="{{Url('posts').'/'.$post['id']}}" class="ad-item heigh-light">
                             @else
-                                <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
+                                <a href="{{Url('posts').'/'.$post['id']}}" class="ad-item">
                             @endif
-                            @if($post->isBreaking)
+                            @if($post['isBreaking'])
                                 <div class="important"><span></span><div>عاجل</div></div>
                             @endif
                                 <div class="image-box">
-                                    <img src="{{$post->img}}" alt="">
-                                    <div class="price">{{$post->price}}
+                                    <img src="{{$post['img']}}" alt="">
+                                    <div class="price">{{$post['price']}}
                                         <span>ر.س</span>
                                     </div>
                                 </div>
-                                <h1 title="سيارة بمواصفات خاصة">{{$post->title}}</h1>
-                                <small>مدينة {{$post->city}}</small>
-                                @if($post->liked == 1)
+                                <h1 title="{{$post['title']}}">{{$post['title']}}</h1>
+                                <small>مدينة {{$post['city']}}</small>
+                                @if($post['liked'] == 1)
                                     <div class="watch-icon active">
                                 @else
                                     <div class="watch-icon">
                                 @endif
-                                    <input type="hidden" name="liked" class="liked" value="{{$post->liked}}">
-                                    <input type="hidden" name="post_id" class="post_id" value="{{$post->id}}">
+                                    <input type="hidden" name="liked" class="liked" value="{{$post['liked']}}">
+                                    <input type="hidden" name="post_id" class="post_id" value="{{$post['id']}}">
                                     <i class="fa fa-star"></i>
                                 </div>
                             </a>

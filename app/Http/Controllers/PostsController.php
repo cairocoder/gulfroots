@@ -39,6 +39,7 @@ class PostsController extends Controller
         $alike = $alike->splice(0, 3);
         $alike = $this->getInfoOfPost($alike, $user);
         $parents = $this->getParents($post->sub_category_id);
+        $post = $post->toArray();
         return view('posts.single', compact('post', 'post_photos', 'latest', 'alike', 'seller', 'parents'));
     }
     //

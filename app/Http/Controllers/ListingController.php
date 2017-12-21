@@ -18,13 +18,13 @@ class ListingController extends Controller
 {
     //
     public function ChooseCategory(){
-        $categories = DB::table('categories')->where('sub_id', null)->orderBy('sort','ASC')->get();
+        $categories = DB::table('categories')->where('sub_id', null)->orderBy('sort','ASC')->get()->toArray();
         return view('posts.ad1', compact('categories'));
     }
 
     public function ChooseSubCategory($category_id){
-        $subcategoriesALL = DB::table('categories')->where('sub_id', '!=', null)->get();
-        $subcategories = DB::table('categories')->where('sub_id', $category_id)->get();
+        $subcategoriesALL = DB::table('categories')->where('sub_id', '!=', null)->get()->toArray();
+        $subcategories = DB::table('categories')->where('sub_id', $category_id)->get()->toArray();
         $parents = [];
         $ancestor = Categories::findorfail($category_id);
         if($ancestor->sub_id != null)
@@ -34,9 +34,10 @@ class ListingController extends Controller
             array_push($parents, $ancestor->id);
         }
         $ancestor = $ancestor->id;
-        if($subcategories->isEmpty()){
+        if(empty($subcategories)){
             return $this->ChooseSupplyOrDemand($category_id, $parents, $ancestor, $subcategoriesALL);
         }
+        dd($subcategories);
         return view('posts.ad2', compact('subcategories', 'subcategoriesALL', 'parents', 'ancestor', 'category_id'));
     }
 

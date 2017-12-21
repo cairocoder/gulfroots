@@ -7,31 +7,31 @@
             <div class="swiper-slide">
             @endif
                 <!-- ad item -->
-                @if($post->isColored)
-                <a href="{{Url('posts').'/'.$post->id}}" class="ad-item heigh-light">
+                @if($post['isColored'])
+                <a href="{{Url('posts').'/'.$post['id']}}" class="ad-item heigh-light">
                 @else
-                <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
+                <a href="{{Url('posts').'/'.$post['id']}}" class="ad-item">
                 @endif
-                @if($post->isBreaking)
+                @if($post['isBreaking'])
                 <div class="important"><span></span><div>عاجل</div></div>
                 @endif
                     <div class="image-box">
-                        <img src="{{Url($post->img)}}" alt="">
+                        <img src="{{Url($post['img'])}}" alt="">
                     </div>
                     <div class="post-data">
-                        <h1 title="{{$post->title}}">{{$post->title}}</h1>
-                        <div class="price">{{$post->price}}
+                        <h1 title="{{$post['title']}}">{{$post['title']}}</h1>
+                        <div class="price">{{$post['price']}}
                                 <span>ر.س</span>
                         </div>
-                        <small class="boxed-only">مدينة {{$post->city}}</small>
+                        <small class="boxed-only">مدينة {{$post['city']}}</small>
                     </div>
-                    @if($post->liked == 1)
+                    @if($post['liked'] == 1)
                         <div class="watch-icon active">
                     @else
                         <div class="watch-icon">
                     @endif
-                        <input type="hidden" name="liked" class="liked" value="{{$post->liked}}">
-                        <input type="hidden" name="post_id" class="post_id" value="{{$post->id}}">
+                        <input type="hidden" name="liked" class="liked" value="{{$post['liked']}}">
+                        <input type="hidden" name="post_id" class="post_id" value="{{$post['id']}}">
                         <i class="fa fa-star"></i>
                     </div>
                 </a>
