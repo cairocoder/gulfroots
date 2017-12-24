@@ -52,8 +52,8 @@ class PostsTableSeeder extends Seeder
                 'price' => $faker->numberBetween(1000,2500),
                 'sub_category_id' => $faker->numberBetween(19,50),
                 'user_id' => $faker->numberBetween(1,20),
-                'isArchived' => $faker->numberBetween(0, 1),
-                'isApproved' => $faker->numberBetween(0, 1),
+                'isArchived' => 0,
+                'isApproved' => 1,
                 'isinTop' => $faker->numberBetween(0, 1),
                 'search_sentence' => "",
             ]);
