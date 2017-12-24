@@ -35,7 +35,8 @@ class AppServiceProvider extends ServiceProvider
           $view->with(compact('categories', 'subcategory'));
         });
         view()->composer('includes.specialcategories', function($view) {
-            $specialcategory = Categories::where('slug', '!=', null)->get();
+            $specialcategory = Categories::where('slug', '!=', "")->get()->take(10);
+            // dd($specialcategory);
             $view->with(compact('specialcategory'));
           });
         view()->composer('includes.favoriteslider', function($view) {
@@ -187,7 +188,7 @@ class AppServiceProvider extends ServiceProvider
 
     private function getCategoriesForLayouts(){
         $categories = Categories::where('sub_id', null)->get();
-        $allsubcategories = Categories::where('sub_id', '!=', null)->get();
+        $allsubcategories = Categories::where('sub_id', '!=', "")->get();
         $categories->map(function ($category) use($allsubcategories){
             $ids = $this->getIdsOfChildrenCategories($category->id);
             $category['posts_count'] = 0;

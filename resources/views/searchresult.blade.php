@@ -21,15 +21,7 @@
                     <!-- select icon in the search bar -->
                     <div class="select-head">
                         <div class="select-icon">
-                        @if(!isset($request['cat-id']) || $request['cat-id'] == 0)
-                            <i class="fa fa-bars"></i>
-                        @else
-                            @foreach($categories as $category)
-                                @if($category['id'] == $request['cat-id'])
-                                <i class="fa fa-{{$category['icon']}}"></i>
-                                @endif
-                            @endforeach
-                        @endif
+                            <i class="fa fa-{{$parents[0]['icon'] or 'bars'}}"></i>
                         </div>
                         <i class="fa fa-caret-down"></i>
                     </div>
@@ -135,16 +127,16 @@
                                 </div>
                             @if($key == count($parents) - 1)
                                 <ul div class="filter-level1-data active">
-                                    <li><a href="{{ Url('categories/'.$cat->id) }}" class="active">جميع الاقسام</a></li>
+                                    <li><a href="" class="active">جميع الاقسام</a></li>
                                     @foreach($subcategory as $category)
                                         @if($category['sub_id'] == $cat->id)
-                                            <li><a href="{{ Url('categories/'.$category['id']) }}">{{$category['name']}}</a></li>
+                                            <li><a href="">{{$category['name']}}</a></li>
                                         @endif
                                     @endforeach
                                 </ul>                            
                             @else
                                 <ul div class="filter-level1-data active">
-                                    <li><a href="{{ Url('categories/'.$cat->id) }}">جميع الاقسام</a></li>
+                                    <li><a href="">جميع الاقسام</a></li>
                                 </ul>
                             @endif
                             @endforeach
@@ -209,21 +201,6 @@
                                 <li><a href="#!">نهائي</a></li>
                             </ul>
                         </div>
-
-                        @foreach($filters as $group_name=>$values)
-                            <div class="side-filter-level1 active">
-                                <div class="filter-title active">
-                                    <span>{{$group_name}}</span>
-                                    <i class="fa fa-caret-down"></i>
-                                </div>
-                                    <ul div class="filter-level1-data active">
-                                    <li><a href="#!" class="active">جميع الاعلانات</a></li>
-                                    @foreach($values as $value)
-                                        <li><a href="#!">{{$value->name}}</a></li>
-                                    @endforeach
-                                    </ul>
-                            </div>
-                        @endforeach
 
                         <div class="google-ads">
                             <img src="assets/images/ads.png" alt="">

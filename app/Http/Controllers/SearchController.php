@@ -60,7 +60,7 @@ class SearchController extends Controller
         $top = $this->filterByPrice($top, $request['maxi_price'], $request['mini_price']);
         $posts = $this->filterByPrice($posts, $request['maxi_price'], $request['mini_price']);
         $parents = array_reverse($parents);
-        $filters = $this->getFiltersOfSubCategory(1);
+        // $filters = $this->getFiltersOfSubCategory(1);
         shuffle($top);
         $top = array_slice($top, 0, 3); 
         // dd($top);
@@ -75,7 +75,7 @@ class SearchController extends Controller
             $posts = $this->sortResults($posts, $request['sort']);
         }
         // dd($top);
-        return view('searchresult', compact('posts', 'parents', 'top', 'request', 'filters', 'applied_ret'));
+        return view('searchresult', compact('posts', 'parents', 'top', 'request', 'applied_ret'));
     }
 
     private function sortResults($posts, $sort){
