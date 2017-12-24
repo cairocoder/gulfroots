@@ -60,7 +60,8 @@ class SearchController extends Controller
         $top = $this->filterByPrice($top, $request['maxi_price'], $request['mini_price']);
         $posts = $this->filterByPrice($posts, $request['maxi_price'], $request['mini_price']);
         $parents = array_reverse($parents);
-        $filters = $this->getFiltersOfSubCategory($parents[0]);
+        if(count($parents) > 0)$filters = $this->getFiltersOfSubCategory($parents[0]);
+        else $filters = [];
         shuffle($top);
         $top = array_slice($top, 0, 3); 
         // dd($top);
