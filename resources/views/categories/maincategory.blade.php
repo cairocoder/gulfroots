@@ -63,6 +63,45 @@
                                 </li>
                             </ul>
                         </div>
+                        <div class="side-filter-level1 active">
+                            <div class="filter-title active">
+                                <span>نوع الاعلان</span>
+                                <i class="fa fa-caret-down"></i>
+                            </div>
+                            <ul class="filter-level1-data active">
+                                <li><a href="#!" class="active">جميع الاعلانات</a></li>
+                                <li><a href="#!">اعلانات مدفوعة عادية</a></li>
+                                <li><a href="#!">اعلانات مدفوعة مميزة</a></li>
+                                <li><a href="#!">اعلانات مدفوعة عاجلة</a></li>
+                                <li><a href="#!">اعلانات مدفوعة ملونة</a></li>
+                                <li><a href="#!">افضل الاعلانات</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="side-filter-level1 active">
+                            <div class="filter-title active">
+                                <span>نوع البيع</span>
+                                <i class="fa fa-caret-down"></i>
+                            </div>
+                            <ul class="filter-level1-data active">
+                                <li><a href="#!" class="active">جميع الاعلانات</a></li>
+                                <li><a href="#!">عرض</a></li>
+                                <li><a href="#!">طلب</a></li>
+                            </ul>
+                        </div>
+
+
+                        <div class="side-filter-level1 active">
+                            <div class="filter-title active">
+                                <span>نوع العرض</span>
+                                <i class="fa fa-caret-down"></i>
+                            </div>
+                            <ul class="filter-level1-data active">
+                                <li><a href="#!" class="active">جميع الاعلانات</a></li>
+                                <li><a href="#!">قابل للتفاوض</a></li>
+                                <li><a href="#!">نهائي</a></li>
+                            </ul>
+                        </div>
                         <div class="google-ads">
                             <img src="{{ asset('images/ads.png')}}" alt="">
                         </div>
