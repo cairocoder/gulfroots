@@ -100,7 +100,7 @@ class PostsController extends Controller
         }
         $category = Categories::findorfail($category_id);
         $posts = Posts::search($category->name)->paginate(14);
-        $filters = $this->getFiltersOfSubCategory(1);;
+        $filters = $this->getFiltersOfSubCategory($category_id);;
         $posts = $this->getInfoOfPost($posts, $user);
         $parents = $this->getParents($category_id);
         if($category_id == 1){

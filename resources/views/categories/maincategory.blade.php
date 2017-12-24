@@ -63,6 +63,20 @@
                                 </li>
                             </ul>
                         </div>
+                        @foreach($filters as $group_name=>$values)
+                        <div class="side-filter-level1 active">
+                            <div class="filter-title active">
+                                <span>{{$group_name}}</span>
+                                <i class="fa fa-caret-down"></i>
+                            </div>
+                                <ul div class="filter-level1-data active">
+                                <li><a href="#!" class="active">جميع الاعلانات</a></li>
+                                @foreach($values as $value)
+                                    <li><a href="#!" onclick="document.getElementById('form1').submit();">{{$value['name']}}</a></li>
+                                @endforeach
+                                </ul>
+                        </div>
+                        @endforeach
                         <div class="google-ads">
                             <img src="{{ asset('images/ads.png')}}" alt="">
                         </div>
