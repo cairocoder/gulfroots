@@ -10,7 +10,7 @@
             <div class="main-filter">
                 <form method="POST" class="search" action="{{Url('search')}}" id="form1">
                 {{ csrf_field() }}
-                <input type="hidden" class="applied-filters" name="applied_filters" value="{{$applied_ret}}">
+                <input type="hidden" class="applied-filters" name="applied_filters" value="{{$applied_ret or ''}}">
                 <input type="hidden" class="mini_price" id="mini_price" name="mini_price" value="{{$request['mini-price']}}">
                 <input type="hidden" class="maxi_price" id="maxi_price" name="maxi_price" value="{{$request['maxi_price']}}">
                 <input type="hidden" class="sort" id="sort" name="sort" value="{{$request['sort'] or ''}}">
