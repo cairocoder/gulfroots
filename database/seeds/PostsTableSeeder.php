@@ -47,7 +47,6 @@ class PostsTableSeeder extends Seeder
                         'post_id' => $i,
                         'expiry_date' => $post->created_at->addDays($faker->numberBetween(7,30)),
                     ]);
-                    
                     if($tmp->type == 1){
                         App\FiltersPosts::create(['filters_id' => 9, 'posts_id' => $i]);
                         $search_sentence .= ' paid isColored اعلانات مدفوعه ملونة';

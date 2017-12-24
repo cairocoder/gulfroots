@@ -19,9 +19,9 @@ class FiltersGroupsTableSeeder extends Seeder
         
         DB::table('filters_groups')->insert(['group_name' => 'الترخيص', 'type' => 5]);// id = 4
         DB::table('filters_groups')->insert(['group_name' => 'الماركة', 'type' => 4]);// id = 5
-        DB::table('filters_groups')->insert(['group_name' => 'تاريخ الصنع', 'type' => 3]);// id = 6
+        DB::table('filters_groups')->insert(['group_name' => 'موديل', 'type' => 4]);// id = 6
         DB::table('filters_groups')->insert(['group_name' => 'اللون', 'type' => 1]);// id = 7
-        DB::table('filters_groups')->insert(['group_name' => 'سعة المحرك', 'type' => 3]);// id = 8
+        DB::table('filters_groups')->insert(['group_name' => 'سعة المحرك', 'type' => 4]);// id = 8
         DB::table('filters_groups')->insert(['group_name' => 'ناقل الحركة', 'type' => 5]);// id = 9
         DB::table('filters_groups')->insert(['group_name' => 'نوع الوقود', 'type' => 5]);// id = 10
         DB::table('filters_groups')->insert(['group_name' => 'فتحة السقف', 'type' => 5]);// id = 11
