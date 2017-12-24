@@ -48,11 +48,9 @@ class PostsTableSeeder extends Seeder
                         'expiry_date' => $post->created_at->addDays($faker->numberBetween(7,30)),
                     ]);
                     if($tmp->type == 1){
-                        App\FiltersPosts::create(['filters_id' => 9, 'posts_id' => $i]);
                         $search_sentence .= ' paid isColored اعلانات مدفوعه ملونة';
                     }
                     if($tmp->type == 2){
-                        App\FiltersPosts::create(['filters_id' => 7, 'posts_id' => $i]);
                         $search_sentence .= ' paid isinMain اعلانات مدفوعه مميزة';
                     }
                 }
@@ -63,7 +61,6 @@ class PostsTableSeeder extends Seeder
                         'post_id' => $i,
                         'expiry_date' => $post->created_at->addDays($faker->numberBetween(7,30)),
                     ]);
-                    App\FiltersPosts::create(['filters_id' => $tmp->type, 'posts_id' => $i]);
                     $search_sentence .= ' isBreaking اعلانات مدفوعه عاجلة';
                 }
             }
@@ -73,7 +70,6 @@ class PostsTableSeeder extends Seeder
                     'post_id' => $i,
                     'expiry_date' => $post->created_at->addDays($faker->numberBetween(7,30)),
                 ]);
-                App\FiltersPosts::create(['filters_id' => 10, 'posts_id' => $i]);
                 $search_sentence .= ' paid isinTop أفضل الاعلانات';
             }
             //add post filters
