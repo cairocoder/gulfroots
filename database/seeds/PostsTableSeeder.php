@@ -39,7 +39,7 @@ class PostsTableSeeder extends Seeder
             ]);
         $list2 = collect(['جديد', 'مستعمل'
         ]);
-        for($i = 1; $i <= 10; $i++) {
+        for($i = 1; $i <= 500; $i++) {
             $search_sentence = "";
             $post = App\Posts::create([
                 'title' => 'منتج'. $i,
