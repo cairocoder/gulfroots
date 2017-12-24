@@ -122,9 +122,42 @@ class SearchController extends Controller
         $posts->map(function ($post) use($user) {
             $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
-            $tmp = explode(' - ', $post->filters()->where('group_id', 1)->first()->name);
-            $post['country'] = $tmp[1];
-            $post['city'] = $tmp[0];
+            // $tmp = explode(' - ', $post->filters()->where('group_id', 1)->first()->name);
+            $post['country'] = "السعودية";
+            $list = collect([
+            'الرّياض',
+            'جدة',
+            'مكة المُكرمة',
+            'المدينة المنورة',
+            'الأحساء',
+                'الطائف',
+                'خميس مشيط',
+                'حائل',
+                'حفر الباطن',
+                    'الجبيل',
+                    'الخرج',
+                    'أبها',
+                    'الدّمام',
+                        'نجران',
+                        'بريدة',
+                        'ينبع',
+                        'تبوك',
+                            'القنفذة',
+                            'القطيف',
+                            'جازان'
+            ]);
+            foreach($list as $city){
+                if($post->search_sentence.contains($city))
+                    $post['city'] = $city;
+            }
+            $list = collect(['جديد', 'مستعمل'
+                ]);
+                foreach($list as $city){
+                    if($post->search_sentence.contains($city))
+                        $post['status'] = $city;
+                }
+            // dd($post['city']);
+            // $post['status'] = ;
             $features = $post->getFeatures()->get();
             $post['isColored'] = $post['isinMain'] = $post['isBreaking'] = 0;
             foreach($features as $feature){

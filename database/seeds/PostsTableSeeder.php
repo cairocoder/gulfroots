@@ -33,6 +33,32 @@ class PostsTableSeeder extends Seeder
                 'isinTop' => $faker->numberBetween(0, 1),
                 'search_sentence' => "",
             ]);
+            $list = collect([
+                'الرّياض',
+                 'جدة',
+                  'مكة المُكرمة',
+                   'المدينة المنورة',
+                   'الأحساء',
+                    'الطائف',
+                     'خميس مشيط',
+                      'حائل',
+                       'حفر الباطن',
+                        'الجبيل',
+                         'الخرج',
+                          'أبها',
+                           'الدّمام',
+                            'نجران',
+                             'بريدة',
+                              'ينبع',
+                               'تبوك',
+                                'القنفذة',
+                                 'القطيف',
+                                  'جازان'
+                ]);
+            $search_sentence .= ' ' . $list->random();
+            $list = collect(['جديد', 'مستعمل'
+            ]);
+            $search_sentence .= ' ' . $list->random();
             $ancestor = App\Categories::findorfail($post->sub_category_id);
             $search_sentence .= ' ' . $ancestor->name;
             while($ancestor->sub_id != null){

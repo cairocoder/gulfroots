@@ -25,10 +25,42 @@ class PostsController extends Controller
         }
         $post = Posts::findorfail($id);
         $post->liked = Favorites::where('post_id', $id)->where('user_id', $user->id)->count();
-        $tmp = explode(' - ', $post->filters()->where('group_id', 1)->first()->name);
-        $post['country'] = $tmp[1];
-        $post['city'] = $tmp[0];
-        $post['status'] = $post->filters()->where('group_id', 4)->first()->name;
+        // $tmp = explode(' - ', $post->filters()->where('group_id', 1)->first()->name);
+        $post['country'] = "السعودية";
+        $list = collect([
+        'الرّياض',
+         'جدة',
+          'مكة المُكرمة',
+           'المدينة المنورة',
+           'الأحساء',
+            'الطائف',
+             'خميس مشيط',
+              'حائل',
+               'حفر الباطن',
+                'الجبيل',
+                 'الخرج',
+                  'أبها',
+                   'الدّمام',
+                    'نجران',
+                     'بريدة',
+                      'ينبع',
+                       'تبوك',
+                        'القنفذة',
+                         'القطيف',
+                          'جازان'
+        ]);
+        foreach($list as $city){
+            if($post->search_sentence.contains($city))
+                $post['city'] = $city;
+        }
+        $list = collect(['جديد', 'مستعمل'
+            ]);
+            foreach($list as $city){
+                if($post->search_sentence.contains($city))
+                    $post['status'] = $city;
+            }
+        // dd($post['city']);
+        // $post['status'] = ;
         $seller = User::where('id', $post->user_id)->first();
         $seller->whatsapp_number = $post->seller_contact_no;
         $latest = Posts::where('user_id', $post->user_id)->where('isArchived', 0)->where('isApproved', 1)->where('id', '!=', $id)->orderBy('created_at', 'desc')->get();
@@ -113,10 +145,42 @@ class PostsController extends Controller
         $posts->map(function ($post) use($user) {
             $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
-            $tmp = explode(' - ', $post->filters()->where('group_id', 1)->first()->name);
-            $post['country'] = $tmp[1];
-            $post['city'] = $tmp[0];
-            $post['status'] = $post->filters()->where('group_id', 4)->first()->name;
+            // $tmp = explode(' - ', $post->filters()->where('group_id', 1)->first()->name);
+            $post['country'] = "السعودية";
+            $list = collect([
+            'الرّياض',
+            'جدة',
+            'مكة المُكرمة',
+            'المدينة المنورة',
+            'الأحساء',
+                'الطائف',
+                'خميس مشيط',
+                'حائل',
+                'حفر الباطن',
+                    'الجبيل',
+                    'الخرج',
+                    'أبها',
+                    'الدّمام',
+                        'نجران',
+                        'بريدة',
+                        'ينبع',
+                        'تبوك',
+                            'القنفذة',
+                            'القطيف',
+                            'جازان'
+            ]);
+            foreach($list as $city){
+                if($post->search_sentence.contains($city))
+                    $post['city'] = $city;
+            }
+            $list = collect(['جديد', 'مستعمل'
+                ]);
+                foreach($list as $city){
+                    if($post->search_sentence.contains($city))
+                        $post['status'] = $city;
+                }
+            // dd($post['city']);
+            // $post['status'] = ;
             $features = $post->getFeatures()->get();
             foreach($features as $feature){
                 if($feature->type == 1){
