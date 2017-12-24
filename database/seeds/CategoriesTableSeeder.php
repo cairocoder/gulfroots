@@ -181,7 +181,7 @@ class CategoriesTableSeeder extends Seeder
 
         // Category 7 level 1
         $category = App\Categories::create(['name' => 'المجتمع والترفية', 'slug' => 'مجتمع', 'icon' =>'users', 'photo' => 'front-assets/images/bigcat12.jpg']); // id = 100
-        for($i = 1; $i <= 5; $i++)
+        for($i = 1; $i <= 1; $i++)
             DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 7 level 2
         DB::table('categories')->insert(['name' => 'فعاليات ومعارض', 'sub_id'=>'100']); // id = 101
@@ -308,7 +308,7 @@ class CategoriesTableSeeder extends Seeder
 
         // Category 11 level 1
         $category = App\Categories::create(['name' => 'المنزل والحديقة', 'slug' => 'منزل','icon' =>'home', 'photo' => 'front-assets/images/bigcat2.jpg']); // id = 193
-        for($i = 1; $i <= 5; $i++)
+        for($i = 1; $i <= 1; $i++)
             DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 11 level 2
         DB::table('categories')->insert(['name' => 'الاجهزة', 'sub_id'=>'193']); // id = 194
