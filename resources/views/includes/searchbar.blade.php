@@ -13,7 +13,7 @@
         <!-- select icon in the search bar -->
         <div class="select-head">
             <div class="select-icon">
-                <i class="fa fa-{{$category['icon'] or 'bars'}}"></i>
+                <i class="fa fa-{{$parents[0]['icon'] or 'bars'}}"></i>
             </div>
             <i class="fa fa-caret-down"></i>
         </div>

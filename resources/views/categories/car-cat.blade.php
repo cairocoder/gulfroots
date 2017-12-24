@@ -32,7 +32,7 @@
                         
                         
                         <div class="row no-margin">
-                        <form method="POST" action="{{Url('search')}}" id="form1">
+                        <form method="POST" class="search" action="{{Url('search')}}" id="form2">
                             {{csrf_field()}}
                         <input type="hidden" class="applied-filters" name="applied_filters" value="{{$applied_ret or ''}}">
                         <input id="cat-id" type="text" name="cat-id" value="1" hidden>   
@@ -168,7 +168,7 @@
 
                     <!-- search side -->
                     <div class="side-search-box">
-                        <form method="POST"action="{{Url('search')}}">
+                        <form method="POST" action="{{Url('search')}}">
                         <p>تصفح المنتجات</p>
                         <small>فلتر خاص بتصفح المنتجات</small>
                             <?php $arr = $filters['type']?>

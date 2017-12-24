@@ -159,6 +159,7 @@ class SearchController extends Controller
             // dd($post['city']);
             // $post['status'] = ;
             $features = $post->getFeatures()->get();
+            dd($features);
             $post['isColored'] = $post['isinMain'] = $post['isBreaking'] = 0;
             foreach($features as $feature){
                 if($feature->type == 1){
