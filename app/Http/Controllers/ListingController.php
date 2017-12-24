@@ -18,13 +18,13 @@ class ListingController extends Controller
 {
     //
     public function ChooseCategory(){
-        $categories = DB::table('categories')->where('sub_id', null)->orderBy('sort','ASC')->get()->toArray();
+        $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get()->toArray();
         return view('posts.ad1', compact('categories'));
     }
 
     public function ChooseSubCategory($category_id){
-        $subcategoriesALL = DB::table('categories')->where('sub_id', '!=', null)->get()->toArray();
-        $subcategories = DB::table('categories')->where('sub_id', $category_id)->get()->toArray();
+        $subcategoriesALL = Categories::where('sub_id', '!=', null)->get()->toArray();
+        $subcategories = Categories::where('sub_id', $category_id)->get()->toArray();
         $parents = [];
         $ancestor = Categories::findorfail($category_id);
         if($ancestor->sub_id != null)
@@ -37,7 +37,6 @@ class ListingController extends Controller
         if(empty($subcategories)){
             return $this->ChooseSupplyOrDemand($category_id, $parents, $ancestor, $subcategoriesALL);
         }
-        // dd($subcategories);
         return view('posts.ad2', compact('subcategories', 'subcategoriesALL', 'parents', 'ancestor', 'category_id'));
     }
 
@@ -46,9 +45,11 @@ class ListingController extends Controller
     }
 
     public function ShowNewProduct(Request $request){
+
         $subcategory_id = $request->input('subcategory_id');
         $SupplyOrDemand = $request->input('SupplyOrDemand');
         $filters = $this->getFiltersOfSubCategory($subcategory_id);
+        // dd($filters);
         return view('posts.newpost', compact( 'subcategory_id', 'SupplyOrDemand', 'filters'));
     }
 
@@ -68,15 +69,16 @@ class ListingController extends Controller
         }
         $filters = [];
         foreach ($groupsoffilters as $key => $group) {
-            $tmp = FiltersGroups::findorfail($group->id)->first();
             $var = $group['group_name'];
-            $filters[$var] = $group->getFilters()->get();
+            $filters[$var] = $group->getFilters()->get()->toArray();
+            $filters['type'][$var] = $group->type;  
         }
         return $filters;
     }
 
     public function CreateNewPost(Request $request, Authenticatable $user){
-        $search_sentence = "";
+        // dd($request);
+        $search_sentence;
         $post = Posts::create([
             'name' => $request->input('title'),
             'short_des' => $request->input('short_des'),
@@ -91,17 +93,8 @@ class ListingController extends Controller
             'longitude' => $request->input('my-long'),
             'latitude' => $request->input('my-lat'),
         ]);
-        $filters = $this->getFiltersOfSubCategory($request->input('subcategory_id'));
-        foreach($filters as $group_name=>$value){
-            // dd($request->input($group_name));
-            $var = $request->input($group_name);
-            // dd($var[0]);
-            for($i = 0; $i < count($var); ++$i){
-                // $another_var = ;
-                // dd($another_var);
-                $search_sentence .= ' ' . Filters::where('id', $var[$i])->first()->name;
-            }
-        }
+        $search_sentence = implode(' ', $request->input('filters'));
+        // dd($search_sentence);
         $ancestor = Categories::findorfail($post->sub_category_id);
         $search_sentence .= ' ' . $ancestor->name;
         while($ancestor->sub_id != null){
@@ -113,15 +106,6 @@ class ListingController extends Controller
             'hash' => $hash,
             'post_id' => $post->id,
         ]);
-        //create filters relations
-        foreach ($request->file('img') as $image){
-            $getimageName = time().'.'.$image->getClientOriginalExtension();
-            $image->move(public_path('images'), $getimageName);
-            $photo = Post_Photos::create([
-               'post_id' => $post->id,
-               'photolink' => 'images/'. $getimageName
-            ]);
-        }
         $cost = 0;
         //Package
         if($request->input('pack') == 1){

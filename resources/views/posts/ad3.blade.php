@@ -37,9 +37,9 @@
                 <!-- dropdown wrapper -->
                 @foreach($subcategoriesALL as $subcategory)
                     @foreach($parents as $parent)
-                        @if($subcategory->id == $parent)
-                            <a href="{{Url('newad')}}/{{$subcategory->id}}">
-                                <i class="{{$subcategory->icon}}"></i>{{$subcategory->name}}
+                        @if($subcategory['id'] == $parent)
+                            <a href="{{Url('newad')}}/{{$subcategory['id']}}">
+                                <i class="{{$subcategory['icon']}}"></i>{{$subcategory['name']}}
                             </a>
                         @endif
                     @endforeach

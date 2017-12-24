@@ -12,7 +12,11 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         // Category 1 level 1
-        DB::table('categories')->insert(['name' => 'السيارات و المركبات', 'slug' => 'سيارات', 'icon' =>'car', 'photo' => 'front-assets/images/bigcat7.jpg']); // id = 1
+        $category = App\Categories::create(['name' => 'السيارات و المركبات', 'slug' => 'سيارات', 'icon' =>'car', 'photo' => 'front-assets/images/bigcat7.jpg']); // id = 1
+        for($i = 1; $i <= 1; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 4; $i <= 12; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 1 level 2
         DB::table('categories')->insert(['name' => 'السيارات وعربات تخييم', 'sub_id'=>'1']); // id = 2
         // Category 1 level 3
@@ -63,7 +67,9 @@ class CategoriesTableSeeder extends Seeder
 
 
         // Category 2 level 1
-        DB::table('categories')->insert(['name' => 'قوارب والدراجات المائية', 'slug' => 'قوارب', 'icon' =>'ship', 'photo' => 'front-assets/images/bigcat8.jpg']); // id = 34
+        $category = App\Categories::create(['name' => 'قوارب والدراجات المائية', 'slug' => 'قوارب', 'icon' =>'ship', 'photo' => 'front-assets/images/bigcat8.jpg']); // id = 34
+        for($i = 1; $i <= 1; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 2 level 2
         DB::table('categories')->insert(['name' => 'الدراجات المائية', 'sub_id'=>'34']); // id = 35
         DB::table('categories')->insert(['name' => 'الزوارق والتجديف', 'sub_id'=>'34']); // id = 36
@@ -77,7 +83,9 @@ class CategoriesTableSeeder extends Seeder
 
 
         // Category 3 level 1
-        DB::table('categories')->insert(['name' => 'اطفال ورضع', 'slug' => 'اطفال','icon' =>'child', 'photo' => 'front-assets/images/bigcat9.jpg']); // id = 42
+        $category = App\Categories::create(['name' => 'اطفال ورضع', 'slug' => 'اطفال','icon' =>'child', 'photo' => 'front-assets/images/bigcat9.jpg']); // id = 42
+        for($i = 1; $i <= 1; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 3 level 2
         DB::table('categories')->insert(['name' => 'حامل اطفال', 'sub_id'=>'42']); // id = 43
         DB::table('categories')->insert(['name' => 'الاستحمام', 'sub_id'=>'42']); // id = 44
@@ -100,7 +108,9 @@ class CategoriesTableSeeder extends Seeder
 
 
         // Category 4 level 1
-        DB::table('categories')->insert(['name' => 'الملابس والمجوهرات والمستحضرات', 'slug' => 'ملابس و مجوهرات','icon' =>'diamond' , 'photo' => 'front-assets/images/bigcat1.jpg']); // id = 59
+        $category = App\Categories::create(['name' => 'الملابس والمجوهرات والمستحضرات', 'slug' => 'ملابس و مجوهرات','icon' =>'diamond' , 'photo' => 'front-assets/images/bigcat1.jpg']); // id = 59
+        for($i = 1; $i <= 1; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 4 level 2
         DB::table('categories')->insert(['name' => 'اكسسوارات', 'sub_id'=>'59']); // id = 60
         DB::table('categories')->insert(['name' => 'حقائب', 'sub_id'=>'59']); // id = 61
@@ -142,7 +152,9 @@ class CategoriesTableSeeder extends Seeder
 
 
         // Category 5 level 1
-        DB::table('categories')->insert(['name' => 'السفر و السياحة', 'slug' => 'سفر', 'icon' =>'ship', 'photo' => 'front-assets/images/bigcat10.jpg']); // id = 90
+        $category = App\Categories::create(['name' => 'السفر و السياحة', 'slug' => 'سفر', 'icon' =>'ship', 'photo' => 'front-assets/images/bigcat10.jpg']); // id = 90
+        for($i = 1; $i <= 1; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 5 level 2
         DB::table('categories')->insert(['name' => 'فنادق', 'sub_id'=>'90']); // id = 91
         DB::table('categories')->insert(['name' => 'شقق مفروشة', 'sub_id'=>'90']); // id = 92
@@ -153,7 +165,9 @@ class CategoriesTableSeeder extends Seeder
 
 
         // Category 6 level 1
-        DB::table('categories')->insert(['name' => 'مطاعم وكافيهات ومخبوزات', 'slug' => 'مطعم', 'icon' =>'cutlery', 'photo' => 'front-assets/images/bigcat11.jpg']); // id = 95
+        $category = App\Categories::create(['name' => 'مطاعم وكافيهات ومخبوزات', 'slug' => 'مطعم', 'icon' =>'cutlery', 'photo' => 'front-assets/images/bigcat11.jpg']); // id = 95
+        for($i = 1; $i <= 1; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 6 level 2
         DB::table('categories')->insert(['name' => 'مطاعم وكافيه', 'sub_id'=>'95']); // id = 96
         DB::table('categories')->insert(['name' => 'مخابز وحلويات', 'sub_id'=>'95']); // id = 97
@@ -166,7 +180,9 @@ class CategoriesTableSeeder extends Seeder
         
 
         // Category 7 level 1
-        DB::table('categories')->insert(['name' => 'المجتمع والترفية', 'slug' => 'مجتمع', 'icon' =>'users', 'photo' => 'front-assets/images/bigcat12.jpg']); // id = 100
+        $category = App\Categories::create(['name' => 'المجتمع والترفية', 'slug' => 'مجتمع', 'icon' =>'users', 'photo' => 'front-assets/images/bigcat12.jpg']); // id = 100
+        for($i = 1; $i <= 5; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 7 level 2
         DB::table('categories')->insert(['name' => 'فعاليات ومعارض', 'sub_id'=>'100']); // id = 101
         DB::table('categories')->insert(['name' => 'الانشطة والهوايات', 'sub_id'=>'100']); // id = 102
@@ -181,7 +197,9 @@ class CategoriesTableSeeder extends Seeder
 
 
         // Category 8 level 1
-        DB::table('categories')->insert(['name' => 'كتب والعاب', 'slug' => 'كتب والعاب','icon' =>'book', 'pho8to' => 'front-assets/images/bigcat13.jpg']); // id = 110
+        $category = App\Categories::create(['name' => 'كتب والعاب', 'slug' => 'كتب والعاب','icon' =>'book', 'photo' => 'front-assets/images/bigcat13.jpg']); // id = 110
+        for($i = 1; $i <= 1; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 8 level 2
         DB::table('categories')->insert(['name' => 'كتب', 'sub_id'=>'110']); // id = 111
         // Category 8 level 3
@@ -203,7 +221,9 @@ class CategoriesTableSeeder extends Seeder
 
 
         // Category 9 level 1
-        DB::table('categories')->insert(['name' => 'وظائف', 'slug' => 'وظيفه', 'icon' => 'briefcase', 'photo' => 'front-assets/images/bigcat14.jpg']); // id = 123
+        $category = App\Categories::create(['name' => 'وظائف', 'slug' => 'وظيفه', 'icon' => 'briefcase', 'photo' => 'front-assets/images/bigcat14.jpg']); // id = 123
+        for($i = 1; $i <= 3; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 9 level 2
         DB::table('categories')->insert(['name' => 'محاسبة', 'sub_id'=>'123']); // id = 124
         DB::table('categories')->insert(['name' => 'مساعد اداري', 'sub_id'=>'123']); // id = 125
@@ -274,7 +294,9 @@ class CategoriesTableSeeder extends Seeder
 
 
         // Category 10 level 1
-        DB::table('categories')->insert(['name' => 'تذاكر', 'slug' => 'تذاكر', 'icon' => 'ticket', 'photo' => 'front-assets/images/bigcat5.jpg']); // id = 188
+        $category = App\Categories::create(['name' => 'تذاكر', 'slug' => 'تذاكر', 'icon' => 'ticket', 'photo' => 'front-assets/images/bigcat5.jpg']); // id = 188
+        for($i = 1; $i <= 1; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 10 level 2
         DB::table('categories')->insert(['name' => 'الحافلات والقطارات والطائرة', 'sub_id'=>'188']); // id = 189
         DB::table('categories')->insert(['name' => 'فعاليات ومعارض', 'sub_id'=>'188']); // id = 190
@@ -285,7 +307,9 @@ class CategoriesTableSeeder extends Seeder
 
 
         // Category 11 level 1
-        DB::table('categories')->insert(['name' => 'المنزل والحديقة', 'slug' => 'منزل','icon' =>'home', 'photo' => 'front-assets/images/bigcat2.jpg']); // id = 193
+        $category = App\Categories::create(['name' => 'المنزل والحديقة', 'slug' => 'منزل','icon' =>'home', 'photo' => 'front-assets/images/bigcat2.jpg']); // id = 193
+        for($i = 1; $i <= 5; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 11 level 2
         DB::table('categories')->insert(['name' => 'الاجهزة', 'sub_id'=>'193']); // id = 194
         // Category 11 level 3
@@ -377,7 +401,9 @@ class CategoriesTableSeeder extends Seeder
 
 
         // Category 12 level 1
-        DB::table('categories')->insert(['name' => 'التحف والفنون والمقتنيات', 'slug' => 'التحف','icon' =>'picture-o', 'photo' => 'front-assets/images/bigcat15.jpg']); // id = 267
+        $category = App\Categories::create(['name' => 'التحف والفنون والمقتنيات', 'slug' => 'التحف','icon' =>'picture-o', 'photo' => 'front-assets/images/bigcat15.jpg']); // id = 267
+        for($i = 1; $i <= 1; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 12 level 2
         DB::table('categories')->insert(['name' => 'التحف', 'sub_id'=>'267']); // id = 268
         DB::table('categories')->insert(['name' => 'فنون', 'sub_id'=>'267']); // id = 269
@@ -387,7 +413,11 @@ class CategoriesTableSeeder extends Seeder
 
 
         // Category 13 level 1
-        DB::table('categories')->insert(['name' => 'الإلكترونيات و الكمبيوتر', 'slug' => 'الإلكترونيات', 'icon' => 'desktop', 'photo' => 'front-assets/images/bigcat16.jpg']); // id = 272
+        $category = App\Categories::create(['name' => 'الإلكترونيات و الكمبيوتر', 'slug' => 'الإلكترونيات', 'icon' => 'desktop', 'photo' => 'front-assets/images/bigcat16.jpg']); // id = 272
+        for($i = 1; $i <= 1; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        // for($i = 9; $i <= 11; $i++)
+        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 13 level 2
         DB::table('categories')->insert(['name' => 'صوتيات', 'sub_id'=>'272']); // id = 273
         // Category 13 level 3
@@ -463,7 +493,9 @@ class CategoriesTableSeeder extends Seeder
 
 
         // Category 14 level 1
-        DB::table('categories')->insert(['name' => 'خدمات و تأجير', 'slug' => 'خدمات', 'icon' => 'money', 'photo' => 'front-assets/images/bigcat6.jpg']); // id = 327
+        $category = App\Categories::create(['name' => 'خدمات و تأجير', 'slug' => 'خدمات', 'icon' => 'money', 'photo' => 'front-assets/images/bigcat6.jpg']); // id = 327
+        for($i = 1; $i <= 1; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 14 level 2
         DB::table('categories')->insert(['name' => 'تأجير', 'sub_id'=>'327']); // id = 328
         // Category 14 level 3
@@ -550,7 +582,11 @@ class CategoriesTableSeeder extends Seeder
 
 
         // Category 15 level 1
-        DB::table('categories')->insert(['name' => 'العقارات', 'slug' => 'عقار','icon' => 'building-o', 'photo' => 'front-assets/images/bigcat3.jpg']); // id = 392
+        $category = App\Categories::create(['name' => 'العقارات', 'slug' => 'عقار','icon' => 'building-o', 'photo' => 'front-assets/images/bigcat3.jpg']); // id = 392
+        for($i = 1; $i <= 1; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 13; $i <= 19; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 15 level 2
         DB::table('categories')->insert(['name' => 'الاعمال التجارية للبيع', 'sub_id'=>'392']); // id = 393
         DB::table('categories')->insert(['name' => 'مكاتب ادارية ومعارض تجارية', 'sub_id'=>'392']); // id = 394
@@ -589,7 +625,9 @@ class CategoriesTableSeeder extends Seeder
 
 
         // Category 16 level 1
-        DB::table('categories')->insert(['name' => 'الرياضة و اللياقة البدنية', 'slug' => 'الرياضة', 'icon' => 'futbol-o', 'photo' => 'front-assets/images/bigcat4.jpg']); // id = 418
+        $category = App\Categories::create(['name' => 'الرياضة و اللياقة البدنية', 'slug' => 'الرياضة', 'icon' => 'futbol-o', 'photo' => 'front-assets/images/bigcat4.jpg']); // id = 418
+        for($i = 1; $i <= 1; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 16 level 2
         DB::table('categories')->insert(['name' => 'دراجات', 'sub_id'=>'418']); // id = 419
         DB::table('categories')->insert(['name' => 'الملاكمة وفنون الدفاع عن النفس', 'sub_id'=>'418']); // id = 420
@@ -602,7 +640,9 @@ class CategoriesTableSeeder extends Seeder
 
 
         // Category 17 level 1
-        DB::table('categories')->insert(['name' => 'الحيوانات الاليفة', 'slug' => 'حيوانات','icon' =>'paw', 'photo' => 'front-assets/images/bigcat17.jpg']); // id = 426
+        $category = App\Categories::create(['name' => 'الحيوانات الاليفة', 'slug' => 'حيوانات','icon' =>'paw', 'photo' => 'front-assets/images/bigcat17.jpg']); // id = 426
+        for($i = 1; $i <= 1; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 16 level 2
         DB::table('categories')->insert(['name' => 'الطيور', 'sub_id'=>'426']); // id = 427
         DB::table('categories')->insert(['name' => 'القطط', 'sub_id'=>'426']); // id = 428
@@ -617,13 +657,16 @@ class CategoriesTableSeeder extends Seeder
         DB::table('categories')->insert(['name' => 'الحيوانات الاليفة الأخرى', 'sub_id'=>'426']); // id = 437
 
         // Category 18 level 1
-        DB::table('categories')->insert(['name' => 'رحلات برية', 'slug' => 'رحلات','icon' =>'free-code-camp', 'photo' => 'front-assets/images/bigcat18.jpg']); // id = 438
+        $category = App\Categories::create(['name' => 'رحلات برية', 'slug' => 'رحلات','icon' =>'free-code-camp', 'photo' => 'front-assets/images/bigcat18.jpg']); // id = 438
+        for($i = 1; $i <= 1; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 18 level 2
         DB::table('categories')->insert(['name' => 'تخييم وتنزه', 'sub_id'=>'438']); // id = 439
         DB::table('categories')->insert(['name' => 'رحلات بريه', 'sub_id'=>'438']); // id = 440
 
         // Category 19 level 1
-        DB::table('categories')->insert(['name' => 'البضائع المتنوعة', 'slug' => 'بضائع','icon' =>'cubes', 'photo' => 'front-assets/images/bigcat19.jpg']); // id = 440
-     
+        $category = App\Categories::create(['name' => 'البضائع المتنوعة', 'slug' => 'بضائع','icon' =>'cubes', 'photo' => 'front-assets/images/bigcat19.jpg']); // id = 441
+        for($i = 1; $i <= 1; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
     }
 }

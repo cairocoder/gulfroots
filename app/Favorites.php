@@ -19,4 +19,5 @@ class Favorites extends Model
     {
         return $this->belongsTo('App\Post');
     }
+    
 }

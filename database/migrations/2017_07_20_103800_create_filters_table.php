@@ -17,6 +17,7 @@ class CreateFiltersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('type');
+            $table->text('values');
             $table->timestamps();
             $table->integer('group_id')->unsigned();
 

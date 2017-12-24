@@ -72,7 +72,7 @@
                                 <ul div class="filter-level1-data active">
                                 <li><a href="#!" class="active">جميع الاعلانات</a></li>
                                 @foreach($values as $value)
-                                    <li><a href="#!" onclick="document.getElementById('form1').submit();">{{$value->name}}</a></li>
+                                    <li><a href="#!" onclick="document.getElementById('form1').submit();">{{$value['name']}}</a></li>
                                 @endforeach
                                 </ul>
                         </div>

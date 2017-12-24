@@ -28,23 +28,78 @@
                 <div class="row no-margin borderd">
                     <div class="col l6">
                         <div class="top-group">
-                            <input type="text" class="in-mini" name="price" placeholder="السعر">
-                            @foreach($filters as $key => $filter)
-                            <div>
-                                </br>
-                                {{ $key }} :
-                                @foreach($filter as $value)
-                                 &nbsp;<label class="checkbox blued">
-                                    @if($SupplyOrDemand == 'Demand')
-                                        <input type="radio" name="{{$key}}[]" value="{{$value->id}}"><span></span> {{$value->name}}
-                                    @else
-                                        <input type="checkbox" name="{{$key}}[]" value="{{$value->id}}"><span></span> {{$value->name}}
-                                    @endif
-                                       </label>
-                                @endforeach
-                            </div>
-                            @endforeach
+                        <input type="text"  name="price" class="in-mini" placeholder="السعر">
+                        <label class="checkbox blued">
+                                <input type="radio" name="filter[price]" value="محدد"><span></span> محدد
+                        </label>
+                        <label class="checkbox blued">
+                                <input type="radio" class="show-price" name="filter[price]" value="قابل للتفاوض"><span></span> قابل للتفاوض
+                        </label>
+                        <label class="checkbox blued">
+                                <input type="radio" name="filter[price]" value="مجانا"><span></span> مجانا
+                        </label>
+                        <label class="checkbox blued">
+                                <input type="radio" name="filter[price]" value="تبادل"><span></span> تبادل
+                        </label>
+                        <div class="price-hidden">
+                            هل تريد وضع حد ادني للتفاوض؟    &nbsp;
+                            <input type="text"  class="in-mini" placeholder="ريال سعودي">
                         </div>
+                        </div>
+                        <div>
+                            الحالة :  &nbsp;
+                            <label class="checkbox blued">
+                                    <input type="radio" name="filter[status]" value="جديد"><span></span> جديد
+                            </label>
+                            <label class="checkbox blued">
+                                    <input type="radio" name="filter[status]" value="مستعمل"><span></span> مستعمل
+                            </label>
+                        </div>
+                        <div class="row no-margin borderd">
+                            <div class="col l8">
+                                <br>
+                            </div>
+                        </div>
+                        <br>
+                        <?php $arr = $filters['type']?>
+                        @foreach($filters as $key=>$filter)
+                            @if($key != "type" && $arr[$key] == 1)
+                                <select name="filters[{{$key}}]" class="s-select xlarge">
+                                    <option>{{$key}}</option>    
+                                    @foreach($filter as $val)
+                                        <option value="{{$val['name']}}">{{$val['name']}}</option>
+                                    @endforeach
+                                </select>
+                            @elseif($key != "type" && $arr[$key] == 2)
+                                {{$key}} : &nbsp;
+                                    @foreach($filter as $val)
+                                    <label class="checkbox blued">
+                                        <input type="checkbox" name="filters[{{$key}}]" value="{{$val['name']}}"><span></span> {{$val['name']}}
+                                    </label>
+                                    @endforeach
+                            @elseif($key != "type" && $arr[$key] == 3)
+                                    <input type="text" name="filters[{{$key}}]" placeholder="{{$key}}" class="xlarge">
+                            @elseif($key != "type" && $arr[$key] == 4)
+                                <select name="filters[{{$key}}]" class="s-select xlarge">
+                                    <option>{{$key}}</option>    
+                                    @foreach($filter as $val)
+                                        <option value="{{$val['name']}}">{{$val['name']}}</option>
+                                        <?php $ops = explode(',', $val['values'])?>
+                                        @foreach($ops as $op)
+                                        <option value="{{$op}}">{{$op}}  </option>
+                                        @endforeach
+                                    @endforeach
+                                </select>
+                            @elseif($key != "type" && $arr[$key] == 5)
+                                {{$key}} :
+                                    @foreach($filter as $val)
+                                    <label class="checkbox blued">
+                                        <input type="radio" name="filters[{{$key}}]" value="{{$val['name']}}"><span></span> {{$val['name']}}
+                                    </label>
+                                    @endforeach
+                            @endif
+                            <br><br>
+                        @endforeach
                     </div>
                     <div class="clearfix"></div>
                 </div>

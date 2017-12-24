@@ -28,10 +28,10 @@ class AppServiceProvider extends ServiceProvider
             $categories = $this->getCategoriesForLayouts();
             $view->with(compact('categories'));
         });
-        view()->composer(['posts.ad2', 'posts.ad3','includes.searchbar', 'categories.maincategory', 'searchresult'], function($view) {
+        view()->composer(['posts.ad2', 'posts.ad3','includes.searchbar', 'categories.car-cat','categories.maincategory', 'searchresult'], function($view) {
           $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get()->toArray();
           $subcategory = Categories::where('sub_id', '!=', null)->get()->toArray();
-        //   dd($categories);
+        //   dd($subcategory);
           $view->with(compact('categories', 'subcategory'));
         });
         view()->composer('includes.specialcategories', function($view) {
@@ -164,9 +164,9 @@ class AppServiceProvider extends ServiceProvider
         $posts->map(function ($post) use($user) {
             $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
-            $tmp = explode(' - ', $post->filters()->where('group_id', 1)->first()->name);
-            $post['country'] = $tmp[1];
-            $post['city'] = $tmp[0];
+            // $tmp = explode(' - ', $post->filters()->first()->name);
+            $post['country'] = "";
+            $post['city'] = "";
             $features = $post->getFeatures()->get();
             $post['isColored'] = $post['isinMain'] = $post['isBreaking'] = 0;
             foreach($features as $feature){

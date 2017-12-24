@@ -21,7 +21,7 @@
                     <!-- select icon in the search bar -->
                     <div class="select-head">
                         <div class="select-icon">
-                        @if($request['cat-id'] == 0)
+                        @if(!isset($request['cat-id']) || $request['cat-id'] == 0)
                             <i class="fa fa-bars"></i>
                         @else
                             @foreach($categories as $category)
@@ -170,6 +170,46 @@
                             </ul>
                         </div>
 
+                        <div class="side-filter-level1 active">
+                            <div class="filter-title active">
+                                <span>نوع الاعلان</span>
+                                <i class="fa fa-caret-down"></i>
+                            </div>
+                            <ul class="filter-level1-data active">
+                                <li><a href="#!" class="active">جميع الاعلانات</a></li>
+                                <li><a href="#!">اعلانات مدفوعة عادية</a></li>
+                                <li><a href="#!">اعلانات مدفوعة مميزة</a></li>
+                                <li><a href="#!">اعلانات مدفوعة عاجلة</a></li>
+                                <li><a href="#!">اعلانات مدفوعة ملونة</a></li>
+                                <li><a href="#!">افضل الاعلانات</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="side-filter-level1 active">
+                            <div class="filter-title active">
+                                <span>نوع البيع</span>
+                                <i class="fa fa-caret-down"></i>
+                            </div>
+                            <ul class="filter-level1-data active">
+                                <li><a href="#!" class="active">جميع الاعلانات</a></li>
+                                <li><a href="#!">عرض</a></li>
+                                <li><a href="#!">طلب</a></li>
+                            </ul>
+                        </div>
+
+
+                        <div class="side-filter-level1 active">
+                            <div class="filter-title active">
+                                <span>نوع العرض</span>
+                                <i class="fa fa-caret-down"></i>
+                            </div>
+                            <ul class="filter-level1-data active">
+                                <li><a href="#!" class="active">جميع الاعلانات</a></li>
+                                <li><a href="#!">قابل للتفاوض</a></li>
+                                <li><a href="#!">نهائي</a></li>
+                            </ul>
+                        </div>
+
                         @foreach($filters as $group_name=>$values)
                             <div class="side-filter-level1 active">
                                 <div class="filter-title active">
@@ -209,7 +249,7 @@
                                 </div>
                             </div>
                             <div class="sort-box">
-                                <select onchange="console.log(document.getElementById('sort').value);document.getElementById('sort').value=this.value;document.getElementById('form1').submit();">
+                                <select onchange="document.getElementById('sort').value=this.value;document.getElementById('form1').submit();">
                                     <option value="0">الاكثر تشابه</option>
                                     <option value="1"{{ (isset($request['sort']) and $request['sort'] == 1) ? 'selected' : ''}}>الاحدث اولا</option>
                                     <option value="2"{{ (isset($request['sort']) and $request['sort'] == 2) ? 'selected' : ''}}>الاقل سعر</option>

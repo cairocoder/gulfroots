@@ -13,6 +13,7 @@ class FiltersGroups extends Model
     {
         return $this->hasMany('App\Filters', 'group_id');
     }
+    
     public function categories()
     {
         return $this->belongsToMany('App\Categories', 'categories_filters_groups');

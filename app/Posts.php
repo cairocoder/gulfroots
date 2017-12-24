@@ -28,11 +28,6 @@ class Posts extends Model
         return $this->hasMany( 'App\Post_Photos', 'id', 'post_id');
     }
 
-    public function filters()
-    {
-        return $this->belongsToMany('App\Filters', 'filter_post');
-    }
-
     public function getFeatures()
     {
         return $this->hasMany('App\PostFeatures', 'post_id');

@@ -71,6 +71,9 @@ class PostsController extends Controller
         $filters = $this->getFiltersOfSubCategory(1);;
         $posts = $this->getInfoOfPost($posts, $user);
         $parents = $this->getParents($category_id);
+        if($category_id == 1){
+            return view('categories.car-cat', compact('posts', 'category', 'parents', 'filters'));
+        }else
         return view('categories.maincategory', compact('posts', 'category', 'parents', 'filters'));
     }
 
@@ -100,7 +103,8 @@ class PostsController extends Controller
         foreach ($groupsoffilters as $key => $group) {
             $tmp = FiltersGroups::findorfail($group->id)->first();
             $var = $group['group_name'];
-            $filters[$var] = $group->getFilters()->get();
+            $filters[$var] = $group->getFilters()->get()->toArray();
+            $filters['type'][$var] = $group->type;  
         }
         return $filters;
     }

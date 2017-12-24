@@ -15,10 +15,10 @@ class PostsTableSeeder extends Seeder
         //
         $faker = Faker\Factory::create();
         //
-        for($i = 1; $i <= 1; $i++) {
+        for($i = 1; $i <= 500; $i++) {
             $search_sentence = "";
             $post = App\Posts::create([
-                'title' => $faker->realText(20),
+                'title' => 'منتج'. $i,
                 'short_des' => $faker->realText(20),
                 'long_des' => $faker->realText(200),
                 'detailed_address' => $faker->address,
@@ -33,16 +33,6 @@ class PostsTableSeeder extends Seeder
                 'isinTop' => $faker->numberBetween(0, 1),
                 'search_sentence' => "",
             ]);
-            for($j = 0; $j < 1; $j++){
-                $filter = App\FiltersPosts::create(['filters_id' => $faker->numberBetween(1,5), 'posts_id' => $i]);
-                $search_sentence .= ' ' . App\Filters::where('id', $filter->filters_id)->first()->name;
-                $filter = App\FiltersPosts::create(['filters_id' => $faker->numberBetween(15,16), 'posts_id' => $i]);
-                $search_sentence .= ' ' . App\Filters::where('id', $filter->filters_id)->first()->name;
-                $filter = App\FiltersPosts::create(['filters_id' => $faker->numberBetween(11,12), 'posts_id' => $i]);
-                $search_sentence .= ' ' . App\Filters::where('id', $filter->filters_id)->first()->name;
-                $filter = App\FiltersPosts::create(['filters_id' => $faker->numberBetween(13,14), 'posts_id' => $i]);
-                $search_sentence .= ' ' . App\Filters::where('id', $filter->filters_id)->first()->name;
-            }
             $ancestor = App\Categories::findorfail($post->sub_category_id);
             $search_sentence .= ' ' . $ancestor->name;
             while($ancestor->sub_id != null){
