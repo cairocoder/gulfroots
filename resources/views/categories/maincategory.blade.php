@@ -138,7 +138,7 @@
                                                 <span>ر.س</span>
                                             </div>
                                         </div>
-                                        <h1 title="{{$post->short_des}}">{{$post->short_des}}</h1>
+                                        <h1 title="{{$post->title}}">{{$post->title}}</h1>
                                         <small>مدينة {{$post->city}}</small>
                                         @if($post->liked == 1)
                                             <div class="watch-icon active">

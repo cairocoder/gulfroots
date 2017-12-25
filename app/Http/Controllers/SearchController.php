@@ -51,7 +51,7 @@ class SearchController extends Controller
         // dd($search_sentence);
         $search_sentence = $this->clean($search_sentence);
         // dd($search_sentence);
-        $posts = Posts::search($search_sentence)->where('isArchived', 0)->where('isApproved', 1)->where('isinTop', 0)->paginate(11);
+        $posts = Posts::search($search_sentence)->where('isArchived', 0)->where('isApproved', 1)->paginate(11);
         $top = Posts::search($search_sentence.' isinTop')->where('isArchived', 0)->where('isApproved', 1)->get();
         // dd($top);
         // $posts = $posts->sortBy('price');
@@ -65,12 +65,12 @@ class SearchController extends Controller
         shuffle($top);
         $top = array_slice($top, 0, 3); 
         // dd($top);
-        foreach($top as $key=>$post){
-            $top[$key] = $post->toArray();
-        }
-        foreach($posts as $key=>$post){
-            $posts[$key] = $post->toArray();
-        }
+        // foreach($top as $key=>$post){
+        //     $top[$key] = $post->toArray();
+        // }
+        // foreach($posts as $key=>$post){
+        //     $posts[$key] = $post->toArray();
+        // }
         if($request['sort'] > 0){
             $top = $this->sortResults($top, $request['sort']);
             $posts = $this->sortResults($posts, $request['sort']);
