@@ -179,6 +179,8 @@ class SearchController extends Controller
     }
 
     private function getFiltersOfSubCategory($subcategory_id){
+        if($subcategory_id == 0)
+            return [];
         $groupsoffilters = [];
         $ancestor = Categories::findorfail($subcategory_id);
         $filterss = $ancestor->filtersgroups()->get();
