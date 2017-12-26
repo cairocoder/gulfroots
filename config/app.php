@@ -187,6 +187,7 @@ return [
         Kryptonit3\Counter\CounterServiceProvider::class,
         Nahid\Talk\TalkServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
     ],
 
     /*
