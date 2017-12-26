@@ -51,7 +51,7 @@ class SearchController extends Controller
         // dd($search_sentence);
         $search_sentence = $this->clean($search_sentence);
         // dd($search_sentence);
-        $posts = Posts::search($search_sentence)->where('isArchived', 0)->where('isApproved', 1)->paginate(11);
+        $posts = Posts::search($search_sentence)->where('isArchived', 0)->where('isApproved', 1)->get();
         $top = Posts::search($search_sentence.' isinTop')->where('isArchived', 0)->where('isApproved', 1)->get();
         // dd($top);
         // $posts = $posts->sortBy('price');
@@ -75,8 +75,8 @@ class SearchController extends Controller
             $top = $this->sortResults($top, $request['sort']);
             $posts = $this->sortResults($posts, $request['sort']);
         }
-        // dd($top);
-        return view('searchresult', compact('posts', 'parents', 'top', 'request', 'applied_ret', 'filters'));
+        // dd($posts);
+        return view('searchresult', compact('posts', 'parents', 'top', 'request', 'applied_ret'));
     }
 
     private function sortResults($posts, $sort){

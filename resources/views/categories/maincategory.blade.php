@@ -6,6 +6,9 @@
         <h1>{{$category->name}}</h1>
     </div>
     @endif
+    
+    <!--  script -->
+    <script id="privet-filters" type="application/json">{!! json_encode($filters, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_FORCE_OBJECT) !!}</script>
     <!-- normal body -->
     <div class="normal-body">
         <div class="big-container">

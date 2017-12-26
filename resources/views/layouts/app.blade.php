@@ -224,5 +224,6 @@
 <!-- Fixed Footer End -->
 <!-- jQuery plugins -->
 <script defer src="{{Url('/')}}/front-assets/js/ui.min.js"></script>
+<script defer src="{{Url('/')}}/front-assets/js/filters.js"></script>
 </body>
 </html>
