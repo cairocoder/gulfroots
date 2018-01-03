@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', ' - ' . $category->name)
+@section('title', ' - ' . $category->name_ar)
 @section('content')
-    @if($category->sub_id == null)
+    @if($category->parent_id == null)
     <div class="cat-banner" style="background-image:url('{{ asset($category->photo)}}')">
-        <h1>{{$category->name}}</h1>
+        <h1>{{$category->name_ar}}</h1>
     </div>
     @endif
     
@@ -18,7 +18,7 @@
             <div class="link-map">
                 <div class="map-item"><a href="{{route('landing')}}">الرئيسية</a></div>
                 @foreach($parents as $cat)
-                    <div class="map-item"><a href="{{ Url('categories/'.$cat->id) }}">{{$cat->name}}</a></div>
+                    <div class="map-item"><a href="{{ Url('categories/'.$cat['id']) }}">{{$cat['name_ar']}}</a></div>
                 @endforeach
             </div>
             <!-- search data -->
@@ -30,21 +30,21 @@
                         <div class="side-filter-level1 active">
                             @foreach($parents as $key=>$cat)
                                 <div class="filter-title active">
-                                    <span>{{$cat->name}}</span>
+                                    <span>{{$cat['name_ar']}}</span>
                                     <i class="fa fa-caret-down"></i>
                                 </div>
                             @if($key == count($parents) - 1)
                                 <ul div class="filter-level1-data active">
-                                    <li><a href="{{ Url('categories/'.$cat->id) }}" class="active">جميع الاقسام</a></li>
-                                    @foreach($subcategory as $category)
-                                        @if($category['sub_id'] == $cat['id'])
-                                            <li><a href="{{ Url('categories/'.$category['id']) }}">{{$category['name']}}</a></li>
+                                    <li><a href="{{ Url('categories/'.$cat['id']) }}" class="active">جميع الاقسام</a></li>
+                                    @foreach($cat['subcategories'] as $category)
+                                        @if($category['parent_id'] == $cat['id'])
+                                            <li><a href="{{ Url('categories/'.$category['id']) }}">{{$category['name_ar']}}</a></li>
                                         @endif
                                     @endforeach
                                 </ul>                            
                             @else
                                 <ul div class="filter-level1-data active">
-                                    <li><a href="{{ Url('categories/'.$cat->id) }}">جميع الاقسام</a></li>
+                                    <li><a href="{{ Url('categories/'.$cat['id']) }}">جميع الاقسام</a></li>
                                 </ul>
                             @endif
                             @endforeach
@@ -132,7 +132,7 @@
                                     @else
                                         <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
                                     @endif
-                                    @if($post->isBreaking)
+                                    @if($post->isUrgent)
                                         <div class="important"><span></span><div>عاجل</div></div>
                                     @endif
                                         <div class="image-box">

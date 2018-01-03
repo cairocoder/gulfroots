@@ -1,18 +1,17 @@
 <?php
 
 namespace App;
-
-use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 
 class Posts extends Model
 {
-    use Searchable;
     //
     protected $table = 'posts';
-    protected $fillable = ['title', 'short_des', 'long_des', 'detailed_address', 'seller_name', 'seller_email', 'seller_contact_no', 
-        'longitude', 'latitude', 'price', 'sub_category_id', 'user_id', 'search_sentence'];
-
+    protected $fillable = ['title', 'description', 'address', 'seller_name', 'seller_email', 'seller_number', 'longitude', 'latitude',
+     'price', 'category_id', 'creator_id', 'status', 'type', 'seller_type', 'search_sentence', 'country', 'city'];
+    protected $casts = [
+        'search_sentence' => 'json'
+    ];
     public function category()
     {
         return $this->belongsTo('App\Categories');
@@ -23,7 +22,7 @@ class Posts extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function getMembers()
+    public function getPhotos()
     {
         return $this->hasMany( 'App\Post_Photos', 'id', 'post_id');
     }

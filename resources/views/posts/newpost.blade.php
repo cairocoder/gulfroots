@@ -9,7 +9,7 @@
     <div class="big-container bottom-100">
         <form method="POST" action="{{Url('/newpost')}}" enctype="multipart/form-data">
             {{ csrf_field() }}
-            <input type="hidden" name="subcategory_id" value="{{$subcategory_id}}">
+            <input type="hidden" name="category_id" value="{{$subcategory_id}}">
             <div class="row no-margin centerd">
                 @if(Auth::user()->isCommercial() == false)
                     @include('includes.packages')
@@ -70,35 +70,17 @@
                                         <option value="{{$val['name']}}">{{$val['name']}}</option>
                                     @endforeach
                                 </select>
-                            @elseif($key != "type" && $arr[$key] == 2)
-                                {{$key}} : &nbsp;
-                                    @foreach($filter as $val)
-                                    <label class="checkbox blued">
-                                        <input type="checkbox" name="filters[{{$key}}]" value="{{$val['name']}}"><span></span> {{$val['name']}}
-                                    </label>
-                                    @endforeach
+                                <br><br>
                             @elseif($key != "type" && $arr[$key] == 3)
                                     <input type="text" name="filters[{{$key}}]" placeholder="{{$key}}" class="xlarge">
-                            @elseif($key != "type" && $arr[$key] == 4)
-                                <select name="filters[{{$key}}]" class="s-select xlarge">
-                                    <option>{{$key}}</option>    
-                                    @foreach($filter as $val)
-                                        <option value="{{$val['name']}}">{{$val['name']}}</option>
-                                        <?php $ops = explode(',', $val['values'])?>
-                                        @foreach($ops as $op)
-                                        <option value="{{$op}}">{{$op}}  </option>
-                                        @endforeach
-                                    @endforeach
-                                </select>
                             @elseif($key != "type" && $arr[$key] == 5)
-                                {{$key}} :
+                                {{$key}} : &nbsp;
                                     @foreach($filter as $val)
                                     <label class="checkbox blued">
                                         <input type="radio" name="filters[{{$key}}]" value="{{$val['name']}}"><span></span> {{$val['name']}}
                                     </label>
                                     @endforeach
                             @endif
-                            <br><br>
                         @endforeach
                     </div>
                     <div class="clearfix"></div>
@@ -107,8 +89,8 @@
                 <div class="row no-margin">
                     <div class="col l6">
                         <br>
-                        <input type="text" name="short_des" placeholder="عنوان">
-                        <input type="text" name="short_des" placeholder="وصف مختصر للاعلان">
+                        <input type="text" name="title" placeholder="عنوان">
+                        <input type="text" name="description" placeholder="وصف مختصر للاعلان">
                         <textarea name="long_des" placeholder="وصف الاعلان"></textarea>
                         <div class="pay-box not-payed">
                             <img src="{{ asset('front-assets/images/urgant.jpg')}}" alt="">
@@ -119,7 +101,7 @@
                                     الانتباه </p>
                             </div>
                             <div class="pay-select">
-                                <input type="checkbox" name="isBreaking">
+                                <input type="checkbox" name="isUrgent">
                                 <div class="pay-btn">اضافة</div>
                             </div>
                         </div>

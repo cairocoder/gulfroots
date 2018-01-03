@@ -17,7 +17,9 @@ class CreateFiltersGroupsTable extends Migration
             $table->increments('id');
             $table->string('group_name');
             $table->integer('type');
+            $table->integer('parent_id')->nullable()->unsigned();
             $table->timestamps();
+            $table->foreign('parent_id')->references('id')->on('filters_groups')->onDelete('cascade');
         });
     }
 

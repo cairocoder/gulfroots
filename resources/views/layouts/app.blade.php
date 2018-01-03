@@ -132,10 +132,10 @@
             <nav>
                 <ul class="start {{Request::is('/categories*')?"active":""}}">
                     @foreach($categories as $category)
-                        <li><a href="{{Url('/')}}/categories/{{$category->id}}">{{$category->name}}</a>
+                        <li><a href="{{Url('/')}}/categories/{{$category['id']}}">{{$category['name_ar']}}</a>
                             <ul class="level2">
-                                @foreach($category->subcategories as $subcat)
-                                    <li><a href="{{Url('/')}}/categories/{{$subcat->id}}">{{$subcat->name}}</a>
+                                @foreach($category['subcategories'] as $subcat)
+                                    <li><a href="{{Url('/')}}/categories/{{$subcat['id']}}">{{$subcat['name_ar']}}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -186,15 +186,12 @@
             </div>
             <div class="col l3" class="start {{Request::is('/categories*')?"active":""}}">
                 <h3>الاقسام الاكثر شهرة</h3>
-                @if(count($categories) > 0)
-                    @foreach($categories as $category)
-                        <a href="{{Url('/')}}/categories/{{$category->id}}">{{$category->name}}</a>
-                        @if($category->id === 5)
-                        @break
-                        @endif
-                    @endforeach
-                @else
-                @endif
+                @foreach($categories as $category)
+                    <a href="{{Url('/')}}/categories/{{$category['id']}}">{{$category['name_ar']}}</a>
+                    @if($category['id'] === 5)
+                    @break
+                    @endif
+                @endforeach
             </div>
             <div class="clearfix"></div>
         </div>

@@ -15,17 +15,20 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name_ar');
+            $table->string('name_en')->nullable();
             $table->integer('status');
-            $table->integer('sub_id')->nullable()->unsigned();
+            $table->integer('parent_id')->nullable()->unsigned();
             $table->string('slug');
-            $table->string('Des');
             $table->string('icon');
             $table->string('photo');
-            $table->integer('sort');
+
+            $table->integer('posts_count')->default(0);
+            $table->integer('posts_views')->default(0);
+            $table->integer('category_views')->default(0);
             $table->timestamps();
             
-            $table->foreign('sub_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

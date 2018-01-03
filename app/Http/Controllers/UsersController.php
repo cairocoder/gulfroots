@@ -53,38 +53,32 @@ class UsersController extends Controller
 
     public function showPublicPosts($id){
         $user = User::where('id', $id)->first();
-        $posts = $user->getPosts()->where('isArchived', 0)->where('isApproved', 1)->get();
+        $active = $user->getPosts()->where('isArchived', 0)->where('isApproved', 1)->get();
+        $archived = $user->getPosts()->where('isArchived', 1)->where('isApproved', 1)->get();
         $visitor = Auth::user();
         if(!$visitor){
             $visitor = new User;
             $visitor->id = -1;
         }
-        $active = 0;
-        $archived = 0;
-        foreach($posts as $post){
-            if($post->isArchived)
-                $archived++;
-            else $active++;
-        }
-        $posts->map(function ($post) use($visitor){
-            $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
-            $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $visitor->id)->count();
-            $features = $post->getFeatures()->get();
-            foreach($features as $feature){
-                if($feature->type == 1){
-                    $post['isColored'] = 1;
-                }
-                if($feature->type == 2){
-                    $post['isinMain'] = 1;
-                }
-                if($feature->type == 5){
-                    $post['isBreaking'] = 1;
-                }
-            }
-            return $post;
-        });
+        // $posts->map(function ($post) use($visitor){
+        //     $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
+        //     $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $visitor->id)->count();
+        //     $features = $post->getFeatures()->get();
+        //     foreach($features as $feature){
+        //         if($feature->type == 1){
+        //             $post['isColored'] = 1;
+        //         }
+        //         if($feature->type == 2){
+        //             $post['isinMain'] = 1;
+        //         }
+        //         if($feature->type == 5){
+        //             $post['isUrgent'] = 1;
+        //         }
+        //     }
+        //     return $post;
+        // });
         // dd($posts);
-      return view('users.publicads', compact('posts', 'user', 'archived', 'active'));
+      return view('users.publicads', compact('user', 'archived', 'active'));
     }
 
     public function ads()
@@ -93,31 +87,25 @@ class UsersController extends Controller
         if(!$user){
             return route('login');
         }
-        $active = 0;
-        $archived = 0;
-        $posts = $user->getPosts()->get();
-        foreach($posts as $post){
-            if($post->isArchived)
-                $archived++;
-            else $active++;
-        }
-        $posts->map(function ($post) {
-            $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
-            $features = $post->getFeatures()->get();
-            foreach($features as $feature){
-                if($feature->type == 1){
-                    $post['isColored'] = 1;
-                }
-                if($feature->type == 2){
-                    $post['isinMain'] = 1;
-                }
-                if($feature->type == 5){
-                    $post['isBreaking'] = 1;
-                }
-            }
-            return $post;
-        });
-        
+        $active = $user->getPosts()->where('isArchived', 0)->where('isApproved', 1)->get();
+        $archived = $user->getPosts()->where('isArchived', 1)->where('isApproved', 1)->get();
+        $stopped = $user->getPosts()->where('isApproved', 0)->get();
+        // $posts->map(function ($post) {
+        //     $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
+        //     $features = $post->getFeatures()->get();
+        //     foreach($features as $feature){
+        //         if($feature->type == 1){
+        //             $post['isColored'] = 1;
+        //         }
+        //         if($feature->type == 2){
+        //             $post['isinMain'] = 1;
+        //         }
+        //         if($feature->type == 5){
+        //             $post['isUrgent'] = 1;
+        //         }
+        //     }
+        //     return $post;
+        // });
         $favorites = $user->getFavorites()->get();
         $favorites->map(function ($post){
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
@@ -131,12 +119,13 @@ class UsersController extends Controller
                     $post['isinMain'] = 1;
                 }
                 if($feature->type == 5){
-                    $post['isBreaking'] = 1;
+                    $post['isUrgent'] = 1;
                 }
             }
             return $post;
         });
-      return view('users.ads', compact('posts', 'favorites'));
+        // stopped active archived
+      return view('users.ads', compact('stopped', 'active', 'archived', 'favorites'));
     }
 
     public function messages(User $user)

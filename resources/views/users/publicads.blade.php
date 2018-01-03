@@ -12,20 +12,16 @@
 
         <div class="profile-posts-tabs">
             <div class="profile-posts-tab active" data-tab-target=".now-ads">
-                اعلانات حالية ({{$active}})
+                اعلانات حالية ({{count($active)}})
             </div>
             <div class="profile-posts-tab" data-tab-target=".ex-ads">
-                اعلانات منتهيه ({{$archived}})
+                اعلانات منتهيه ({{count($archived)}})
             </div>
         </div>
 
         <div class="profile-screens">
-            @if($archived)
-            <div class="boxed-ads in-profile ex-ads">
-            @else
-            <div class="boxed-ads no-data in-profile ex-ads">
-            @endif
-                @foreach($posts as $post)
+            <div class="boxed-ads {{count($archived) ? '':'no-data'}} in-profile ex-ads">
+                @foreach($archived as $post)
                     @if($post->isArchived == 1)
                     <!-- ad item -->
                     <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
@@ -49,18 +45,14 @@
                     </a>
                     @endif
                 @endforeach
-                @if(!$archived)
+                @if(count($archived) == 0)
                     <div class="centerd">
                             <h2>لاتوجد اعلانات منتهيه</h2>
                     </div>
                 @endif
             </div>
-            @if($active)
-            <div class="boxed-ads in-profile now-ads active">
-            @else
-            <div class="boxed-ads in-profile no-data now-ads active">
-            @endif
-                @foreach($posts as $post)
+            <div class="boxed-ads in-profile {{count($active) ? '':'no-data'}} now-ads active">
+                @foreach($active as $post)
                     @if($post->isArchived == 0)
                     <!-- ad item -->
                     <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
@@ -84,7 +76,7 @@
                     </a>
                     @endif
                 @endforeach
-                @if(!$active)
+                @if(count($active) == 0)
                 <div class="centerd">
                         <h2>لاتوجد اعلانات حاليه</h2>
                 </div>

@@ -35,7 +35,7 @@ Route::get('/savedsearch', 'UsersController@savedsearch')->name('savedsearch');
 Route::get('/posts/{id}', 'PostsController@ShowPost');
 Route::post('/report/{id}', 'PostsController@ReportPost');
 
-Route::post('/search', 'SearchController@search');
+Route::get('/search', 'SearchController@search');
 Route::post('/favorite/posts/{id}', 'PostsController@toggleFavorite');
 
 Route::get('/fb/redirect', 'Auth\SocialAuthController@fbredirect')->name('fbredirect');
@@ -152,10 +152,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth_admin'], function () {
 
 });
 
-Route::get('newad', 'ListingController@ChooseCategory');
-Route::post('newad', 'ListingController@ShowNewProduct');
-Route::get('newad/{category}', 'ListingController@ChooseSubCategory');
-Route::post('newpost', 'ListingController@CreateNewPost');
+Route::get('newad', 'PostsController@ChooseCategory');
+Route::post('newad', 'PostsController@ShowNewProduct');
+Route::get('newad/{category}', 'PostsController@ChooseSubCategory');
+Route::post('newpost', 'PostsController@CreateNewPost');
 
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');

@@ -8,16 +8,16 @@
 
             <!-- filter start -->
             <div class="main-filter">
-                <form method="POST" class="search" action="{{Url('search')}}" id="form1">
+                <form method="GET" class="search" action="{{Url('search')}}" id="form1">
                 {{ csrf_field() }}
-                <input type="hidden" class="applied-filters" name="applied_filters" value="{{$applied_ret or ''}}">
-                <input type="hidden" class="mini_price" id="mini_price" name="mini_price" value="{{$request['mini-price']}}">
-                <input type="hidden" class="maxi_price" id="maxi_price" name="maxi_price" value="{{$request['maxi_price']}}">
-                <input type="hidden" class="sort" id="sort" name="sort" value="{{$request['sort'] or ''}}">
+                <input type="hidden" class="applied-filters" name="applied_filters" value="{{$_REQUEST['applied_filters'] or ''}}">
+                <input type="hidden" class="mini_price" id="mini_price" name="mini_price" value="{{$_REQUEST['mini_price'] or ''}}">
+                <input type="hidden" class="maxi_price" id="maxi_price" name="maxi_price" value="{{$_REQUEST['maxi_price'] or ''}}">
+                <input type="hidden" class="sort" id="sort" name="sort" value="{{$_REQUEST['sort'] or ''}}">
                 <!-- select dropdown start -->
                 <div class="select-cat">
                     <!-- hidden input to catch the id -->
-                    <input id="cat-id" type="text" name="cat-id" value="{{$request->input('cat-id')}}" hidden>
+                    <input id="cat-id" type="text" name="cat-id" value="{{$_REQUEST['cat-id']}}" hidden>
                     <!-- select icon in the search bar -->
                     <div class="select-head">
                         <div class="select-icon">
@@ -36,23 +36,23 @@
                         @foreach($categories as $category)
                             <!-- select group level 1 start  -->
                             <div class="select-group" data-cat-icon="{{$category['icon']}}" data-cat-id="{{$category['id']}}">
-                                <i class="fa fa-{{$category['icon']}}"></i> {{$category['name']}}
-                                @foreach($subcategory as $subcat)
-                                    @if($subcat['sub_id'] == $category['id'])
+                                <i class="fa fa-{{$category['icon']}}"></i> {{$category['name_ar']}}
+                                @foreach($category['subcategories'] as $subcat)
+                                    @if($subcat['parent_id'] == $category['id'])
                                     <div class="group-toggle"><i class="fa fa-caret-down"></i></div>
                                     <!-- select group level 2 start  -->
                                     <div class="group-box">
                                         <!-- group item -->
                                         <div class="select-item-level1" data-cat-id="{{$subcat['id']}}">
-                                            {{$subcat['name']}}
-                                            @foreach($subcategory as $subOfsubcat)
-                                                @if($subcat['id'] == $subOfsubcat['sub_id'])
+                                            {{$subcat['name_ar']}}
+                                            @foreach($subcat['subcategories'] as $subOfsubcat)
+                                                @if($subcat['id'] == $subOfsubcat['parent_id'])
                                                 <div class="group-toggle"><i class="fa fa-caret-down"></i></div>
                                                 <!-- select group level 3 start  -->
                                                 <div class="group-box2">
                                                     <!-- group item -->
                                                     <div class="select-item-level2" data-cat-id="{{$subOfsubcat['id']}}">
-                                                        {{$subOfsubcat['name']}}
+                                                        {{$subOfsubcat['name_ar']}}
                                                     </div>
                                                 </div>
                                                 <!-- select group level 3 end  -->
@@ -73,14 +73,14 @@
 
                 <!-- search bar -->
                 <div class="main-search">
-                    <input type="text" placeholder="{{$request->search_query}}" value="{{$request->search_query}}" name="search_query">
+                    <input type="text" placeholder="ابحث عن ..." value="{{$_REQUEST['search_query']}}" name="search_query">
                 </div>
 
                 <!-- city box -->
                 <div class="city-box">
                     <div class="city-form">
                     <i  class="fa fa-map-marker"></i>
-                    <input type="text" placeholder="المدينة" value="{{$request->search_city}}" name="search_city">
+                    <input type="text" placeholder="المدينة" value="{{$_REQUEST['search_city']}}" name="search_city">
                     <select name="search_distance" onchange="document.getElementById('form1').submit();">
                         <option selected>0 كم</option>
                         <option>5 كم</option>
@@ -105,7 +105,7 @@
             <div class="link-map">
                 <div class="map-item"><a href="index.html">الرئيسية</a></div>
                 @foreach($parents as $cat)
-                    <div class="map-item"><a href="{{ Url('categories/'.$cat->id) }}">{{$cat->name}}</a></div>
+                    <div class="map-item"><a href="{{ Url('categories/'.$cat['id']) }}">{{$cat['name_ar']}}</a></div>
                 @endforeach
             </div>
 
@@ -120,23 +120,21 @@
 
                         <div class="side-filter-level1 active">
                         @if(count($parents) > 0)
-                            @foreach($parents as $key=>$cat)
+                            @foreach($parents as $cat)
                                 <div class="filter-title active">
-                                    <span>{{$cat->name}}</span>
+                                    <span>{{$cat['name_ar']}}</span>
                                     <i class="fa fa-caret-down"></i>
                                 </div>
-                            @if($key == count($parents) - 1)
+                            @if($loop->last)
                                 <ul div class="filter-level1-data active">
                                     <li><a href="" class="active" onclick="document.getElementById('form1').submit();">جميع الاقسام</a></li>
-                                    @foreach($subcategory as $category)
-                                        @if($category['sub_id'] == $cat->id)
-                                            <li><a href="" onclick="document.getElementById('form1').submit();">{{$category['name']}}</a></li>
-                                        @endif
+                                    @foreach($cat['subcategories'] as $ca)
+                                    <li><a id="abdallah" href="" class="" onclick="document.getElementById('cat-id').value={{$ca['id']}};document.getElementById('form1').submit();">{{$ca['name_ar']}}</a></li>
                                     @endforeach
                                 </ul>                            
                             @else
                                 <ul div class="filter-level1-data active">
-                                    <li><a href="">جميع الاقسام</a></li>
+                                    <li><a href="" onclick="document.getElementById('cat-id').value={{$cat['id']}};document.getElementById('form1').submit();">جميع الاقسام</a></li>
                                 </ul>
                             @endif
                             @endforeach
@@ -152,9 +150,9 @@
                             <ul div class="filter-level1-data active">
                                 <li>
                                     <form id="abdallah">
-                                        <input type="text" placeholder="السعر الادني" value="{{$request['mini-price'] or ''}}" id="mini">
-                                        <input type="text" placeholder="السعر الاقصي" value="{{$request['maxi-price'] or ''}}" id="maxi">
-                                        <input type="submit" value="تصفية" onclick="document.getElementById('maxi_price').value=document.getElementById('maxi').value;
+                                        <input type="text" placeholder="السعر الادني" value="{{$_REQUEST['mini_price'] or ''}}" id="mini">
+                                        <input type="text" placeholder="السعر الاقصي" value="{{$_REQUEST['maxi_price'] or ''}}" id="maxi">
+                                        <input type="submit" value="تصفية" onclick="document.getElementById('mini_price').value=document.getElementById('mini').value;
                                         document.getElementById('maxi_price').value=document.getElementById('maxi').value;
                                         document.getElementById('form1').submit();">
                                     </form>
@@ -201,6 +199,18 @@
                             </ul>
                         </div>
 
+                        <div class="side-filter-level1 active">
+                            <div class="filter-title active">
+                                <span>نوع الحالة</span>
+                                <i class="fa fa-caret-down"></i>
+                            </div>
+                            <ul class="filter-level1-data active">
+                                <li><a href="#!" class="active">جميع الاعلانات</a></li>
+                                <li><a href="#!">جديد</a></li>
+                                <li><a href="#!">مستعمل</a></li>
+                            </ul>
+                        </div>
+
                         <div class="google-ads">
                             <img src="assets/images/ads.png" alt="">
                         </div>
@@ -227,9 +237,9 @@
                             <div class="sort-box">
                                 <select onchange="document.getElementById('sort').value=this.value;document.getElementById('form1').submit();">
                                     <option value="0">الاكثر تشابه</option>
-                                    <option value="1"{{ (isset($request['sort']) and $request['sort'] == 1) ? 'selected' : ''}}>الاحدث اولا</option>
-                                    <option value="2"{{ (isset($request['sort']) and $request['sort'] == 2) ? 'selected' : ''}}>الاقل سعر</option>
-                                    <option value="3"{{ (isset($request['sort']) and $request['sort'] == 3) ? 'selected' : ''}}>الاعلي سعر</option>
+                                    <option value="1"{{ (isset($_REQUEST['sort']) and $_REQUEST['sort'] == 1) ? 'selected' : ''}}>الاحدث اولا</option>
+                                    <option value="2"{{ (isset($_REQUEST['sort']) and $_REQUEST['sort'] == 2) ? 'selected' : ''}}>الاقل سعر</option>
+                                    <option value="3"{{ (isset($_REQUEST['sort']) and $_REQUEST['sort'] == 3) ? 'selected' : ''}}>الاعلي سعر</option>
                                 </select>
                             </div>
                         </div>
@@ -249,7 +259,7 @@
                                     @else
                                         <a href="{{Url('posts').'/'.$post['id']}}" class="ad-item">
                                     @endif
-                                    @if($post['isBreaking'])
+                                    @if($post['isUrgent'])
                                         <div class="important"><span></span><div>عاجل</div></div>
                                     @endif
                                         <div class="image-box">
@@ -267,7 +277,7 @@
                                                 <span>ر.س</span>
                                             </div>
                                             <div class="desc">
-                                                {{$post['short_des']}}
+                                                {{$post['description']}}
                                             </div>
                                         </div>
                                         <small class="boxed-only">{{$post['city']}}</small>
@@ -304,7 +314,7 @@
                                     @else
                                         <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
                                     @endif
-                                    @if($post->isBreaking)
+                                    @if($post->isUrgent)
                                         <div class="important"><span></span><div>عاجل</div></div>
                                     @endif
                                         <div class="image-box">
@@ -322,7 +332,7 @@
                                                 <span>ر.س</span>
                                             </div>
                                             <div class="desc">
-                                                {{$post->short_des}}
+                                                {{$post->description}}
                                             </div>
                                         </div>
                                         <small class="boxed-only">مدينة {{$post->city}}</small>

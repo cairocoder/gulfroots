@@ -16,12 +16,12 @@ class CreateFiltersTable extends Migration
         Schema::create('filters', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('type');
-            $table->text('values');
+            $table->string('icon')->nullable();
             $table->timestamps();
             $table->integer('group_id')->unsigned();
-
+            $table->integer('parent_id')->nullable()->unsigned();
             $table->foreign('group_id')->references('id')->on('filters_groups')->onDelete('cascade');
+            $table->foreign('parent_id')->references('id')->on('filters')->onDelete('cascade');
         });
     }
 

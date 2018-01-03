@@ -29,7 +29,8 @@ class CreateRoleUsersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('role_users');
         //Schema::dropIfExists('premission_role');
-        Schema::dropforeign(array('user_id','role_id'));
+        // Schema::dropforeign(array('user_id','role_id'));
     }
 }

@@ -15,47 +15,22 @@ class PostsTableSeeder extends Seeder
         //
         $faker = Faker\Factory::create();
         //
-        $list1 = collect([
-            'الرّياض',
-             'جدة',
-              'مكة المُكرمة',
-               'المدينة المنورة',
-               'الأحساء',
-                'الطائف',
-                 'خميس مشيط',
-                  'حائل',
-                   'حفر الباطن',
-                    'الجبيل',
-                     'الخرج',
-                      'أبها',
-                       'الدّمام',
-                        'نجران',
-                         'بريدة',
-                          'ينبع',
-                           'تبوك',
-                            'القنفذة',
-                             'القطيف',
-                              'جازان'
-            ]);
-        $list2 = collect(['جديد', 'مستعمل'
-        ]);
         for($i = 1; $i <= 500; $i++) {
-            $search_sentence = "";
+            $search_sentence = [];
             $post = App\Posts::create([
                 'title' => 'منتج'. $i,
-                'short_des' => $faker->realText(20),
-                'long_des' => $faker->realText(200),
-                'detailed_address' => $faker->address,
+                'description' => $faker->realText(200),
+                'address' => $faker->address,
                 'seller_name' => $faker->name,
                 'seller_email' => $faker->email,
-                'seller_contact_no' => $faker->phoneNumber,
+                'seller_number' => $faker->phoneNumber,
                 'price' => $faker->numberBetween(1000,2500),
-                'sub_category_id' => $faker->numberBetween(19,50),
+                'category_id' => $faker->numberBetween(19,50),
                 'user_id' => $faker->numberBetween(1,20),
                 'isArchived' => 0,
                 'isApproved' => 1,
-                'isinTop' => $faker->numberBetween(0, 1),
-                'search_sentence' => "",
+                'isTop' => $faker->numberBetween(0, 1),
+                'search_sentence' => json_encode([]),
             ]);
             $search_sentence .= ' ' . $list1->random();
             $search_sentence .= ' ' . $list2->random();
@@ -77,6 +52,7 @@ class PostsTableSeeder extends Seeder
                         $search_sentence .= ' paid isColored اعلانات مدفوعه ملونة';
                     }
                     if($tmp->type == 2){
+                        dd($post->search_sentence);
                         $search_sentence .= ' paid isinMain اعلانات مدفوعه مميزة';
                     }
                 }
@@ -87,7 +63,7 @@ class PostsTableSeeder extends Seeder
                         'post_id' => $i,
                         'expiry_date' => $post->created_at->addDays($faker->numberBetween(7,30)),
                     ]);
-                    $search_sentence .= ' isBreaking اعلانات مدفوعه عاجلة';
+                    $search_sentence .= ' isUrgent اعلانات مدفوعه عاجلة';
                 }
             }
             if($post->isinTop = 1){

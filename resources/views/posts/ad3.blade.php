@@ -17,7 +17,7 @@
                 @if(count($categories) > 0)
                     @foreach($categories as $category)
                         @if($category['id'] == $ancestor)
-                            <i class="{{$category['icon']}}"></i> {{$category['name']}}
+                            <i class="{{$category['icon']}}"></i> {{$category['name_ar']}}
                             <a href="{{Url('newad')}}"><i class="fa fa-times"></i></a>
                         @endif
                     @endforeach
@@ -39,7 +39,7 @@
                     @foreach($parents as $parent)
                         @if($subcategory['id'] == $parent)
                             <a href="{{Url('newad')}}/{{$subcategory['id']}}">
-                                <i class="{{$subcategory['icon']}}"></i>{{$subcategory['name']}}
+                                <i class="{{$subcategory['icon']}}"></i>{{$subcategory['name_ar']}}
                             </a>
                         @endif
                     @endforeach

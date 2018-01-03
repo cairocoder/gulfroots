@@ -1,6 +1,6 @@
 <!-- filter start -->
 <div class="main-filter">
-    <form method="POST" action="{{Url('search')}}" id="form1">
+    <form method="GET" action="{{Url('search')}}" id="form1">
     {{ csrf_field() }}
     <input type="hidden" class="applied-filters" name="applied_filters" value="{{$applied_ret or ''}}">
     <input type="hidden" class="mini_price" id="mini_price" name="mini_price" value="{{$request['mini_price'] or ''}}">
@@ -28,23 +28,23 @@
             @foreach($categories as $category)
                 <!-- select group level 1 start  -->
                 <div class="select-group" data-cat-icon="{{$category['icon']}}" data-cat-id="{{$category['id']}}">
-                    <i class="fa fa-{{$category['icon']}}"></i> {{$category['name']}}
-                    @foreach($subcategory as $subcat)
-                        @if($subcat['sub_id'] == $category['id'])
+                    <i class="fa fa-{{$category['icon']}}"></i> {{$category['name_ar']}}
+                    @foreach($category['subcategories'] as $subcat)
+                        @if($subcat['parent_id'] == $category['id'])
                         <div class="group-toggle"><i class="fa fa-caret-down"></i></div>
                         <!-- select group level 2 start  -->
                         <div class="group-box">
                             <!-- group item -->
                             <div class="select-item-level1" data-cat-id="{{$subcat['id']}}">
-                                {{$subcat['name']}}
-                                @foreach($subcategory as $subOfsubcat)
-                                    @if($subcat['id'] == $subOfsubcat['sub_id'])
+                                {{$subcat['name_ar']}}
+                                @foreach($subcat['subcategories'] as $subOfsubcat)
+                                    @if($subcat['id'] == $subOfsubcat['parent_id'])
                                     <div class="group-toggle"><i class="fa fa-caret-down"></i></div>
                                     <!-- select group level 3 start  -->
                                     <div class="group-box2">
                                         <!-- group item -->
                                         <div class="select-item-level2" data-cat-id="{{$subOfsubcat['id']}}">
-                                            {{$subOfsubcat['name']}}
+                                            {{$subOfsubcat['name_ar']}}
                                         </div>
                                     </div>
                                     <!-- select group level 3 end  -->

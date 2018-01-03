@@ -29,7 +29,9 @@ class CreateRoleAdminsTable extends Migration
      */
     public function down()
     {
-        //Schema::dropIfExists('premission_role');
-        Schema::dropforeign(array('admin_id','role_id'));
+
+        Schema::dropIfExists('role_admins');
+        // Schema::dropIfExists('premission_role');
+        // Schema::dropforeign(array('admin_id','role_id'));
     }
 }

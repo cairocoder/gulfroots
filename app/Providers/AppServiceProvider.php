@@ -25,19 +25,54 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer(['layouts.user', 'layouts.app', 'layouts.page'], function($view) {
-            $categories = $this->getCategoriesForLayouts();
+            $featured = explode(',', DB::table('site_settings')->first()->featured_categories);
+            $categories = Categories::where(function($query) use ($featured){
+                foreach($featured as $id){
+                    $query->orwhere('id', $id);
+                }
+            })->get()->map(function ($cat) {
+                $cat['subcategories'] = $cat->getSubCategories()->get()->splice(0,8)->pluck('attributes');
+                return $cat;
+            })->pluck('attributes');
             $view->with(compact('categories'));
         });
-        view()->composer(['posts.ad2', 'posts.ad3','includes.searchbar', 'categories.car-cat','categories.maincategory', 'searchresult'], function($view) {
-          $categories = Categories::where('sub_id', null)->orderBy('sort','ASC')->get()->toArray();
-          $subcategory = Categories::where('sub_id', '!=', null)->get()->toArray();
-        //   dd($subcategory);
-          $view->with(compact('categories', 'subcategory'));
+        
+        view()->composer(['categories.car-cat','categories.maincategory', 'searchresult'], function($view) {
+            $categories = Categories::where('parent_id', null)->get()->map(function ($category) {
+                $category['subcategories'] = $category->getSubCategories()->get()->map(function ($cat) {
+                    $cat['subcategories'] = $cat->getSubCategories()->get()->pluck('attributes');
+                    return $cat;
+                })->pluck('attributes');
+                return $category;
+            })->pluck('attributes');
+          $view->with(compact('categories'));
+        });
+        view()->composer(['posts.ad1'], function($view) {
+            $categories = Categories::where('parent_id', null)->get()->map(function ($cat) {
+                return collect($cat->toArray())
+                    ->only(['id', 'name_ar', 'icon'])
+                    ->all();
+            });
+            $view->with(compact('categories'));
+        });
+        view()->composer(['posts.ad2', 'posts.ad3','includes.searchbar'], function($view) {
+            $categories = Categories::where('parent_id', null)->get()->map(function ($category) {
+                $category['subcategories'] = $category->getSubCategories()->get()->map(function ($cat) {
+                    $cat['subcategories'] = $cat->getSubCategories()->get()->pluck('attributes');
+                    return $cat;
+                })->pluck('attributes');
+                return $category;
+            })->pluck('attributes');
+          $view->with(compact('categories'));
         });
         view()->composer('includes.specialcategories', function($view) {
-            $specialcategory = Categories::where('slug', '!=', "")->get()->take(10);
-            // dd($specialcategory);
-            $view->with(compact('specialcategory'));
+            $special = explode(',', DB::table('site_settings')->first()->special_categories);
+            $specialcategories = Categories::where(function($query) use ($special){
+                foreach($special as $id){
+                    $query->orwhere('id', $id);
+                }
+            })->get()->pluck('attributes');
+            $view->with(compact('specialcategories'));
           });
         view()->composer('includes.favoriteslider', function($view) {
             $user = Auth::user();
@@ -64,11 +99,6 @@ class AppServiceProvider extends ServiceProvider
             $latest = $this->getInfoOfPost($latest, $user);
             $favorites = $user->getFavorites()->get();
             $favorites = $this->getInfoOfPost($favorites, $user);
-            $user = Auth::user();
-            if(!$user){
-                $user = new User;
-                $user->id = -1;
-            }
             $id = $this->hashMe();
             $lastseen = collect();
             $visitor = DB::table('kryptonit3_counter_visitor')->where('visitor', $id)->first();
@@ -149,12 +179,12 @@ class AppServiceProvider extends ServiceProvider
             if($cat->id == $category){
                 array_push($ids, $cat->id);
             }else{
-                $tmp = $cat->sub_id;
+                $tmp = $cat->parent_id;
                 while($tmp != NULL){
                     if($tmp == $category){
                         array_push($ids, $cat->id);
                     }
-                    $tmp = Categories::where('id', $tmp)->first()->sub_id;
+                    $tmp = Categories::where('id', $tmp)->first()->parent_id;
                 }
             }
         }
@@ -169,7 +199,7 @@ class AppServiceProvider extends ServiceProvider
             $post['country'] = "";
             $post['city'] = "";
             $features = $post->getFeatures()->get();
-            $post['isColored'] = $post['isinMain'] = $post['isBreaking'] = 0;
+            $post['isColored'] = $post['isinMain'] = $post['isUrgent'] = 0;
             foreach($features as $feature){
                 if($feature->type == 1){
                     $post['isColored'] = 1;
@@ -178,32 +208,11 @@ class AppServiceProvider extends ServiceProvider
                     $post['isinMain'] = 1;
                 }
                 if($feature->type == 5){
-                    $post['isBreaking'] = 1;
+                    $post['isUrgent'] = 1;
                 }
             }
             return $post;
         });
         return $posts;
-    }
-
-    private function getCategoriesForLayouts(){
-        $categories = Categories::where('sub_id', null)->get();
-        $allsubcategories = Categories::where('sub_id', '!=', "")->get();
-        $categories->map(function ($category) use($allsubcategories){
-            $ids = $this->getIdsOfChildrenCategories($category->id);
-            $category['posts_count'] = 0;
-            $subcategories = [];
-            foreach($ids as $id){
-                $category['posts_count'] += Posts::where('sub_category_id', $id)->count();  
-            }
-            foreach($allsubcategories as $sub){
-                if($sub->sub_id == $category->id)
-                    array_push($subcategories, $sub);
-            }
-            $category['subcategories'] = array_slice($subcategories, 0, 8);
-            return $category;
-        });
-        $categories = $categories->sortByDesc('posts_count')->splice(0, 6);
-        return $categories;
     }
 }

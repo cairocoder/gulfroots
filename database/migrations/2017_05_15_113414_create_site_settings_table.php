@@ -21,8 +21,9 @@ class CreateSiteSettingsTable extends Migration
             $table->text('tags_en');
             $table->text('meta_description_ar');
             $table->text('meta_description_en');
+            $table->string('featured_categories')->default('');
+            $table->string('special_categories')->default('');
             $table->timestamps();
-
         });
 
     }

@@ -12,7 +12,7 @@
             <div class="link-map">
                 <div class="map-item"><a href="{{ route ('landing')}}">الرئيسية</a></div>
                 @foreach($parents as $cat)
-                    <div class="map-item"><a href="{{ Url('categories/'.$cat->id) }}">{{$cat->name}}</a></div>
+                    <div class="map-item"><a href="{{ Url('categories/'.$cat['id']) }}">{{$cat['name_ar']}}</a></div>
                 @endforeach
                 <div class="map-item">{{$post['title']}}</div>
             </div>
@@ -32,7 +32,7 @@
                             <input type="hidden" name="post_id" class="post_id" value="{{$post['id']}}">
                             <i class="fa fa-star"></i>
                         </div>
-                        <h1>{{$post['short_des']}}</h1>
+                        <h1>{{$post['description']}}</h1>
                         <h3> {{$post['price']}} <span>ريال</span></h3>
                         <div class="row no-margin borderd">
                             <div class="col l6">
@@ -110,7 +110,10 @@
                             <div class="col l7">
                                 <h2>وصف المنتج</h2>
                                 <p>
-                                  {{$post['long_des']}}
+                                  {{$post['description']}}
+                                </p>
+                                <p>
+                                  {{$post['search_sentence']}}
                                 </p>
                             </div>
                             <div class="col l5">
@@ -155,7 +158,7 @@
                                                 <span>ر.س</span>
                                             </div>
                                             <div class="desc">
-                                                {{$listing->short_des}}
+                                                {{$listing->description}}
                                             </div>
                                         </div>
                                         <small class="boxed-only">{{$listing->city}}</small>
@@ -201,7 +204,7 @@
                                             <span>ر.س</span>
                                         </div>
                                         <div class="desc">
-                                            {{$listing->short_des}}
+                                            {{$listing->description}}
                                         </div>
                                     </div>
                                     <small class="boxed-only">{{$listing->city}}</small>

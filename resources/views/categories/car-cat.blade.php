@@ -15,7 +15,7 @@
             <div class="link-map">
                 <div class="map-item"><a href="{{route('landing')}}">الرئيسية</a></div>
                 @foreach($parents as $cat)
-                    <div class="map-item"><a href="{{ Url('categories/'.$cat->id) }}">{{$cat->name}}</a></div>
+                    <div class="map-item"><a href="{{ Url('categories/'.$cat['id']) }}">{{$cat['name_ar']}}</a></div>
                 @endforeach
             </div>
             
@@ -108,7 +108,7 @@
                                     @else
                                         <a href="{{Url('posts').'/'.$post->id}}" class="ad-item">
                                     @endif
-                                    @if($post->isBreaking)
+                                    @if($post->isUrgent)
                                         <div class="important"><span></span><div>عاجل</div></div>
                                     @endif
                                         <div class="image-box">

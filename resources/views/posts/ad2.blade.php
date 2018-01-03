@@ -16,7 +16,7 @@
                 @if(count($categories) > 0)
                     @foreach($categories as $category)
                         @if($category['id'] == $ancestor)
-                            <i class="fa fa-{{$category['icon']}}"></i> {{$category['name']}}
+                            <i class="fa fa-{{$category['icon']}}"></i> {{$category['name_ar']}}
                             <a href="{{Url('newad')}}"><i class="fa fa-times"></i></a>
                         @endif
                     @endforeach
@@ -38,7 +38,7 @@
                         @foreach($parents as $parent)
                             @if($subcategory['id'] == $parent)
                                 <a href="{{Url('newad')}}/{{$subcategory['id']}}">
-                                    <i class="{{$subcategory['icon']}}"></i>{{$subcategory['name']}}
+                                    <i class="{{$subcategory['icon']}}"></i>{{$subcategory['name_ar']}}
                                 </a>
                             @endif
                         @endforeach
@@ -55,9 +55,9 @@
             <!-- dropdown wrapper -->
                 @if(count($subcategories) > 0)
                     @foreach($subcategories as $subcategory)
-                        @if($subcategory['sub_id'] == $category_id)
+                        @if($subcategory['parent_id'] == $category_id)
                             <a href="{{Url('newad')}}/{{$subcategory['id']}}">
-                                <i class="{{$subcategory['icon']}}"></i>{{$subcategory['name']}}
+                                <i class="{{$subcategory['icon']}}"></i>{{$subcategory['name_ar']}}
                             </a>
                         @endif
                     @endforeach

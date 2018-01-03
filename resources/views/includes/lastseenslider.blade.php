@@ -12,7 +12,7 @@
                 @else
                 <a href="{{Url('posts').'/'.$post['id']}}" class="ad-item">
                 @endif
-                @if($post['isBreaking'])
+                @if($post['isUrgent'])
                 <div class="important"><span></span><div>عاجل</div></div>
                 @endif
                     <div class="image-box">
