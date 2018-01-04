@@ -278,6 +278,7 @@ class PostsController extends Controller
             $user->id = -1;
         }
         $post = Posts::findorfail($id);
+        $post->search_sentence = json_decode($post->search_sentence);
         // dd($post);
         $post->liked = Favorites::where('post_id', $id)->where('user_id', $user->id)->count();
         // $tmp = explode(' - ', $post->filters()->where('group_id', 1)->first()->name);
