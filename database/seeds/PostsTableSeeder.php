@@ -19,28 +19,33 @@ class PostsTableSeeder extends Seeder
             $search_sentence = [];
             $post = App\Posts::create([
                 'title' => 'منتج'. $i,
+                'short' => $faker->realText(100),
                 'description' => $faker->realText(200),
                 'address' => $faker->address,
                 'seller_name' => $faker->name,
                 'seller_email' => $faker->email,
                 'seller_number' => $faker->phoneNumber,
                 'price' => $faker->numberBetween(1000,2500),
-                'category_id' => $faker->numberBetween(19,50),
+                'category_id' => $faker->numberBetween(1,441),
                 'user_id' => $faker->numberBetween(1,20),
                 'isArchived' => 0,
                 'isApproved' => 1,
                 'isTop' => $faker->numberBetween(0, 1),
-                'search_sentence' => json_encode([]),
+                'search_sentence' => "",
             ]);
-            $search_sentence .= ' ' . $list1->random();
+            $post->country;
+            $post->city = ِApp\Filters::where('group_id', 2)->inRandomOrder()->first();
+            dd($post->city);
             $search_sentence .= ' ' . $list2->random();
-            $ancestor = App\Categories::findorfail($post->sub_category_id);
-            $search_sentence .= ' ' . $ancestor->name;
-            while($ancestor->sub_id != null){
-                $ancestor = App\Categories::findorfail($ancestor->sub_id);
-                $search_sentence .= ' ' . $ancestor->name;
+            $search_sentence['category'] = "";
+            $ancestor = App\Categories::findorfail($post->category_id);
+            $search_sentence['category'] .= ' ' . $ancestor->name;
+            while($ancestor->parent_id != null){
+                $ancestor = App\Categories::findorfail($ancestor->parent_id);
+                $search_sentence['category'] .= ' ' . $ancestor->name;
             }
             //add post_features
+            $search_sentence['نوع الاعلان'] = "";
             if($i % 2){
                 for($j = 0; $j < 1; $j++){
                     $tmp = App\PostFeatures::create([
@@ -49,11 +54,10 @@ class PostsTableSeeder extends Seeder
                         'expiry_date' => $post->created_at->addDays($faker->numberBetween(7,30)),
                     ]);
                     if($tmp->type == 1){
-                        $search_sentence .= ' paid isColored اعلانات مدفوعه ملونة';
+                        $search_sentence['نوع الاعلان'] .= ' paid isColored اعلانات مدفوعه ملونة';
                     }
                     if($tmp->type == 2){
-                        dd($post->search_sentence);
-                        $search_sentence .= ' paid isinMain اعلانات مدفوعه مميزة';
+                        $search_sentence['نوع الاعلان'] .= ' paid isinMain اعلانات مدفوعه مميزة';
                     }
                 }
             }else{
@@ -63,7 +67,7 @@ class PostsTableSeeder extends Seeder
                         'post_id' => $i,
                         'expiry_date' => $post->created_at->addDays($faker->numberBetween(7,30)),
                     ]);
-                    $search_sentence .= ' isUrgent اعلانات مدفوعه عاجلة';
+                    $search_sentence['نوع الاعلان'] .= ' isUrgent اعلانات مدفوعه عاجلة';
                 }
             }
             if($post->isinTop = 1){
@@ -72,13 +76,11 @@ class PostsTableSeeder extends Seeder
                     'post_id' => $i,
                     'expiry_date' => $post->created_at->addDays($faker->numberBetween(7,30)),
                 ]);
-                $search_sentence .= ' paid isinTop أفضل الاعلانات';
+                $search_sentence['نوع الاعلان'] .= ' paid isinTop أفضل الاعلانات';
             }
             //add post filters
             $post->search_sentence = $search_sentence;
             $post->save();
-            if($post)
-                $post->searchable();
             $hash = $this->pageId('posts', $post->id);
             DB::table('posts_dictionaries')->insert([
                 'hash' => $hash,

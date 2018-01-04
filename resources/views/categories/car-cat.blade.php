@@ -22,55 +22,41 @@
             <!-- search data -->
             <div class="row no-margin top-25">
 
-                
-
                 <div class="col l9">
-
 
                     <!-- top search -->
                     <div class="top-cat-search">
                         
                         
                         <div class="row no-margin">
-                        <form method="POST" class="search" action="{{Url('search')}}" id="form2">
+                        <form method="GET" class="search" action="{{Url('search')}}" id="form2">
                             {{csrf_field()}}
                         <input type="hidden" class="applied-filters" name="applied_filters" value="{{$applied_ret or ''}}">
+                        <input type="hidden" name="search_city" value="">
+                        <input type="hidden" name="sort" value="">
                         <input id="cat-id" type="text" name="cat-id" value="1" hidden>   
                             <div class="col l6 m12">
-                                <input type="text" placeholder="السعر الاقصي" value="{{$request['maxi-price'] or ''}}" id="maxi">
+                                <input type="text" placeholder="السعر الاقصي" name="maxi_price" value="{{$request['maxi-price'] or ''}}" id="maxi">
                             </div>
                             <div class="col l6 m12">
-                                <input type="text" placeholder="السعر الادني" value="{{$request['mini-price'] or ''}}" id="mini">
+                                <input type="text" placeholder="السعر الادني" name="mini_price" value="{{$request['mini-price'] or ''}}" id="mini">
                             </div>
                             <?php $arr = $filters['type']?>
                             @foreach($filters as $key=>$filter)
                             
-                                @if($key != "type" && $arr[$key] == 1)
+                                @if($loop->index > 0 && $loop->index < 7 && $key != "type" && $arr[$key] == 1)
                                 <div class="col l6 m12">
                                     <select name="filters[{{$key}}]">
                                         <option>{{$key}}</option>    
                                         @foreach($filter as $val)
                                             <option value="{{$val['name']}}">{{$val['name']}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                @elseif($key != "type" && $arr[$key] == 4)
-                                <div class="col l6 m12">
-                                    <select name="filters[{{$key}}]">
-                                        <option>{{$key}}</option>    
-                                        @foreach($filter as $val)
-                                            <option value="{{$val['name']}}">{{$val['name']}}</option>
-                                            <?php $ops = explode(',', $val['values'])?>
-                                            @foreach($ops as $op)
-                                            <option value="{{$op}}">{{$op}}  </option>
-                                            @endforeach
                                         @endforeach
                                     </select>
                                 </div>
                                 @endif
                             @endforeach
                             <div class="col l6 m12">
-                                <input type="text" placeholder="كلمة البحث..." name="seach_query">
+                                <input type="text" placeholder="كلمة البحث..." name="search_query">
                             </div>
                             
                             <div class="col l12 m12 lefted">
@@ -168,12 +154,19 @@
 
                     <!-- search side -->
                     <div class="side-search-box">
-                        <form method="POST" action="{{Url('search')}}">
+                        <form method="GET" action="{{Url('search')}}">
+                        <input type="hidden" class="applied-filters" name="applied_filters" value="{{$applied_ret or ''}}">
+                        <input type="hidden" name="search_city" value="">
+                        <input type="hidden" name="search_query" value="">
+                        <input type="hidden" name="cat-id" value="1">
+                        <input type="hidden" name="sort" value="">
+                        <input type="hidden" placeholder="السعر الاقصي" name="maxi_price" value="{{$request['maxi-price'] or ''}}">
+                        <input type="hidden" placeholder="السعر الادني" name="mini_price" value="{{$request['mini-price'] or ''}}">
                         <p>تصفح المنتجات</p>
                         <small>فلتر خاص بتصفح المنتجات</small>
                             <?php $arr = $filters['type']?>
                             @foreach($filters as $key=>$filter)
-                                @if($key != "type" && $arr[$key] == 1)
+                                @if($loop->index > 0 && $loop->index < 6 && $key != "type" && $arr[$key] == 1)
                                     <select name="filters[{{$key}}]">
                                         <option>{{$key}}</option>    
                                         @foreach($filter as $val)
@@ -214,8 +207,10 @@
             <!-- link filter -->
             <div class="link-filter">
                 <h2>تصفح من خلال نوع السياره</h2>
-                
-                <a href="#">
+                @foreach($car as $ca)
+                <a href="#"><img src="{{asset($ca->icon)}}" alt="{{$ca->name}}"></a>
+                @endforeach
+                <!-- <a href="#">
                     <img src="{{asset('images/car1.jpg')}}" alt="">
                 </a>
                 <a href="#">
@@ -244,7 +239,7 @@
                 </a>
                 <a href="#">
                     <img src="{{asset('images/car10.jpg')}}" alt="">
-                </a>
+                </a> --> 
 
             </div>
 
@@ -252,8 +247,10 @@
             <h2>تصفح من خلال نوع الماركات</h2>
 
             <div class="link-logo">
-
-                <a href="#">
+                @foreach($cars as $ca)
+                <a href="#"><img src="{{asset($ca->icon)}}" alt="{{$ca->name}}"></a>
+                @endforeach
+                <!-- <a href="#">
                     <img src="{{asset('images/cars1.jpg')}}" alt="">
                 </a>
                 <a href="#">
@@ -279,7 +276,7 @@
                 </a>
                 <a href="#">
                     <img src="{{asset('images/cars9.jpg')}}" alt="">
-                </a>
+                </a> -->
 
             </div>
 <!-- 

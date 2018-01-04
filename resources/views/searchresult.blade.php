@@ -127,14 +127,14 @@
                                 </div>
                             @if($loop->last)
                                 <ul div class="filter-level1-data active">
-                                    <li><a href="" class="active" onclick="document.getElementById('form1').submit();">جميع الاقسام</a></li>
+                                    <li><a id="abdallah" href="" class="active" onclick="document.getElementById('form1').submit();">جميع الاقسام</a></li>
                                     @foreach($cat['subcategories'] as $ca)
                                     <li><a id="abdallah" href="" class="" onclick="document.getElementById('cat-id').value={{$ca['id']}};document.getElementById('form1').submit();">{{$ca['name_ar']}}</a></li>
                                     @endforeach
                                 </ul>                            
                             @else
                                 <ul div class="filter-level1-data active">
-                                    <li><a href="" onclick="document.getElementById('cat-id').value={{$cat['id']}};document.getElementById('form1').submit();">جميع الاقسام</a></li>
+                                    <li><a id="abdallah" href="" onclick="document.getElementById('cat-id').value={{$cat['id']}};document.getElementById('form1').submit();">جميع الاقسام</a></li>
                                 </ul>
                             @endif
                             @endforeach
@@ -174,6 +174,24 @@
                             </ul>
                         </div>
 
+                        @foreach($filters as $name=>$values)
+                            @if($name != 'type')
+                            <div class="side-filter-level1 active">
+                                <div class="filter-title active">
+                                    <span>{{$name}}</span>
+                                    <i class="fa fa-caret-down"></i>
+                                </div>
+                                <ul class="filter-level1-data active">
+                                    <li>
+                                        <li><a href="#!" class="active">جميع الاعلانات</a></li>
+                                        @foreach($values as $value)
+                                        <li><a href="#!">{{$value['name']}}</a></li>
+                                        @endforeach
+                                    </li>
+                                </ul>
+                            </div>
+                            @endif
+                        @endforeach
                         <div class="side-filter-level1 active">
                             <div class="filter-title active">
                                 <span>نوع البيع</span>
@@ -356,9 +374,12 @@
                                 @endforeach
                         </div>
                             @elseif(count($top) == 0)
-                            <div class="centerd">
-                                <h2>No Search Results</h2>
-                            </div>
+                                <div class="row no-margin boxed-ads no-data">
+
+                                    <h2>لاتوجد نتائج للبحث</h2>
+
+                                </div>
+                                <div class="clearfix"></div>
                             @endif
                         <div class="centerd">
                             <img src="assets/images/width-ads.jpg" alt="">

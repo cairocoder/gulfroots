@@ -7,8 +7,8 @@ class Posts extends Model
 {
     //
     protected $table = 'posts';
-    protected $fillable = ['title', 'description', 'address', 'seller_name', 'seller_email', 'seller_number', 'longitude', 'latitude',
-     'price', 'category_id', 'creator_id', 'status', 'type', 'seller_type', 'search_sentence', 'country', 'city'];
+    protected $fillable = ['title', 'short','description', 'address', 'seller_name', 'seller_email', 'seller_number', 'longitude', 'latitude',
+     'price', 'category_id', 'user_id', 'status', 'type', 'seller_type', 'search_sentence', 'country', 'city'];
     protected $casts = [
         'search_sentence' => 'json'
     ];

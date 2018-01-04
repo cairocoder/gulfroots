@@ -9,7 +9,7 @@
         <!-- select dropdown start -->
     <div class="select-cat">
         <!-- hidden input to catch the id -->
-        <input id="cat-id" type="text" name="cat-id" value="{{$category['id'] or 0}}" hidden>
+        <input id="cat-id" type="text" name="cat-id" value="{{(isset($parents) and $parents[count($parents) - 1]['id']) or 0}}" hidden>
         <!-- select icon in the search bar -->
         <div class="select-head">
             <div class="select-icon">

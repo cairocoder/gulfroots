@@ -6,6 +6,9 @@ use App\Posts;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Uuid;
+use App\PostsDictionary;
+use App\PostFeatures;
 use App\Favorites;
 use App\Categories;
 use App\User;
@@ -43,12 +46,15 @@ class PostsController extends Controller
     }
 
     public function ShowNewProduct(Request $request){
-
-        $subcategory_id = $request->input('subcategory_id');
-        $SupplyOrDemand = $request->input('SupplyOrDemand');
-        $filters = $this->getFiltersOfSubCategory($subcategory_id);
+        $category_id = $_REQUEST['subcategory_id'];
+        $SupplyOrDemand = $_REQUEST['SupplyOrDemand'];
+        $filters = $this->getFiltersOfSubCategory($category_id);
+        $ancestor = Categories::findorfail($category_id);
+        // a real ancestor                 or       add_land        or          add_rent
+        while($ancestor->parent_id != null and $ancestor->id != 396 and $ancestor->id != 92)
+            $ancestor = Categories::findorfail($ancestor->parent_id);
         // dd($filters);
-        return view('posts.newpost', compact( 'subcategory_id', 'SupplyOrDemand', 'filters'));
+        return view('posts.newpost', compact( 'category_id', 'SupplyOrDemand', 'filters', 'ancestor'));
     }
 
     private function getFiltersOfSubCategory($subcategory_id){
@@ -71,95 +77,109 @@ class PostsController extends Controller
             $filters[$var] = $group->getFilters()->get()->toArray();
             $filters['type'][$var] = $group->type;  
         }
+        // dd($filters);
         return $filters;
     }
 
-    public function CreateNewPost(Request $request, Authenticatable $user){
-        // dd($request);
-        $search_sentence;
+    public function CreateNewPost(Request $request){
+        $user = Auth::user();
+        if(array_key_exists('price',$_REQUEST) == false)
+            $_REQUEST['price'] = 0;
         $post = Posts::create([
-            'name' => $request->input('title'),
-            'short_des' => $request->input('short_des'),
-            'long_des' => $request->input('long_des'),
-            'detailed_address' => $request->input('detailed_address'),
-            'seller_name' => $request->input('seller_name'),
-            'seller_contact_no' => $request->input('seller_contact_no'),
-            'price' => $request->input('price'),
-            'sub_category_id' => $request->input('subcategory_id'),
+            'title' => $_REQUEST['title'],
+            'short' => $_REQUEST['short'],
+            'description' => implode(' ', $_REQUEST['description']),
+            'address' => $_REQUEST['address'],
+            'seller_name' => $_REQUEST['seller_name'],
+            'seller_email' => $_REQUEST['seller_email'],
+            'seller_number' => $_REQUEST['seller_number'],
+            'price' => $_REQUEST['price'],
+            'category_id' => $_REQUEST['category_id'],
             'user_id' => $user->id,
-            'isinTop' => $request->input('isinTopDecision'),
-            'longitude' => $request->input('my-long'),
-            'latitude' => $request->input('my-lat'),
+            'search_sentence' => $_REQUEST['filters'],
         ]);
-        $search_sentence = implode(' ', $request->input('filters'));
-        // dd($search_sentence);
-        $ancestor = Categories::findorfail($post->sub_category_id);
-        $search_sentence .= ' ' . $ancestor->name;
-        while($ancestor->sub_id != null){
-            $ancestor = Categories::findorfail($ancestor->sub_id);
-            $search_sentence .= ' ' . $ancestor->name;
+        $search_sentence = $_REQUEST['filters'];
+        $search_sentence['category'] = "";
+        foreach($this->getParents($_REQUEST['category_id']) as $cat){
+            $search_sentence['category'] .= ' ' . $cat['name_ar'];
         }
+        // dd($search_sentence);
         $hash = $this->pageId('posts', $post->id);
         PostsDictionary::create([
             'hash' => $hash,
             'post_id' => $post->id,
         ]);
         $cost = 0;
+        foreach ($request->file('img') as $image){
+            $getimageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images'), $getimageName);
+            $photo = Post_Photos::create([
+               'post_id' => $post->id,
+               'photolink' => 'images/'. $getimageName
+            ]);
+        }
+        $search_sentence['نوع الاعلان'] = "";
         //Package
         if($request->input('pack') == 1){
             //isColored Feature
             if($request->input('isColoredDecision') == 1){
-                $search_sentence .= ' paid isColored اعلانات مدفوعه ملونة';
+                $search_sentence['نوع الاعلان'] .= ' paid isColored اعلانات مدفوعه ملونة';
                 PostFeatures::create([
                     'type' => 1,
                     'post_id' => $post->id,
                     'expiry_date' => $post->created_at->addDays($request->input('isColored')) ,
                 ]);
+                $post['isColored'] = 1;
             }
             //isinMain Feature
             if($request->input('isinMainDecision') == 1){
-                $search_sentence .= ' paid isinMain اعلانات مدفوعه مميزة';
+                $search_sentence['نوع الاعلان'] .= ' paid isinMain اعلانات مدفوعه مميزة';
                 PostFeatures::create([
                     'type' => 2,
                     'post_id' => $post->id,
                     'expiry_date' => $post->created_at->addDays($request->input('isinMain')),
                 ]);
+                $post['ininMain'] = 1;
             }
             //isinTop Feature
             if($request->input('isinTopDecision') == 1){
-                $search_sentence .= ' paid isinTop أفضل الاعلانات';
+                $search_sentence['نوع الاعلان'] .= ' paid isinTop أفضل الاعلانات';
                 PostFeatures::create([
                     'type' => 3,
                     'post_id' => $post->id,
                     'expiry_date' => $post->created_at->addDays($request->input('isinTop')),
                 ]);
+                $post['isTop'] = 1;
             }
         }elseif($request->input('pack') == 2){
-            // $search_sentence .= " اعلانات مدفوعه عادية";
+            // $search_sentence['نوع الاعلان'] .= " اعلانات مدفوعه عادية";
             //isColored Feature
-            $search_sentence .= ' paid isColored اعلانات مدفوعه ملونة';
+            $search_sentence['نوع الاعلان'] .= ' paid isColored اعلانات مدفوعه ملونة';
             PostFeatures::create([
                 'type' => 1,
                 'post_id' => $post->id,
                 'expiry_date' => $post->created_at->addDays(30),
             ]);
+            $post['isColored'] = 1;
             //isinMain Feature
             if($request->input('isinMainDecision') == 1){
-                $search_sentence .= ' paid isinMain اعلانات مدفوعه مميزة';
+                $search_sentence['نوع الاعلان'] .= ' paid isinMain اعلانات مدفوعه مميزة';
                 PostFeatures::create([
                     'type' => 2,
                     'post_id' => $post->id,
                     'expiry_date' => $post->created_at->addDays($request->input('isinMain')),
                 ]);
+                $post['ininMain'] = 1;
             }
             //isinTop Feature
             if($request->input('isinTopDecision') == 1){
-                $search_sentence .= ' paid isinTop أفضل الاعلانات';
+                $search_sentence['نوع الاعلان'] .= ' paid isinTop أفضل الاعلانات';
                 PostFeatures::create([
                     'type' => 3,
                     'post_id' => $post->id,
                     'expiry_date' => $post->created_at->addDays($request->input('isinTop')),
                 ]);
+                $post['isTop'] = 1;
             }
         }elseif($request->input('pack') == 3){
             //isColored Feature
@@ -168,28 +188,31 @@ class PostsController extends Controller
                 'post_id' => $post->id,
                 'expiry_date' => $post->created_at->addDays(30),
             ]);
+            $post['isColored'] = 1;
             //isinMain Feature
             PostFeatures::create([
                 'type' => 2,
                 'post_id' => $post->id,
                 'expiry_date' => $post->created_at->addDays(30),
             ]);
+            $post['isinMain'] = 1;
             //has20photos
             PostFeatures::create([
                 'type' => 4,
                 'post_id' => $post->id,
                 'expiry_date' => $post->created_at->addDays(30),
             ]);
-            $search_sentence .= ' paid isColored اعلانات مدفوعه ملونة';
-            $search_sentence .= ' paid isinMain اعلانات مدفوعه مميزة';
+            $search_sentence['نوع الاعلان'] .= ' paid isColored اعلانات مدفوعه ملونة';
+            $search_sentence['نوع الاعلان'] .= ' paid isinMain اعلانات مدفوعه مميزة';
             //isinTop Feature
             if($request->input('isinTopDecision') == 1){
-                $search_sentence .= ' paid isinTop أفضل الاعلانات';
+                $search_sentence['نوع الاعلان'] .= ' paid isinTop أفضل الاعلانات';
                 PostFeatures::create([
                     'type' => 3,
                     'post_id' => $post->id,
                     'expiry_date' => $post->created_at->addDays($request->input('isinTop')),
                 ]);
+                $post['isTop'] = 1;
             }
         }else{
             //isColored Feature
@@ -198,41 +221,44 @@ class PostsController extends Controller
                 'post_id' => $post->id,
                 'expiry_date' => $post->created_at->addDays(30),
             ]);
+            $post['isColored'] = 1;
             //isinMain Feature
             PostFeatures::create([
                 'type' => 2,
                 'post_id' => $post->id,
                 'expiry_date' => $post->created_at->addDays(30),
             ]);
+            $post['isinMain'] = 1;
             //isinTop Feature
             PostFeatures::create([
                 'type' => 3,
                 'post_id' => $post->id,
                 'expiry_date' => $post->created_at->addDays(30),
             ]);
+            $post['isTop'] = 1;
             //has20photos
             PostFeatures::create([
                 'type' => 4,
                 'post_id' => $post->id,
                 'expiry_date' => $post->created_at->addDays(30),
             ]);
-            $search_sentence .= ' paid isColored اعلانات مدفوعه ملونة';
-            $search_sentence .= ' paid isinMain اعلانات مدفوعه مميزة';
-            $search_sentence .= ' paid isinTop أفضل الاعلانات';
+            $search_sentence['نوع الاعلان'] .= ' paid isColored اعلانات مدفوعه ملونة';
+            $search_sentence['نوع الاعلان'] .= ' paid isinMain اعلانات مدفوعه مميزة';
+            $search_sentence['نوع الاعلان'] .= ' paid isinTop أفضل الاعلانات';
         }
         //isUrgent Feature
         if($request->input('isUrgent') == 1){
-            $search_sentence .= ' isUrgent اعلانات مدفوعه عاجلة';
+            $search_sentence['نوع الاعلان'] .= ' isUrgent اعلانات مدفوعه عاجلة';
             PostFeatures::create([
                 'type' => 5,
                 'post_id' => $post->id,
                 'expiry_date' => $post->created_at->addDays($request->input('isinTop')),
             ]);
+            $post['isUrgent'] = 1;
         }
         // dd($search_sentence);
         $post->search_sentence = $search_sentence;
         $post->save();
-        $post->searchable();
         return redirect('posts/'.$post->id);
     }
 
@@ -252,6 +278,7 @@ class PostsController extends Controller
             $user->id = -1;
         }
         $post = Posts::findorfail($id);
+        // dd($post);
         $post->liked = Favorites::where('post_id', $id)->where('user_id', $user->id)->count();
         // $tmp = explode(' - ', $post->filters()->where('group_id', 1)->first()->name);
         // dd($post['city']);
@@ -262,10 +289,10 @@ class PostsController extends Controller
         $latest = $latest->splice(0, 3);
         $post_photos = Post_Photos::with('post')->where('post_id', $id)->get();
         $latest = $this->getInfoOfPost($latest, $user);
-        $alike = Posts::orderBy(DB::raw('RAND()'))->where('id', '!=', $id)->where('isArchived', 0)->where('isApproved', 1)->where('sub_category_id', $post->sub_category_id)->where('id', '!=', $post->id)->get();
+        $alike = Posts::orderBy(DB::raw('RAND()'))->where('id', '!=', $id)->where('isArchived', 0)->where('isApproved', 1)->where('category_id', $post->category_id)->where('id', '!=', $post->id)->get();
         $alike = $alike->splice(0, 3);
         $alike = $this->getInfoOfPost($alike, $user);
-        $parents = $this->getParents($post->sub_category_id);
+        $parents = $this->getParents($post->category_id);
         $post = $post->toArray();
         return view('posts.single', compact('post', 'post_photos', 'latest', 'alike', 'seller', 'parents'));
     }
@@ -326,42 +353,6 @@ class PostsController extends Controller
         $posts->map(function ($post) use($user) {
             $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;
-            // $tmp = explode(' - ', $post->filters()->where('group_id', 1)->first()->name);
-            $post['country'] = "السعودية";
-            $list = collect([
-            'الرّياض',
-            'جدة',
-            'مكة المُكرمة',
-            'المدينة المنورة',
-            'الأحساء',
-                'الطائف',
-                'خميس مشيط',
-                'حائل',
-                'حفر الباطن',
-                    'الجبيل',
-                    'الخرج',
-                    'أبها',
-                    'الدّمام',
-                        'نجران',
-                        'بريدة',
-                        'ينبع',
-                        'تبوك',
-                            'القنفذة',
-                            'القطيف',
-                            'جازان'
-            ]);
-            foreach($list as $city){
-                if($post->search_sentence.contains($city))
-                    $post['city'] = $city;
-            }
-            $list = collect(['جديد', 'مستعمل'
-                ]);
-                foreach($list as $city){
-                    if($post->search_sentence.contains($city))
-                        $post['status'] = $city;
-                }
-            // dd($post['city']);
-            // $post['status'] = ;
             $features = $post->getFeatures()->get();
             foreach($features as $feature){
                 if($feature->type == 1){

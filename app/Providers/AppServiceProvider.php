@@ -45,7 +45,10 @@ class AppServiceProvider extends ServiceProvider
                 })->pluck('attributes');
                 return $category;
             })->pluck('attributes');
-          $view->with(compact('categories'));
+            $car = Filters::where('group_id', 16)->get();
+            $cars = Filters::where('group_id', 7)->get();
+            // dd($cars);            
+          $view->with(compact('categories', 'cars', 'car'));
         });
         view()->composer(['posts.ad1'], function($view) {
             $categories = Categories::where('parent_id', null)->get()->map(function ($cat) {

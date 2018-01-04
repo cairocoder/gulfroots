@@ -9,7 +9,7 @@
     <div class="big-container bottom-100">
         <form method="POST" action="{{Url('/newpost')}}" enctype="multipart/form-data">
             {{ csrf_field() }}
-            <input type="hidden" name="category_id" value="{{$subcategory_id}}">
+            <input type="hidden" name="category_id" value="{{$category_id}}">
             <div class="row no-margin centerd">
                 @if(Auth::user()->isCommercial() == false)
                     @include('includes.packages')
@@ -22,115 +22,32 @@
             <div class="nc top-25 bottom-25">
                 سوف يستمر الاعلان الخاص بك حتي 30 يوم من تاريخ النشر
             </div>
-
-            <div class="strip-head blue to-back">تفاصيل الاعلان</div>
-            <div class="to-back-body ad-check">
-                <div class="row no-margin borderd">
-                    <div class="col l6">
-                        <div class="top-group">
-                        <input type="text"  name="price" class="in-mini" placeholder="السعر">
-                        <label class="checkbox blued">
-                                <input type="radio" name="filter[price]" value="محدد"><span></span> محدد
-                        </label>
-                        <label class="checkbox blued">
-                                <input type="radio" class="show-price" name="filter[price]" value="قابل للتفاوض"><span></span> قابل للتفاوض
-                        </label>
-                        <label class="checkbox blued">
-                                <input type="radio" name="filter[price]" value="مجانا"><span></span> مجانا
-                        </label>
-                        <label class="checkbox blued">
-                                <input type="radio" name="filter[price]" value="تبادل"><span></span> تبادل
-                        </label>
-                        <div class="price-hidden">
-                            هل تريد وضع حد ادني للتفاوض؟    &nbsp;
-                            <input type="text"  class="in-mini" placeholder="ريال سعودي">
-                        </div>
-                        </div>
-                        <div>
-                            الحالة :  &nbsp;
-                            <label class="checkbox blued">
-                                    <input type="radio" name="filter[status]" value="جديد"><span></span> جديد
-                            </label>
-                            <label class="checkbox blued">
-                                    <input type="radio" name="filter[status]" value="مستعمل"><span></span> مستعمل
-                            </label>
-                        </div>
-                        <div class="row no-margin borderd">
-                            <div class="col l8">
-                                <br>
-                            </div>
-                        </div>
-                        <br>
-                        <?php $arr = $filters['type']?>
-                        @foreach($filters as $key=>$filter)
-                            @if($key != "type" && $arr[$key] == 1)
-                                <select name="filters[{{$key}}]" class="s-select xlarge">
-                                    <option>{{$key}}</option>    
-                                    @foreach($filter as $val)
-                                        <option value="{{$val['name']}}">{{$val['name']}}</option>
-                                    @endforeach
-                                </select>
-                                <br><br>
-                            @elseif($key != "type" && $arr[$key] == 3)
-                                    <input type="text" name="filters[{{$key}}]" placeholder="{{$key}}" class="xlarge">
-                            @elseif($key != "type" && $arr[$key] == 5)
-                                {{$key}} : &nbsp;
-                                    @foreach($filter as $val)
-                                    <label class="checkbox blued">
-                                        <input type="radio" name="filters[{{$key}}]" value="{{$val['name']}}"><span></span> {{$val['name']}}
-                                    </label>
-                                    @endforeach
-                            @endif
-                        @endforeach
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-
-                <div class="row no-margin">
-                    <div class="col l6">
-                        <br>
-                        <input type="text" name="title" placeholder="عنوان">
-                        <input type="text" name="description" placeholder="وصف مختصر للاعلان">
-                        <textarea name="long_des" placeholder="وصف الاعلان"></textarea>
-                        <div class="pay-box not-payed">
-                            <img src="{{ asset('front-assets/images/urgant.jpg')}}" alt="">
-                            <div class="pay-text">
-                                <h3>علامة عاجل <span>20 ريال</span></h3>
-                                <p>
-                                    اختر اضافة علامة عاجل ليظهر الاعلان الخاص بك بشكل اكثر تميزا وبطريقة تجذب
-                                    الانتباه </p>
-                            </div>
-                            <div class="pay-select">
-                                <input type="checkbox" name="isUrgent">
-                                <div class="pay-btn">اضافة</div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col l6">
-                        <br>
-                        <div class="note">
-                            <img src="{{ asset('front-assets/images/info.jpg')}}" alt="">
-                            تأكد من ادخال عنوان ووصف الاعلان بشكل واضح ومميز واحرص ان يكون الوصف مفصلا واضحا بكل تفاصيل
-                            المنتج
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-
-
+            @if($ancestor->id == 1)
+                @include('components.add_car')
+            @elseif($ancestor->id == 92)
+                @include('components.add_rent')
+            @elseif($ancestor->id == 123)
+                @include('components.add_job')
+            @elseif($ancestor->id == 272)
+                @include('components.add_device')
+            @elseif($ancestor->id == 392)
+                @include('components.add_house')
+            @elseif($ancestor->id == 396)
+                @include('components.add_land')
+            @else
+                @include('components.add_product')
+            @endif
             <div class="strip-head blue to-back">بيانات البائع</div>
             <div class="to-back-body">
                 <div class="row no-margin">
                     <div class="col l6">
                         <input type="text" name="seller_name" placeholder="اسم البائع*">
-                        {{--<input type="email" placeholder="البريد الاليكتروني*">--}}
-                        <input type="text" name="seller_contact_no" placeholder="رقم الاتصال">
+                        <input type="email" name="seller_email" placeholder="البريد الاليكتروني*">
+                        <input type="text" name="seller_number" placeholder="رقم الاتصال">
                         <input class="my-lat" type="hidden">
                         <input class="my-long" type="hidden">
                         <div class="input-wrap">
-                            <input type="text" name="detailed_address" placeholder="العنوان*">
+                            <input type="text" name="address" placeholder="العنوان*">
                             <a href="#!" class="get-location"><i class="fa fa-map-marker"></i>تحديد الموقع الجغرافي</a>
                         </div>
                     </div>

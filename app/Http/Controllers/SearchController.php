@@ -30,18 +30,20 @@ class SearchController extends Controller
         // dd($search_sentence);
         $search_sentence = explode(' ', $_REQUEST['search_query']);
         $category = $_REQUEST['cat-id'];
+        $applied_filters = explode(',', $_REQUEST['applied_filters']);
         $parents = [];
         if($category > 0){
             $ancestor = Categories::findorfail($category);
             array_push($parents, $ancestor->toArray());
-            array_push($search_sentence, $parents[0]['name_ar']);
+            array_push($applied_filters, $parents[0]['name_ar']);
             while($ancestor->parent_id != null){
-                // $search_sentence .= ' ' . $ancestor->name;
+            array_push($applied_filters, $ancestor['name_ar']);
                 $ancestor = Categories::findorfail($ancestor->parent_id);
                 array_push($parents, $ancestor->toArray());
             }
             $parents[0]['subcategories'] = Categories::where('parent_id', $parents[0]['id'])->get()->toArray();
         }
+        // dd($applied_filters);
         foreach($search_sentence as $search){
             if($search){   
                 $posts->where('title', 'LIKE',"%{$search}%");
@@ -52,10 +54,9 @@ class SearchController extends Controller
                 $top->orwhere('search_sentence', 'LIKE', "%{$search}%");
             }
         }
-        $applied_filters = explode(',', $_REQUEST['applied_filters']);
         foreach($applied_filters as $applied){
             if($applied){
-                $ret = trim($this->clean(explode(' : ', $applied)[1]));
+                $ret = trim($this->clean(array_reverse(explode(' : ', $applied))[0]));
                 $posts->where('search_sentence', 'LIKE',"%{$ret}%");
                 $top->where('search_sentence', 'LIKE',"%{$ret}%");
             }
@@ -74,24 +75,25 @@ class SearchController extends Controller
         if($_REQUEST['sort'] > 0){
             $posts = $this->sortResults($posts, $_REQUEST['sort']);
         }
-        // $posts = $this->getInfoOfPost($posts, $user);
-        // $top = $this->getInfoOfPost($top, $user);
+        $posts = $this->getInfoOfPost($posts)->get();
+        $top = $this->getInfoOfPost($top)->get();
         $parents = array_reverse($parents);
-        // dd($parents);
+        // dd($posts);
+        // dd($top);
         if(count($parents) > 0)$filters = $this->getFiltersOfSubCategory($parents[0]['id']);
         else $filters = [];
-        $top = $top->get()->map(function($t){
-            $t['img'] = "";
-            $t['liked'] = "";
-            return $t;
-        });
-        $posts = $posts->get()->map(function($t){
-            $t['img'] = "";
-            $t['liked'] = "";
-            return $t;
-        });
+        // $top = $top->get()->map(function($t){
+        //     $t['img'] = "";
+        //     $t['liked'] = "";
+        //     return $t;
+        // });
+        // $posts = $posts->get()->map(function($t){
+        //     $t['img'] = "";
+        //     $t['liked'] = "";
+        //     return $t;
+        // });
         //->pluck('attributes')
-        return view('searchresult', compact('posts', 'parents', 'top', '_REQUEST'));
+        return view('searchresult', compact('posts', 'parents', 'top', '_REQUEST', 'filters'));
     }
 
     private function sortResults($posts, $sort){
@@ -124,26 +126,26 @@ class SearchController extends Controller
             $user = new User;
             $user->id = -1;
         }
-        $posts->map(function ($post) use($user) {
+        $posts->get()->map(function ($post) use($user) {
             $features = $post->getFeatures()->get();
-            foreach($features as $feature){
-                if($feature->type == 1){
-                    if($feature->expiry_date-lt(\Carbon\Carbon::now()))
-                        $post['isColored'] = 0;
-                }
-                if($feature->type == 2){
-                    if($feature->expiry_date-lt(\Carbon\Carbon::now()))
-                        $post['isinMain'] = 0;
-                }
-                if($feature->type == 3){
-                    if($feature->expiry_date-lt(\Carbon\Carbon::now()))
-                        $post['isTop'] = 0;
-                }
-                if($feature->type == 5){
-                    if($feature->expiry_date-lt(\Carbon\Carbon::now()))
-                        $post['isUrgent'] = 0;
-                }
-            }
+            // foreach($features as $feature){
+            //     if($feature->type == 1){
+            //         if($feature->expiry_date->lt(\Carbon\Carbon::now()))
+            //             $post['isColored'] = 0;
+            //     }
+            //     if($feature->type == 2){
+            //         if($feature->expiry_date->lt(\Carbon\Carbon::now()))
+            //             $post['isinMain'] = 0;
+            //     }
+            //     if($feature->type == 3){
+            //         if($feature->expiry_date->lt(\Carbon\Carbon::now()))
+            //             $post['isTop'] = 0;
+            //     }
+            //     if($feature->type == 5){
+            //         if($feature->expiry_date->lt(\Carbon\Carbon::now()))
+            //             $post['isUrgent'] = 0;
+            //     }
+            // }
             $post->save();
             $post['liked'] = Favorites::where('post_id', $post['id'])->where('user_id', $user->id)->count();
             $post['img'] = Post_Photos::where('post_id', $post['id'])->first()->photolink;

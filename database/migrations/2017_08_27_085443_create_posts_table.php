@@ -16,6 +16,7 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->string('short');
             $table->string('description');
             $table->string('address');
             $table->string('seller_name');
@@ -37,7 +38,7 @@ class CreatePostsTable extends Migration
             $table->integer('isArchived')->default(0);
             $table->integer('isApproved')->default(1);
 
-            $table->integer('ininMain')->default(0);
+            $table->integer('isinMain')->default(0);
             $table->integer('isTop')->default(0);
             $table->integer('isUrgent')->default(0);
             $table->integer('isColored')->default(0);

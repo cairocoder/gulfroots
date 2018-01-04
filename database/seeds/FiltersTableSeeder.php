@@ -54,7 +54,7 @@ class FiltersTableSeeder extends Seeder
         DB::table('filters')->insert(['name' => 'ساري', 'group_id' => '6']);//id = 35
         DB::table('filters')->insert(['name' => 'منتهي', 'group_id' => '6']);//id = 36
         
-        DB::table('filters')->insert(['name' => 'فولكس', 'group_id' => '7', 'icon' => '']);//id = 37
+        DB::table('filters')->insert(['name' => 'فولكس', 'group_id' => '7', 'icon' => 'images/cars1.jpg']);//id = 37
         DB::table('filters')->insert(['name' => 'باسات', 'group_id' => '8', 'parent_id' => '37']);//id = 38
         DB::table('filters')->insert(['name' => '2017', 'group_id' => '9', 'parent_id' => '38']);//id = 39
         DB::table('filters')->insert(['name' => '2018', 'group_id' => '9', 'parent_id' => '38']);//id = 40
@@ -62,20 +62,27 @@ class FiltersTableSeeder extends Seeder
         DB::table('filters')->insert(['name' => '2017', 'group_id' => '9', 'parent_id' => '41']);//id = 42
         DB::table('filters')->insert(['name' => '2018', 'group_id' => '9', 'parent_id' => '41']);//id = 43
 
-        DB::table('filters')->insert(['name' => 'نيونا', 'group_id' => '7', 'icon' => '']);//id = 44
+        DB::table('filters')->insert(['name' => 'نيونا', 'group_id' => '7', 'icon' => 'images/cars2.jpg']);//id = 44
         DB::table('filters')->insert(['name' => 'كورولا', 'group_id' => '8', 'parent_id' => '44']);//id = 45
         DB::table('filters')->insert(['name' => '2017', 'group_id' => '9', 'parent_id' => '45']);//id = 46
         DB::table('filters')->insert(['name' => '2018', 'group_id' => '9', 'parent_id' => '45']);//id = 47
         DB::table('filters')->insert(['name' => 'ياريس', 'group_id' => '8', 'parent_id' => '44']);//id = 48
         DB::table('filters')->insert(['name' => '2017', 'group_id' => '9', 'parent_id' => '48']);//id = 49
         DB::table('filters')->insert(['name' => '2018', 'group_id' => '9', 'parent_id' => '48']);//id = 50
-        DB::table('filters')->insert(['name' => 'هونداي', 'group_id' => '7', 'icon' => '']);//id = 51
+        DB::table('filters')->insert(['name' => 'هونداي', 'group_id' => '7', 'icon' => 'images/cars8.jpg']);//id = 51
         DB::table('filters')->insert(['name' => 'أكسنت', 'group_id' => '8', 'parent_id' => '51']);//id = 52
         DB::table('filters')->insert(['name' => '2017', 'group_id' => '9', 'parent_id' => '52']);//id = 53
         DB::table('filters')->insert(['name' => '2018', 'group_id' => '9', 'parent_id' => '52']);//id = 54
         DB::table('filters')->insert(['name' => 'إلانترا', 'group_id' => '8', 'parent_id' => '51']);//id = 55
         DB::table('filters')->insert(['name' => '2017', 'group_id' => '9', 'parent_id' => '55']);//id = 56
         DB::table('filters')->insert(['name' => '2018', 'group_id' => '9', 'parent_id' => '55']);//id = 57
+        
+        DB::table('filters')->insert(['name' => 'سوبارو', 'group_id' => '7', 'icon' => 'images/cars3.jpg']);//id = 44
+        DB::table('filters')->insert(['name' => 'نيسان', 'group_id' => '7', 'icon' => 'images/cars4.jpg']);//id = 44
+        DB::table('filters')->insert(['name' => 'ميتسوبيشي', 'group_id' => '7', 'icon' => 'images/cars5.jpg']);//id = 44
+        DB::table('filters')->insert(['name' => 'مارسيدس', 'group_id' => '7', 'icon' => 'images/cars6.jpg']);//id = 44
+        DB::table('filters')->insert(['name' => 'مازدا', 'group_id' => '7', 'icon' => 'images/cars7.jpg']);//id = 44
+        DB::table('filters')->insert(['name' => 'فورد', 'group_id' => '7', 'icon' => 'images/cars9.jpg']);//id = 44
 
         DB::table('filters')->insert(['name' => 'أبيض', 'group_id' => '10']);
         DB::table('filters')->insert(['name' => 'أسود', 'group_id' => '10']);
@@ -102,16 +109,16 @@ class FiltersTableSeeder extends Seeder
         DB::table('filters')->insert(['name' => 'جر أمامي', 'group_id' => '15']);
         DB::table('filters')->insert(['name' => 'جر خلفي', 'group_id' => '15']);
 
-        DB::table('filters')->insert(['name' => 'مكشوفة', 'group_id' => '16', 'icon' => '']);
-        DB::table('filters')->insert(['name' => 'كوبية', 'group_id' => '16', 'icon' => '']);
-        DB::table('filters')->insert(['name' => 'هاتشباك', 'group_id' => '16', 'icon' => '']);
-        DB::table('filters')->insert(['name' => 'سيدان', 'group_id' => '16', 'icon' => '']);
-        DB::table('filters')->insert(['name' => 'متعددة الأغراض', 'group_id' => '16', 'icon' => '']);
-        DB::table('filters')->insert(['name' => 'شاحنة', 'group_id' => '16', 'icon' => '']);
-        DB::table('filters')->insert(['name' => 'نصف نقل', 'group_id' => '16', 'icon' => '']);
-        DB::table('filters')->insert(['name' => 'نقل جماعي', 'group_id' => '16', 'icon' => '']);
-        DB::table('filters')->insert(['name' => 'عائلية', 'group_id' => '16', 'icon' => '']);
-        DB::table('filters')->insert(['name' => 'أخري', 'group_id' => '16', 'icon' => '']);
+        DB::table('filters')->insert(['name' => 'مكشوفة', 'group_id' => '16', 'icon' => 'images/car1.jpg']);
+        DB::table('filters')->insert(['name' => 'كوبية', 'group_id' => '16', 'icon' => 'images/car2.jpg']);
+        DB::table('filters')->insert(['name' => 'هاتشباك', 'group_id' => '16', 'icon' => 'images/car3.jpg']);
+        DB::table('filters')->insert(['name' => 'سيدان', 'group_id' => '16', 'icon' => 'images/car4.jpg']);
+        DB::table('filters')->insert(['name' => 'متعددة الأغراض', 'group_id' => '16', 'icon' => 'images/car5.jpg']);
+        DB::table('filters')->insert(['name' => 'شاحنة', 'group_id' => '16', 'icon' => 'images/car6.jpg']);
+        DB::table('filters')->insert(['name' => 'نصف نقل', 'group_id' => '16', 'icon' => 'images/car7.jpg']);
+        DB::table('filters')->insert(['name' => 'نقل جماعي', 'group_id' => '16', 'icon' => 'images/car8.jpg']);
+        DB::table('filters')->insert(['name' => 'عائلية', 'group_id' => '16', 'icon' => 'images/car9.jpg']);
+        DB::table('filters')->insert(['name' => 'أخري', 'group_id' => '16', 'icon' => 'images/car10.jpg']);
         
         DB::table('filters')->insert(['name' => 'غرفة واحدة', 'group_id' => '17']);
         DB::table('filters')->insert(['name' => 'غرفتين', 'group_id' => '17']);

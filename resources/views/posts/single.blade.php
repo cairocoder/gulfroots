@@ -32,7 +32,7 @@
                             <input type="hidden" name="post_id" class="post_id" value="{{$post['id']}}">
                             <i class="fa fa-star"></i>
                         </div>
-                        <h1>{{$post['description']}}</h1>
+                        <h1>{{$post['short']}}</h1>
                         <h3> {{$post['price']}} <span>ريال</span></h3>
                         <div class="row no-margin borderd">
                             <div class="col l6">
@@ -40,7 +40,7 @@
                                 {{$post['country']}} - {{$post['city']}} | <span dir="ltr">مشاهدة {{Counter::showAndCount('posts', $post['id'])}} </span>
                             </div>
                             <div class="col l6 lefted">
-                                <a href="{{Url('newad') .'/'. $post['sub_category_id']}}">
+                                <a href="{{Url('newad') .'/'. $post['category_id']}}">
                                     <i class="fa fa-plus crcl"></i> اضف اعلان مشابة
                                 </a>
                                 |
@@ -113,7 +113,11 @@
                                   {{$post['description']}}
                                 </p>
                                 <p>
-                                  {{$post['search_sentence']}}
+                                    @foreach($post['search_sentence'] as $key=>$value)
+                                    @if($key != 'نوع الاعلان')
+                                    {{$key}} : {{$value}} <br>
+                                    @endif
+                                    @endforeach
                                 </p>
                             </div>
                             <div class="col l5">
