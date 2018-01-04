@@ -13,8 +13,8 @@ class CategoriesTableSeeder extends Seeder
     {
         // Category 1 level 1
         $category = App\Categories::create(['name_ar' => 'السيارات و المركبات', 'slug' => 'سيارات', 'icon' =>'car', 'photo' => 'front-assets/images/bigcat7.jpg']); // id = 1
-        // for($i = 1; $i <= 2; $i++)
-        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 1; $i <= 2; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         for($i = 6; $i <= 16; $i++)
             DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 1 level 2
@@ -68,8 +68,8 @@ class CategoriesTableSeeder extends Seeder
 
         // Category 2 level 1
         $category = App\Categories::create(['name_ar' => 'قوارب والدراجات المائية', 'slug' => 'قوارب', 'icon' =>'ship', 'photo' => 'front-assets/images/bigcat8.jpg']); // id = 34
-        // for($i = 1; $i <= 2; $i++)
-        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 1; $i <= 2; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 2 level 2
         $category = App\Categories::create(['name_ar' => 'الدراجات المائية', 'parent_id'=>'34']); // id = 35
         $category = App\Categories::create(['name_ar' => 'الزوارق والتجديف', 'parent_id'=>'34']); // id = 36
@@ -84,8 +84,8 @@ class CategoriesTableSeeder extends Seeder
 
         // Category 3 level 1
         $category = App\Categories::create(['name_ar' => 'اطفال ورضع', 'slug' => 'اطفال','icon' =>'child', 'photo' => 'front-assets/images/bigcat9.jpg']); // id = 42
-        // for($i = 1; $i <= 2; $i++)
-        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 1; $i <= 2; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 3 level 2
         $category = App\Categories::create(['name_ar' => 'حامل اطفال', 'parent_id'=>'42']); // id = 43
         $category = App\Categories::create(['name_ar' => 'الاستحمام', 'parent_id'=>'42']); // id = 44
@@ -109,8 +109,8 @@ class CategoriesTableSeeder extends Seeder
 
         // Category 4 level 1
         $category = App\Categories::create(['name_ar' => 'الملابس والمجوهرات والمستحضرات', 'slug' => 'ملابس و مجوهرات','icon' =>'diamond' , 'photo' => 'front-assets/images/bigcat1.jpg']); // id = 59
-        // for($i = 1; $i <= 2; $i++)
-        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 1; $i <= 2; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 4 level 2
         $category = App\Categories::create(['name_ar' => 'اكسسوارات', 'parent_id'=>'59']); // id = 60
         $category = App\Categories::create(['name_ar' => 'حقائب', 'parent_id'=>'59']); // id = 61
@@ -153,8 +153,8 @@ class CategoriesTableSeeder extends Seeder
 
         // Category 5 level 1
         $category = App\Categories::create(['name_ar' => 'السفر و السياحة', 'slug' => 'سفر', 'icon' =>'ship', 'photo' => 'front-assets/images/bigcat10.jpg']); // id = 90
-        // for($i = 1; $i <= 2; $i++)
-        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 1; $i <= 2; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 5 level 2
         $category = App\Categories::create(['name_ar' => 'فنادق', 'parent_id'=>'90']); // id = 91
         $category = App\Categories::create(['name_ar' => 'شقق مفروشة', 'parent_id'=>'90']); // id = 92
@@ -168,8 +168,8 @@ class CategoriesTableSeeder extends Seeder
 
         // Category 6 level 1
         $category = App\Categories::create(['name_ar' => 'مطاعم وكافيهات ومخبوزات', 'slug' => 'مطعم', 'icon' =>'cutlery', 'photo' => 'front-assets/images/bigcat11.jpg']); // id = 95
-        // for($i = 1; $i <= 2; $i++)
-        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 1; $i <= 2; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 6 level 2
         $category = App\Categories::create(['name_ar' => 'مطاعم وكافيه', 'parent_id'=>'95']); // id = 96
         $category = App\Categories::create(['name_ar' => 'مخابز وحلويات', 'parent_id'=>'95']); // id = 97
@@ -183,8 +183,8 @@ class CategoriesTableSeeder extends Seeder
 
         // Category 7 level 1
         $category = App\Categories::create(['name_ar' => 'المجتمع والترفية', 'slug' => 'مجتمع', 'icon' =>'users', 'photo' => 'front-assets/images/bigcat12.jpg']); // id = 100
-        // for($i = 1; $i <= 2; $i++)
-        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 1; $i <= 2; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 7 level 2
         $category = App\Categories::create(['name_ar' => 'فعاليات ومعارض', 'parent_id'=>'100']); // id = 101
         $category = App\Categories::create(['name_ar' => 'الانشطة والهوايات', 'parent_id'=>'100']); // id = 102
@@ -200,8 +200,8 @@ class CategoriesTableSeeder extends Seeder
 
         // Category 8 level 1
         $category = App\Categories::create(['name_ar' => 'كتب والعاب', 'slug' => 'كتب والعاب','icon' =>'book', 'photo' => 'front-assets/images/bigcat13.jpg']); // id = 110
-        // for($i = 1; $i <= 2; $i++)
-        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 1; $i <= 2; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 8 level 2
         $category = App\Categories::create(['name_ar' => 'كتب', 'parent_id'=>'110']); // id = 111
         // Category 8 level 3
@@ -297,8 +297,8 @@ class CategoriesTableSeeder extends Seeder
 
         // Category 10 level 1
         $category = App\Categories::create(['name_ar' => 'تذاكر', 'slug' => 'تذاكر', 'icon' => 'ticket', 'photo' => 'front-assets/images/bigcat5.jpg']); // id = 188
-        // for($i = 1; $i <= 2; $i++)
-        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 1; $i <= 2; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 10 level 2
         $category = App\Categories::create(['name_ar' => 'الحافلات والقطارات والطائرة', 'parent_id'=>'188']); // id = 189
         $category = App\Categories::create(['name_ar' => 'فعاليات ومعارض', 'parent_id'=>'188']); // id = 190
@@ -310,8 +310,8 @@ class CategoriesTableSeeder extends Seeder
 
         // Category 11 level 1
         $category = App\Categories::create(['name_ar' => 'المنزل والحديقة', 'slug' => 'منزل','icon' =>'home', 'photo' => 'front-assets/images/bigcat2.jpg']); // id = 193
-        // for($i = 1; $i <= 2; $i++)
-        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 1; $i <= 2; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 11 level 2
         $category = App\Categories::create(['name_ar' => 'الاجهزة', 'parent_id'=>'193']); // id = 194
         // Category 11 level 3
@@ -404,8 +404,8 @@ class CategoriesTableSeeder extends Seeder
 
         // Category 12 level 1
         $category = App\Categories::create(['name_ar' => 'التحف والفنون والمقتنيات', 'slug' => 'التحف','icon' =>'picture-o', 'photo' => 'front-assets/images/bigcat15.jpg']); // id = 267
-        // for($i = 1; $i <= 2; $i++)
-        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 1; $i <= 2; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 12 level 2
         $category = App\Categories::create(['name_ar' => 'التحف', 'parent_id'=>'267']); // id = 268
         $category = App\Categories::create(['name_ar' => 'فنون', 'parent_id'=>'267']); // id = 269
@@ -416,8 +416,8 @@ class CategoriesTableSeeder extends Seeder
 
         // Category 13 level 1
         $category = App\Categories::create(['name_ar' => 'الإلكترونيات و الكمبيوتر', 'slug' => 'الإلكترونيات', 'icon' => 'desktop', 'photo' => 'front-assets/images/bigcat16.jpg']); // id = 272
-        // for($i = 1; $i <= 2; $i++)
-        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 1; $i <= 2; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
             DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => 24]);
         // Category 13 level 2
         $category = App\Categories::create(['name_ar' => 'صوتيات', 'parent_id'=>'272']); // id = 273
@@ -495,8 +495,8 @@ class CategoriesTableSeeder extends Seeder
 
         // Category 14 level 1
         $category = App\Categories::create(['name_ar' => 'خدمات و تأجير', 'slug' => 'خدمات', 'icon' => 'money', 'photo' => 'front-assets/images/bigcat6.jpg']); // id = 327
-        // for($i = 1; $i <= 2; $i++)
-        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 1; $i <= 2; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 14 level 2
         $category = App\Categories::create(['name_ar' => 'تأجير', 'parent_id'=>'327']); // id = 328
         // Category 14 level 3
@@ -584,8 +584,8 @@ class CategoriesTableSeeder extends Seeder
 
         // Category 15 level 1
         $category = App\Categories::create(['name_ar' => 'العقارات', 'slug' => 'عقار','icon' => 'building-o', 'photo' => 'front-assets/images/bigcat3.jpg']); // id = 392
-        // for($i = 1; $i <= 2; $i++)
-        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 1; $i <= 2; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         for($i = 17; $i <= 20; $i++)
             DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 15 level 2
@@ -627,8 +627,8 @@ class CategoriesTableSeeder extends Seeder
 
         // Category 16 level 1
         $category = App\Categories::create(['name_ar' => 'الرياضة و اللياقة البدنية', 'slug' => 'الرياضة', 'icon' => 'futbol-o', 'photo' => 'front-assets/images/bigcat4.jpg']); // id = 418
-        // for($i = 1; $i <= 2; $i++)
-        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 1; $i <= 2; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 16 level 2
         $category = App\Categories::create(['name_ar' => 'دراجات', 'parent_id'=>'418']); // id = 419
         $category = App\Categories::create(['name_ar' => 'الملاكمة وفنون الدفاع عن النفس', 'parent_id'=>'418']); // id = 420
@@ -642,8 +642,8 @@ class CategoriesTableSeeder extends Seeder
 
         // Category 17 level 1
         $category = App\Categories::create(['name_ar' => 'الحيوانات الاليفة', 'slug' => 'حيوانات','icon' =>'paw', 'photo' => 'front-assets/images/bigcat17.jpg']); // id = 426
-        // for($i = 1; $i <= 2; $i++)
-        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 1; $i <= 2; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 16 level 2
         $category = App\Categories::create(['name_ar' => 'الطيور', 'parent_id'=>'426']); // id = 427
         $category = App\Categories::create(['name_ar' => 'القطط', 'parent_id'=>'426']); // id = 428
@@ -659,15 +659,15 @@ class CategoriesTableSeeder extends Seeder
 
         // Category 18 level 1
         $category = App\Categories::create(['name_ar' => 'رحلات برية', 'slug' => 'رحلات','icon' =>'free-code-camp', 'photo' => 'front-assets/images/bigcat18.jpg']); // id = 438
-        // for($i = 1; $i <= 2; $i++)
-        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 1; $i <= 2; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
         // Category 18 level 2
         $category = App\Categories::create(['name_ar' => 'تخييم وتنزه', 'parent_id'=>'438']); // id = 439
         $category = App\Categories::create(['name_ar' => 'رحلات بريه', 'parent_id'=>'438']); // id = 440
 
         // Category 19 level 1
         $category = App\Categories::create(['name_ar' => 'البضائع المتنوعة', 'slug' => 'بضائع','icon' =>'cubes', 'photo' => 'front-assets/images/bigcat19.jpg']); // id = 441
-        // for($i = 1; $i <= 2; $i++)
-        //     DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
+        for($i = 1; $i <= 2; $i++)
+            DB::table('categories_filters_groups')->insert(['categories_id' => $category->id, 'filters_groups_id' => $i]);
     }
 }
