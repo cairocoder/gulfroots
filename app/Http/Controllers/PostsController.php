@@ -257,7 +257,7 @@ class PostsController extends Controller
             $post['isUrgent'] = 1;
         }
         // dd($search_sentence);
-        $post->search_sentence = $search_sentence;
+        $post->search_sentence = json_encode($search_sentence, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_FORCE_OBJECT);
         $post->save();
         return redirect('posts/'.$post->id);
     }
