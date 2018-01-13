@@ -112,14 +112,13 @@
                                 <p>
                                   {{$post['description']}}
                                 </p>
-                                {{--
-                                <p>
-                                    @foreach($post['search_sentence'] as $key=>$value)
-                                    @if($key != 'نوع الاعلان')
-                                    {{$key}} : {{$value}} <br>
-                                    @endif
-                                    @endforeach
-                                </p> -- }}
+                                    {{--<p>--}}
+                                    {{--@foreach($post['search_sentence'] as $key=>$value)--}}
+                                    {{--@if($key != 'نوع الاعلان')--}}
+                                    {{--{{$key}} : {{$value}} <br>--}}
+                                    {{--@endif--}}
+                                    {{--@endforeach--}}
+                                    {{--</p>--}}
                             </div>
                             <div class="col l5">
                                 <div class="product-det">
