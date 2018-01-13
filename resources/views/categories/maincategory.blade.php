@@ -1,9 +1,16 @@
-@extends('layouts.app')
+@if(count($parents) == 1)
+    <?php $tmp = 'layouts.app' ?>
+@else
+    <?php $tmp = 'layouts.user' ?>
+@endif
+@extends($tmp)
 @section('title', ' - ' . $category->name_ar)
 @section('content')
-    <div class="cat-banner" style="background-image:url('{{ asset($parents[0]['photo'])}}')">
-        <h1>{{$parents[0]['name_ar']}}</h1>
-    </div>
+    @if(count($parents) == 1)
+        <div class="cat-banner" style="background-image:url('{{ asset($parents[0]['photo'])}}')">
+            <h1>{{$parents[0]['name_ar']}}</h1>
+        </div>
+    @endif
     
     <!--  script -->
     <script id="privet-filters" type="application/json">{!! json_encode($filters, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_FORCE_OBJECT) !!}</script>

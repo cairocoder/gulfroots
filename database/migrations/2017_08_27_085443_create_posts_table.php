@@ -31,7 +31,7 @@ class CreatePostsTable extends Migration
             $table->integer('type');
             $table->integer('views');
             $table->integer('seller_type');
-            $table->string('search_sentence');
+            $table->json('search_sentence');
             $table->string('country');
             $table->string('city');
 

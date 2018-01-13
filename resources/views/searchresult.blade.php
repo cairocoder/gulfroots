@@ -76,6 +76,22 @@
                     <input type="text" placeholder="ابحث عن ..." value="{{$_REQUEST['search_query']}}" name="search_query">
                 </div>
 
+                <!-- saved search -->
+                @guest
+                @else
+                    @if($_REQUEST['search_query'])
+                    <div class="hide-on-med-and-down saved-search-box">
+                        <i class="fa fa-save"></i>
+                        حفظ نتائج البحث
+                        <i class="fa fa-caret-down"></i>
+                    </div>
+
+                    <div class="saved-search-drop">
+                        <p>احفظ عملية البحث لمراجعتها فيما بعد.</p>
+                        <button>حفظ</button>
+                    </div>
+                    @endif
+                @endguest
                 <!-- city box -->
                 <div class="city-box">
                     <div class="city-form">

@@ -36,6 +36,7 @@ Route::get('/posts/{id}', 'PostsController@ShowPost');
 Route::post('/report/{id}', 'PostsController@ReportPost');
 
 Route::get('/search', 'SearchController@search');
+Route::post('/savesearch', 'SearchController@save_search');
 Route::post('/favorite/posts/{id}', 'PostsController@toggleFavorite');
 
 Route::get('/fb/redirect', 'Auth\SocialAuthController@fbredirect')->name('fbredirect');

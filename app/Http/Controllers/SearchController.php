@@ -93,9 +93,12 @@ class SearchController extends Controller
         //     return $t;
         // });
         //->pluck('attributes')
+        // dd($_REQUEST);
         return view('searchresult', compact('posts', 'parents', 'top', '_REQUEST', 'filters'));
     }
-
+    public function save_search(){
+        App\SavedSearch::create(['query' => $_REQUEST['search_query'], 'user_id' => Auth::user()->id]);
+    }
     private function sortResults($posts, $sort){
         if($sort == 1){
             // sort by latest
